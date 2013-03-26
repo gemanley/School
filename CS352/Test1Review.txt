@@ -1,0 +1,5 @@
+E. New --> Ready --> Running --> Terminated
+		     Running --> Waiting --> Ready
+		     Running --> Ready (Used in Round Robin or preemptive)
+2. x4=0, x1=1, x3=2, pid=0, x2=1
+3. a. b. the main thread will stall since the child thread doesn't change the flag in the main thread.
