@@ -1,0 +1,190 @@
+
+.feature.news > footer > a, #events .last > a{
+	transition: all 0.1s ease-in;
+}
+
+#ribbon h1{
+	margin-top: 16px;
+	margin-bottom: 16px;
+}
+
+#ribbon form{
+	margin-top: 21px;
+}
+
+/*=======================================================*/
+/*== ISU Navigation =====================================*/
+/*=======================================================*/
+
+#main-nav{
+	overflow: visible;
+}
+
+#ribbon nav > ul{
+	font-size: 0;
+	list-style: none;
+	margin: 0;
+	padding: 0 0 0px;
+	text-align: center;
+}
+
+#ribbon nav > ul > li{
+	border-left: 1px solid #7e0e19;
+	display: inline-block;
+	position: relative;
+}
+
+#ribbon nav > ul > li > a{
+	border-left: 1px solid #ac3440;
+	color: #fff;
+	display: block;
+	font-size: 14px;
+	letter-spacing: 1px;
+	min-width: 80px;
+	outline: none;
+	padding: 4px 36px 6px;
+	text-decoration: none;
+	text-shadow: -1px 1px 3px #333;
+}
+
+#ribbon nav > ul > li:hover > a{
+	background: #c31b2a linear-gradient(#a51322, #af1f2d);
+	position: relative;
+	z-index: 110;
+}
+
+#ribbon nav > ul > li:hover > a[href="javascript:;"]{
+	cursor: default;
+}
+
+#ribbon nav > ul > li:last-child{
+	border-right: 1px solid #ac3440;
+}
+
+#ribbon nav > ul > li:last-child > a{
+	border-right: 1px solid #7e0e19;
+}
+
+#ribbon nav > ul > li > ul{
+	background: #e4dfcf linear-gradient(#f2f2f2, #e4dfcf);
+	border-radius: 0 0 4px 4px;
+	box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+	display: none;
+	list-style: none;
+	margin: 0;
+	padding: 0 0 4px;
+	position: absolute;
+	text-align: left;
+	width: 100%;
+	z-index: 100;
+}
+
+#ribbon nav > ul > li:hover > ul{
+	display: block;
+}
+
+#ribbon nav > ul > li > ul > li > a{
+	color: #444;
+	display: block;
+	font-size: 11px;
+	font-weight: bold;
+	padding: 8px 12px;
+	text-decoration: none;
+}
+
+#ribbon nav > ul > li > ul > li > a:hover{
+	background: #bebbaf;
+	color: #222;
+}
+
+/*=======================================================*/
+/*== Generic Scroller ===================================*/
+/*=======================================================*/
+
+.scroller{
+	overflow: hidden;
+	position: relative;
+}
+
+.scroller > section{
+	position: relative;
+	z-index: 10;
+}
+
+.scroller > section > ul{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.scroller > section > ul > li{
+	display: none;
+	position: absolute;
+}
+
+.scroller > section > ul > li.active{
+	display: block;
+}
+
+.scroller > nav{
+	position: absolute;
+	z-index: 20;
+}
+
+.scroller > nav > ul{
+	list-style: none;
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+}
+
+.scroller > nav > ul > li > a{
+	outline: none;
+}
+
+/*=======================================================*/
+/*== Footer =============================================*/
+/*=======================================================*/
+
+#footer .last{
+	text-align: center;
+}
+
+#footer .last > a{
+	background: #f4f3e8 linear-gradient(#fff, #eeeddd);
+	border: 1px solid transparent; /* chrome fix #29427 */
+	border-radius: 4px;
+	box-shadow: 0 0 1px #fff inset, 0 1px 3px rgba(0, 0, 0, 0.4);
+	color: #888;
+	display: inline-block;
+	font-weight: bold;
+	line-height: 15px;
+	outline: none;
+	margin: 5px 0;
+	padding: 3px 5px;
+	text-decoration: none;
+	text-transform: uppercase;
+	transition: all 0.2s ease-in-out;
+}
+
+#footer .last > a:hover{
+	box-shadow: 0 0 12px #fff inset, 0 1px 3px rgba(0, 0, 0, 0.4);
+	color: #666;
+}
+
+#footer .last > a:active{
+	background: #f4f3e8 linear-gradient(#fff, #f4f3e8);
+	border-color: #999;
+	border-radius: 3px;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4) inset;
+}
+
+/*=======================================================*/
+/*== Compatibility ======================================*/
+/*=======================================================*/
+
+.feature.news > footer > a, #events .last > a{ -moz-transition: all 0.1s ease-in; -webkit-transition: all 0.1s ease-in; }
+#ribbon nav > ul > li:hover > a{ background: #c31b2a; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#a51322, endColorstr=#af1f2d); background: #c31b2a -moz-linear-gradient(#a51322, #af1f2d); background: #c31b2a -webkit-gradient(linear, left top, left bottom, from(#a51322), to(#af1f2d)); }
+#ribbon nav > ul > li > ul{ background: #e4dfcf; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#f2f2f2, endColorstr=#e4dfcf); background: #e4dfcf -moz-linear-gradient(#f2f2f2, #e4dfcf); background: #e4dfcf -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#e4dfcf)); border-radius: 0 0 4px 4px; -moz-border-radius: 0 0 4px 4px; -webkit-border-radius: 0 0 4px 4px; box-shadow: 0 0 12px rgba(0, 0, 0, 0.6); -moz-box-shadow: 0 0 12px rgba(0, 0, 0, 0.6); -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.6); }
+#footer .last > a{ background: #f4f3e8; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff, endColorstr=#eeeddd); background: #f4f3e8 -moz-linear-gradient(#fff, #eeeddd); background: #f4f3e8 -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eeeddd)); border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px; box-shadow: 0 0 1px #fff inset, 0 1px 3px rgba(0, 0, 0, 0.4); -moz-box-shadow: 0 0 1px #fff inset, 0 1px 3px rgba(0, 0, 0, 0.4); -webkit-box-shadow: 0 0 1px #fff inset, 0 1px 3px rgba(0, 0, 0, 0.4); -moz-transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; }
+#footer .last > a:active{ background: #f4f3e8; background: #f4f3e8 -moz-linear-gradient(#fff, #f4f3e8); background: #f4f3e8 -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f4f3e8)); border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4) inset; -moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4) inset; -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4) inset; }

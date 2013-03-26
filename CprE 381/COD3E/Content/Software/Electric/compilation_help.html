@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<meta name="generator" content="Adobe GoLive 6">
+		<title>Installation Instructions for Electric</title>
+		<link href="../../resources/base_style.css" rel="stylesheet" media="screen">
+	</head>
+
+	<body bgcolor="#ffffff">
+		<h1>Installation Instructions for Electric</h1>
+		<p>Electric compiles on most UNIX variants, including SunOS, Solaris, BSD, HPUX, AIX, and (of course) GNU/Linux. Macintosh users must run System 7 or later. Electric compiles best under Metrowerks, although it has been built with MPW and THINK_C. Electric compiles under Windows 95/98/ME, NT 4.0, 2000, or XP with Visual C++ 5.0 or later.</p>
+		<p>The Electric <a href="ElectricManual.pdf">manual</a> has detailed installation instructions.</p>
+		<p>Contents:</p>
+		<ul>
+			<li><a href="#Unix">Building under Unix</a>
+			<li><a href="#Mac">Building under Mac</a>
+			<li><a href="#Windows">Building under Windows</a>
+			<li><a href="#Install">Installing</a>
+			<li><a href="#UnixMore">Additional details for Unix</a>
+		</ul>
+		<h2><a id="Unix" name="Unix"></a>Building under Unix</h2>
+		<p>To configure for your system, go into the top-level directory and type:<br>
+			&nbsp;&nbsp;&nbsp;<i>./configure</i><br>
+			
+			This will examine the system and create a file called &quot;Makefile&quot;.</p>
+		<p>To build Electric you now only need to type:<br>
+			&nbsp;&nbsp;&nbsp;<i>make</i><br>
+			
+			This compiles Electric and creates the executable file &quot;electric&quot; in the top level directory.</p>
+		<p>Type &quot;./electric&quot; to run the system.</p>
+		<p>On Solaris, when using the Forte C compiler, uncomment the line that starts with &quot;<i>FORTECFLAGS</i>&quot; in &quot;Makefile&quot;.</p>
+		<p>Electric has the option of using TrueType fonts.  If you want this, follow these instructions:</p>
+		<ol>
+			<li>If your system has Rainer Menzner's &quot;T1Lib&quot; installed, skip to step 4. Otherwise obtain Rainer Menzner's &quot;T1Lib&quot; (for example, from <a href="http://sunsite.unc.edu/pub/Linux/libs/graphics">http://sunsite.unc.edu/pub/Linux/libs/graphics</a>)<br>
+				Once you have it, unpack it (it will create a directory called &quot;T1-1.1.0&quot;), go into that directory, type &quot;./configure&quot; and then type &quot;make&quot;. You can then install with &quot;make install&quot;.
+			<li>Now go to the Electric directory and edit the &quot;Makefile&quot;. Near the top are comments labeled &quot;T1LIB TRUETYPE&quot;. Uncomment the two lines (remove the &quot;#&quot; from the beginning of the lines) and change the lines so that they point into the T1Lib folder that you have just installed. For example, if the T1Lib libraries installed into &quot;/usr/local/lib&quot; and the T1Lib headers installed into &quot;/usr/local/include&quot;, then you want these lines to read:<br>&nbsp;&nbsp;&nbsp;TRUETYPE_LIBS = /usr/local/lib/libt1.a<br>&nbsp;&nbsp;&nbsp;TRUETYPECFLAGS = -DTRUETYPE=1 -I/usr/local/include<li>Next (this is the most painful part), you have to set the environment variable T1LIB_CONFIG to point to the file &quot;t1lib.config&quot;. This file may be installed in &quot;/usr/local/share/t1lib&quot;. There will certainly be a copy in the &quot;examples&quot; folder of the distribution. The catch here is that this file has relative path names in it which must be converted to absolute. So, if you have extracted the T1Lib distribution into the folder &quot;/home/strubin/T1-1.1.0&quot;, then the file should look like this:<br>
+				&nbsp;&nbsp;&nbsp;FONTDATABASE=/home/strubin/T1-1.1.0/examples/FontDataBase<br>&nbsp;&nbsp;&nbsp;ENCODING=/home/strubin/T1-1.1.0/Fonts/enc:.<br>&nbsp;&nbsp;&nbsp;AFM=/home/strubin/T1-1.1.0/Fonts/afm:.<br>&nbsp;&nbsp;&nbsp;TYPE1=/home/strubin/T1-1.1.0/Fonts/type1:.<li>Finally, rebuild Electric with the TrueType library.  When you run it, you will get a warning if any of the TrueType initialization fails (in which case it will revert to the non-TrueType code). Otherwise, you have it.<br>
+			<li>Note that Electric uses the first font in the database by default.  To change the font that Electric uses, set the environment variable ELECTRIC_TRUETYPE_FONT to the desired font name. You can see a list of available fonts by setting this environment variable to an unknown name, in which case Electric will show all fonts in its error message.
+			
+			
+			
+			
+			
+			
+		</ol>
+		<p>To add Java, follow these instructions:</p>
+		<ol>
+			<li>Download the Java Development Kit (JDK) from <a href="http://java.sun.com">http://java.sun.com</a>. Install it. For the purposes of these instructions, assume that it is installed into&nbsp;/usr/java/jdk. If you install it elsewhere, adjust these instructions accordingly.<li>After configuration, but before making Electric, edit the &quot;Makefile&quot; and uncomment the lines near the top that enable Java. Change the definition of <i>LANGJAVA_DIR</i> to point to the installed JDK location.<li>On Solaris, add this string to the environment variable LD_LIBRARY_PATH:<br>
+				&nbsp;&nbsp;&nbsp;<font size="-1">	:/usr/java/jdk/jre/lib/sparc:/usr/java/jdk/jre/lib/sparc/classic:/usr/java/jdk/jre/lib/sparc/native_threads<br>
+				</font>
+				On GNU/Linux, add this string to the environment variable LD_LIBRARY_PATH:<br>
+				&nbsp;&nbsp;&nbsp;<font size="-1">:/usr/java/jdk/jre/lib/i386:/usr/java/jdk/jre/lib/i386/classic:/usr/java/jdk/jre/lib/i386/native_threads
+			</font>
+			
+				
+			<li>Be sure to export &quot;LD_LIBRARY_PATH&quot; if your shell requires it.
+			
+			
+			
+		</ol>
+		<p>To add the TCL interpreter, download ActiveTcl from <a href="http://www.tcl.tk">http://www.tcl.tk</a> and install it. Then edit &quot;Makefile&quot; and you will find the instructions necessary to enable the interpreter.</p>
+		<h2><a id="Mac" name="Mac"></a>Building under Macintosh</h2>
+		<p>For System 7, 8, and 9, there is a Metrowerks project (called &quot;Electric.xml&quot;). Run Metrowerks, import this file, and save it in the top level, alongside the &quot;src&quot; directory.  Due to the size of the code that is being built, you may have to increase the size of the Metrowerks partition.</p>
+		<p>For System 10, there are two ways to go: Qt or ProjectBuilder.  Qt is the only fully-working solution, but unfortunately it is not free on the Macintosh (it is actually quite expensive). Also, you need Qt release 3.1.0 or later. </p>
+		<p>To build with &quot;Qt&quot;, use a terminal window and type &quot;./configure&quot; to generate a &quot;Makefile&quot;. Edit the &quot;Makefile&quot; and switch to Qt widgets (uncomment the Qt part, comment the Motif part, and in the Qt section, change comments to switch to &quot;Qt on Macintosh&quot;).</p>
+		<p>The alternative to Qt is ProjectBuilder (the files &quot;Electric.pbproj&quot; and &quot;English.lproj&quot; are included). Note that the ProjectBuilder solution is not fully debugged, so use with care.</p>
+		<p>After compilation, you will have the application &quot;Electric&quot;.  Double-click it to run the system.</p>
+		<p>To add the TCL interpreter, follow these instructions:</p>
+		<ol>
+			<li>Download ActiveTcl from &quot;<a href="http://www.tcl.tk">http://www.tcl.tk</a>&quot; and install it.<br>
+			<li>If using Qt/System 10, edit &quot;Makefile&quot; and add TCL.  Otherwise:
+			<li>In the compiler, add an include path to the installed TCL &quot;include&quot; directory.
+			<li>Also in the compiler, add the appropriate TCL library to the project.
+			<li>Edit the appropriate &quot;mac&quot; include file in &quot;src/include&quot; (for example, &quot;macsfsheaders.h&quot;) and uncomment the definition of &quot;<i>FORCETCL</i>&quot;.</ol>
+		<p>To add a Java interpreter (System 10 only) follow these instructions:</p>
+		<ol>
+			<li>Download Java from &quot;<a href="http://java.sun.com">http://java.sun.com</a>&quot; and install it.
+			<li>If using Qt, edit &quot;Makefile&quot; and add Java.  Otherwise:
+			<li>In the compiler, add an include path to the installed Java &quot;include&quot; directory.
+			<li>Also in the compiler, add the appropriate Java library to the project.
+			<li>Edit the appropriate &quot;mac&quot; include file in &quot;src/include&quot; (for example, &quot;macsfsheaders.h&quot;) and uncomment the definition of &quot;<i>FORCEJAVA</i>&quot;.</ol>
+		<h2><a id="Windows" name="Windows"></a>Building under Windows</h2>
+		<ul>
+			<li>For users of Visual C++ 5.0 or 6.0, open the workspace file &quot;Electric.dsw&quot;. Both it and the associated file &quot;Electric.dsp&quot; are in the top level, alongside the &quot;src&quot; directory.<li>Visual Studio .NET users can open &quot;Electric.vcproj&quot;. 
+			<li>If you have trouble, you could try using the MAKE file &quot;Electric.mak&quot;. Compile Electric. This will create a new directory in the top level called &quot;Debug&quot;, which will contain all of the object files. Inside of the &quot;Debug&quot; directory, you will find the executable file &quot;Electric&quot;.</ul>
+		<p><b>Note:</b>&nbsp;Electric should be run with the Display Settings set to &quot;65536 Colors&quot; or &quot;True Color&quot;. Anything less will cause the colors to appear wrong.</p>
+		<p><b>Special note for VC++ 6.0 (or later)<br>
+			</b>You may have trouble linking and receive this error:</p>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;LINK : fatal error LNK1181: cannot open input file &quot;nafxcwd.lib&quot;</p>
+		<p>If so, try the following:</p>
+		<ol>
+			<li>Open the project settings. Select the &quot;Win32 Debug&quot; configuration.
+			<li>Select the &quot;General&quot;&nbsp;tab. Make sure the &quot;Microsoft Foundation Classes&quot; option is set to &quot;Use MFC in a Shared DLL&quot;.
+			<li>Select the &quot;Link&quot; tab. Check the &quot;Object/Library module&quot; option of the &quot;General&quot; category. If it contains the text &quot;nafxcwd.lib&quot; then remove that text (but leave anything else).
+		</ol>
+		<p>To add the Java interpreter, follow these instructions:</p>
+		<ol>
+			<li>Download the Java Development Kit (JDK) from <a href="http://java.sun.com">http://java.sun.com</a>. Install it.<br>
+				The standard location is &quot;C:\Program Files\JavaSDK&quot; (or whatever the version is), and this path will be used here. If you install it elsewhere, adjust these instructions accordingly.
+			<li>Edit the environment variables in the &quot;System&quot; Control Panel. On some systems, you click on the &quot;Environment&quot; tab; on others, click on the &quot;Advanced&quot; tab and then click the &quot;Environment Variables&quot; button. Under &quot;System variables&quot;, select &quot;Path&quot; and in the &quot;Value:&quot; area, add this string to the end:<br>
+				&nbsp;&nbsp;&nbsp;<font size="-1">
+				        ;C:\Program Files\JavaSDK\jre\bin\classic;C:\Program Files\JavaSDK\bin</font><br>
+				
+				On some newer versions of the Java Development Kit, you may also have to include this path:<br>
+				&nbsp;&nbsp;&nbsp;<font size="-1">
+				        ;&lt;CODE&gt;;C:\Program Files\JavaSDK\bin\client</font><br>
+				
+				On Windows 95 and Windows 98 systems, you may have to edit C:\AUTOEXE.BAT and append this to the PATH variable.  You must restart your computer after making this change.
+			<li>In Visual C++ 5.0 or 6.0, use the &quot;Settings&quot; command of the &quot;Project&quot; menu. Select the &quot;C/C++&quot; tab and the &quot;Preprocessor&quot; category.  In the &quot;Preprocessor definitions&quot; area, add this to the end:<br>
+				&nbsp;&nbsp;&nbsp;<font size="-1">,FORCEJAVA=1</font><br>
+				
+				In the &quot;Additional include directories&quot; area add this to the end:<br>
+				&nbsp;&nbsp;&nbsp;<font size="-1">,C:\Program Files\JavaSDK\include,C:\Program Files\JavaSDK\include\win32</font><br>
+				
+				Select the &quot;Link&quot; tab and the &quot;General&quot; category.  In the &quot;Object/library modules&quot; area, enter this:<br>
+				&nbsp;&nbsp;<font size="-1">&nbsp;jvm.lib</font><br>
+				
+				Select the &quot;Link&quot; tab and the &quot;Input&quot; category.  In the &quot;Additional library path&quot; area, enter this:<br>
+				&nbsp;&nbsp;&nbsp;<font size="-1">C:\Program Files\JavaSDK\lib</font><li>In Visual Studio .NET, right-click on the &quot;Electric&quot; solution and choose &quot;Properties&quot;. Select &quot;C/C++&quot; on the left and choose the &quot;General&quot; category under it. In the &quot;Additional Include Directories&quot; area, add this to the end:<br>
+				&nbsp;&nbsp;&nbsp;<font size="-1">;C:\Program Files\JavaSDK\include,C:\Program Files\JavaSDK\include\win32</font><br>
+				
+				Next choose the &quot;Preprocessor&quot; category of &quot;C/C++&quot; and in the &quot;Preprocessor Definitions&quot; area add this to the end:<br>
+				&nbsp;&nbsp;&nbsp;<font size="-1">;FORCEJAVA=1</font><br>
+				
+				Select &quot;Linker&quot; on the left and choose the &quot;General&quot; category under it. In the &quot;Additional Library Directories&quot; area, enter this:<br>
+				&nbsp;&nbsp;&nbsp;<font size="-1">;C:\Program Files\JavaSDK\lib</font><br>
+				
+				Next choose the &quot;Input&quot; category of &quot;Linker&quot; and in the &quot;Additional Dependencies&quot; area enter this:<br>
+				&nbsp;&nbsp;&nbsp;<font size="-1">jvm.lib</font><li>Once Java is installed, you must compile the ROM generator. In a command window, change directories to the &quot;lib\java&quot; directory and run the command:<br>
+				&nbsp;&nbsp;&nbsp;<font size="-1">javac romgen.java</font></ol>
+		<p>To add the TCL interpreter, follow these instructions:</p>
+		<ol>
+			<li>Download ActiveTcl from <a href="http://www.tcl.tk">http://www.tcl.tk</a> and install it.
+			<li>In the compiler, edit the Project Settings and find the field &quot;Additional include directories&quot; (under &quot;C/C++&quot;).  Add a new path to the installed TCL Includes (typically &quot;C:\Program Files\Tcl\include&quot;).
+			<li>Also in the compiler, edit the Project Settings and find the field &quot;Additional library path&quot; (under &quot;Linker&quot;).  Add a new path to the installed TCL Libraries (typically &quot;C:\Program Files\Tcl\lib&quot;).
+			<li>Edit the file &quot;src/include/config.h&quot; and make sure that the constant &quot;TCLLIBDIR&quot; points to the proper location of the initialization files (&quot;init.tcl&quot; and others). This is typically &quot;C:\Program Files\Tcl\lib\tcl8.3&quot;. Note that each backslash is doubled in this file, and you should follow this convention.</ol>
+		<h2><a id="Install" name="Install"></a>Installing</h2>
+		<p>Once compiled, Electric will run properly from the directory where it was built. However, if you wish to install the system, you must move files carefully. This is because Electric makes use of a collection of &quot;support files&quot;. The main support file is called &quot;cadrc&quot; (on UNIX, it has a dot in front: &quot;.cadrc&quot;). In addition, Electric needs to find the &quot;lib&quot; and &quot;html&quot; directories. If these support files cannot be found, Electric will not be able to initialize its graphical user interface. Just type &quot;-quit&quot; to exit the program if this happens.</p>
+		<p>On Windows and the Macintosh, it is sufficient to move the support files, along with the executable, to a public location. Then make an alias (shortcut) to the executable and place that anywhere you like.  When the alias is run, the directory with the executable will become the current directory, and all of the needed support files will be found.</p>
+		<p>On UNIX, the &quot;make install&quot; command will place the executable and the support files in a public location, but they may not be together.  For example, it is not uncommon for the executable to be placed in &quot;/usr/local/bin&quot;, but the support files in &quot;/usr/local/lib/electric&quot;.  When this happens, the executable needs to know where the support files are located.  There are three ways to do this:</p>
+		<ol>
+			<li>You can set the ELECTRIC_LIBDIR environment variable to point to the location of the support files.
+			<li>You can change the #define of &quot;LIBDIR&quot; in &quot;src/include/config.h&quot; to point to the location of the support files.
+			<li>You can keep a local copy of &quot;.cadrc&quot; file (this file can be in your home directory or in the current directory).  Inside of the &quot;.cadrc&quot; file, change the &quot;electric library default-path&quot; command to point to the remaining support files (the &quot;lib&quot; and &quot;html&quot; directories).
+			
+			
+			
+			
+			
+			
+		</ol>
+		<p>UNIX systems also offer &quot;make install.html&quot;, which installs the online manual into a public place (typically &quot;/usr/local/share/doc/electric/html&quot;). Be sure that the #define of &quot;DOCDIR&quot; in &quot;src/include/config.h&quot; agrees with this path, or else the &quot;See Manual&quot; command will not work.</p>
+		<h2><a id="UnixMore" name="UnixMore"></a>Additional Details for Unix</h2>
+		<p>Electric uses &quot;widget libraries&quot; to control the windows on the display. The default widget library is Motif (see <a href="http://www.opengroup.org/openmotif">http://www.opengroup.org/openmotif</a>). You can use LessTif (see <a href="http://www.lesstif.org">http://www.lesstif.org</a>), but it has some bugs. You will have to remove the &quot;XtDestroyWidget()&quot; call in &quot;DiaDoneDialog()&quot;. You can also use Qt (see <a href="http://www.trolltech.com">http://www.trolltech.com</a>) by editing the &quot;Makefile&quot; after running &quot;configure&quot;. Comments near the top explain what to do.</p>
+		<p>When installing these packages on your system, be sure to get both the libraries and the &quot;devel&quot; package that contains the compiler header files. Also note that many systems use shared libraries for these widget packages, and this may require some additional steps when installing. This is because the libraries get installed in a place that the shared library system doesn't know about. If you have super-user access, you can use &quot;ldconfig&quot; to tell the system where to find the libraries. Otherwise, you can use the LD_LIBRARY_PATH environment variable (on AIX use LIBPATH and on HP-UP use SHLIB_PATH). This variable is a colon-separated list of paths to be searched for shared libraries. For example, this setting will work on many systems:<br>
+			&nbsp;&nbsp;&nbsp;<i>LD_LIBRARY_PATH = /usr/X11R6/lib/</i><br>
+			&nbsp;&nbsp;&nbsp;<i>export LD_LIBRARY_PATH</i></p>
+		<p>Electric has two ways to control the display. By default, the system runs on any depth monitor, but is slow on older machines and must be run locally (that is, the client and the server must be on the same computer). The alternate method of display is faster and can run over the network, but it can only support displays that are set to 8bpp (8 bits per pixel). In addition, this alternate method will suffer from &quot;colormap flashing&quot; when the cursor enters and leaves the Electric windows. To switch to this alternate method, edit the &quot;Makefile&quot; after running &quot;configure&quot;. Comments near the top explain what to do. Note also that Motif and Lesstif do not work well with this alternate display method, so you will also have to switch to using the Athena widgets.<br>
+		</p>
+		<p>Electric makes use of external programs for simulation.  The location of these programs can be found in the various #defines in the file &quot;src/include/config.h&quot;, which can be overridden with the following variables in your &quot;.cshrc&quot; file:<br>
+			&nbsp;&nbsp;&nbsp;<i>setenv ELECTRIC_SPICELOC /usr/local/bin/spice</i><br>
+			&nbsp;&nbsp;&nbsp;<i>setenv ELECTRIC_ESIMLOC /usr/local/bin/esim</i><br>
+			&nbsp;&nbsp;&nbsp;<i>setenv ELECTRIC_RSIMLOC /usr/local/bin/rsim</i><br>
+			&nbsp;&nbsp;&nbsp;<i>setenv ELECTRIC_PRESIMLOC /usr/local/bin/presim</i><br>
+			&nbsp;&nbsp;&nbsp;<i>setenv ELECTRIC_RNLLOC /usr/local/bin/rnl</i><br>
+		</p>
+		<p>There are two command-line arguments that can be given to control the X-Windows display. If you use the &quot;-f&quot; option, Electric will start with a full-screen graphics window. If you use the &quot;-geom WxH+X+Y&quot;, it will set the graphics window to be &quot;W&quot; wide, &quot;H&quot; high, and with its corner at (X, Y). Additional X-Windows options can be typed into the file &quot;.Xdefaults&quot;. The resources &quot;Electric.font0&quot; through &quot;Electric.font8&quot; set the font to use for point sizes 4, 6, 8, 10, 12, 14, 16, 18, and 20. The resource &quot;Electric.fontmenu&quot; controls the text used in the component menu, and the resource &quot;Electric.fontedit&quot; controls the text used in the text editor. Here is a sample line from the file:<br>
+			&nbsp;&nbsp;&nbsp;<font size="-1">Electric.font5: -misc-fixed-medium-r-normal-*-*-140-*-*-*-*-*-*</font><br>
+			
+			To see what all of these fonts look like, load the library &quot;samples.txt&quot; (with the &quot;Readable Dump&quot; subcommand of the &quot;Import&quot; command of the &quot;File&quot; menu) and edit the facet &quot;tech-Artwork&quot;.  The top part of the facet shows text in sizes 4 through 20.</p>
+	</body>
+
+</html>

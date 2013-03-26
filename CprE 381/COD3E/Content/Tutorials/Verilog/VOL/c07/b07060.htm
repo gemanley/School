@@ -1,0 +1,38 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td width="600">Click each of the complications to learn more about it.
+				<p><a href="a07060.htm">Timing</a><br>
+					<a href="b07060.htm">Efficiency</a><br>
+					<a href="c07060.htm">Initialization</a><br>
+					<a href="d07060.htm">Register Selection</a><br>
+					<a href="e07060.htm">State Encoding</a><br>
+					<a href="f07060.htm">Latch Inferencing</a></p>
+				<p>Notice that when you use an always loop as above, the state variable gets assigned on every clock, even if the value has not changed. In many cases, this is quite wasteful, as the state machine will change state with the frequency of the input, not of the clock. Surprisingly, this can consume a significant amount of simulation time in a large model.</p>
+				<p>A technique which can improve efficiency is:</p>
+				<p></p>
+				<pre>
+    always @(posedge clock) begin
+        state 
+					
+					
+					<= nextstate; // non-blocking assign @(in) ; // wait for a change end </PRE> This suspends the always loop until the input changes, which is a necessary condition for the nextstate register to change. This works fine, and will not interfere with synthesis if you put the appropriate synthesis pragmas around it (// synopsys translate off and // synopsys translate on).<P>
+					
+					
+					 
+
+Unfortunately, this trick does not work for the intra-assignment delay if there are no other delays in the model, and if the output of one state machine is the input to another. If both of them use this style, there will be a race.
+
+</pre>
+			</td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

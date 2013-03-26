@@ -1,0 +1,45 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td valign="top" width="235"><img src="images/v0742g1.gif" height="93" width="235">
+				<p></p>
+			</td>
+			<td valign="top" width="335">Just as it is important to write code at a level of abstraction where vectors are the primary data type, it is also important to write code which does not cause vectors to be split up into individual bits.
+				<p></p>
+			</td>
+		</table>
+		<table width="600">
+			Remember that the underlying representation of a vector register is 4-value, or 2 bits per bit of the vector. For a vector net, however, the representation may be 120-value, or 8 bits per vector bit. In a high-performance simulator, the 120-value representation is only used when needed, but the simulator's idea of when it is needed may be more pessimistic than actually necessary.
+			<p>For instance, consider an 8 bit tri-state bus:</p>
+			<pre>
+    wire [7:0] out, in;
+    bufif1 (bus[0], local[0], control);
+    bufif1 (bus[1], local[1], control);
+    .
+    .
+    .
+    bufif1 (bus[7], local[7], control);
+</pre>
+			This is a common way of specifying the bus drivers. However, it is not a very good way. The problem is that the bufif semantics dictate that if control is x, the output may be a blended strength signal. This means that to be correct, the bus must be 120-value, or 8 bits per bit. In other words, the bus must be &quot;split&quot; into 8 one bit nets.
+			<p>The impact of this is felt when another operation is to be done with the bus as an operand. For example,</p>
+			<pre>
+    assign val = bus &amp; mask;
+</pre>
+			would require mask to be split into 8 bits and each bit would be anded separately. This would go roughly 8 times slower than the operation would go if the bus was not split.
+			<p>A better alternative to writing the bus driver would be:</p>
+			<pre>
+    assign bus = control ? local : 'bz;
+</pre>
+			This coding would preserve the 4-value representation of bus, and thus speed up all operations which were applied to the bus. Note, however, that the semantics are subtly different. The bus value is not the same if control is x and any bits of local are x. In most cases, this does not matter, because control is not expected to be x.
+			<p>The conclusion to draw from this discussion is to avoid 120-value signals if at all possible, because they can cause vectors to be split into individual bits. When vectors are split, operations on them are much slower than if they are not split.</p>
+		</table>
+		</FONT>
+	</body>
+
+</html>

@@ -1,0 +1,33 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			<tr>
+				<td>
+					<pre>
+module driver (net_r);
+        output net_r;
+        real r;
+        wire [64:1] net_r = $realtobits(r);
+endmodule
+    
+module receiver (net_r);
+        input net_r;
+        wire [64:1] net_r;
+        real r;
+        always @(net_r)
+            r = $bitstoreal(net_r);
+endmodule 
+</pre>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

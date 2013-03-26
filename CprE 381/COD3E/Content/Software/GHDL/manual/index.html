@@ -1,0 +1,110 @@
+<html lang="en">
+
+	<head>
+		<title>GHDL guide</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+		<meta name="description" content="GHDL guide">
+		<meta name="generator" content="makeinfo 4.1">
+		<link href="http://texinfo.org/" rel="generator-home">
+		<link href="../../../resources/base_style.css" rel="stylesheet" type="text/css" media="all">
+	</head>
+
+	<body>
+		<h1>GHDL guide</h1>
+		<h2>Table of Contents</h2>
+		<ul>
+			<li><a name="toc_Top"></a><a href="index.html#Top">GHDL guide</a>
+			<li><a name="toc_Introduction"></a><a href="Introduction.html#Introduction">Introduction</a>
+				<ul>
+					<li><a href="Introduction.html#Introduction">Content of this manual</a>
+					<li><a href="What-is-VHDL.html#What%20is%20VHDL">What is <code>VHDL</code>?</a>
+					<li><a href="What-is-GHDL.html#What%20is%20GHDL">What is <code>GHDL</code>?</a>
+				</ul>
+			<li><a name="toc_Starting%20with%20GHDL"></a><a href="Starting-with-GHDL.html#Starting%20with%20GHDL">Starting with GHDL</a>
+				<ul>
+					<li><a href="The-hello-word-program.html#The%20hello%20word%20program">The hello world program</a>
+					<li><a href="A-full-adder.html#A%20full%20adder">A full adder</a>
+					<li><a href="Starting-with-a-design.html#Starting%20with%20a%20design">Starting with a design</a>
+				</ul>
+			<li><a name="toc_Flaws%20and%20bugs%20report"></a><a href="Flaws-and-bugs-report.html#Flaws%20and%20bugs%20report">Flaws and bugs report</a>
+				<ul>
+					<li><a href="Deficiencies.html#Deficiencies">Deficiencies</a>
+					<li><a href="Reporting-bugs.html#Reporting%20bugs">Reporting bugs</a>
+					<li><a href="Future-improvements.html#Future%20improvements">Future improvements</a>
+				</ul>
+			<li><a name="toc_Copyrights"></a><a href="Copyrights.html#Copyrights">Copyrights</a>
+			<li><a name="toc_Invoking%20GHDL"></a><a href="Invoking-GHDL.html#Invoking%20GHDL">Invoking GHDL</a>
+				<ul>
+					<li><a href="GHDL-options.html#GHDL%20options">GHDL options</a>
+					<li><a href="GHDL-modes.html#GHDL%20modes">GHDL modes</a>
+						<ul>
+							<li><a href="Analysis-mode.html#Analysis%20mode">Analysis mode</a>
+							<li><a href="Elaboration-mode.html#Elaboration%20mode">Elaboration mode</a>
+							<li><a href="Directory-mode.html#Directory%20mode">Directory mode</a>
+							<li><a href="Import-mode.html#Import%20mode">Import mode</a>
+							<li><a href="Make-mode.html#Make%20mode">Make mode</a>
+							<li><a href="Find-mode.html#Find%20mode">Find mode</a>
+							<li><a href="Clean-mode.html#Clean%20mode">Clean mode</a>
+							<li><a href="Remove-mode.html#Remove%20mode">Remove mode</a>
+							<li><a href="Bind-mode.html#Bind%20mode">Bind mode</a>
+							<li><a href="Link-mode.html#Link%20mode">Link mode</a>
+							<li><a href="List-link-mode.html#List%20link%20mode">List link mode</a>
+							<li><a href="Chop-mode.html#Chop%20mode">Chop mode</a>
+							<li><a href="Help-mode.html#Help%20mode">Help mode</a>
+							<li><a href="Dispconfig-mode.html#Dispconfig%20mode">Dispconfig mode</a>
+							<li><a href="Disp-standard-mode.html#Disp%20standard%20mode">Disp standard mode</a>
+							<li><a href="Version-mode.html#Version%20mode">Version mode</a>
+						</ul>
+					<li><a href="IEEE-library-pitfalls.html#IEEE%20library%20pitfalls">IEEE library pitfalls</a>
+				</ul>
+			<li><a name="toc_Simulation%20and%20run%20time"></a><a href="Simulation-and-run-time.html#Simulation%20and%20run%20time">Simulation and run time</a>
+				<ul>
+					<li><a href="Simulation-options.html#Simulation%20options">Simulation options</a>
+					<li><a href="Debugging-VHDL-programs.html#Debugging%20VHDL%20programs">Debugging VHDL programs</a>
+				</ul>
+			<li><a name="toc_GHDL%20implementation%20of%20VHDL"></a><a href="GHDL-implementation-of-VHDL.html#GHDL%20implementation%20of%20VHDL">GHDL implementation of VHDL</a>
+				<ul>
+					<li><a href="VHDL-standards.html#VHDL%20standards">VHDL standards</a>
+					<li><a href="Source-representation.html#Source%20representation">Source representation</a>
+					<li><a href="Library-database.html#Library%20database">Library database</a>
+					<li><a href="VHDL-files-format.html#VHDL%20files%20format">VHDL files format</a>
+					<li><a href="Top-entity.html#Top%20entity">Top entity</a>
+					<li><a href="Interfacing-to-other-languages.html#Interfacing%20to%20other%20languages">Interfacing to other languages</a>
+						<ul>
+							<li><a href="Interfacing-to-other-languages.html#Interfacing%20to%20other%20languages">Foreign declarations</a>
+							<li><a href="Restrictions-on-foreign-declarations.html#Restrictions%20on%20foreign%20declarations">Restrictions on foreign declarations</a>
+							<li><a href="Linking-with-foreign-object-files.html#Linking%20with%20foreign%20object%20files">Linking with foreign object files</a>
+							<li><a href="Starting-a-simulation-from-a-foreign-program.html#Starting%20a%20simulation%20from%20a%20foreign%20program">Starting a simulation from a foreign program</a>
+							<li><a href="Linking-with-Ada.html#Linking%20with%20Ada">Linking with Ada</a>
+						</ul>
+				</ul>
+			<li><a name="toc_GHDL%20implementation%20of%20VITAL"></a><a href="GHDL-implementation-of-VITAL.html#GHDL%20implementation%20of%20VITAL">GHDL implementation of VITAL</a>
+				<ul>
+					<li><a href="VITAL-packages.html#VITAL%20packages">VITAL packages</a>
+					<li><a href="VHDL-restrictions-for-VITAL.html#VHDL%20restrictions%20for%20VITAL">VHDL restrictions for VITAL</a>
+					<li><a href="Backannotation.html#Backannotation">Backannotation</a>
+					<li><a href="Negative-constraint-calculation.html#Negative%20constraint%20calculation">Negative constraint calculation</a>
+				</ul>
+			<li><a name="toc_Index"></a><a href="index.html#Index">Index</a>
+		</ul>
+		<p>Node:<a name="Top">Top</a>, Next:<a href="Introduction.html#Introduction" rel="next">Introduction</a>,</p>
+		<hr>
+		<br>
+		<h2>GHDL guide</h2>
+		<p>GHDL, a VHDL compiler.</p>
+		<p>Copyright &copy; 2002, 2003, 2004 Tristan Gingold.</p>
+		<p>Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License, Version 1.1 or any later version published by the Free Software Foundation.</p>
+		<ul>
+			<li><a href="Introduction.html#Introduction">Introduction</a>: What is GHDL, what is VHDL
+			<li><a href="Starting-with-GHDL.html#Starting%20with%20GHDL">Starting with GHDL</a>: Build a VHDL program with GHDL
+			<li><a href="Flaws-and-bugs-report.html#Flaws%20and%20bugs%20report">Flaws and bugs report</a>:
+			<li><a href="Copyrights.html#Copyrights">Copyrights</a>:
+			<li><a href="Invoking-GHDL.html#Invoking%20GHDL">Invoking GHDL</a>:
+			<li><a href="Simulation-and-run-time.html#Simulation%20and%20run%20time">Simulation and run time</a>:
+			<li><a href="GHDL-implementation-of-VHDL.html#GHDL%20implementation%20of%20VHDL">GHDL implementation of VHDL</a>:
+			<li><a href="GHDL-implementation-of-VITAL.html#GHDL%20implementation%20of%20VITAL">GHDL implementation of VITAL</a>:
+			<li><a href="index.html#Index">Index</a>:
+		</ul>
+	</body>
+
+</html>

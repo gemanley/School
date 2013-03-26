@@ -1,0 +1,25 @@
+<html lang="en">
+
+	<head>
+		<title>GHDL guide</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+		<meta name="description" content="GHDL guide">
+		<meta name="generator" content="makeinfo 4.1">
+		<link href="http://texinfo.org/" rel="generator-home">
+		<link href="../../../resources/base_style.css" rel="stylesheet" type="text/css" media="all">
+	</head>
+
+	<body>
+		<p>Node:<a name="Linking%20with%20foreign%20object%20files">Linking with foreign object files</a>, Next:<a href="Starting-a-simulation-from-a-foreign-program.html#Starting%20a%20simulation%20from%20a%20foreign%20program" rel="next">Starting a simulation from a foreign program</a>, Previous:<a href="Restrictions-on-foreign-declarations.html#Restrictions%20on%20foreign%20declarations" rel="previous">Restrictions on foreign declarations</a>, Up:<a href="Interfacing-to-other-languages.html#Interfacing%20to%20other%20languages" rel="up">Interfacing to other languages</a></p>
+		<hr>
+		<br>
+		<h4>Linking with foreign object files</h4>
+		<p>You may add additionnal files or options during the link using the <code>-Wl,</code> of <code>GHDL</code>, as described in <a href="Elaboration-mode.html#Elaboration%20mode">Elaboration mode</a>. For example:<br>
+		</p>
+		<pre>$ ghdl -e -Wl,-lm math_tb
+</pre>
+		will create the <code>math_tb</code> executable with the <code>lm</code> (mathematical) library.
+		<p>Note the <code>c</code> library is always linked with an executable.</p>
+	</body>
+
+</html>

@@ -1,0 +1,35 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>The following timing check tasks are available. Click each to learn more about it.
+					<p><map name="menu"><area shape="RECT" coords="1,1,81,21" href="a06144.htm"><area shape="RECT" coords="1,30,71,51" href="b06144.htm"><area shape="RECT" coords="1,60,109,81" href="c06144.htm"><area shape="RECT" coords="1,90,88,111" href="d06144.htm"><area shape="RECT" coords="1,120,80,141" href="e06144.htm"><area shape="RECT" coords="1,150,81,171" href="f06144.htm"><area shape="RECT" coords="1,180,104,201" href="g06144.htm"><area shape="RECT" coords="1,210,109,231" href="h06144.htm"></map></p>
+					<center>
+						<img src="images/v0648g1.gif" usemap="#menu" VALIGN="TOP" HALIGN="LEFT" border="0"></center>
+					<p><br>
+						<br>
+						<tt>$hold (reference_event, data_event, limit [,notifier]);</tt></p>
+					<p>This sets up a check for hold time. The check will be made whenever first the <tt>reference_event</tt> occurs and then the <tt>data_event</tt> occurs.</p>
+					<p>The check is:</p>
+					<p></p>
+					<pre>
+        time(data_event) - time(reference_event) &lt; limit
+</pre>
+					If this is true, then an error is reported. The <tt>time(reference_event)</tt> is the lower bound of the interval, and <tt>time(data_event)</tt> is the upper bound. If <tt>reference_event</tt> and <tt>data_event</tt> occur at the same time, the check is made with both new values, which will usually result in a violation.
+					<p>Example:</p>
+					<p></p>
+					<pre>
+        $hold (posedge clk, dataIn, tHold);
+</pre>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

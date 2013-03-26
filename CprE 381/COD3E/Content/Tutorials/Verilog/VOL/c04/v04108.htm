@@ -1,0 +1,36 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<FONT FACE="TIMES" SIZE="3">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td width="600"><a href="javascript:parent.goGlossHash('#sequdp')"><font color="#B22222">Sequential UDPs</font></a></font> are just an extension of combinational UDPs. Their behavior is described by a table in just the same way, but they have an additional table entry, and that is the &quot;current state&quot;.
+					<p>The output port of a sequential UDP is declared as a reg, thus making it a state variable. Additionally, there is an extra field in the table entry for the current state.</p>
+					<p>Consider this description of a latch.</p>
+					<p></p>
+					<pre>
+    primitive latch (q, ck, d);
+        output q;
+        reg q;
+        input ck, d;
+        table
+        //  ck   d   q   q+
+             0   1 : ? : 1;
+             0   0 : ? : 0;
+             1   ? : 0 : 0;
+             1   ? : 1 : 1;
+        endtable
+    endprimitive
+</pre>
+					The column labelled <tt>q</tt> is the current state, and the column labelled <tt>q+</tt> is the output, or next state.</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

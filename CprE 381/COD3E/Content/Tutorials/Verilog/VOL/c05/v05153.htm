@@ -1,0 +1,107 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td><a name="diagram">This example is a register-transfer level version of the gate level shift register.
+						<p>This design satisfies the following requirements:</p>
+						<p></p>
+						<ul>
+							<li>Implement a shift register. A data value is shifted in on every clock cycle, on the rising edge, and the oldest value is shifted out. The shift register is fifo. The shifted-out value is available after the falling edge of the clock.
+							<li>The depth of the shift register is 4 bits.
+							<li>The module ports are: data input (1 bit), clock (1 bit), data output (1 bit).
+						</ul>
+						<p></p>
+						<center>
+							<a href="#source"><img src="images/vverilog.gif" height="39" width="139" border="0"></a>
+							<p><img src="images/v0551g1.gif" width="467" heigth="309"></p>
+							<p><a href="JavaScript:parent.dispWindow('v05153r1.htm','OutputD')"><img src="images/voutputd.gif" height="39" width="144" border="0"></a>&nbsp;&nbsp;&nbsp;<a href="JavaScript:parent.dispWindow('v05153r2.htm','OutputT')"><img src="images/voutputt.gif" height="39" width="116" border="0"></a></p>
+						</center>
+						<p><br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<a name="source"><b>Example: Shift Register</b></a></p>
+						<pre>
+module test;
+    /* gate level model to implement a shift register */
+    
+    wire dataIn, dataOut, clk;
+    
+    shift4 s4 (dataIn, clk, dataOut);           // 4-bit shift register
+    clkGen #(10) cg (clk);                      // generate the clock       
+    shiftTest at (dataIn, dataOut, clk);        // test generator
+endmodule
+
+
+module shift4 (dataIn, clk, dataOut);
+    output dataOut;
+    input dataIn, clk;
+    reg dataOut;
+    reg [2:0] shiftreg;
+
+    always @(posedge clk)
+        {dataOut, shiftreg} = @(negedge clk) {shiftreg, dataIn};
+endmodule
+
+    
+module clkGen (clk);
+    parameter period = 2;
+    output clk;
+    reg clk;
+    
+    initial clk = 0;                // start off with 0
+    always                          // clock loop
+        #(period/2) clk = ~clk;
+endmodule
+
+
+module shiftTest (dataBit, delayedBit, clk);
+    output dataBit;
+    input delayedBit;
+    input clk;
+    reg dataBit;
+    
+    task emitBits;  // helper task to emit n bits
+        input [7:0] bits, n;    // task inputs
+        begin
+            repeat (n) begin    // assume clk is at negedge
+                    dataBit = bits[0];  // take just the low order bit
+                    bits = bits &gt;&gt; 1;
+                @(negedge clk) ;    
+            end                 // leave at negative edge
+        end
+    endtask
+        
+    always @(posedge clk)       // display results
+        $strobe($stime,&quot; dataBit: %b delayedBit: %b&quot;, dataBit, delayedBit);
+            
+    initial begin               // produce test data
+        emitBits(0, 1);         // take care of first cycle
+        emitBits('b10010, 5);
+        emitBits('b101101, 6);
+        emitBits('b01, 2);
+        emitBits(8'b00000010, 8);
+        $finish;
+    end
+endmodule
+
+</pre>
+						<p><a href="#diagram">Return to Diagram</a></b>&nbsp;&nbsp;&nbsp;<a href="#diagram"><img src="images/varrow.gif" with="38" height="39" border="0"></a></p>
+					</a></td>
+			</tr>
+		</table>
+	</body>
+
+</html>

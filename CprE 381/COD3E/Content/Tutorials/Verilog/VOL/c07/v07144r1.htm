@@ -1,0 +1,260 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			<b>TestLocalInterruptController</b>
+			<p></p>
+			<pre>
+/*  LocalInterruptController.t
+    Copyright (c) 1990 NeXT, Inc.
+    Originated:  Sun Oct  7 12:12:01 PDT 1990 by Mark Ross
+    Last Edited:  $Date$ by $Author$
+    
+Overview:
+    Test module for the LocalInterruptController.  Tests out the function
+    of the device interrupts and the NextBus reset and nmi functionality.  
+    
+IMPORTS:
+    ../Verilog/LocalInterruptController.v  USING [LocalInterruptController]
+    ../Verilog/LocalInterruptStateMachine.v 
+    USING [LocalInterruptStateMachine]
+    ../Verilog/LocalInterruptDataPath.v
+    USING [LocalInterruptDataPath]
+    
+EXPORTS:
+    modules:  TestLocalInterruptController
+    tasks:  none
+    
+Internal Tasks:
+    none 
+Internal Functions:
+    none
+CHANGE LOG:
+    $Log$
+    
+*/
+    
+/*  Defines for this block  */
+module  TestLocalInterruptController;
+    /*  Parameters  */
+    parameter displayOn = 0;
+    parameter verbose = 0;
+    
+    /*  Wires and registers  */
+    reg                     errorsFound;
+    reg [31:0]              nextBusAddressValue;
+    reg [31:0]              nextBusDataValue;
+    
+    reg                     nextBusCycleDone;
+    wire [31:0]             localIODataBusOut;
+    reg                     reset;
+    reg                     clock;
+    reg [3-1:0]             deviceInterruptVector;
+    reg                     nmiRequest;
+    reg                     resetRequest;
+    
+    wire                    nextBusRequest;
+    reg                     nextBusGrant;
+    wire                    masterStart = 0;
+    reg                     masterDataStrobe;
+    
+    wire                    scanShiftIn = 0;
+    wire                    scanShiftOut;
+    wire                    scanShiftEnable = 0;
+    reg [3-1:0]             interruptValidVector;
+    reg [(3*4)-1:0]         interruptNumberVector;
+    
+    wire    forceInterruptTransaction = 0;
+    /*  Instances  */
+    <a href="v07144re.htm" target="v07144re">LocalInterruptController</a> localInterruptController(
+        /*  General signals  */
+        reset, 
+        clock,
+        /*  Data bus signals  */
+        localIODataBusOut,
+        /*  Interrupt signals  */
+        deviceInterruptVector,
+        nmiRequest,
+        resetRequest, 
+        forceInterruptTransaction, 
+        /*  Interrupt Number and valid bits  */
+        interruptValidVector,
+        interruptNumberVector,
+        /*  Signals to interact with the NextBusInterfaceLogic  */
+        nextBusRequest, 
+        nextBusGrant,
+        masterStart, 
+        ioMasterStart,
+        masterDataStrobe,
+        /*  Scan signals  */
+        scanShiftIn,
+        scanShiftOut,
+        scanShiftEnable
+        );
+/*===================  clock declarations:  ==================*/
+    initial begin :RunClock
+    clock = 0;
+    #(400/2);
+        forever #(400/2) clock = ~clock;
+    end
+    
+/*==================  other timed statements: ================*/
+    initial begin
+    <a href="#source5">RunTest</a>;
+    repeat (100) @(posedge clock);
+    disable RunClock;
+    disable <a href="#source6">BusManager</a>;
+    $finish(2);
+    end
+        
+    parameter   cyclesFromRequestToGrant = 4;
+    parameter   cyclesFromRequestToReply = 3;
+    integer numberOfDataCycles;
+    reg     servicingRequest;
+<a name="source6">
+    initial begin :BusManager
+    servicingRequest = 0;
+    forever @(posedge clock) begin
+    if (nextBusRequest &amp; !servicingRequest) begin
+        servicingRequest = 1;
+        @(posedge clock);
+        repeat (cyclesFromRequestToGrant) @(posedge clock);
+        #10 nextBusGrant = 1;
+        
+        //  Now &quot;latch&quot; the request address cycle
+        @(posedge clock) #10 masterDataStrobe = 1;
+        @(posedge clock) nextBusAddressValue = localIODataBusOut;
+        if (verbose) $display(&quot;%0d:\tReceived a NextBus Request ==&gt; %x&quot;, 
+        $time, localIODataBusOut);
+        #10 masterDataStrobe = 0;
+        
+        //  Now for the request data cycle  
+        @(posedge clock) #10 masterDataStrobe = 1;
+        @(posedge clock) nextBusDataValue = localIODataBusOut;
+        if (verbose) $display(&quot;%0d:\tNextBus Data Cycle   ==================&gt; %x&quot;, 
+        $time, localIODataBusOut);
+        #10 masterDataStrobe = 0;
+        nextBusGrant = 0;
+        
+        nextBusCycleDone = 1;
+        
+        servicingRequest = 0;
+    end
+    end
+    end //BusManager
+/*==================  Task declarations: ================*/
+<a name="source5">
+    task  RunTest;
+    begin
+        <a href="#source1">InitializeSystem</a>;
+        #10;
+        
+        
+        <a href="#source2">WalkInterruptBit</a>;
+        
+        <a href="#source3">TestNMIAndReset</a>;
+        
+        <a href="#source4">ShmooInterrupts</a>;
+        
+    end
+    endtask  /*  RunTest  */
+<a name="source2">    
+    task  WalkInterruptBit;
+    integer i;
+    reg [3:0]   interruptNumber;
+    begin
+        $display(&quot;%0d:\tWalk interrupt through each bit position for each interrupt...&quot;, $time);
+        $monitoroff;
+        //  Try with the first interrupt being used  
+        deviceInterruptVector = 2'b00;
+        interruptValidVector = 2'b11;
+        @(posedge clock) #10;
+        
+        for (i=0; i
+							
+							
+							<16; i="i+1)" begin interruptNumber="i;" interruptNumberVector="{4'h0," interruptNumber}; @(posedge clock) #10; deviceInterruptVector="2'b01;" nextBusCycleDone="0;" while (!nextBusCycleDone) @(posedge clock); // Check that only the desired bit is true. if (nextBusDataValue[i] !="=" 1'b1) begin $display("%0d:\t*** ERROR *** ", $time); $display("\t\tExpected bit %0d to be set in WalkInterruptBitTest", i); end nextBusDataValue[i]="0;" if (|nextBusDataValue[15:0]) begin $display("%0d:\t*** ERROR *** ", $time); $display("\t\tExpected all bits except %0d to be clear in WalkInterruptBitTest", i); end deviceInterruptVector="2'b00;" @(posedge clock) #10; end // Make sure it works for the other interrupt as well for (i="0;" i<16; i="i+1)" begin interruptNumber="i;" interruptNumberVector="{interruptNumber," 4'h0}; @(posedge clock) #10; deviceInterruptVector="2'b10;" nextBusCycleDone="0;" while (!nextBusCycleDone) @(posedge clock); // Check that only the desired bit is true. if (nextBusDataValue[i] !="=" 1'b1) begin $display("%0d:\t*** ERROR *** ", $time); errorsFound="1;" $display("\t\tExpected bit %0d to be set in WalkInterruptBitTest", i); end nextBusDataValue[i]="0;" if (|nextBusDataValue[15:0]) begin $display("%0d:\t*** ERROR *** ", $time); errorsFound="1;" $display("\t\tExpected all bits except %0d to be clear in WalkInterruptBitTest", i); end deviceInterruptVector="2'b00;" @(posedge clock) #10; end $monitoron; end endtask /* WalkInterruptBit */ task TestNMIAndReset; <A NAME="source3"> begin resetRequest="1;" nextBusCycleDone="0;" while (!nextBusCycleDone) @(posedge clock); // Check that the transaction was a reset if (nextBusAddressValue !="=" 32'hfffad000) begin $display("%0d:\t*** ERROR *** ", $time); $write("\t\tExpected reset transaction, received "); $write("address="=">
+							
+							
+							 %x\n&quot;, nextBusAddressValue);
+        end 
+        
+        nmiRequest = 1;
+        nextBusCycleDone = 0;
+        while (!nextBusCycleDone) @(posedge clock);
+        
+        //  Check that the transaction was an nmi 
+        if (nextBusAddressValue !== 32'hfffac800) begin
+            $display(&quot;%0d:\t***  ERROR  *** &quot;, $time);
+            $write(&quot;\t\tExpected nmi transaction, received &quot;);
+            $write(&quot;address ==&gt; %x\n&quot;, nextBusAddressValue);
+        end 
+        
+        
+        resetRequest = 0;
+        nmiRequest = 0;
+        
+        repeat (2) @(posedge clock);
+        #10;
+        nmiRequest = 1;
+        resetRequest = 1;
+        
+        nextBusCycleDone = 0;
+        while (!nextBusCycleDone) @(posedge clock);
+        //  Check that the transaction was a reset 
+        if (nextBusAddressValue !== 32'hfffad000) begin
+            $display(&quot;%0d:\t***  ERROR  *** &quot;, $time);
+            $write(&quot;\t\tExpected reset transaction, received &quot;);
+            $write(&quot;address ==&gt; %x\n&quot;, nextBusAddressValue);
+        end 
+        
+        #1;
+        nextBusCycleDone = 0;
+        while (!nextBusCycleDone) @(posedge clock);
+        //  Check that the transaction was an nmi 
+        if (nextBusAddressValue !== 32'hfffac800) begin
+            $display(&quot;%0d:\t***  ERROR  *** &quot;, $time);
+            $write(&quot;\t\tExpected nmi transaction, received &quot;);
+            $write(&quot;address ==&gt; %x\n&quot;, nextBusAddressValue);
+        end 
+        
+    end
+    endtask  /*  TestNMIAndReset  */
+<a name="source4">    
+    task ShmooInterrupts;
+    /*  This test places one interrupt at a fixed location and varies
+        the placement of the second interrupt relative to the first.
+        The placement is varied from having the second interrupt 
+        come at all cycles from -10 clocks to +10 clocks of the time
+        of the fixed interrupt.  
+        */
+    integer i;
+    integer bitToCheck;
+    begin
+        $display(&quot;%0d:\tShmoo interrupts check ...&quot;, $time);
+        //  Set up the positions and valid bits on both interrupts.
+        interruptValidVector = 2'b11;
+        interruptNumberVector = {
+                                 4'h0,
+                                 4'hf
+                                };
+        //  Now run the loop.  The fixed interrupt is at 15 clocks.
+        //  Variable runs from 0 to 30 clocks.  
+        
+        for (i=0; i
+								
+								
+								<31; i="i+1)" begin nextBusCycleDone="0;" deviceInterruptVector="0;" repeat (2) @(posedge clock); fork begin while (~nextBusCycleDone) @(posedge clock); if (~(nextBusDataValue[15] & nextBusDataValue[0])) begin bitToCheck="(nextBusDataValue[15]" 1'b1)? 0 : 15; // Both interrupts weren't serviced, so wait for // another transaction nextBusCycleDone="0;" while (~nextBusCycleDone) @(posedge clock); if (~nextBusDataValue[bitToCheck]) begin $display("%0d:\t*** ERROR *** ", $time); $display("\tReceived the wrong interrupt"); end end end begin repeat (15) @(posedge clock); #10; deviceInterruptVector[0]="1;" end begin repeat (i) @(posedge clock); #10; deviceInterruptVector[1]="1;" end join end end endtask /* ShmooInterrupts */ task MiscTests; begin // See that with the valid bits off, no interrupts come through interruptValidVector="2'b00;" deviceInterruptVector="2'b11;" $display("%0d:\tTesting that with valid bits off, no interrupts come through", $time); repeat (100) @(posedge clock); $display("%0d:\tEnd test with valid bits off, no interrupts come through", $time); deviceInterruptVector="2'b00;" interruptValidVector="2'b11;" @(posedge clock) #10; deviceInterruptVector="2'b11;" nextBusCycleDone="0;" while (!nextBusCycleDone) @(posedge clock); // NOTE: both interrupts should have been serviced with one // transaction to the CMC. deviceInterruptVector="2'b10;" @(posedge clock) #10; // assert an interrupt for only one cycle and see that it is // seen deviceInterruptVector="2'b11;" @(posedge clock) #10; deviceInterruptVector="2'b10;" nextBusCycleDone="0;" while (!nextBusCycleDone) @(posedge clock); end endtask /* MiscTests */ task InitializeSystem; <A NAME="source1"> parameter cyclesInReset="5;" begin errorsFound="0;" reset="0;" nextBusCycleDone="0;" deviceInterruptVector="0;" nmiRequest="0;" resetRequest="0;" nextBusGrant="0;" masterDataStrobe="0;" interruptValidVector="0;" interruptNumberVector="{" 4'h4, 4'he }; @(posedge clock); #10 reset="1;" repeat (cyclesInReset) @(posedge clock); #10 reset="0;" repeat (cyclesInReset) @(posedge clock); $display("%0d:\tComing out of reset ...", $time); end endtask /* InitializeSystem */ /*="=================" Display statements:="===============*/" initial if (displayOn) begin $dumpvars; end else begin $monitor("%0d:\t", $time, "nextBusReq="%b" ", nextBusRequest, "nextBusGrant="%b" ", nextBusGrant, "mdStrobe="%b" ", masterDataStrobe, "devInt="%b" ", deviceInterruptVector, "{reset,nmi}="%b" ", {resetRequest, nmiRequest}, "state="%d" ", localInterruptController.localInterruptStateMachine.presentState, "devIntPending="%b" ", localInterruptController.localInterruptDataPath.interruptPending, "{reset,nmi}pending="%b" ", { localInterruptController.localInterruptDataPath.resetPending, localInterruptController.localInterruptDataPath.nmiPending}, "masks="%b" %b%b ", localInterruptController.localInterruptDataPath.interruptMask, localInterruptController.localInterruptDataPath.resetMask, localInterruptController.localInterruptDataPath.nmiMask ); end endmodule /* TestLocalDMAController */ </PRE> </TABLE> </BODY> </HTML>>
+								
+								
+							</a></a></a></a></pre>
+		</table>
+	</body>
+
+</html>

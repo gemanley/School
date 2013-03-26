@@ -1,0 +1,20 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			Linking with VCS is different, because in the normal course of its operation it must link the object produced by the compiler with the run-time library. In essence, you simply add the object for your new routines to this link command and it will include them appropriately.
+			<p>Because the link is done automatically by the VCS command, all you need to do is include the object files with the Verilog source files in the VCS command.</p>
+			<pre>
+    VCS ex_hello.v ex_hello.o -P hello.tab -o hello
+</pre>
+			This would produce an object file (hello) which can be run.
+		</table>
+	</body>
+
+</html>

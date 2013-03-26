@@ -1,0 +1,26 @@
+<html>
+
+	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+
+	<body bgcolor="#FFFFFF">
+		<pre>
+    wire [msb:lsb] bus;
+    reg  [width-1:0] bus_driver;
+    ...
+    assign #delay bus = (bus_driver == maxval) ? 8'h0 : bus_driver;
+    ...
+    always @(posedge clock)
+        case (state)
+        state1: newstate = state + bus;
+        state2: newstate = state3;
+        state3: newstate = state - bus;
+        state4: newstate = state1;
+        endcase
+    ...
+    real load_factor;
+    initial
+        load_factor = $itor(packets)/($time-lasttime) * r;
+</pre>
+	</body>
+
+</html>

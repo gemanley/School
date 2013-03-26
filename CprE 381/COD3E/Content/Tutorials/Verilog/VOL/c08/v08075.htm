@@ -1,0 +1,100 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+		<style type="text/css" media="screen"><!--
+#answer  { visibility: hidden; position: absolute }
+#layer1 { visibility: visible; position: absolute; top: 1058px; left: 18px; width: 100px; height: 100px }
+--></style>
+		<csactions>
+			<csaction name="1C6BBAE31" class="ShowHide" type="onevent" val0="answer" val1="1"></csaction>
+		</csactions>
+		<csscriptdict import>
+			<script type="text/javascript" src="../../../../resources/CSScriptLib.js"></script>
+		</csscriptdict>
+		<csactiondict>
+			<script type="text/javascript"><!--
+CSAct[/*CMP*/ '1C6BBAE31'] = new Array(CSShowHide,/*CMP*/ 'answer',1);
+
+// --></script>
+		</csactiondict>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td><b>Assume run3 is instantiated from the top-level module test. </b>
+					<pre>
+module run3 (out, in, clk);
+	output out;
+	input in, clk;
+	reg [1:0] count;
+
+	assign out = count == 3;
+
+	initial count = 0;
+
+	always @(posedge clk)
+		case (count)
+	0:		count &lt;= in; 
+	1:		count &lt;= in ? 2 : 0;
+	2:		count &lt;= in ? 3 : 0;
+	3:		count &lt;= in ? 3 : 0;
+		endcase
+
+endmodule
+
+module test;
+	wire out;
+	reg in, clk;
+
+	run3 r3 (out, in, clk);
+
+	initial begin
+		in = 0;
+		clk = 0;
+		forever #5 clk = ~clk;
+	end
+
+	initial begin
+	#2	in = 1;
+		repeat (3) @(posedge clk);
+		in &lt;= 0;
+		repeat (1) @(posedge clk);
+		in &lt;= 1;
+		repeat (4) @(posedge clk) ;
+		in &lt;= 0;
+		repeat (2) @(posedge clk);
+	#1	$finish;
+
+	end
+endmodule
+</pre>
+				</td>
+			</tr>
+		</table>
+<hr>
+		<b>
+Write an initial block for module test which causes the model to stop at the 4th rising edge of the clock.
+</b><tt><TEXTAREA NAME='SCRIPT1' ROWS='6' COLS='70'></textarea></tt>
+		<center>
+			<a onclick="CSAction(new Array(/*CMP*/'1C6BBAE31'));return CSClickReturn()" href="#" csclick="1C6BBAE31"><img src="images/vanswer.gif" width="87" height="39" border="0"></a></center>
+
+			<div id="answer">
+			<b>Answer:</b>
+		<PRE><tt>
+	initial #35 $stop;
+</tt></PRE>
+			or
+			<PRE><tt>
+initial begin
+	repeat (4) @(posedge clk);
+	$stop;
+end
+</tt></PRE>
+		</div>
+		
+	</body>
+
+</html>

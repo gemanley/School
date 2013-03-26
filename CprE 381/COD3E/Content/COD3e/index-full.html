@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<meta name="description" content="Index to parts of COD3e that are included on this CD.">
+		<title>Chapter and Appendix Index</title>
+		<link href="../resources/base_style.css" rel="stylesheet" media="screen">
+		<script type="text/javascript" src="../resources/tigra_tree_menu_pro.js"></script>
+		<script type="text/javascript">
+			function expandAll() {
+				for ( i=0; i<tree1.a_nodes.length; i++ )
+					if ( tree1.a_nodes[i].open ) tree1.a_nodes[i].open(false)
+			}
+			function collapseAll() {
+				for ( i=0; i<tree1.a_nodes.length; i++ )
+					if ( tree1.a_nodes[i].open ) tree1.a_nodes[i].open(true)
+			}
+		</script>
+		<csscriptdict import>
+			<script type="text/javascript" src="../resources/CSScriptLib.js"></script>
+		</csscriptdict>
+		<csactiondict>
+			<script type="text/javascript"><!--
+var preloadFlag = true;
+
+// --></script>
+		</csactiondict>
+	</head>
+
+	<body link="black">
+		<h1>Chapter and Appendix Navigation</h1>
+		<p>Click on book or folder icons to show or hide the contents of each chapter or appendix.<br>
+			You can also use the <font face="Helvetica, Geneva, Arial, SunSans-Regular, sans-serif">Expand All / Collapse All</font> buttons to show or hide everything.<br>
+			CD Library entries marked with this <img src="../resources/icons/web32.gif" alt="" height="20" width="20" border="0"> icon are links to external web sites.</p>
+		<p><a onclick="expandAll(); return true" onmouseover="changeImages('button_expandall_1','../resources/buttons/expandall-2.gif');return true" onmouseout="changeImages('button_expandall_1','../resources/buttons/expandall-1.gif');return true" href="#"><img id="button_expandall_1" src="../resources/buttons/expandall-1.gif" alt="" name="button_expandall_1" border="0" hspace="1" vspace="1"></a> <a onclick="collapseAll(); return true" onmouseover="changeImages('button_collapseall_1','../resources/buttons/collapseall-2.gif');return true" onmouseout="changeImages('button_collapseall_1','../resources/buttons/collapseall-1.gif');return true" href="#"><img id="button_collapseall_1" src="../resources/buttons/collapseall-1.gif" alt="" name="button_collapseall_1" border="0" hspace="1" vspace="1"></a></p>
+		<table width="100%" border="0" cellspacing="0" cellpadding="5">
+			<tr>
+				<td>
+					<script type="text/javascript" src="menu-fullindex.js"></script>
+					<script type="text/javascript"><!--
+	var tree1 = new tree (BOOK_MENU_ITEMS,BOOK_MENU_STYLE);
+	for ( i=0; i<tree1.a_children.length; i++ ) {
+		tree1.a_children[i].load();
+		tree1.a_children[i].state_lookup();
+	}
+//-->
+</script>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

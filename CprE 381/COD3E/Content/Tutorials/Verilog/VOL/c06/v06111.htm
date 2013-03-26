@@ -1,0 +1,32 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">Simulation time is simply a 64-bit unsigned number. However, in many cases, it is convenient to give an interpretation to the time, as nanoseconds, microseconds, or some other time unit.
+					<p>The way to do that in Verilog is by using the:</p>
+					<p></p>
+					<pre>
+        `timescale time_unit/time_precision
+</pre>
+					<p>compiler directive.</p>
+					<p></p>
+				</td>
+			</tr>
+		</table>
+		<table width="600">
+			<tr>
+				<td width="376">This compiler directive tells the compiler how to interpret delays that it sees in the source. By using different values with `timescale, different modules or parts of the model can use delays with different time scales, and the compiler can scale them all correctly.
+					<p>For example, one module could specify its delays in microseconds and another module could specify its delays in nanoseconds, and the simulator could handle them consistently.</p>
+				</td>
+				<td valign="top" width="224"><img src="images/v0637g1.gif" height="196" width="224"></td>
+			</tr>
+		</table>
+	</body>
+
+</html>

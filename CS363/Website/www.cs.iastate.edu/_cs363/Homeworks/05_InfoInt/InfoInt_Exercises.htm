@@ -1,0 +1,115 @@
+<html>
+
+
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Homeworks/05_InfoInt/InfoInt_Exercises.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:01:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Homework</title>
+<meta name="Microsoft Border" content="t, default">
+</head>
+
+<body><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td>
+
+<p><font face="AGaramond" size="3">Com S 363: Introduction to Database Systems</font><br>
+<font face="AGaramond" size="5">Introduction to Database Systems </font></p>
+<p>
+
+</p>
+<p>&nbsp; </p>
+
+</td></tr><!--msnavigation--></table><!--msnavigation--><table dir="ltr" border="0" cellpadding="0" cellspacing="0" width="100%"><tr><!--msnavigation--><td valign="top">
+
+<font SIZE="5">
+<p><i><font face="Arial">Exercises in information integration&nbsp; </font></i></font><i><font SIZE="5" face="Arial">&nbsp;</font></i></p>
+<p><b>Acknowledgement. </b>Several exercises below have been taken from Garcia-Monila, 
+Ullman, Widom book. This is based upon the permission from the Prentice Hall, 
+the publisher of the book. The Authors / Publisher hold the copyright in such 
+cases. </p>
+<p><b>Exercise 1.</b> Computer company A keeps data about the PC mode1s it sells 
+in the schema: <br>
+<br>
+Computers(number, proc, speed, memory, hd) <br>
+Monitors (number, screen, maxResX, maxResY) <br>
+<br>
+For instance the tuple (123, PIII, 1000, 128, 40) in Computers means that model 123 has a Pentium-III processor running at 1000 megahertz, with 128M of memory 
+and a 40G hard disk. The tuple (456, 19, 1600, 1200) in Monitors means that 
+model 456 has a 19-inch screen with a maximum resolution of 1600 x 1200. <br>
+<br>
+Computer company B only sells complete systems, consisting of a computer and 
+monitor. Its schema is <br>
+<br>
+Systems (id, processor, mem, disk, screenSize) <br>
+<br>
+The attribute processor is an integer speed; the type of processor (e.g., 
+Pentium-III) is not recorded. Neither is the maximum resolution of the monitor 
+recorded. Attributes id, mem, and disk are analogous to number, memory, and hd 
+from company A, but the disk size is measured in megabytes instead of gigabytes.
+<br>
+<br>
+a) If company A wants to insert into its relations information about the 
+corresponding items from B, what SQL insert statements should it use? <br>
+<br>
+b) If Company B wants to insert into Systems as much information about the 
+systems that can he built, from computers and monitors made by A, what SQL 
+statements best allow this information to be obtained? <br>
+<br>
+<b>Exercise 2.</b> In Exercise 1 we spoke of two computer companies, A and B, 
+that used different schemas for information about their products. Suppose we 
+have a mediator with schema <br>
+<br>
+PCMed (manf, speed, mem, disk, screen) <br>
+<br>
+with the intuitive meaning that a tuple gives the manufacturer (A or B), 
+processor speed, main-memory size, hard-disk size, and screen size for one of 
+the systems you could buy from that company. Write wrapper templates for the 
+following types of queries. Note that you need to write two templates for each 
+query, one for each of the manufacturers. <br>
+<br>
+Question: Given memory and disk sizes, find the matching tuples. <br>
+<br>
+<b>Exercise 3.</b> An on-line seller of computers wishes to maintain data about 
+orders. Customers can order their PC with any of several processors, a selected 
+amount of main memory, any of several disk units, and any of several CD or DVD 
+readers. The fact tablee for such a database might be: <br>
+<br>
+Orders(cust, date, proc, memory, hd, rd, quant, price) <br>
+<br>
+We should understand attribute cust to be an ID that is the foreign key for a 
+dimension table about customers, and understand attributes proc, hd (hard disk), 
+and rd (removable disk: CD or DVD, typically) similarly. For example, an hd ID 
+might be elaborated in a dimension table giving the manufacturer of the disk and 
+several disk characteristics. The memory attribute is simply an integer: the 
+number of megabytes of memory ordered. The quant attribute is the number of 
+machines of this type ordered by this customer, and the price attribute is the 
+total cost of each machine ordered. <br>
+<br>
+a) Which are dimension attributes, and which are dependent attributes? <br>
+b) For some of the dimension attributes, a dimension table is likely to be 
+needed. Suggest appropriate schemas for these dimension tables. <br>
+<br>
+<b>Exercise 4.</b> What is the ratio of the size of CUBE(F) to the size of F if 
+fact table F has the following characteristics? <br>
+<br>
+a) F has ten dimension attributes, each with ten different values. <br>
+b) F has ten dimension attributes, each with two different values. <br>
+<br>
+<b>Exercise 5.</b> Let us use the 4-dimensional cube CUBE(Sales) from your book 
+which was built from the relation <br>
+<br>
+Sales(model, color, date, dealer, val, cnt) <br>
+<br>
+Tell what tuples of the cube we would use to answer the following queries: <br>
+<br>
+a) Find the total sales of blue cars for each dealer. <br>
+b) Find the total number of green Gobis sold by dealer "Smilin Sally". <br>
+c) Find the average number of Gobis sold on each day of March, 2002 by each 
+dealer. </p><!--msnavigation--></td></tr><!--msnavigation--></table></body>
+
+
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Homeworks/05_InfoInt/InfoInt_Exercises.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:01:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+</html>

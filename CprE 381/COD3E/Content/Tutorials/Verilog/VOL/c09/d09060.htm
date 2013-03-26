@@ -1,0 +1,59 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">This example is similar to the previous fetch/set example. The register which is to be modified is named &quot;longReg&quot;, and it is a vector of arbitrary bit width. The user-defined task takes two parameters, a value and a word number. The word number (32-bit words) is used to decide which bits of longReg to update with the value.
+					<p>New utility routines used:</p>
+					<p>acc_handle_object ( &quot;longReg&quot; )<br>
+						Function returns a handle to the named object. The name is either fully-qualified or relative, starting at the current PLI scope.</p>
+					<p>acc_fetch_size (longRegHandle)<br>
+						Returns the size of the object in number of bits.</p>
+					<p>acc_fetch_value ( longRegHandle, &quot;%%&quot;, &newValue )<br>
+						Returns the logic or strength value of the object. The result is returned either as a string or, as in this case, in a structure.</p>
+					<p>tf_warning ( &quot;word parameter is out of range!&quot; )<br>
+						Print a warning message.</p>
+				</td>
+			</tr>
+		</table>
+		<table width="600">
+			<tr>
+				<td align="center" width="150"><a href="a09060.htm"><img src="images/vverilog.gif" height="39" width="139" border="0"></a></td>
+				<td align="center" width="150"><a href="b09060.htm"><img src="images/vpli.gif" height="39" width="136" border="0"></a></td>
+				<td align="center" width="190"><a href="c09060.htm"><img src="images/vuser.gif" height="39" width="177" border="0"></a></td>
+				<td align="center" width="110"><a href="d09060.htm"><img src="images/vresults.gif" height="39" width="87" border="0"></a></td>
+			</tr>
+		</table>
+		<p><br>
+		</p>
+		<table width="600">
+			<tr>
+				<td>
+					<pre>
+time=0, longReg=xxxxxxxxxxxxxxxxxxxxxxxxx
+time=1, longReg=0000011223344556677889900
+In my_acc: new=0x11111111, word=1
+time=2, longReg=0000011223344556611111111
+In my_acc: new=0x22222222, word=2
+time=3, longReg=0000011222222222211111111
+In my_acc: new=0xffffffff, word=3
+time=4, longReg=0xxxxxxxx2222222211111111
+In my_acc: new=0xffffffff, word=4
+time=5, longReg=xxxxxxxxx2222222211111111
+In my_acc: new=0xffffffff, word=5
+ 
+Warning: word parameter is out of range!
+         From $set_longReg at time 6 in file ex5_acc4.v line 11
+time=7, longReg=0000000000000000000000000
+</pre>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

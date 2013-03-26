@@ -1,0 +1,38 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<TARGET="v01033">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td valign="TOP" width="500"><font size="3">By definition, the top level module is not instantiated by any other module. For the top level module, the module name, which is really its type name, is also used as its instance name. Thus, in the following, module foo is the top level module. </font></td>
+			</tr>
+		</table>
+		<table width="590" VALIGN="TOP" ROWSPAN="2">
+			<tr>
+				<td width="390">
+					<pre>
+        module foo;
+                bar bee (port1, port2);
+        endmodule
+
+
+        module bar (port1, port2);
+                ...
+        endmodule
+
+</pre>
+				</td>
+				<center>
+					<td width="200"><img src="images/v0111g1.gif" height="202" width="172"></td>
+				</center>
+			</tr>
+		</table>
+		<td valign="TOP" width="500">The child module is named bee, and it is of type bar.</TABLE></td>
+	</body>
+
+</html>

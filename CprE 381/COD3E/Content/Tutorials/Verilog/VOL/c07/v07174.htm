@@ -1,0 +1,127 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+		<style type="text/css" media="screen"><!--
+#answer  { visibility: hidden; position: absolute }
+--></style>
+		<csactions>
+			<csaction name="1ABBE9025" class="ShowHide" type="onevent" val0="answer" val1="1"></csaction>
+		</csactions>
+		<csscriptdict import>
+			<script type="text/javascript" src="../../../../resources/CSScriptLib.js"></script>
+		</csscriptdict>
+		<csactiondict>
+			<script type="text/javascript"><!--
+CSAct[/*CMP*/ '1ABBE9025'] = new Array(CSShowHide,/*CMP*/ 'answer',1);
+
+// --></script>
+		</csactiondict>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td><b>The module zero3 below implements a 3-stage pipeline. Each stage is a single bit, and there is a single bit as input. Modify this model to use the following pipe stage. Assume the clock period is 10. Click Answer to see a sample solution. </b></td>
+			</tr>
+			<tr>
+				<td valign="TOP"><pre>
+module stage (out, in, clk, reset);
+	output out;
+	input in, clk, reset;
+	reg out;
+
+	always @(reset)
+		if (reset)
+			assign out = 0;
+		else
+			deassign out;
+
+	always @(posedge clk)
+		out &lt;= in; endmodule
+</pre> 
+				</TD> 
+			</tr>
+			<tr>
+				<TD><pre>
+module test; 
+	wire out; 
+	reg in, clk; zero3 z3 (out, in, clk); 
+	
+	initial begin 
+		in="0;" clk="0;" 
+		forever #5 clk="~clk;" 
+	end 
+	initial begin 
+		$monitor($stime,,"clk: %b in: %b out: %b", clk, in, out); 
+		repeat (2) @(posedge clk); 
+		in &lt;= 1;
+		repeat (2) @(posedge clk);
+		in &lt;= 0;
+		repeat (4) @(posedge clk);
+		in &lt;= 1;
+		repeat (3) @(posedge clk) in &lt;= ~in;
+		@(posedge clk) in &lt;= 0;
+		repeat (4) @(posedge clk);
+	#1	$finish;
+	end
+endmodule
+</pre>
+				</TD>
+			</tr>
+			<tr>
+				<td>
+					<TT><TEXTAREA NAME='SCRIPT1' ROWS='20' COLS='35'>
+module zero3 (out, in, clk);
+	output out;
+	input in, clk;
+	reg s1, s2, s3;
+
+	assign out = s1==0 && s2==0 && s3==0;
+
+	initial begin
+		s1 = 0;
+		s2 = 0;
+		s3 = 0;
+	end
+
+	always @(posedge clk) begin
+		s1 &lt;= in;
+		s2 &lt;= s1;
+		s3 &lt;= s2;
+	end
+endmodule
+					</textarea>
+				</td>
+			</tr>
+		</table>
+
+<p><A HREF="javascript:parent.gotoScreen('07','174',0)"><img src="images/vreset.gif" border="0"></A><p>
+<center>
+			<a onclick="CSAction(new Array(/*CMP*/'1ABBE9025'));return CSClickReturn()" href="#" csclick="1ABBE9025"><img src="images/vanswer.gif" width="87" height="39" border="0"></a></center>
+
+		<div id="answer"><PRE>
+module zero3 (out, in, clk);
+    output out;
+    input in, clk;
+    wire s1, s2, s3;
+    reg reset;
+    assign out = s1==0 & s2==0 & s3==0;
+
+    stage p1 (s1, in, clk, reset);
+    stage p2 (s2, s1, clk, reset);
+    stage p3 (s3, s2, clk, reset);
+
+    initial begin
+    #1  reset = 1;
+    #1  reset = 0;
+    end
+
+endmodule
+</PRE>
+		</DIV>
+
+	</body>
+
+</html>

@@ -1,0 +1,76 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<FONT FACE="TIMES" SIZE="3">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">Using expressions in port instances is more natural, and consequently is much more common. In general, different types of expressions are allowed, depending on the <a href="javascript:parent.goGlossHash('#porttype')"><font color="#B22222">port type.</font></a></font>
+					<p>&nbsp;</p>
+					<center>
+						<table width="340" border="1">
+							<tr>
+								<td width="120">
+									<center>
+										<b>Port Type</b></center>
+									</b></td>
+								<td width="120">
+									<center>
+										<b>Type of Expression</b></center>
+									</b></td>
+							</tr>
+							<tr>
+								<td width="120">
+									<center>
+										input</center>
+								</td>
+								<td width="120">
+									<center>
+										any expression</center>
+								</td>
+							</tr>
+							<tr>
+								<td width="120">
+									<center>
+										output</center>
+								</td>
+								<td width="120">
+									<center>
+										port expression</center>
+								</td>
+							</tr>
+							<tr>
+								<td width="120">
+									<center>
+										inout</center>
+								</td>
+								<td width="120">
+									<center>
+										port expression</center>
+								</td>
+							</tr>
+						</table>
+					</center>
+				</td>
+			</tr>
+		</table>
+		<p></p>
+		<table width="600">
+			<tr>
+				<td width="600">Any expression is legal in an <a href="javascript:parent.goGlossHash('#inport')"><font color="#B22222">input port</font></a></font>. This is because it is treated just like the right-hand side of a continuous assignment. Whenever one of its operands changes, the expression is evaluated, and its result is propagated into the input port.
+					<p><a href="javascript:parent.goGlossHash('#outport')"><font color="#B22222">Output ports</font></a></font> may only take port expressions, however. This is because essentially a port assignment is a continuous assignment, and the expression which connects to an output port acts as a left-hand side of the assignment. That is, it is the thing receiving the data.</p>
+					<p><a href="javascript:parent.goGlossHash('#inout')"><font color="#B22222">Inout ports</font></a></font> essentially act like both an input and an output port. As a result, the rules on them are the union of all the restrictions.</p>
+					<p></p>
+					<center>
+						<a href="JavaScript:parent.dispWindow('v04024r1.htm','Example')"><img src="images/vexample.gif" height="39" width="91" border="0"></a></center>
+				</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

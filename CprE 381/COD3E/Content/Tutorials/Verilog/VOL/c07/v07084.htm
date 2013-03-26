@@ -1,0 +1,35 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td valign="top" width="530">An alternative method of writing zero-delay models is like this:
+				<p></p>
+				<pre>
+    always @(negedge clock)
+        nextstate = f(state, in);
+        
+    always @(posedge clock)
+        state = nextstate;
+</pre>
+				Now, the two events are the rising and falling edge of the clock. Notice that there is no propagation from state or in to f(state, in), since it always gets evaluated at the falling edge. Notice also that now a regular assignment is used for updating state. It is somewhat more obvious that there are two events per cycle when it is done like this, but always doing the next state computation may be inefficient. That could be improved like this:
+				<p></p>
+				<pre>
+    always @(state or in)
+        @(negedge clock)
+            nextstate = f(state, in);
+            
+    always @(posedge clock)
+        state = nextstate;
+</pre>
+				Writing the model like this restores the propagation from state and in to the nextstate computation.</td>
+			<td valign="top" width="70"><img src="images/v0728g1.gif" height="277" width="62"></td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

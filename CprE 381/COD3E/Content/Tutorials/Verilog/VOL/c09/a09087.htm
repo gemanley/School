@@ -1,0 +1,50 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body onload=" parent.initBtn0()" bgcolor="white">
+				<table width="600" cellpadding="10">
+			<b>The following C routine counts the number of times it is called. How does the pli.tab entry need to be modified in order to make PrintCount be called when simulation finishes?</b>
+			<p></p>
+		</table>
+		<pre>
+#include &lt;stdio.h&gt;
+#include &quot;acc_user.h&quot;
+
+static int count = 0;
+int EdgeCounter ()
+{
+    count ++;
+}
+
+int ResetCounter ()
+{
+    count  = 0;
+}
+
+int GetCounter ()
+{
+    tf_putp(0, count);
+}
+
+int PrintCount  (int data, int reason)
+{
+    if (reason == reason_finish)
+	io_printf(&quot;count = %0d/n&quot;, count);
+}
+</pre>
+		<hr>
+		<form>
+			<input onclick="parent.setValue(0,0)" type="radio" name="A" value="A">1. $positiveEdge call=EdgeCounter check=PrintCount<br>
+			<input onclick="parent.setValue(0,1)" type="radio" name="A" value="B">2. $positiveEdge call=EdgeCounter misc=reason_finish<br>
+			<input onclick="parent.setValue(0,2)" type="radio" name="A" value="A"><font color="#4B0082"><b>3. $positiveEdge call=EdgeCounter misc=PrintCount</b></font><br>
+			<input onclick="parent.setValue(0,3)" type="radio" name="A" value="A">4. $EdgeCounter call=positiveEdge size=count<br>
+			<input onclick="parent.setValue(0,4)" type="radio" name="A" value="A">5. none of the above
+		</form>
+		<b>Correct.</b></TABLE>
+	</body>
+
+</html>

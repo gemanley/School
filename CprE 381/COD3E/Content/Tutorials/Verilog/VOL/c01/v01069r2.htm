@@ -1,0 +1,20 @@
+<html>
+
+	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+
+	<body bgcolor="#FFFFFF">
+				Parameter values can be specified in the module instantiation directly. This is done as follows:
+		<p></p>
+		<pre>
+    shift #(16) sh1 (shiftedVal, inVal, 7);    //instance of 16-bit shift module
+</pre>
+		Using this method of parameter redefinition, it is very clear that the parameter being redefined belongs only to the instance, and not any other. However, it is not so clear when there is more than one parameter in the module being instantiated. In that case, all parameters to be given new values are listed in the parentheses, in the order they are defined in the module definition, and the new values are assigned positionally.
+		<p>So, if there are 3 parameters in the module, named par1, par2, and par3, then the instantiation would look like:</p>
+		<p></p>
+		<pre>
+        foo #(10,20,30) f1 ( in1, out1);
+</pre>
+		and par1 would get 10, par2 would get 20, and par3 would get 30. However, this method has a problem if you want to redefine some, but not all, parameters in an instance. All parameters which are to get new values must be defined consecutively. That is, if you want to redefine the first and third parameters, but not the second, you can't do it with this method. You can do that using defparam, since it is insensitive to parameter order.</font>
+	</body>
+
+</html>

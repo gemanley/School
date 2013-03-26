@@ -1,0 +1,110 @@
+<html lang="en">
+
+	<head>
+		<title>GHDL guide</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+		<meta name="description" content="GHDL guide">
+		<meta name="generator" content="makeinfo 4.1">
+		<link href="http://texinfo.org/" rel="generator-home">
+		<link href="../../../resources/base_style.css" rel="stylesheet" type="text/css" media="all">
+	</head>
+
+	<body>
+		<p>Node:<a name="A%20full%20adder">A full adder</a>, Next:<a href="Starting-with-a-design.html#Starting%20with%20a%20design" rel="next">Starting with a design</a>, Previous:<a href="The-hello-word-program.html#The%20hello%20word%20program" rel="previous">The hello word program</a>, Up:<a href="Starting-with-GHDL.html#Starting%20with%20GHDL" rel="up">Starting with GHDL</a></p>
+		<hr>
+		<br>
+		<h3>A full adder</h3>
+		<p>VHDL is generally used for hardware design. This example starts with a full adder described in the <code>adder.vhdl</code> file:<br>
+		</p>
+		<pre>entity adder is
+  -- <var>i0</var>, <var>i1</var> and the carry-in <var>ci</var> are inputs of the adder.
+  -- <var>s</var> is the sum output, <var>co</var> is the carry-out.
+  port (i0, i1 : in bit; ci : in bit; s : out bit; co : out bit);
+end adder;
+
+architecture rtl of adder is
+begin
+   --  This full-adder architecture contains two concurrent assignment.
+   --  Compute the sum.
+   s &lt;= i0 xor i1 xor ci;
+   --  Compute the carry.
+   co &lt;= (i0 and i1) or (i0 and ci) or (i1 and ci);
+end rtl;
+</pre>
+		<p>You can analyze this design file:<br>
+		</p>
+		<pre>$ ghdl -a adder.vhdl
+</pre>
+		<p>You can try to execute the <code>adder</code> design, but this is useless, since nothing externally visible will happen. In order to check this full adder, a testbench has to be run. This testbench is very simple, since the adder is also simple: it checks exhaustively all inputs. Note that only the behaviour is tested, timing constraints are not checked. The file <code>adder_tb.vhdl</code> contains the testbench for the adder:<br>
+		</p>
+		<pre>--  A testbench has no ports.
+entity adder_tb is
+end adder_tb;
+
+architecture behav of adder_tb is
+   --  Declaration of the component that will be instantiated.
+   component adder
+     port (i0, i1 : in bit; ci : in bit; s : out bit; co : out bit);
+   end component;
+   --  Specifies which entity is bound with the component.
+   for adder_0: adder use entity work.adder;
+   signal i0, i1, ci, s, co : bit;
+begin
+   --  Component instantiation.
+   adder_0: adder port map (i0 =&gt; i0, i1 =&gt; i1, ci =&gt; ci,
+                            s =&gt; s, co =&gt; co);
+
+   --  This process does the real job.
+   process
+      type pattern_type is record
+         --  The inputs of the adder.
+         i0, i1, ci : bit;
+         --  The expected outputs of the adder.
+         s, co : bit;
+      end record;
+      --  The patterns to apply.
+      type pattern_array is array (natural range &lt;&gt;) of pattern_type;
+      constant patterns : pattern_array :=
+        (('0', '0', '0', '0', '0'),
+         ('0', '0', '1', '1', '0'),
+         ('0', '1', '0', '1', '0'),
+         ('0', '1', '1', '0', '1'),
+         ('1', '0', '0', '1', '0'),
+         ('1', '0', '1', '0', '1'),
+         ('1', '1', '0', '0', '1'),
+         ('1', '1', '1', '1', '1'));
+   begin
+      --  Check each pattern.
+      for i in patterns'range loop
+         --  Set the inputs.
+         i0 &lt;= patterns(i).i0;
+         i1 &lt;= patterns(i).i1;
+         ci &lt;= patterns(i).ci;
+         --  Wait for the results.
+         wait for 1 ns;
+         --  Check the outputs.
+         assert s = patterns(i).s
+            report &quot;bad sum value&quot; severity error;
+         assert co = patterns(i).co
+            report &quot;bad carray out value&quot; severity error;
+      end loop;
+      assert false report &quot;end of test&quot; severity note;
+      --  Wait forever; this will finish the simulation.
+      wait;
+   end process;
+end behav;
+</pre>
+		<p>As usual, you should analyze the design:<br>
+		</p>
+		<pre>$ ghdl -a adder_tb.vhdl
+</pre>
+		And build an executable for the testbench:<br>
+		<pre>$ ghdl -e adder_tb
+</pre>
+		You do not need to specify which object files are required: GHDL knows them and automatically adds them in the executable. Now, it is time to run the testbench:<br>
+		<pre>$ ./adder_tb
+adder_tb.vhdl:52:7:(assertion note): end of test
+</pre>
+	</body>
+
+</html>

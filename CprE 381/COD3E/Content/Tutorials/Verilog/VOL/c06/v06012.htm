@@ -1,0 +1,50 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600"><font size="3">There is a static scope within each module definition with which one can locate any identifier. For example, in the following,
+						<p></p>
+						<center>
+							<img src="images/v0604g1.gif" height="197" width="273"></center>
+						<p></p>
+						<pre>
+    module A;
+        reg x;              // 1
+        ...
+        task B;
+            reg x;          // 2
+            begin
+                ...
+                begin: C
+                    reg x;  // 3
+                    ...
+                end
+            end
+        endtask
+        
+        initial
+            begin: D
+                reg x;      // 4
+                ...
+            end
+    endmodule
+</pre>
+						<p>there is a module, a task, and two named blocks. There are four distinct registers, each named x within its local scope.</p>
+						<p></p>
+						<center>
+							<img src="images/v0604g2.gif" height="153" width="327"></center>
+						<p>Identifier references are resolved by means of normal scope rules. So a reference that appears in block C will first get resolved by definitions found in C, then by those found in B, then by those found in A. A reference in C will not be resolved by an identifier declared in D.</p>
+						<p>However, you can reference an identifier outside of the normal scope rules by using its hierarchical name. This is known as a cross-module reference.</p>
+					</font></td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

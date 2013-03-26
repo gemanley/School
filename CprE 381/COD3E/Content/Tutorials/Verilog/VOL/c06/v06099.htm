@@ -1,0 +1,54 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">All of the I/O system tasks have a variation whose name begins with &quot;f&quot; that will write the output to one or more files. The file output system tasks are:
+					<p></p>
+				</td>
+			</tr>
+		</table>
+		<table width="400">
+			<tr>
+				<td width="16"></td>
+				<td width="100"><tt>$fdisplay<br>
+						$fwrite<br>
+						$fstrobe<br>
+						$fmonitor</tt></td>
+				<td width="100"><tt>$fdisplayb<br>
+						$fwriteb<br>
+						$fstrobeb<br>
+						$fmonitorb</tt></td>
+				<td width="100"><tt>$fdisplayh<br>
+						$fwriteh<br>
+						$strobeh<br>
+						$fmonitorh</tt></td>
+				<td width="100"><tt>$fdisplayo<br>
+						$$fwriteo<br>
+						$fstrobeo<br>
+						$fmonitoro</tt></td>
+			</tr>
+		</table>
+		<p></p>
+		<table width="600">
+			<tr>
+				<td width="378">The first argument of each of these system tasks is the <b>multi-channel descriptor</b>. This is an integer which is a bit-map to a set of files, or channels. A bit in the integer is assigned to a file by means of the <tt><b>$fopen</b></tt> system function.
+					<p></p>
+					<center>
+						<a href="JavaScript:parent.dispWindow('v06099r1.htm','Example')"><img src="images/vexample.gif" height="39" width="91" border="0"></a></center>
+					<p>There is also a <tt><b>$fclose( 
+								<mcd>
+								)</b></tt> system task that closes the file and allows the associated channel bits in the mcd to be reused.</p>
+				</td>
+				<td valign="top" width="222"><img src="images/v0633g1.gif" height="219" width="222"></td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

@@ -1,0 +1,41 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="3">
+			<tr>
+				<td><b>What is wrong with the following module instantiation?</b>
+					<p><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;module modA;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modB #(1,2) (p1, p2,, p4);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;endmodule </tt></p>
+					<p></p>
+					<hr>
+				</td>
+			</tr>
+			<tr>
+				<form>
+					<td width="450">a. <input onclick="parent.setValue(0,0)" type="radio" name="A" value="A">missing ports are not allowed in instantiations</td>
+				</form>
+			</tr>
+			<tr>
+				<td width="450">b. <input onclick="parent.setValue(0,1)" type="radio" name="A" value="B">the module instance name is missing</td>
+			</tr>
+			<tr>
+				<td width="450">c. <input onclick="parent.setValue(0,2)" type="radio" name="A" value="C">the module instance parameter values must be after the port list</td>
+			</tr>
+			<tr>
+				<td width="450">d. <input onclick="parent.setValue(0,3)" type="radio" name="A" value="D">nothing</td>
+			</tr>
+			<tr></form>
+				<td><b>Click Done to check your answer.</b></td>
+			</tr>
+			<tr>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:parent.checkAnswer(0,1)"><img src="images/vdone.gif" height="39" width="74" border="0"></a></td>
+			</tr>
+			<tr></tr>
+		</table>
+	</body>
+
+</html>

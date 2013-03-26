@@ -1,0 +1,77 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			<b>TARMS_COUNTER (modified)</b>
+			<p></p>
+			<pre>
+`timescale 1ns / 100ps
+module ARMS_COUNTER(CLK,STRB,CON,DATA,CNT);
+    input CLK;
+    input STRB;         // strobe for function change
+    input [1:0] CON;    // function control
+    input [3:0] DATA;   // limit
+    
+    output [3:0] CNT;   // counter value
+    reg [3:0] CNT;      // counter
+
+    reg [3:0] LIM;      // limit
+    reg CNTE;           // count enable
+    reg COUNTUP;        // counter direction
+   
+////////////////  The decoder ////////////////////////////////////
+initial 
+    CNTE = 1'b0;
+
+always @(posedge STRB)
+    begin
+        case (CON)
+            2'b00: begin                // reset counter
+                        CNT = 4'b0000;
+                        CNTE = 0;
+                    end
+            2'b01:  begin               // load limit
+                        LIM = DATA; 
+                        CNTE = 0;
+                    end
+            2'b10:  begin               // count up
+                        COUNTUP = 1; 
+                        CNTE = (CNT != LIM);
+                    end
+            2'b11:  begin               // count down
+                        COUNTUP = 0; 
+                        CNTE = (CNT != LIM);
+                    end
+            default: ;
+        endcase
+    end // Rising edge of STRB
+
+
+////////////////  The counter ////////////////////////////////////
+
+always @(posedge CLK)
+    if (CNTE)
+        if (COUNTUP)
+            CNT = CNT + 4'b0001;
+        else 
+            CNT = CNT - 4'b0001;
+
+
+////////////////  The comparator ////////////////////////////////////
+
+always @(CNT)
+    if(CNT == LIM)
+        CNTE = 1'b0;
+
+endmodule
+</pre>
+		</table>
+	</body>
+
+</html>

@@ -1,0 +1,48 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td valign="top" width="600">Many of the examples which we have used are delay-less, or <a href="javascript:parent.goGlossHash('#zerodelay')"><font color="#B22222">zero-delay models</font></a>. The advantage of zero-delay models is that they simulate faster than models which have a lot of delays in them.
+				<p>The reason that zero-delay models are faster in execution can be seen by comparing the steps required to execute the following two functionally equivalent bits of code.</p>
+				<p></p>
+				<pre>
+   ...					...
+   assign #1 w1 = r1 + r2;		assign w1 = r1 + r2;
+   assign #2 w2 = w1 + r1;		assign w2 = w1 + r1;
+   assign #3 w3 = r1 - r2; 		assign w3 = r1 - r2;
+
+   always@(strobe)			always@(strobe)
+      r1 = #1 r1 + 3;			   r1 
+					
+					
+					<= r1 + 3; ... ... </PRE> These bits of code are functionally equivalent, in that when strobe happens, the various values r1, w1, w2, and w3 all get new values. They are not equivalent with respect to timing, since the signals change as follows.<p>
+					
+					
+					
+
+
+					
+					
+					<center>
+						
+						
+						
+<img src="images/v0725g1.gif" height="181" width="242">
+</center>
+					
+					
+					
+
+
+</pre>
+			</td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

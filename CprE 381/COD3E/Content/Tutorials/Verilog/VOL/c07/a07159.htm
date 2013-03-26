@@ -1,0 +1,33 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body onload=" parent.initBtn0()" bgcolor="white">
+		<table width="600" cellpadding="10">
+			<b>What is wrong with the following state machine code?</b>
+			<p></p>
+			<pre>
+	assign nextstate = next(state, in);
+	assign out = func(state);
+	always @(posedge clk)
+		state = nextstate;
+</pre>
+		</table>
+		<hr>
+		<table width="600">
+			<form>
+				<input type="radio" name="A" value="-1">1. nothing<br>
+				<input type="radio" name="A" value="-1">2. Because there are no delays in the assignments, &quot;nextstate&quot; changes too fast for the proper state computation.<br>
+				<input type="radio" name="A" value="-1">3. Because there are no delays in the assignments, &quot;state&quot; changes too fast for the proper output computation.<br>
+				<input type="radio" name="A" value="-1"><font color="#4B0082">4. Because there are no delays in the assignments, the output of this state machine cannot be used as the input to another state machine coded the same way.</font><br>
+			</form>
+			<a name="answer"><b>Right. The correct answer is item 4.</b>
+				<p></p>
+			</a>
+		</table>
+	</body>
+
+</html>

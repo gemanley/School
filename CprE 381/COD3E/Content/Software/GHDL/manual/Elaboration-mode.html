@@ -1,0 +1,34 @@
+<html lang="en">
+
+	<head>
+		<title>GHDL guide</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+		<meta name="description" content="GHDL guide">
+		<meta name="generator" content="makeinfo 4.1">
+		<link href="http://texinfo.org/" rel="generator-home">
+		<link href="../../../resources/base_style.css" rel="stylesheet" type="text/css" media="all">
+	</head>
+
+	<body>
+		<p>Node:<a name="Elaboration%20mode">Elaboration mode</a>, Next:<a href="Directory-mode.html#Directory%20mode" rel="next">Directory mode</a>, Previous:<a href="Analysis-mode.html#Analysis%20mode" rel="previous">Analysis mode</a>, Up:<a href="GHDL-modes.html#GHDL%20modes" rel="up">GHDL modes</a></p>
+		<hr>
+		<br>
+		<h4>Elaboration mode</h4>
+		<br>
+		<pre>$ ghdl -e [<var>options</var>] <var>primary_unit</var> [<var>secondary_unit</var>]
+</pre>
+		<p>In <dfn>elaboration</dfn> mode, GHDL creates an executable containing the code of the <code>VHDL</code> sources, the elaboration code and simulation code to execute a design hiearachy. The elaboration mode is selected with <var>-e</var> switch, and must be followed by either:</p>
+		<ul>
+			<li>a name of a configuration unit
+			<li>a name of an entity unit
+			<li>a name of an entity unit followed by a name of an architecture unit
+		</ul>
+		<p>Name of the units must be a simple name, without any dot. You can select the name of the <code>WORK</code> library with the <code>--work=NAME</code> option, as described in <a href="GHDL-options.html#GHDL%20options">GHDL options</a>.</p>
+		<p>See <a href="Top-entity.html#Top%20entity">Top entity</a>, for the restrictions on the root design of a hierarchy.</p>
+		<p>The file name of the executable is the name of the primary unit, or for the later case, the concatenation of the name of the primary unit, a dash, and the name of the secondary unit (or architecture).</p>
+		<p>The <code>-o</code> followed by a file name can override the default executable file name.</p>
+		<p>For the elaboration mode, <code>GHDL</code> re-analyzes all the configurations, entities, architectures and package declarations, and creates the default configurations and the default binding indications according to the LRM rules. It also generates the list of objects files required for the executable. Then, it links all these files with the run time library.</p>
+		<p>The actual elaboration is performed at run-time.</p>
+	</body>
+
+</html>

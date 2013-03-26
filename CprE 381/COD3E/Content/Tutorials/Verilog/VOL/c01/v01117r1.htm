@@ -1,0 +1,22 @@
+<html>
+
+	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+
+	<body bgcolor="#FFFFFF">
+				Here is a module with behavior determined solely by continuous assignments:
+		<p></p>
+		<pre>
+        module decodeX4 (b0, b1, b2, b3, in0, in1);
+        
+            output b0, b1, b2, b3;
+            input  in0, in1;            // select inputs
+        
+            assign b0 = ~in1 &amp; ~in0;    // decode inputs =&gt; outputs
+            assign b1 = ~in1 &amp;  in0;
+            assign b2 =  in1 &amp; ~in0;
+            assign b3 =  in1 &amp;  in0;
+        endmodule
+</pre>
+	</body>
+
+</html>

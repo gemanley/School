@@ -1,0 +1,189 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<a name="diagram">
+			<table width="600">
+				<tr>
+					<td>This example has a top-level module and three sub-modules.
+						<p>This design is supposed to satisfy the following requirements:</p>
+						<p></p>
+						<ul>
+							<li>Implement a shift register. A data value is shifted in on every clock cycle, on the rising edge, and the oldest value is shifted out. The shift register is fifo.
+							
+							<li>Count the number of ones which are present in the shift register. The counter should be 32 bits wide (admitedly, this is overkill).
+							
+							<li>The depth of the shift register should be parameterized.
+							
+							<li>The module ports are: data input (1 bit), clock (1 bit), data output (1 bit), counter (32 bits).
+						
+						</ul>
+						<p></p>
+						<center>
+							<a href="#source"><img src="images/vverilog.gif" height="39" width="139" border="0"></a>
+							<p><img src="images/v0339g1.gif" height="292" width="383"></p>
+							<p><a href="JavaScript:parent.dispWindow('v03123r3.htm','OutputD')"><img src="images/voutputd.gif" height="39" width="144" border="0"></a> <a href="JavaScript:parent.dispWindow('v03123r2.htm','OutputT')"><img src="images/voutputt.gif" height="39" width="116" border="0"></a></p>
+						</center>
+					</td>
+				</tr>
+			</table>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+		</a>
+		<pre><a name="source"><code><a href="#ref">module system</a>;
+    /* This is a test fixture for testing a combination shift register 
+       and counter */
+    
+    <a href="#ref">wire</a> data, clk;             <a href="#ref">// nets to connect up the pieces</a>
+    wire delayedData;           // data out of the fifo
+    wire <a href="#ref">[31:0]</a> nOnes;          // number of ones contained in fifo
+    
+    // <a href="#ref">Module instances</a>
+    shiftAndCount SandC (delayedData, nOnes, data, clk);    // shift register
+    clkGen <a href="#ref">#(10)</a> cg (clk);                                  // generate the clock       
+    testGenerator tg (data, delayedData, nOnes, clk);       // create data, check result
+    
+endmodule
+
+module shiftAndCount (<a href="#ref">bitOut, count, dataIn, clk</a>);
+    <a href="#ref">parameter</a> width = 8;
+    <a href="#ref">output</a> bitOut;                      // data shifted out
+    <a href="#ref">output</a> [31:0] count;                // count of ones
+    input dataIn, clk;                  // inputs
+    
+    integer count;                      // the counter
+    reg bitOut;                         // temporary
+    reg [width-1:0] lastBits;           // shift register
+    
+    initial begin count = 0; lastBits = 0; end
+
+    <a href="#ref">always</a> <a href="#ref">@(posedge clk)</a> begin
+        bitOut = lastBits[width-1];
+        lastBits = (lastBits&le;&le;1) | dataIn;
+        if (bitOut &gr; dataIn)
+            count = count - 1;
+        else
+        if (bitOut &le; dataIn)
+            count = count + 1;
+    end
+endmodule
+
+module clkGen (clk);
+    parameter period = 2;
+    output clk;
+    reg clk;
+    
+    initial clk = 0;                // start off with 0
+    always                          // clock loop
+        <A HREF="#ref">#(period/2)</A> clk = ~clk;
+endmodule
+
+module testGenerator (dataBit, delayedBit, count, clk);
+    output dataBit;
+    input delayedBit;
+    input [31:0] count;
+    input clk;
+    reg dataBit;
+    
+    <A HREF="#ref">task</A> emitBits;  // helper task to emit n bits
+        input [7:0] bits, n;    // task inputs
+        begin
+            repeat (n) begin    // assume clk is at negedge
+                dataBit = bits[0];  // take just the low order bit
+                bits = bits &gr;&gr; 1;
+            @(negedge clk) ;    
+            end                 // leave at negative edge
+        end
+    endtask
+    
+    <a href="#ref">task</a> check;
+        input bit;
+        input [31:0] shouldBe;
+        begin
+            if (delayedBit != bit)
+                <a href="#ref">$display($time</a>,&quot; delayed bit is %b but should be %b&quot;, 
+                                delayedBit, bit);
+            if (count != shouldBe) 
+                $display($time,&quot; Count is %d but should be %d&quot;, 
+                                count, shouldBe);
+        end
+    endtask
+            
+    initial begin               // produce test data, check results
+        $monitor($time,&quot; dataBit: %b delayedBit: %b&quot;, dataBit, delayedBit);
+        <a href="#ref">emitBits(0, 1);</a>         // take care of first cycle
+        emitBits('b10010, 5);
+        check(0, 2);
+        emitBits('b101101, 6);
+        check(0, 5);
+        emitBits('b01, 2);
+        check(1, 5);
+        <a href="#ref">$stop;</a>
+    end
+endmodule</code></a></pre>
+		<p><b><a href="#diagram">Return to Diagram</a>&nbsp;&nbsp;&nbsp;<a href="#diagram"><img src="images/varrow.gif" width="38" height="39" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#ref">More Information</a></b>&nbsp;&nbsp;&nbsp;<a href="#ref"><img src="images/varrow.gif" width="38" height="39" border="0"></a><br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+			<a name="ref"><b>For more information on the following topics see the list below.</b></a></p>
+		<p><b>module system;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:parent.gotoScreen('01','033',1)">See Modules, Top Level</a><br>
+					<b>wire;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','078',1)">Modelling Structures, Nets</a><br>
+					<b>// nets to connect up the pieces;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('02','015',1)">Lexical Conventions, Tokens, Comments</a><br>
+					<b>[31:0] ]</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('02','090',1)">Data Types, Vector</a><br>
+					<b>Module instances;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','027',1)">Modules, Definition</a><br>
+					<b>#(10) ;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','069',1)">Modelling Structures, Parameters, Redefinition</a><br>
+					<b>bitOut, count, dataIn, clk</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','036',1)">Ports</a><br>
+					<b>parameter</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','063',1)">Modelling Structures, Parameters, Definition</a><br>
+					<b>output</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','036',1)">Ports</a><br>
+					<b>always</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','041',1)">Modelling Structures, Procedural Blocks, Always</a><br>
+					<b>@(posedge inClk)</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('03','084',1)">Simulation, Events, Action Occurs at Times Instants</a><br>
+					<b>#(period/2) )</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('03','066',1)">Simulation, Delays</a><br>
+					<b>task</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','150',1)">Modelling Structures, Tasks and Functions</a><br>
+					<b>$display($time,</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('02','057',1)">Lexical Conventions, Tokens, System Tasks and Functions</a><br>
+					<b>emitBits(0, 1);</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','150',1)">Modelling Structures, Tasks and Functions</a><br>
+					<b>$stop; ;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('02','057',1)">Lexical Conventions, Tokens, System Tasks and Functions</a><br>
+				</p>
+		<p><b><a href="#source">Return to Source</a>&nbsp;&nbsp;&nbsp;<a href="#source"><img src="images/varrow.gif" width="38" height="39" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#diagram">Return to Diagram</a></b>&nbsp;&nbsp;&nbsp;<a href="#diagram"><img src="images/varrow.gif" width="38" height="39" border="0"></a><br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+			<br>
+		</p>
+	</body>
+
+</html>

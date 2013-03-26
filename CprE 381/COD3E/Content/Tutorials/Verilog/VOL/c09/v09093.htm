@@ -1,0 +1,44 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<b>The following Verilog code uses $nextInput(invar) to get a new value for the integer variable invar for successive tests. What is the proper entry in pli.tab if the C routine is named NextIn?</b>
+			<p></p>
+		</table>
+		<pre>
+module testbench;
+   integer invar;
+
+   initial begin
+      for ($nextInput(invar); invar&gt;0; $nextInput(invar))
+         case(invar)
+      1:    test1;
+      2:    test2;
+      3:    test3;
+         endcase
+   end
+
+task test1; ... endtask
+task test2; ... endtask
+task test3; ... endtask
+
+endmodule /* testbench */
+</pre>
+		<hr>
+		<form>
+			<input onclick="parent.setValue(0,0)" type="radio" name="A" value="A">1. $nextInput call=NextIn<br>
+			<input onclick="parent.setValue(0,1)" type="radio" name="A" value="B">2. $nextInput call=NextIn size=32<br>
+			<input onclick="parent.setValue(0,2)" type="radio" name="A" value="A">3. $nextInput call=NextIn data=invar<br>
+			<input onclick="parent.setValue(0,3)" type="radio" name="A" value="A">4. $nextInput call=NextIn misc=NextIn<br>
+			<input onclick="parent.setValue(0,4)" type="radio" name="A" value="A">5. none of the above
+		</form>
+		<b>Click Done to check your answer.</b>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:parent.checkAnswer(0,1)"><img src="images/vdone.gif" height="39" width="74" border="0"></a></TD></TABLE></p>
+	</body>
+
+</html>

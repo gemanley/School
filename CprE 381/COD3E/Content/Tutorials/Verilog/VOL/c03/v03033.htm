@@ -1,0 +1,79 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>The result of an operation is determined by either the operation itself (it is self-determined) or by the operation's context (it is context-determined). Self-determined expressions are often called &quot;fixed-size&quot; expressions. Operands which have an explicit bit length (e.g. reg[5:1] r5;) are also called &quot;fixed-size&quot; operands. Context-determined expressions are often called &quot;non-fixed size&quot; expressions. Operands which do not have an explicit bit length (e.g. 15) are also called &quot;non-fixed size&quot; operands.
+					<p>The following table gives the rules for resulting bit-lengths of self-determined expressions. L(i) indicates the length of operand i.</p>
+					<p></p>
+					<center>
+						<table width="400" border="1">
+							<tr>
+								<td width="230">
+									<center>
+										<b>Expression</b></center>
+								</td>
+								<td width="170">
+									<center>
+										<b>Bit length</b></center>
+								</td>
+							</tr>
+							<tr>
+								<td width="230">unsized constant number</td>
+								<td width="170">same as integer</td>
+							</tr>
+							<tr>
+								<td width="230"><a href="javascript:parent.goGlossHash('#sconstant')"><font color="#B22222">sized constant</font></a></font> number</td>
+								<td width="170">as given</td>
+							</tr>
+							<tr>
+								<td width="230">i op j, where op is:<br>
+									+ - * / % &amp; | ^ ^~ ~^</td>
+								<td valign="top" width="170">max(L(i),L(j))</td>
+							</tr>
+							<tr>
+								<td width="230">op i, where op is:<br>
+									+ - ~</td>
+								<td valign="top" width="170">L(i)</td>
+							</tr>
+							<tr>
+								<td width="230">i op j, where op is:<br>
+									=== !== = = != &amp;&amp; || &gt; &gt;= &lt; 
+									<= </td> <td width="170" valign="top"> 1 bit</td>
+								</td>
+							</tr>
+							<tr>
+								<td width="230">op i, where op is:<br>
+									&amp; ~&amp; | ~| ^ ~^ ^~</td>
+								<td valign="top" width="170">1 bit</td>
+							</tr>
+							<tr>
+								<td width="230">i op j, where op is:<br>
+									&gt;&gt; &lt;&lt;</td>
+								<td valign="top" width="170">L(i)</td>
+							</tr>
+							<tr>
+								<td width="230">i ? j : k</td>
+								<td valign="top" width="170">max(L(j),L(k))</td>
+							</tr>
+							<tr>
+								<td width="230">{i,...,j}</td>
+								<td valign="top" width="170">L(i)+...+L(j)</td>
+							</tr>
+							<tr>
+								<td width="230">{i{j,...,k}}</td>
+								<td valign="top" width="170">i*(L(j)+...+L(k))</td>
+							</tr>
+						</table>
+					</center>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

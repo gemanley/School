@@ -1,0 +1,21 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<td width="600">The output capabilities are mostly built into the language. Effective display of internal state and signals is unique to each model, however, and should be carefully considered while the model is being written.
+				<p>The language features are:</p>
+				<p>$monitor<br>
+					The simplest language feature for exposing the operation of a model is the $monitor system task. The typical way that it is used is to monitor a group of related signals to see how they change in relationship to each other. Often, $monitor system task calls can be very long, monitoring lots of signals, and this can be the primary output of the model. The use of $monitor is constrained by the inability to have more than one set of signals being monitored at a time. The system task <a href="javascript:parent.gotoScreen('06','075',1)">$monitor</a> was covered in more detail in Chapter 6.</p>
+				<p>$dumpvars<br>
+					A variation on $monitor is the $dumpvars system task. This language feature was added as a means of dumping the state changes of a large number of signals in the model. It always dumps the specified signals to a file in a predefined format which was chosen to minimize the space requirements of the file while still using an ASCII encoding. The file format is called VCD, for Value Change Dump. Using the dumpfile, you have (nearly) all the information available about the changes in signal values. However, you need an external program to interpret the VCD file, which can be quite large.</p>
+			</td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

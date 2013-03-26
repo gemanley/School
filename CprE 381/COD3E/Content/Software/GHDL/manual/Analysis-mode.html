@@ -1,0 +1,27 @@
+<html lang="en">
+
+	<head>
+		<title>GHDL guide</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+		<meta name="description" content="GHDL guide">
+		<meta name="generator" content="makeinfo 4.1">
+		<link href="http://texinfo.org/" rel="generator-home">
+		<link href="../../../resources/base_style.css" rel="stylesheet" type="text/css" media="all">
+	</head>
+
+	<body>
+		<p>Node:<a name="Analysis%20mode">Analysis mode</a>, Next:<a href="Elaboration-mode.html#Elaboration%20mode" rel="next">Elaboration mode</a>, Previous:<a href="GHDL-modes.html#GHDL%20modes" rel="previous">GHDL modes</a>, Up:<a href="GHDL-modes.html#GHDL%20modes" rel="up">GHDL modes</a></p>
+		<hr>
+		<br>
+		<h4>Analysis mode</h4>
+		<br>
+		<pre>$ ghdl -a [<var>options</var>] <var>files</var>
+</pre>
+		<p>In <dfn>analysis</dfn> mode, GHDL compiles one or more files, and creates an object file for each source file. The analysis mode is selected with <var>-a</var> switch. Any argument starting with a dash is a option, the others are filenames. No option is allowed after a filename argument. GHDL analyzes each filename in the given order, and stops the analysis in case of error (the following files are not analyzed).</p>
+		<p>Options may either be GHDL options or GCC options. Consult GCC documentation for details on GCC options. See <a href="GHDL-options.html#GHDL%20options">GHDL options</a>, for details on the GHDL ones. For example, to produce debugging information such as line numbers, use:<br>
+		</p>
+		<pre>$ ghdl -a -g my_design.vhdl
+</pre>
+	</body>
+
+</html>

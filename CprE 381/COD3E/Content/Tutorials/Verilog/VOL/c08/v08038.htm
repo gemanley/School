@@ -1,0 +1,39 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<b>Given the monitor statement:</b><br>
+			<pre>
+	$monitor($stime, &quot;:  s2 = %h&quot;, s2);
+</pre>
+			<b>for the following module:</b><br>
+			<pre>
+	module zero3 (out, in, clk);
+		output out;
+		input in, clk;
+		reg s1, s2, s3;
+
+		assign out = s1==0 &amp; s2==0 &amp; s3==0;
+
+		initial begin
+			s1 = 0;
+			s2 = 0;
+			s3 = 0;
+		end
+
+		always @(posedge clk) begin
+			s1 
+				
+				
+				<= in; s2 <= s1;			s3 <= s2;		end	endmodule</pre></TABLE><HR><TABLE WIDTH="600"><TR><TD><b>Where should the monitor statement be inserted? Click Done to check your answer.</b><p><form><INPUT TYPE="radio" value=-1 NAME="A" onClick="parent.setValue(0,0)">a. before the statement s1 = 0;<br><INPUT TYPE="radio" value=-1 NAME="A" onClick="parent.setValue(0,1)">b. after the statement s3 = 0;<br><INPUT TYPE="radio" value=-1 NAME="A" onClick="parent.setValue(0,2)">c. before the statement s1 <= in;<br><INPUT TYPE="radio" value=-1 NAME="A" onClick="parent.setValue(0,3)">d. after the assign statement<br><INPUT TYPE="radio" value=-1 NAME="A" onClick="parent.setValue(0,4)">e. in its own initial block<br><INPUT TYPE="radio" value=-1 NAME="A" onClick="parent.setValue(0,5)">f. either a or e<br><INPUT TYPE="radio" value=-1 NAME="A" onClick="parent.setValue(0,6)">g. either b or c<br><INPUT TYPE="radio" value=-1 NAME="A" onClick="parent.setValue(0,7)">h. none of the above<br></FORM><p><a href="javascript:parent.checkAnswer(0,5)"><img src="images/vdone.gif" width="74" height="39" border="0"></a></center></TD></table></BODY></HTML>>> </pre> </table> </body> </html>>
+				
+			</pre>
+		</table>
+	</body>
+
+</html>

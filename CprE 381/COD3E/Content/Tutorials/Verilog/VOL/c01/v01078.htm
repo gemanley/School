@@ -1,0 +1,261 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<!-- <TARGET="v01078"> --><a name="top">
+			<table width="600" cellpadding="10">
+				<tr>
+					<td valign="TOP" width="600">
+												<center>
+							<img src="images/v0123g1.gif" height="73" width="179"></center>
+						<p>Nets are the things that connect model components together. They are usually thought of as wires in a circuit. Nets are declared in statements like this:</p>
+						<p><tt>&nbsp;&nbsp;<a href="#nettype">net_type</a> [<a href="#range">range</a>] [<a href="#delay">delay3</a>] <a href="#identifiers">list_of_net_identifiers</a> ;</tt></p>
+						<p>or</p>
+						<p>&nbsp;&nbsp;net_type [<a href="#drive">drive_strength</a>] [range] [delay3]<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#assign">list_of_net_decl_assignments</a> ;</p>
+						<p></TT><b>Click each of the components of the net declaration to learn more about it.</b></p>
+						<p>Typical net declarations would be:</p>
+						<p><tt>&nbsp;&nbsp;wire w1, w2;<br>&nbsp;&nbsp;tri [31:0] bus32;<br>&nbsp;&nbsp;wire wire_number_5 = wire_number_2 &amp; wire_number_3; </tt></p>
+						<p>Nets should be declared before they are used. However, if you don't declare one before it is used in an instance port list, it will default to a predefined net type, normally a <a href="javascript:parent.goGlossHash('#scalar')"><font color="#B22222">scalar</font></a></FONT> wire.</p>
+						<p><br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<a name="nettype"><b>net_type</b></a></p>
+						<p>Typical values for net_type include wire, tri, tri0, tri1, wand, wor, triand, trior, supply0, supply1</p>
+						<p><a href="#top">Return to top <img src="images/varrow.gif" with="38" height="39" border="0"></a><br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<a name="range"><b>range</b></a></p>
+						<p>This is an indication of how many bits wide the net should be. The form is [msb:lsb], where msb is the most significant bit number, and lsb is the least significant bit number.</p>
+						<p>The range specifier can used to declare a multi-bit quantity for a net. The Verilog word for a multi-bit quantity is a &quot;vector.&quot; Vectors are covered in more detail later in this chapter.</p>
+						<p><a href="#top">Return to top <img src="images/varrow.gif" with="38" height="39" border="0"></a><br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<a name="delay"><b>delay3</b></a></p>
+						<p>This is a numeric value which specifies the length of time between when a driver on this net changes value and when that value is seen by other elements the net drives. The &quot;3&quot; indicates that this can be a single number or three numbers, for rise, fall, and turnoff delays.</p>
+						<p>Delays are specified in several ways in Verilog. Delays are introduced with the &quot;#&quot; character. A delay can be assigned to a net driver (either a gate, primitive, or continuous assignment), or it can be assigned to the net directly. Delays are covered in more detail later in this chapter.</p>
+						<p><a href="#top">Return to top <img src="images/varrow.gif" with="38" height="39" border="0"></a><br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<a name="drive"><b>drive_strength</b></a></p>
+						<p>This is an indication of the strength of the signal being driven by the assignment. Signal strength is covered in more detail under Scalar Nets later in this chapter.</p>
+						<p><a href="#top">Return to top <img src="images/varrow.gif" with="38" height="39" border="0"></a><br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<a name="identifiers"><b>list_of_net_identifiers</b></a></p>
+						<p>The above notation means that a list of identifiers. Identifiers may be made up of any number of letters, digits, and {_$}:</p>
+						<p><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;simple_identifier ::= [a-zA-Z_]{[a-zA-Z0-9_$]}</tt></p>
+						<p></TT>That is, the first character must be alphabetic or &quot;_&quot;, and the rest may be alphabetic, numeric, &quot;_&quot;, or &quot;$&quot;. Identifiers may be as long as 1 million characters and are case-sensitive. Identifiers are covered under Lexical Conventions in Chapter 2.</p>
+						<p><a href="#top">Return to top <img src="images/varrow.gif" with="38" height="39" border="0"></a><br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<a name="assign"><b>list_of_net_dec_assignments</b></a></p>
+						<p>This is a list of assignments. These are the same as continuous assignments.</p>
+						<p><a href="#top">Return to top <img src="images/varrow.gif" with="38" height="39" border="0"></a><br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+						</p>
+					</td>
+				</tr>
+			</table>
+		</a>
+	</body>
+
+</html>

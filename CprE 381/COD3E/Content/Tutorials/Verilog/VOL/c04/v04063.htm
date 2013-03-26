@@ -1,0 +1,26 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<FONT FACE="TIMES" SIZE="3">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">As described in Chapter 3 (see section on Multiple Delays), built-in primitives can take either 2 delay values or 3 delay values, depending on the primitive. (Pullup and Pulldown do not allow any delay specification.)
+					<p>The delay simply means that if a gate input changes value at time <b>t</b>, the gate output will change value at time <b>t+d</b>. Delays which are attached to each primitive in the netlist are called <a href="javascript:parent.goGlossHash('#didelay')"><font color="#B22222"><b>distributed delays</b></font></a></font>, because they are distributed throughout the circuit.</p>
+					<p>While delays can be specified on built-in primitives (and user-defined primitives), they cannot be specified on arbitrary modules. This is primarily because primitives have a simple, direct relationship between inputs and output(s), but normal modules do not. Therefore, if you want to associate delays with the outputs of a module, you must put the delays on the output drivers, either primitive or continuous assignment.</p>
+					<p>Primitive delays work like this:</p>
+					<p></p>
+					<center>
+						<img src="images/v0418g1.gif" height="154" width="330"></center>
+					<p>The gate in the figure has a delay of d, which causes the output to lag the input by d time units.</p>
+				</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

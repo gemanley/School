@@ -1,0 +1,351 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from class.ece.iastate.edu/cpre288/labs/Lab3/index.asp by HTTrack Website Copier/3.x [XR&CO'2010], Wed, 12 Dec 2012 08:16:46 GMT -->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<!-- INSERT TITLE -->
+	<title>CprE 288 Lab Manual</title>
+
+	<meta charset="utf-8"> 
+	<link rel="stylesheet" href="../../css/base4341.css?1.6" media="all"> 
+	<link rel="stylesheet" href="../../css/iastate4341.css?1.6" media="all"> 
+	<!--[if lt IE 9]>
+		<link rel="stylesheet" href="../../css/ie-fix.css">
+		<link rel="stylesheet" href="../../css/ie-fix-iastate.css">
+		<script>
+			(function()
+			{
+				var els = 'header,footer,section,aside,nav,article,hgroup,time'.split(',');
+				for (var i = 0; i < els.length; i++)
+					document.createElement(els[i]);
+			})()
+		</script>
+	<![endif]--> 
+
+	<link rel="stylesheet" href="../../css/content4341.css?1.6" media="all">
+
+	<!-- PAGE CONTENT -->
+	<meta name="title" content="CprE 288 - Embedded Systems Lab Manual">
+	<meta name="keywords" content="cpre 288, cpre288, lab manual, manual, iRobot, course, iastate, atmel, atmega128">
+</head>
+<body>
+
+<!-- HEADER -->
+	<header> 
+		<article id="ribbon"> 
+			<section class="grids-24"> 
+				<section class="grid-16"> 
+					<h1> 
+						<img src="../../css/isu-logo.png" alt="Iowa State University"/> 
+					</h1> 
+				</section> 
+				<section class="grid-8"> 
+					<form method="get" action="http://google.iastate.edu/search"> 
+						<input type="hidden" name="output" value="xml_no_dtd"/> 
+						<input type="hidden" name="client" value="default_frontend"/> 
+						<input type="hidden" name="site" value="class.ece.iastate.edu/cpre288"/> 
+						<input type="hidden" name="proxystylesheet" value="beta_frontend"/> 
+						<input type="text" name="q" tabindex="1" accesskey="s" placeholder="Search"/> 
+						<input type="submit" name="btnG" value="" title="Search"/> 
+					</form> 
+				</section> 
+			</section> 
+		</article> 
+	</header> 
+
+    
+   	<article>
+		<section id="container">
+			<section class="grids-24"> 
+                <article id="content" class="grid-24"> 
+                    <section class="gutter">
+<!-- BODY -->
+
+<h1>CPRE 288 Laboratory</h1>
+<hr>
+<h1>Lab 3: Memory Mapped I/O</h1>
+
+
+<h2>Lecture - Lab Connection</h2>
+
+<p>In lecture, you have studied memory mapped I/O and the concept of API 
+(application programming interface) functions.  The general purpose input/output pins (GPIO) 
+are grouped into sets of 8 pins, called ports.  You will use these concepts and 
+the related skills to develop functionality that allows a person to interact 
+with a running program through push buttons and a shaft encoder and control the 
+motion of a stepper motor.</p>
+
+<h2>Prelab</h2>
+
+<ul>
+    <li>Read through the lab description, including the linked documents.</li>
+    <li>Skim the reference documents below; in particular, you should skim pages 65-88 of the <a href="resources/docs/doc2467.html">ATmega128 Datasheet</a>, with a focus on understanding the bottom of page 66.  In addition, read page 8 of the <a href="../../resources/docs/EC11.pdf">Shaft Encoder Datasheet</a>.</li>
+	<li>Read through the source code for util.c.  It has been heavily commented to assist you.</li>
+    <li>Print the <a href="lab_eval.doc">Lab Evaluation Form</a>.</li>
+</ul>
+
+<h2>Reference Documents</h2>
+
+<p>All reference documents are also available on the Resources page of the course website.</p>
+
+<ul>
+  <li>(doc2467) <a href="resources/docs/doc2467.html">ATmega128 Datasheet</a></li>
+  <li><a href="../../resources/docs/EC11.pdf">Shaft Encoder Datasheet</a></li>
+  <li><a href="../../resources/docs/AVR360_Step_Motor_Controller.pdf">Stepper Motor Datasheet</a></li>
+  <li><a href="../../resources/docs/standard_motor_4018.pdf">Stepper Motor Product Sheet</a></li>
+</ul>
+  
+<h2>Reference Files</h2>
+
+<p>Download the following files to a single folder your U: drive. (Right-click and select 'Save Target As')</p>
+
+<ul>
+ <li><a href="../programs/open_interface.c">open_interface.c</a>: The API functions for the most basic Open Interface functions</li>
+ <li><a href="../programs/open_interface.h">open_interface.h</a>: The header file for open_interface.c</li>
+ <li><a href="../programs/lcd.c">lcd.c</a>: A program file with a number of LCD functions</li>
+ <li><a href="../programs/lcd.h">lcd.h</a>: The header file for lcd.c</li>
+ <li><a href="../programs/lab3/util.c">util.c</a>: This file contains functions which you must implement during this lab</li>
+ <li><a href="../programs/lab3/util.h">util.h</a>: The header file for util.c</li>
+</ul>
+
+<h3>Notes</h3>
+<ul>
+  <li>Port C is used by the push buttons as well as the shaft encoder. To read data from this port, use the register PINC.</li>
+  <li>The push buttons on Port C are active low. For example, if SW3 button is <strong>not</strong> pushed, the 
+  corresponding bit (i.e. PC2) within the byte from PINC will be a value of 1. If it is pushed, the corresponding
+  bit is 0. This push button circuit is designed to pull the appropriate MCU pin low by making contact to ground.</li>
+</ul>
+
+
+
+
+
+<hr>
+<h2>Part 1. Push Buttons</h2>
+
+<p><strong>Requirements</strong> - Implement the read_push_buttons() function in util.c and display the currently pressed button on the LCD screen.</p>
+
+<p>In this part, you will complete an API function for the push 
+buttons on the LCD display board. The function read_push_buttons() in util.c is currently unimplemented.
+Write code in the function such that it returns the position of the button being pressed. For example, the position of the leftmost push button on the board, 
+labeled as SW6, is 6. If multiple buttons are being pushed, the function should only
+return the index of the leftmost button and ignore the other buttons. If no button is pushed, 0 should 
+be returned.</p>
+
+<p>The function prototype has been written in util.c. Additionally, there are comments on which port is associated 
+with the push buttons. Complete the function body of read_push_buttons().</p>
+
+<p>You will also need to write a program continually calls read_push_buttons() and displays the result on the screen.  Do not forget about the initialization functions!  Here's an example of such a program:</p>
+
+
+<p>
+<font face="courier">
+#include "lcd.h" <br>
+#include "util.h" <br>
+   <br>
+void main() { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;lcd_init();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;init_push_buttons();<br>
+   <br> 
+&nbsp;&nbsp;&nbsp;&nbsp;while(1) {  // loop indefinitely <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char button = read_push_buttons();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lprintf("Button: %d", button);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+   <br>
+}<br><br>
+</font>
+</p>
+
+
+<p><strong>If you have completed this section of the lab within the first 30 minutes of lab, move on to Part 2.  The parts of the lab are cummulative, and demoing the last part to the TA is sufficient for receiving all points.  If you think you will fail to complete the entire lab within the lab period, you may demo this part to your TA for partial credit and demo the remaining parts at the beginning of your next lab session.</strong></p>
+
+
+
+
+<hr>
+<h2>Part 2. Shaft Encoder</h2>
+
+<p><strong>Requirements</strong> - Implement the read_shaft_encoder() function in util.c.  Modify your program from part 1 to display both the currently pressed push button and a sum of the return values from read_shaft_encoder() on the LCD screen.
+
+<p> The shaft encoder is a human input device that is primarily used to allow a user to increment or decrement a value 
+(such as the volume on a stereo).  The shaft encoder selected for the VORTEX platform has no absolute position.  
+What can be known is whether the shaft encoder has been turned clockwise or counter-clockwise. The shaft encoder 
+used in our lab is a mechanical shaft encoder. There are essentially two switches that 
+close and open in an order dependent upon the direction of rotation. The 
+shaft encoder is wired to the Port C pins PC6 (for channel A) and PC7 (for 
+channel B) of the MCU, so that each internal switch is either monitored by PC6 
+or by PC7. As each of the internal switches closes, the switch pulls the 
+respective MCU pin low to ground. An open switch results in a high voltage (5 V or 
+so) on the respective MCU pin. The result of the alternating voltages is 
+a square wave, but since the two waveforms lag or lead the other by a phase 
+angle these signals are said to be quadrature signals. Traditionally these 
+signals were called quadrature signals for the phase angle between was commonly 
+90 degrees. As the shaft is rotated clockwise channel A will lead channel 
+B. As the shaft is rotated counter-clockwise channel B will lead channel A. </p>
+
+<img alt="" src="images/quadrature_signals.gif" width="649" height="153"></p>
+
+<p>The objective of Part II is for your team to implement the function read_shaft_encoder() in util.c such that it will read the 
+shaft encoder and return values according to the following rules:</p>
+
+<ul>
+	<li>When the shaft is rotated clockwise return 1</li>
+	<li>When the shaft is rotated counter-clockwise return -1</li>
+	<li>When the shaft is not rotated return 0</li>
+</ul>
+
+<p>The function prototype is already present in util.c and in util.h. Much of the function has been written.
+It has incomplete statements that need your attention. No additional lines of code should be necessary.</p>
+			
+<p>Write a program that continually calls this function and keeps a sum of the return values from the function.  If the shaft encoder
+ is left alone, the sum should remain constant.  If the shaft encoder is rotated, the sum will increase or decrease.  Display the sum 
+ on the LCD display along with the currently pressed push button.</p> 
+ 
+<p><strong>Warning!</strong> - Don't forget to call the proper initialization functions once at the beginning of your program.  The function shaft_encoder_init() will initialize the ports correctly for the shaft encoder.</p>
+
+<p>Using memory mapped I/O to determine the direction of rotation 
+of the shaft encoder has timing challenges. Do not be overly concerned 
+about supporting a wide range of rotation speeds. Work on rotation speeds 
+that are comfortable and easy to maintain.</p>
+
+<p><strong>If you have completed this section of the lab within the first hour of lab, move on to Part 3.  The parts of the lab are cummulative, and demoing the last part to the TA is sufficient for receiving all points.  If you think you will fail to complete the entire lab within the lab period, you may demo this part to your TA for partial credit and demo the remaining parts at the beginning of your next lab session.</strong></p>
+
+
+
+
+<hr>
+<h2>Part 3. Stepper Motor</h2>
+
+<p><strong>Requirements</strong> - Implement the move_stepper_motor_by_step() function in util.c.  Expand your program from part 2 so that it additionally rotates the stepper motor when the shaft encoder is rotated.
+
+<p>The unipolar stepper motor being 
+used in this lab has 200 steps, which translates to 1.8 degrees of rotation per 
+step. The stepper motor's rotation can be controlled by simply 
+energizing the motor's windings in a sequence. The sequence order will 
+define the direction of rotation. The control lines for the stepper motor 
+have been wired to Port E on pins PE4-PE7. The driver chip expects 
+positive logic whereby a 1 on one of the PE4-PE7 pins is translated into 
+energizing the winding associated with that pin. Only one winding should 
+be energized at one time for this lab. So motor control translates into 
+shifting a bit value of 1 across the upper four bits of PORTE.</p>
+
+<p>A function skeleton for move_stepper_motor_by_step()
+has been started in util.c. Normally a function like this would have 
+three parameters (number of steps, direction, speed), but for now we will focus 
+on two parameters. So for this part of the lab, complete the function so 
+that the motor will turn the specified number of steps in the direction 
+requested. A direction value of 1 should be interpreted to mean clockwise 
+and -1 to mean counter-clockwise. In order for this function to move the 
+stepper accurately each time it is invoked, the previous stepper energizing 
+pattern needs to be known (i.e. the values PE4-PE7 need to saved) so that the 
+first energizing pattern produced by the current function invocation does not 
+cause the motor to skip step positions.</p>
+
+<p>The stepper motor is being energized by a 14V supply, so the amount of power 
+consumed relative to other components on the board is quite high. The 
+power draw of the motor is minimized when the driver chip does not see a call 
+for any windings to be energized (i.e. the output of PE4 through PE7 is low or 
+logic 0). After having moved the motor into position, set pins PE4-PE7 to 
+0. This will make the motor susceptible to rotation by an external force 
+for no holding torque will be generated, but for our current purposes that is 
+acceptable. Your TA will verify that you have de-energized the motor during the 
+lab demonstration.</p>
+
+<p>After completing move_stepper_motor_by_step(), write a program that 
+will couple the shaft encoder to the stepper motor. The objective of the 
+program is to have the stepper move position as the shaft encoder is 
+turned. The direction of rotation of the stepper should match that of the 
+shaft encoder. There should be a one-to-one correspondence between steps moved 
+and the number of positions the shaft encoder is turned. Before 
+attempting to move the stepper motor, the stepper needs to be initialized by 
+calling the stepper_init() function.</p>
+
+<p>After completing the one-to-one correspondence coupling, you could try mapping 
+absolute position of the stepper with the shaft encoder. There are 20 
+positions on the shaft encoder and 200 steps, so 10 steps of stepper movement 
+would be needed for each shaft encoder move. You are welcome to try other 
+mappings between the shaft encoder and stepper.
+</p>
+
+
+<p><strong>Demo your program to your TA.</strong></p>
+
+
+<hr>
+<h2>Cautions</h2>
+                
+<p>Never leave a powered-down JTAGICE mkII connected to a powered robot - current may 
+leak from the unit and result in damage to the emulator.  Try to leave the blue JTAGICE 
+mkII box powered on at all times.</p>
+
+<p>Turn the power to the Cerebot board and iRobot off before charging.  The Cerebot 
+board consumes power and the battery will not charge if the robot is in full_mode (which 
+it enters after calling oi_init, turing the power LED yellow).  The robot is charging 
+when the robot's power LED is pulsing red and both green LEDS on the dock are lit.</p>
+
+
+<h2>Reference Files</h2>
+
+<table class="gray" cellpadding="0" cellspacing="0" width="700">
+  <thead>
+    <th>Files</th>
+    <th>Description</th>
+  </thead>
+  </tbody>
+    <tr>
+      <td><a href="../../resources/docs/EC11.pdf">Shaft Encoder Datasheet</a></td>
+      <td>Information on how the shaft encoder works</td>
+    </tr>
+	<tr>
+      <td><a href="../../resources/docs/AVR360_Step_Motor_Controller.pdf">Stepper Motor Datasheet</a></td>
+      <td>Information on how the stepper motor works</td>
+    </tr>
+	<tr>
+      <td><a href="../../resources/docs/standard_motor_4018.pdf">Stepper Motor Product Sheet</a></td>
+      <td>A short product summary</td>
+    </tr>
+    <tr>
+      <td><a href="lab_eval.doc">Lab Evaluation Form</a></td>
+      <td>Evaluation form for Lab</td>
+    </tr>
+    <tr> 
+      <td><a href="https://spreadsheets.google.com/viewform?hl=en&formkey=dDBwV3J1UkxJdnZfTEtZV2NKSzFwU1E6MQ#gid=0">Online Feedback Form</a></td>
+      <td>Tell us what you think of the lab (feedback forms)</td>
+    </tr>
+  </tbody>
+</table>
+
+                    </section>
+ 				</article> 
+			</section>
+		</section>
+	</article> 
+    
+<!-- FOOTER -->
+	<footer class="grids-24"> 
+		<section id="footer" class="grid-24"> 
+			<section class="grid-3 first"> 
+				<h1><img alt="Iowa State University" src="../../css/isu-footer-logo.png"></h1> 
+			</section> 
+			<section class="grid-17"> 
+				<p> 
+					Department of Electrical and Computer Engineering 
+				</p> 
+				<p> 
+					Copyright &copy; 2011, Iowa State University of Science and Technology.
+					All rights reserved. 
+                </p>
+                <p>
+                	Page last updated on 
+                    6/26/2012 12:15:45 PM
+				</p> 
+			</section>  
+		</section> 
+	</footer>
+ 
+</body>
+
+<!-- Mirrored from class.ece.iastate.edu/cpre288/labs/Lab3/index.asp by HTTrack Website Copier/3.x [XR&CO'2010], Wed, 12 Dec 2012 08:16:46 GMT -->
+</html>

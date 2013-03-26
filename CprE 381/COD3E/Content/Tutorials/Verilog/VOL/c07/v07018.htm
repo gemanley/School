@@ -1,0 +1,36 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td valign="top" width="435">Clocks written with procedural code are by far the most common. Probably the simplest loop is this:
+				<p></p>
+				<pre>
+    always begin
+        #period/2 clk = 0;
+        #period/2 clk = 1;
+    end
+</pre>
+				Here are some variations:
+				<pre>
+    initial clk = 0;
+    always #period/2
+        clk = ~clk;
+
+    initial begin
+        clk = 0;
+        forever #period/2
+            clk = ~clk;
+    end 
+</pre>
+			</td>
+			<td valign="top" width="165"><img src="images/v0706g1.gif" height="146" width="145"></td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

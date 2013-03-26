@@ -1,0 +1,32 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="320">This system task is used for printing output whenever any of its arguments change. Like $strobe, when it does print, it does so after all other events in that time step have occurred.
+					<p>$monitor takes the same arguments as $display (see the discussion of Output Formats earlier in this section).</p>
+					<p></p>
+					<pre>
+    $monitor (arg1, arg2, arg3);
+</pre>
+					<p>is equivalent to</p>
+					<p></p>
+					<pre>
+    always @(arg1 or arg2 or arg3)
+        $strobe (arg1, arg2, arg3);
+</pre>
+					<p>There is a slight difference, in that $monitor only takes effect when the system task is executed. There is another difference in that the output line will be emitted at the time the $monitor is executed in order to provide a reference point for the argument values.</p>
+					<p>Only one $monitor may be active at a time. If a second $monitor task is executed, then the second one replaces the previous one. This is an annoying restriction.</p>
+				</td>
+				<td valign="top" width="280"><img src="images/v0625g1.gif" height="208" width="280"></td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

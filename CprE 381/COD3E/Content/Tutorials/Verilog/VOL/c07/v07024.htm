@@ -1,0 +1,37 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td width="600">When the design is latch-based, it is often the case that consecutive latches must be latched on opposite clock edges, and that the clock edges must be separated by a non-overlap period. That is, latch 1 must be latched before latch 2 is released. In general, the requirement with this type of design is that at any given time, both phase 1 latches and phase 2 latches may not be flow-through.
+				<p>The obvious way to write this in Verilog would be as follows:</p>
+				<pre>
+    always 
+        #period/2 clk = ~clk
+    assign p1clk = clk,
+           p2clk = ~clk;
+</pre>
+				Unfortunately, this may not work due to race conditions. That is, you cannot be sure that a phase1 latch has turned off before a phase2 latch has turned on.
+				<p>The way to fix this is to separate the two clock phases so there is a non-zero time between one turning off and the other turning on:</p>
+				<pre>
+    always begin
+                    p1clk = 0;
+        #epsilon    p2clk = 1;
+        
+        #(period/2-epsilon)
+                    p2clk = 0;
+        #epsilon    p1clk = 1;
+        
+        #(period/2-epsilon) ;
+    end 
+</pre>
+			</td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

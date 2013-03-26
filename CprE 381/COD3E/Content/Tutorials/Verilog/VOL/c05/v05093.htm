@@ -1,0 +1,35 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>Conditional statements are the standard IF with an optional ELSE clause. It looks like:
+					<p><tt>&nbsp;&nbsp;&nbsp;if (expression) statement_or_null [else statement_or_null] </tt></p>
+					<p>where</p>
+					<p><tt>&nbsp;&nbsp;&nbsp;statement_or_null is statement or ;</tt></p>
+					<p></TT></p>
+					<p>The expression is a logical expression, which means it evaluates to a 1-bit result. The 1-bit result is obtained by comparing the expression result with 0, not by truncating the expression result to one bit. The following are equivalent:</p>
+					<p></p>
+					<pre>
+    if (expression) ...  is equivalent to    if (expression != 0) ...
+                            not to           if (expression[0]) ...
+</pre>
+					The meaning assigned to the 4 possible values is:
+					<p></p>
+					<dl>
+						<dd>0 false
+						<dd>1 true
+						<dd>x false
+						<dd>z false
+					</dl>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

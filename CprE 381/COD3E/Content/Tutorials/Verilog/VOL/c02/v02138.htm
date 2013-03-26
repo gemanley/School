@@ -1,0 +1,69 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+		<style type="text/css" media="screen"><!--
+#answer  { visibility: hidden; position: absolute }
+--></style>
+		<csactions>
+			<csaction name="131C1FC4" class="ShowHide" type="onevent" val0="answer" val1="1"></csaction>
+		</csactions>
+		<csscriptdict import>
+			<script type="text/javascript" src="../../../../resources/CSScriptLib.js"></script>
+		</csscriptdict>
+		<csactiondict>
+			<script type="text/javascript"><!--
+CSAct[/*CMP*/ '131C1FC4'] = new Array(CSShowHide,/*CMP*/ 'answer',1);
+
+// --></script>
+		</csactiondict>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td><b>Modify module Q5 from the previous screen to use a parameter for the time delay from rising to falling edge. Name this new module Q6.</b>
+					<p></p>
+						<tt><textarea name="SCRIPT1" rows="12" cols="40">
+module Q5 (count, clock);
+   input clock;
+   output [3:0] count;
+   reg [3:0] count_reg;
+ 
+   initial count_reg = 0;
+ 
+   always @(posedge clock)
+      count_reg = count_reg + 1;
+ 
+   assign #2 count = count_reg;
+endmodule
+</textarea></tt>
+					<p><a href="javascript:parent.gotoScreen(02,138,0)"><img src="images/vreset.gif" border="0"></a></p>
+					<div align="center">
+						<p><a onclick="CSAction(new Array(/*CMP*/'131C1FC4'));return CSClickReturn()" href="#" csclick="131C1FC4"><img src="images/vdone.gif" height="39" width="74" border="0"></a></p>
+					</div>
+					<div id="answer">
+						<tt><pre>
+module Q6 (count, clock);
+   input clock;
+   output [3:0] count;
+   parameter clktoq = 2;
+   reg [3:0] count_reg;
+
+   initial count_reg = 0;
+
+   always @(posedge clock)
+      count_reg = count_reg + 1;
+
+   assign #clktoq count = count_reg;
+endmodule
+
+					 	</pre></tt>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

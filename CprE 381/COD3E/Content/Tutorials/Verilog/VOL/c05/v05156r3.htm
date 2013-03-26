@@ -1,0 +1,35 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			<tr>
+				<td><b>Initial reset</b>
+					<p>The reset code is written as</p>
+					<p></p>
+					<pre>
+
+ initial begin
+        if (!notReset) 
+            regOut = {size{1'b0}};    // avoid start-up race
+        forever @(negedge notReset)
+            regOut = #resetToQ {size{1'b0}};
+    end
+
+instead of 
+
+ always @(negedge notReset)
+            regOut = #resetToQ {size{1'b0}};
+
+</pre>
+					The reason for this is that if notReset was set to 0 in some other initial block, that might happen before the always had executed to begin waiting for the change on notReset. In that case, the reset event would be missed.</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

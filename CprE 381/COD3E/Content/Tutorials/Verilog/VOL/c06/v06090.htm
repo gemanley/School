@@ -1,0 +1,29 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="377">This system task is used to terminate simulation. It can take an optional argument which indicates how much information the simulator should print out about the simulation execution. Typically this information will include the number of events, CPU time and amount of memory the model has consumed.
+					<p>Example:</p>
+					<p></p>
+					<pre>
+    case (data)
+        `none:    $finish;
+        `some:    $finish(1);
+        `all:     $finish(2);
+    endcase
+</pre>
+					<p>This contrived example shows how you might dynamically select how much data you want about the simulation run. Any statement after this case statement would not get executed.</p>
+				</td>
+				<td valign="top" width="233"><img src="images/v0630g1.gif" height="227" width="223"></td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

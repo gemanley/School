@@ -1,0 +1,100 @@
+<html lang="en">
+
+	<head>
+		<title>GHDL guide</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+		<meta name="description" content="GHDL guide">
+		<meta name="generator" content="makeinfo 4.1">
+		<link href="http://texinfo.org/" rel="generator-home">
+		<link href="../../../resources/base_style.css" rel="stylesheet" type="text/css" media="all">
+	</head>
+
+	<body>
+		<p>Node:<a name="Simulation%20options">Simulation options</a>, Next:<a href="Debugging-VHDL-programs.html#Debugging%20VHDL%20programs" rel="next">Debugging VHDL programs</a>, Previous:<a href="Simulation-and-run-time.html#Simulation%20and%20run%20time" rel="previous">Simulation and run time</a>, Up:<a href="Simulation-and-run-time.html#Simulation%20and%20run%20time" rel="up">Simulation and run time</a></p>
+		<hr>
+		<br>
+		<h3>Simulation options</h3>
+		<p>In most system environments, it is possible to pass options while invoking a program. Contrary to most programming language, there is no standard method in VHDL to obtain the arguments or to set the exit status.</p>
+		<p>In GHDL, it is impossible to pass parameters to your design. A later version could do it through the generics interfaces of the top entity.</p>
+		<p>However, the GHDL run time behaviour can be modified with some options; for example, it is possible to stop simulation after a certain time.</p>
+		<p>The exit status of the simulation is <code>EXIT_SUCCESS</code> (0) if the simulation completes, or <code>EXIT_FAILURE</code> (1) in case of error (assertion failure, overflow or any constraint error).</p>
+		<p>Here is the list of the most useful options. Some debugging options are also available, but not described here. The <code>--help</code> options lists all options available, including the debugging one.</p>
+		<dl>
+			<dt><code>--assert-level=<var>LEVEL</var></code>
+			<dd>Select the assertion level at which an assertion violation stops the simulation. <var>LEVEL</var> is the name from the <code>severity_level</code> enumerated type defined in the <code>standard</code> package or the <code>none</code> name.
+				<p>By default, only assertion violation of severity level <code>failure</code> stops the simulation.</p>
+				<p>For example, if <var>LEVEL</var> was <code>warning</code>, any assertion violation with severity level <code>warning</code>, <code>error</code> or <code>failure</code> would stop simulation, but the assertion violation at the <code>note</code> severity level would only display a message.</p>
+				<p><code>--assert-level=none</code> prevents any assertion violation to stop simulation.<br>
+				</p>
+			<dt><code>--stop-time=<var>TIME</var></code>
+			<dd>Stop the simulation after <var>TIME</var>. <var>TIME</var> is expressed as a time value, <em>without</em> any space. The time is the simulation time, not the real clock time.
+				<p>For examples:<br>
+				</p>
+				<pre>$ ./my_design --stop-time=10ns
+$ ./my_design --stop-time=ps
+</pre>
+				<br>
+			<dt><code>--stop-delta=<var>N</var></code>
+			<dd>Stop the simulation after <var>N</var> delta cycles in the same current time.<br>
+			<dt><code>--disp-time</code>
+			<dd>Display the time and delta cycle number as simulation advances.<br>
+			<dt><code>--disp-tree[<var>=KIND</var>]</code>
+			<dd>Display the design hierarchy as a tree of instantiated design entities. This may be useful to understand the structure of a complex design. <var>KIND</var> is optional, but if set must be one of:
+				<dl>
+					<dt><code>none</code>
+					<dd>Do not display hierarchy. Same as if the option was not present.<br>
+					<dt><code>inst</code>
+					<dd>Display entities, architectures, instances, blocks and generates statements.<br>
+					<dt><code>proc</code>
+					<dd>Like <code>inst</code> but also display processes.<br>
+					<dt><code>port</code>
+					<dd>Like <code>proc</code> but display ports and signals too.
+				</dl>
+				If <var>KIND</var> is not specified, the hierarchy is displayed with the <code>port</code> mode.<br>
+			<dt><code>--vcd=<var>FILENAME</var></code>
+			<dd>Dump into the VCD file <var>FILENAME</var> the signal values before each non-delta cycle. If <var>FILENAME</var> is <code>-</code>, then the standard output is used, otherwise a file is created or overwritten.
+				<p><dfn>VCD</dfn> (value change dump) is a file format defined by the <code>verilog</code> standard and used by virtually any wave viewer.</p>
+				<p>Since it comes from <code>verilog</code>, only a few VHDL types can be dumped. GHDL dumps only signals whose base type is of the following:</p>
+				<ul>
+					<li>types defined in the <code>std.standard</code> package:
+						<ul>
+							<li><code>bit</code>
+							<li><code>bit_vector</code>
+						</ul>
+					<li>types defined in the <code>ieee.std_logic_1164</code> package:
+						<ul>
+							<li><code>std_ulogic</code>
+							<li><code>std_logic</code> (because it is a subtype of <code>std_ulogic</code>)
+							<li><code>std_ulogic_vector</code>
+							<li><code>std_logic_vector</code>
+						</ul>
+				</ul>
+				<p>I have successfully used <code>gtkwave</code> to view VCD files.</p>
+				<p>It is very unfortunate there is no standard or well-known wave file format supporting VHDL types. If you are aware of such a free format, please mail me (see <a href="Reporting-bugs.html#Reporting%20bugs">Reporting bugs</a>).<br>
+				</p>
+			<dt><code>--sdf=<var>PATH</var>=<var>FILENAME</var></code><br>
+			<dt><code>--sdf=min=<var>PATH</var>=<var>FILENAME</var></code><br>
+			<dt><code>--sdf=typ=<var>PATH</var>=<var>FILENAME</var></code><br>
+			<dt><code>--sdf=max=<var>PATH</var>=<var>FILENAME</var></code>
+			<dd>Do VITAL annotation on <var>PATH</var> with SDF file <var>FILENAME</var>.
+				<p><var>PATH</var> is a path of instances, separated with <code>.</code> or <code>/</code>. Any separator can be used. Instances are component instantiation labels, generate labels or block labels. Currently, you cannot use an indexed name.</p>
+				<p>If the option contains a type of delay, that is <code>min=</code>, <code>typ=</code> or <code>max=</code>, the annotator use respectively minimum, typical or maximum values. If the option does not contain a type of delay, the annotator use the typical delay.</p>
+				<p>See <a href="Backannotation.html#Backannotation">Backannotation</a>, for more details.<br>
+				</p>
+			<dt><code>--stack-max-size=<var>SIZE</var></code>
+			<dd>Set the maximum size in bytes of the non-sensitized processes stacks.
+				<p>If the value <var>SIZE</var> is followed (without any space) by the <code>k</code>, <code>K</code>, <code>kb</code>, <code>Kb</code>, <code>ko</code> or <code>Ko</code> multiplier, then the size is the numeric value multiplied by 1024.</p>
+				<p>If the value <var>SIZE</var> is followed (without any space) by the <code>m</code>, <code>M</code>, <code>mb</code>, <code>Mb</code>, <code>mo</code> or <code>Mo</code> multiplier, then the size is the numeric value multiplied by 1024 * 1024 = 1048576.</p>
+				<p>Each non-sensitized process has its own stack, while the sensitized processes share the same and main stack. This stack is the stack created by the operating system.</p>
+				<p>Using too small stacks may result in simulation failure due to lack of memory. Using too big stacks may reduce the maximum number of processes.<br>
+				</p>
+			<dt><code>--stack-size=<var>SIZE</var></code>
+			<dd>Set the initial size in bytes of the non-sensitized processes stack. The <var>SIZE</var> value has the same format as the previous option.
+				<p>The stack of the non-sensitized processes grows until reaching the maximum size limit.<br>
+				</p>
+			<dt><code>--help</code>
+			<dd>Display a short description of the options accepted by the run time library.
+		</dl>
+	</body>
+
+</html>

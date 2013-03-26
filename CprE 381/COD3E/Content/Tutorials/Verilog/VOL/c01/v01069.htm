@@ -1,0 +1,34 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="640" cellpadding="10">
+			<tr>
+				<td valign="TOP" width="640">Parameters are useful because they can be redefined on a module instance basis. That is, each different instance of module foo can have different parameter values. This is particularly useful for vector widths. For example, the following module implements a shifter:
+					<p></p>
+					<pre>
+    module shift (shiftOut, dataIn, shiftCount);
+        parameter width = 4;
+        output [width-1:0] shiftOut;
+        input [width-1:0] dataIn;
+        input [31:0] shiftCount;
+        
+        assign shiftOut = dataIn &lt;&lt; shiftCount;
+    endmodule
+</pre>
+					<font size="3">This module can now be used for shifters of various sizes, simply by changing the width parameter. Parameters can be changed per instance in either of two ways.
+						<p>There are two ways to change parameter values from their defaults, <a href="javascript:parent.goGlossHash('#defparam')"><font color="#B22222">defparam</font></a> statements and module instance parameter assignment. <b>Click each button to learn more about that technique.</b></p>
+						<p></p>
+						<center>
+							<a href="JavaScript:parent.dispWindow('v01069r1.htm','Example')"><img src="images/v0122b1.gif" height="38" width="102" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="JavaScript:parent.dispWindow('v01069r2.htm','Example')"><img src="images/v0122b2.gif" height="38" width="170" border="0"></a></center>
+					</font></td>
+			</tr>
+		</table>
+		</font>
+	</body>
+
+</html>

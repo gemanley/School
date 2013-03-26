@@ -1,0 +1,26 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td valign="top" width="600"><a href="JavaScript:parent.dispWindow('v07144ra.htm','Reading')">TestLocalInterruptController</a><br>
+				This is the top level test module. It instantiates the LocalInterruptController module and provides an environment for it. The environment includes a fake bus manager to mimic the bus protocol. It also includes a set of tasks which manipulate values on the input ports of the module being tested.
+				<p><a href="JavaScript:parent.dispWindow('v07144rb.htm','Reading')">LocalInterruptController</a><br>
+					The LocalInterruptController module simply instantiates a state machine (LocalInterruptStateMachine) and a data path module (LocalInterruptDataPath). There is a minimal amount of logic in this module (just one or operation, found in a continuous assignment).</p>
+				<p><a href="JavaScript:parent.dispWindow('v07144rc.htm','Reading')">LocalInterruptDataPath</a><br>
+					The data path has some combinational logic, a multiplexed register (RegMX10), and some combinational logic on the output of the register. The register is a 10-bit register with two data inputs, selected by reset. One of the inputs is wired to 0, so this is the way the register is reset.</p>
+				<p><a href="JavaScript:parent.dispWindow('v07144rd.htm','Reading')">LocalInterruptStateMachine</a><br>
+					This is the state machine that controls the logic. The state vector is 3 bits, and there are 7 states. There are 6 different inputs, each 1 bit wide. The state and one output (presentState and ioMasterStart) are registered in a RegX4 module. The other outputs are produced combinationally from the state and the inputs. This module is organized just like our state machine diagram:</p>
+				<p></p>
+				<center>
+					<img src="images/v0712g1.gif" height="182" width="400"></center>
+			</td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

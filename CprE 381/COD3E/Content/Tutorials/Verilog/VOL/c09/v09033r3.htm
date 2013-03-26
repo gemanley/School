@@ -1,0 +1,58 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			There are a variety of reasons why a user-written routine is called. The reason argument is always the second argument to the routine when it is called (the data field from the table is the first).
+			<p>The possible reasons are:</p>
+			<pre> 
+ reason_calltf
+                user-defined task/function was called
+ reason_checktf
+                user-defined task/function was scanned during compilation
+ reason_sizetf
+                user-defined function was scanned during compilation
+ reason_endofcompile
+                compilation finished, simulation about to start
+ reason_paramvc
+                change of value of a user-defined system task/function argument
+ reason_paramdrc
+                change of value of a driver of a user-defined system task/function argument
+ reason_synch
+                end of a time step enabled by tf_synchronize()
+ reason_rosynch
+                end of a time step enabled by tf_rosynchronize()
+ reason_reactivate
+                event scheduled by tf_setdelay()
+ reason_force
+                execution of a quasi-continuous assign on any net or register
+ reason_release
+                release of a quasi-continuous assign on any net or register
+ reason_disable
+                execution of a disable statement
+ reason_interactive
+                execution of $stop
+ reason_scope
+                execution of $scope
+ reason_startofsave
+                start of execution of $save
+ reason_save
+                completion of execution of $save
+ reason_restart
+                execution of $restart
+ reason_reset
+                start of execution of $reset
+ reason_endofreset
+                completion of execution of $reset
+ reason_finish
+                execution of $finish
+</pre>
+		</table>
+	</body>
+
+</html>

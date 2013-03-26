@@ -1,0 +1,27 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">The time_unit argument specifies the unit for all delays which appear after the directive. That is, if the time_unit is milliseconds, all delays will be scaled as if they are milliseconds.
+					<p>The time_precision argument tells what the minimum unit of accuracy is for the delays. That is, if the precision is microseconds, and the time unit is milliseconds, then any delay with more than 3 decimal digits would be rounded. For example, #4.12345 would be converted to 4123 microseconds.</p>
+					<p>The valid time_unit and time_precision arguments are:</p>
+					<p></p>
+					<center>
+						<img src="images/v0638g1.gif" height="209" width="318"></center>
+					<p>The time_precision argument must be at least as small as the time_unit argument.</p>
+					<p>Because there can be more than one `timescale directive in a model, the compiler must take the smallest time_precision and use that as a global precision for the simulation. If the smallest precision is 100ns, then 1 time unit of the simulation clock would correspond to 100ns.</p>
+					<p></p>
+					<center>
+						<a href="JavaScript:parent.dispWindow('v06114r1.htm','Example')"><img src="images/vexample.gif" height="39" width="91" border="0"></a></center>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

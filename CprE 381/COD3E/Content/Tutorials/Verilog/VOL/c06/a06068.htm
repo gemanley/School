@@ -1,0 +1,37 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body onload="parent.initBtn0()" bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td><b>What does the following model print? Click Done to check your answer.</b>
+					<p></p>
+					<pre>
+module test;
+	reg [4:0] r5;
+	reg a, b;
+	initial begin
+		r5 = 23;
+		a = 0;
+	#5	$display(&quot;a: %b  b: %d  r5: %d&quot;, a, b, r5);
+	end
+endmodule
+</pre>
+					<hr>
+					<form>
+						<input onclick="parent.setValue(0,0)" type="radio" name="A" value="A">1. a: 0 b: x r5: 23<br>
+						<input onclick="parent.setValue(0,1)" type="radio" name="A" value="B">2. a: 0 b: x r5: 10111<br>
+						<input onclick="parent.setValue(0,2)" type="radio" name="A" value="C">3. <font color="#4B0082"><b>a: 0 b: x r5: 5</b></font></b><br>
+						<input onclick="parent.setValue(0,3)" type="radio" name="A" value="D">4. none of the above
+						<p></p>
+					</form>
+					<b>That's right.</b></td>
+			</tr>
+		</table>
+	</body>
+
+</html>

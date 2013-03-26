@@ -1,0 +1,32 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">Disable can be used to disable some other block from the one which executes the disable. By definition, the disable statement is being executed from a different process than the one which contains the block to be disabled.
+					<p>The following is an example of one process disabling another:</p>
+					<p></p>
+					<pre>
+    always begin: proc_a
+        #100 q = 0;
+    end
+    
+    always @retrig begin
+        disable proc_a;
+        q = 1;
+    end
+</pre>
+					<p>This example will set q to 0 100 <a href="javascript:parent.goGlossHash('#timeunit')"><font color="#B22222">time units</font></a> after retrig changes value. In the absence of retrig, the first always block will continue to loop, each time waiting for 100 time units then setting q = 0.</p>
+					<p>When retrig occurs, the proc_a block will be disabled, which simply causes the always to start over again, which means it starts the 100 time unit wait again. After the disable, q is set to 1. The overall behavior here is that q will be 1 for a length of time 100 units after the last retrig event, at which time it will go to 0.</p>
+				</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

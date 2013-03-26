@@ -1,0 +1,26 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600">
+			<tr>
+				<td width="600">Because some events are unordered, when they are executed (at the same instant of simulated time), it is undefined which one will execute first. What this means is that it is permissable for a simulator to execute them in either order it chooses. Two different simulators may execute the events in a different order, or the same simulator may execute them in a different order at different times during the simulation. Or, going further, a truly parallel simulator could execute them both at the same time, with either one finishing first, due solely to chance.
+					<p>The implication of all this is that you had better not write Verilog code which has a different result depending on the order of execution of simultaneous, unordered events. This is known generally as a <a href="javascript:parent.goGlossHash('#racecond')"><font color="#B22222">race condition</font></a>, and it occurs when one event samples a data value, another event changes the data value, and the two events are unordered with respect to each other.</p>
+					<p></p>
+					<center>
+						<A HREF="b03105.htm">
+						<center>
+							<img src="images/vexample.gif" height="39" width="91" border="0"></A></center>
+					</center>
+				</td>
+			</tr>
+		</table>
+		<p><br>
+		</p>
+	</body>
+
+</html>

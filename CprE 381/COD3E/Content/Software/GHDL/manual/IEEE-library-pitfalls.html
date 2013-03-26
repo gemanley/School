@@ -1,0 +1,118 @@
+<html lang="en">
+
+	<head>
+		<title>GHDL guide</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+		<meta name="description" content="GHDL guide">
+		<meta name="generator" content="makeinfo 4.1">
+		<link href="http://texinfo.org/" rel="generator-home">
+		<link href="../../../resources/base_style.css" rel="stylesheet" type="text/css" media="all">
+	</head>
+
+	<body>
+		<p>Node:<a name="IEEE%20library%20pitfalls">IEEE library pitfalls</a>, Previous:<a href="GHDL-modes.html#GHDL%20modes" rel="previous">GHDL modes</a>, Up:<a href="Invoking-GHDL.html#Invoking%20GHDL" rel="up">Invoking GHDL</a></p>
+		<hr>
+		<br>
+		<h3>IEEE library pitfalls</h3>
+		<p>When you use options <code>--ieee=synopsys</code> or <code>--ieee=mentor</code>, the <code>IEEE</code> library contains non standard packages such as <code>std_logic_arith</code>. These packages are not standard because there are not described by an IEEE paper, even if they have been put in the <code>IEEE</code> library. Furthermore, they are not really de-facto standard, because there a slight differences between the packages of Mentor and those of Synopsys.</p>
+		<p>Furthermore, since they are not well-thought, their use have pitfalls. For example, this description has error during compilation:<br>
+		</p>
+		<pre>library ieee;
+use ieee.std_logic_1164.all;
+
+--  A counter from 0 to 10.
+entity counter is
+   port (val : out std_logic_vector (3 downto 0);
+         ck : std_logic;
+         rst : std_logic);
+end counter;
+
+library ieee;
+use ieee.std_logic_unsigned.all;
+
+architecture bad of counter
+is
+   signal v : std_logic_vector (3 downto 0);
+begin
+   process (ck, rst)
+   begin
+     if rst = '1' then
+        v &lt;= x&quot;0&quot;;
+     elsif rising_edge (ck) then
+        if v = &quot;1010&quot; then -- Error
+           v &lt;= x&quot;0&quot;;
+        else
+           v &lt;= v + 1;
+        end if;
+     end if;
+   end process;
+
+   val &lt;= v;
+end bad;
+</pre>
+		<p>When you analyze this design, GHDL does not accept it (too long lines have been split for readability):<br>
+		</p>
+		<pre>$ ghdl -a --ieee=synopsys bad_counter.vhdl
+bad_counter.vhdl:13:14: operator &quot;=&quot; is overloaded
+bad_counter.vhdl:13:14: possible interpretations are:
+../../libraries/ieee/std_logic_1164.v93:69:5: implicit function &quot;=&quot;
+    [std_logic_vector, std_logic_vector return boolean]
+../../libraries/synopsys/std_logic_unsigned.vhdl:64:5: function &quot;=&quot;
+    [std_logic_vector, std_logic_vector return boolean]
+../translate/ghdldrv/ghdl: compilation error
+</pre>
+		Indeed, the <code>&quot;=&quot;</code> operator is defined in both packages, and both are visible at the place it is used. The first declaration is an implicit one, which occurs when the <code>std_logic_vector</code> type is declared and is a element to element comparaison, the second one is an explicit declared function, with the semantic of an unsigned comparaison.
+		<p>With some analyser, the explicit declaration has priority on the implicit declaration, and this design can be analyzed without error. However, this is not the rule given by the VHDL LRM, and since GHDL follows these rules, it emits an error.</p>
+		<p>It is easy to fix this error, by using a selected name:<br>
+		</p>
+		<pre>library ieee;
+use ieee.std_logic_unsigned.all;
+
+architecture fixed_bad of counter
+is
+   signal v : std_logic_vector (3 downto 0);
+begin
+   process (ck, rst)
+   begin
+     if rst = '1' then
+        v &lt;= x&quot;0&quot;;
+     elsif rising_edge (ck) then
+        if ieee.std_logic_unsigned.&quot;=&quot; (v, &quot;1010&quot;) then
+           v &lt;= x&quot;0&quot;;
+        else
+           v &lt;= v + 1;
+        end if;
+     end if;
+   end process;
+
+   val &lt;= v;
+end fixed_bad;
+</pre>
+		<p>However, it is better to only use the standard packages defined by IEEE, which provides the same functionnalities:<br>
+		</p>
+		<pre>library ieee;
+use ieee.numeric_std.all;
+
+architecture good of counter
+is
+   signal v : unsigned (3 downto 0);
+begin
+   process (ck, rst)
+   begin
+     if rst = '1' then
+        v &lt;= x&quot;0&quot;;
+     elsif rising_edge (ck) then
+        if v = &quot;1010&quot; then
+           v &lt;= x&quot;0&quot;;
+        else
+           v &lt;= v + 1;
+        end if;
+     end if;
+   end process;
+
+   val &lt;= std_logic_vector (v);
+end good;
+</pre>
+	</body>
+
+</html>

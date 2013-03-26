@@ -1,0 +1,46 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>The for loop takes three expressions, just like the for loop in C:
+					<p></p>
+					<dl>
+						<dd><tt>index_stmt</tt>
+							<dl>
+								<dd>May be any assignment statement, but usually an assignment to the loop index. This is a procedural assignment, so the left-hand side must be a register.
+							</dl>
+						<dd><tt>cond_expr</tt>
+							<dl>
+								<dd>A logical valued expression which is evaluated at the beginning of each loop iteration. If true, the iteration is performed, if false, the loop terminates.
+							</dl>
+						<dd><tt>incr_stmt</tt>
+							<dl>
+								<dd>May be any assignment statement, usually modifies the loop index. Again, the left-hand side must be a register.
+							</dl>
+					</dl>
+					<p></p>
+					<center>
+						<a href="JavaScript:parent.dispWindow('v05120r1.htm','Example')"><img src="images/vexample.gif" height="39" width="91" border="0"></a></center>
+					Simple loop control can be complicated by register size. Consider the following:
+					<p><tt></tt></p>
+					<dl>
+						<dd>reg [3:0] indx;
+						<dd>...
+						<dd>for (indx=0; indx 
+							<16; indx="indx+1)" s1; </DL> </TT> This loop will never terminate.<p>
+							<center>
+								<a href="b05120.htm"><img src="images/vwhy.gif" height="39" width="72" border="0"></a></center>
+							<p></p>
+					</dl>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

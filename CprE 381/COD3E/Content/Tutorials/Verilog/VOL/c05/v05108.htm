@@ -1,0 +1,30 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>The semantics of the case statement is that the selector expression is evaluated and its result is compared with each item expression in turn. If equality is found, then the item's statement is executed and the case statement terminates. Unlike C, there is no need for a break statement between cases (there isn't one in the language).
+					<p>Notice that the semantics of the case statement include the priority of selector-item matching. This can cause extra logic to be generated during logic synthesis which may or may not be what is desired.</p>
+					<p>Another feature of case comparison is that <tt>x</tt> and <tt>z</tt> bits match exactly. That is, the comparison is actually:</p>
+					<p><tt>&nbsp;&nbsp;&nbsp;selector === item</tt></p>
+					<p></TT>For this reason, the <font size="3" face="courier">===</font> operator is called &quot;case equality&quot;.</p>
+					<p>Note that both the selector and the item are expressions. In particular, either may be a constant. This can be useful as in the following:</p>
+					<pre>
+        case (1'b1)
+state[0]:       state0;
+state[1]:       state1;
+state[2]:       state2;
+default:        $display(&quot;error: bad state&quot;);
+        endcase
+</pre>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

@@ -1,0 +1,30 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<td width="600">Library files and directories can be used to good advantage for managing model cofigurations. For example, suppose you have a model which has four major components:
+				<dl>
+					<dd>1. board
+					<dd>2. chip1
+					<dd>3. chip2
+					<dd>4. memory
+				</dl>
+				<p>If there is an RTL and a gate version of the two chips (pre-synthesis and post-synthesis), you may want to run four different configurations of the model. This could be done conveniently by putting each of the different module versions in separate directories:</p>
+				<p></p>
+				<center>
+					<img src="images/v0807g1.gif" height="165" width="454"></center>
+				<p>Then, the four different versions could be run with the following commands (assume VCMP is the name of the Verilog compiler):</p>
+				<p></p>
+				<center>
+					<img src="images/v0807g2.gif" height="165" width="443"></center>
+			</td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

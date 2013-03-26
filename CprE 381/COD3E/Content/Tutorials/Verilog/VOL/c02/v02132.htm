@@ -1,0 +1,69 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+		<style type="text/css" media="screen"><!--
+#answer   { visibility: hidden; position: absolute }
+--></style>
+		<csactions>
+			<csaction name="11AB6E01" class="ShowHide" type="onevent" val0="answer" val1="1"></csaction>
+		</csactions>
+		<csscriptdict import>
+			<script type="text/javascript" src="../../../../resources/CSScriptLib.js"></script>
+		</csscriptdict>
+		<csactiondict>
+			<script type="text/javascript"><!--
+CSAct[/*CMP*/ '11AB6E01'] = new Array(CSShowHide,/*CMP*/ 'answer',1);
+
+// --></script>
+		</csactiondict>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td><b>In the first field write a module which produces a 4 bit output that counts the number of rising clock edges which have occurred. The output should be produced on the falling edge of the clock. Name this module Q4. In the second field modify module Q2 so that it instantiates module Q4.</b>
+					<p></p>
+						<tt><textarea name="SCRIPT1" rows="12" cols="35">
+module Q4;
+ 
+endmodule
+</textarea> <textarea name="SCRIPT2" rows="12" cols="35">
+module Q2;
+   reg clock;
+   initial begin
+       clock = 0;
+   #8	forever begin
+       #2   clock = 1;
+       #2   clock = 0;
+       end
+   end
+endmodule
+</textarea></tt>
+						<p><a href="javascript:parent.gotoScreen(02,132,0)"><img src="images/vreset.gif" border="0"></a></p>
+						<center>
+							<p><a onclick="CSAction(new Array(/*CMP*/'11AB6E01'));return CSClickReturn()" href="#" csclick="11AB6E01"><img src="images/vanswer.gif" height="39" width="87" border="0"></a></p>
+						</center>
+						<div id="answer">
+						<tt><pre>module Q4 (count, clock);          module Q2;
+  input clock;                       reg clock;
+  output count;                      wire [3:0] count;
+  reg [3:0] count, count_reg;        Q4 counter (count, clock);
+
+  initial count_reg = 0;             initial begin
+                                         clock = 0;
+  always @(posedge clock)             #8 forever begin 
+    count_reg = count_reg + 1;             #2  clock = 1;       
+                                           #2  clock = 0;
+  always @(negedge clock)                end
+    count = count_reg;             end
+endmodule                        endmodule        
+</pre></tt>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

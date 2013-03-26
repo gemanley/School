@@ -1,0 +1,62 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body onload=" parent.initBtnMT(2);" bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td>Given the following module:
+					<pre>
+module M;
+  reg clock;
+  integer x, y, i;
+
+  initial begin
+    x = 1;                      // 1
+    forever  @(negedge clock)   // 2
+        if (x == 4)             // 3
+        $finish;                // 4
+  end
+
+  always @(posedge clock) begin
+    x = x + 1;    // 5
+  end
+
+  always @(posedge clock) begin
+    y = x;        // 6
+  end
+
+  initial clock = 0;    // 7
+  always 
+  #2 clock = ~clock;    // 8
+endmodule
+</pre>
+					<p>The value of y at the end of execution is indeterminate. That is, it may be either 3 or 4, depending on whether statement 5 or 6 is executed first at each positive clock edge.</p>
+					<p>Suppose you needed to change only one statement so that so that when this module finishes, y has the same value as x.</p>
+					<hr>
+				</td>
+			</tr>
+		</table>
+		<!--
+<form>
+<table width="540"><tr>
+<td width="250">1. What is the number of the line you would change? </td><td width="190"><INPUT TYPE="TEXT" SIZE="12" MAXLENGTH="12" onChange="parent.setValue(0,this.value)"></td>
+<tr>
+<td width="250">2. What would you change this line to? </td><td width="190"><INPUT TYPE="TEXT" SIZE="12" MAXLENGTH="12" onChange="parent.setValue(1,this.value)"></td>
+</tr>
+</table>
+<p>
+--><a answer><b>There are several correct answers. Line 5 could be changed to any of:</b><br>
+			#1 x = x + 1;<br>
+			x = #1 x + 1;<br>
+			x 
+			<= x + 1; <br> x <= #1 x + 1; <p> To review this topic, return to <A HREF="javascript:parent.gotoScreen('03','090',1)"> Simulation Mechanics: Concurrency and Parallelism</A>
+			.
+			<p></p>
+		</a>
+	</body>
+
+</html>

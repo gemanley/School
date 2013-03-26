@@ -1,0 +1,51 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600">
+			<tr>
+				<td>This variation shows what happens if both the module name and a block name are the same (B). Notice that the block B hides the module B.
+					<p></p>
+					<pre>
+module top;
+    B b();
+endmodule
+
+module B;
+    integer x;
+    initial x = 1;
+
+    initial 
+        begin:A
+            integer x;
+            x = 2;
+        end
+
+    initial
+        begin:B
+            integer x;
+            x = 3;
+            begin:C
+                integer x;
+                x = 4;                                  // Output
+                $display(&quot;B.x = %0d&quot;, B.x);             // B.x = 3
+                $display(&quot;top.b.x = %0d&quot;, top.b.x);     // top.b.x = 1
+                $display(&quot;b.x = %0d&quot;, b.x);             // b.x = 1
+                $display(&quot;B.C.x = %0d&quot;, B.C.x);         // B.C.x = 4
+                $display(&quot;A.x = %0d&quot;, A.x);             // A.x = 2
+                //$display(&quot;B.A.x = %0d&quot;, B.A.x);       &lt;&lt; illegal
+                $display(&quot;x = %0d&quot;, x);                 // x = 4
+            end
+        end
+endmodule 
+</pre>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

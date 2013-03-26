@@ -1,0 +1,40 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			<b>ALU</b>
+			<p></p>
+			<pre>
+    module alu (clock, opcode, opA, opB, result);
+        input         clock;
+        input [2:0]   opcode;
+        input [31:0]  opA,opB;
+        output [31:0] result;
+        reg    [31:0] result;
+
+        `define Nop  3'b000
+        `define Add  3'b001
+        `define Sub  3'b010
+        `define Not  3'b011
+        `define Shfl 3'b100
+        `define Shfr 3'b101
+
+        always @(posedge clock)  
+          case (opcode)
+            `Nop:  ;
+            `Add:  result 
+				
+				
+				<= opA + opB; `Sub: result <= opA - opB;            `Not:  result <= ~opA;            `Shfl: result <= opA<<opB;            `Shfr: result <= opA>>opB;          endcase    endmodule</PRE></TABLE></BODY></HTML>>>			</pre>		</table>	</body></html>>>
+				
+			</pre>
+		</table>
+	</body>
+
+</html>

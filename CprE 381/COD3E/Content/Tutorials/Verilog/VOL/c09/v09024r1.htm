@@ -1,0 +1,43 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			There is a file called <b>veriuser.c</b> which is part of the Verilog-XL simulator. This file contains a table, called <b>veriusertfs</b>, which must be modified. The compiler in Verilog-XL uses this table to tell it the names and properties of all the user-defined system tasks.
+			<pre>
+veriuser.c
+
+...
+int helloWorldFunction();       /* added */
+
+s_tfcell veriusertfs[] =
+{
+    ( usertask, 0, 0, 0, helloWorldFunction, 0, &quot;$hello&quot; ),
+    (0)     /*** final entry must be 0 ***/
+};
+</pre>
+			There are other lines in the file, but only the ones shown here need to be changed. Note that &quot;usertask&quot; is a defined symbol which is used to distinguish between a user task and a user function. The only fields in the table entry which we need here are the entry point name (helloWorldFunction) and the Verilog source name ($hello).
+			<p>The different fields in the table entry are:</p>
+			<p>usertask|userfunction<br>
+				indicates a task (no return) or a function (returns a value)</p>
+			<p>data<br>
+				an integer that will get passed to the routine</p>
+			<p>checktf<br>
+				routine which gets called at compile time</p>
+			<p>sizetf<br>
+				routine which gets called (at compile time) if it is a userfunction to determine the size of returning data</p>
+			<p>calltf<br>
+				routine which gets called when the user task/function is invoked</p>
+			<p>misctf<br>
+				routine which gets called at times you can specify</p>
+			<p>name<br>
+				the name of the user-defined system task or function</p>
+		</table>
+	</body>
+
+</html>

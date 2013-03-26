@@ -1,0 +1,28 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td valign="TOP" width="600">
+					<TARGET="v01084">
+					Nets are driven by <a href="javascript:parent.goGlossHash('#netd')"><font color="#B22222">net drivers</font></a>. Drivers may be
+					<p></p>
+					<ul>
+						<li>output port of a primitive instance<br>
+						<li>output port of a module instance<br>
+						<li>left-hand side of a continuous assignment
+							<p></p>
+					</ul>
+					There may be more than one <a href="javascript:parent.goGlossHash('#driver')"><font color="#B22222">driver</font></a> on a net. If there is more than one driver, the value of the net is determined by a resolution function. In Verilog, the possible resolution functions are built-in. Which resolution function is used is determined by the net type. For example, a net declared as <u>wand</u> has an <u>and</u> resolution function.
+					<p>Each bit in a net can take on one of four values: 0, 1, x, or z. In addition, nets can have different driving strengths. That is, a net can be connected to a driver which has weak or strong driving strength.</p>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

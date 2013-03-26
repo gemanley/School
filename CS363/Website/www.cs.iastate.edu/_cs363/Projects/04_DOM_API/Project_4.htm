@@ -1,0 +1,233 @@
+<html>
+
+
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Projects/04_DOM_API/Project_4.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:00:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Project 4</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<style>
+<!--
+BODY{font:x-small 'Verdana';margin-right:1.5em}
+.e{margin-left:1em;text-indent:-1em;margin-right:1em}
+.m{color:blue}
+.t{color:#990000}
+-->
+</style>
+<meta name="Microsoft Border" content="t, default">
+</head>
+
+<body><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td>
+
+<p><font face="AGaramond" size="3">Com S 363: Introduction to Database Systems</font><br>
+<font face="AGaramond" size="5">Introduction to Database Systems </font></p>
+<p>
+
+</p>
+<p>&nbsp; </p>
+
+</td></tr><!--msnavigation--></table><!--msnavigation--><table dir="ltr" border="0" cellpadding="0" cellspacing="0" width="100%"><tr><!--msnavigation--><td valign="top">
+
+    <p><i><font face="Arial" color="#000000" size="5">A project on DOM API and 
+	JDBCX </font></i> </p>
+<p><font face="Times New Roman">The objective of this project is to learn about of JDBCX the counterpart of JDBC for 
+XML. (JDBCX is our term.) In a nutshell the counterpart of relational databases 
+consists of XML documents on the server; counterpart of SQL is XQuery, and the 
+counterpart of Java is Java + DOM API for XML. But the problem with JDBCX is the 
+consumption of main memory. In this project we have offered our own version of 
+JDBCX that has very reasonable memory requirements compared to say XQJ based on 
+jdom.
+</font> </p>
+<div align="left">
+	<p><b><i><font face="Arial">Understanding JDBCX </font></i></b> </p>
+	<ul>
+		<li><font face="Times New Roman">Go to <a href="JDBC_VS_JDBCX.htm">
+		JDBC_vs_JDBCX.htm</a> for details. </font> </li>
+	</ul>
+	<p><b><i><font face="Arial">Download software and demos and configure </font>
+	</i></b> </p>
+	<ul>
+		<li><font face="Times New Roman">We have created a totally self-contained download for Project P4. It 
+		is a zip file consisting of about 18 megabytes. On expansion it will 
+		require about 50 megabytes. In order to download click
+		<a href="../../Resources/P4_Demo.zip">here</a>. <br>
+		<span style="background-color: #FF0000">ATTENTION &gt;&gt;&gt; The folder 
+		P4_Dem0\CyDIW_bin contains P4_StorageConfig.xml. Please make a copy of 
+		this file also in the folder P4_Demo\bin. Otherwise, 2B below will not 
+		work.</span> </font> </li>
+		<li><font face="Times New Roman">
+		<span style="background-color: #FFFF00">Configure the four batch files in the root of P4_Demo to indicate 
+		where java is installed on your system. </span> </font> </li>
+	</ul>
+	<hr>
+	<p><b><i><font face="Arial">Understand and run the demos </font></i></b> </p>
+	<p><font face="Times New Roman">From the root, run the batch files in the following sequence. Once the 
+	demos run you are all setup for the project. </font> </p>
+	<ul>
+		<li><font face="Times New Roman">1A. Run JDBCX_Server.bat first. It will start the server. 
+		&lt;Make sure that you see the message &quot;server is now running...&quot;. Do not 
+		close the console window to keep the server running. </font> </li>
+		<li><font face="Times New Roman">1B. With the server running, run JDBCX_Client.bat. After it has run 
+		successfully, you can close it if you want. </font> </li>
+		<li><font face="Times New Roman">2A. Run Dom_Demo.bat. After it has run successfully, you can close it 
+		if you want. </font> </li>
+		<li><font face="Times New Roman">2B. Run CsxDom_StandAlone_Demo.bat. After it has run successfully, 
+		you can close it if you want. </font> </li>
+	</ul>
+	<p><font face="Times New Roman">What do these demos do? </font> </p>
+	<ul>
+		<li><font face="Times New Roman">1A sets up the server and connects it 
+		to our own storage in P4_Storage. The storage contains auctions(1).bxml, 
+		a 1 megabyte paginated XML document. The number of buffers can be 
+		chosen. </font></li>
+		<li><font face="Times New Roman">1B connects to the server, sends a 
+		simple XQuery query for execution on our Csx XQuery Engine on the 
+		server. The result, a paginated XML document, is stored on the server. 
+		The name of this document is received. The document is then processed 
+		using our Csx DOM. The number of buffers can be chosen. </font></li>
+		<li><font face="Times New Roman">Although 1A and 1B form a full demo, 
+		the objective of 2A and 2B is to compare JDOM and CsxDOM programs side 
+		by side. The programs are broken in sections so you can make a side by 
+		side comparison. 2A uses 1 megabyte auctions(1).xml document and 2B uses 
+		1 megabyte auctions(1).bxml document in our storage. </font></li>
+	</ul>
+	<p><font face="Times New Roman">JDOM vs. Csx DOM</font></p>
+	<ul>
+		<li><font face="Times New Roman">JDOM requires main memory that is 3-10 
+		times of the document being processed. Thus for 1, 10, 100, or 1000 
+		megabytes auctions(n).xml JDOM will require at least 3, 30, 300, or 
+		3,000 megabytes of main memory. </font></li>
+		<li><font face="Times New Roman">I think the CsxDOM is working with 64 
+		kilobytes of memory at linear speed. </font></li>
+	</ul>
+	<p><font face="Times New Roman">Limitations of Csx XQuery engine&nbsp;
+	</font></p>
+	<ul>
+		<li><font face="Times New Roman">Currently, the Csx XQuery engine is not very 
+		robust. It uses far more main memory than it should. For the query in 1B 
+		we do not advise querying a document larger than 10 megabytes.&nbsp;
+		</font></li>
+	</ul>
+	<p><font face="Times New Roman">What are 1B, 2A, and 2B computing? </font>
+	</p>
+	<ul>
+		<li><font face="Times New Roman">They (all three) are processing the 
+		auctions document to extract email addresses of persons. </font></li>
+	</ul>
+<div align="left">
+<hr>&nbsp;</div>
+	<div align="left">
+<b><i><font face="Arial"><span style="background-color: #FFFFFF">How to start 
+your project? </span> </font></i></b>
+	</div>
+<ul>
+	<li><font face="Times New Roman"><span style="background-color: #FFFFFF">You are given auctions(1).xml. browse it to 
+	familiarize yourself. </span> </font></li>
+	<li><font face="Times New Roman"><span style="background-color: #FFFFFF">You are also given auctions(1).bxml in 
+	paginated binary form in P4_Storage. 
+	It is a binary file embedded in a binary storage. You cannot browse it, but 
+	you can assume that it is logically 
+	same as auctions(1).bxml. </span> </font></li>
+</ul>
+	<p><b><i><font face="Arial">The program you will write&nbsp; </font></i></b> </p>
+	<ul>
+		<li><font face="Times New Roman"><b>
+		<span style="background-color: #FFFF00">The problem.</span> </b>For each region, you will list the 
+		total number of items. Your output will consist of 6 such pairs. Note 
+		that this is not the same as counting the &quot;item&quot; children in a given 
+		region. Every item has a quantity field - and you should add these for 
+		each region. If the quantity is 2, then 2 should be contributed to the 
+		sum. </font>
+		</li>
+		<li><font face="Times New Roman"><b>
+		<span style="background-color: #FFFF00">Rewrite 1B.</span></b> You will 
+		rewrite 1B for 1 megabyte XML documents named auctions(1).bxml. The auctions(1).bxml has already been 
+		created for you and included in the binary image in P4_Storage. The 
+		query you execute will be </font>
+		<span style="font-size: 12.0pt; font-family: 'Times New Roman',serif">
+		&quot;let $p:=document(\&quot;auctions(1).bxml\&quot;) return &lt;E1&gt;{$p/regions}&lt;/E1&gt;&quot;.
+		</span></li>
+	</ul>
+	<blockquote>
+		<p>
+		<span style="font-family: 'Times New Roman',serif; background-color: #FFFFFF">
+		1. Just to be sure, try the following statement verbatim: </span></p>
+		<span LANG="EN"><font SIZE="2">
+		<p><span style="background-color: #FFFFFF">String qry = &quot;let 
+		$p:=document(\&quot;auctions(1).bxml\&quot;) return &lt;E1&gt;{$p/regions}&lt;/E1&gt;&quot;;</span></p>
+		<p><span style="background-color: #FFFFFF">2. Note the statement &quot;String 
+		p = entry.getFirstChild().getNodeValue();&quot; in JDBCX_Client.java </span>
+		</p>
+		<p><span style="background-color: #FFFFFF">Here &quot;getFirstChild().&quot; is 
+		important before calling &quot;getNodeValue()&quot;. </span></p>
+		<p><span style="background-color: #FFFFFF">3. A Csx DOM issue: When an 
+		element has an attribute, its children get shifted by 1; e.g., child #2 
+		becomes child #3. </span></p>
+		</font></span>
+	</blockquote>
+	<ul>
+		<li><font face="Times New Roman"><b>
+		<span style="background-color: #FFFFFF">Some tips.</span></b><span style="background-color: #FFFFFF"> Every time you 
+		execute the query, a new output file will be created. If you do it too 
+		many times, the storage will fill up. There are two solutions to this: 
+		(a) Restore P4_Storage to its original form; (b) Find out the name of 
+		the output when the query is executed. In subsequent runs comment-out 
+		commands that run the query so new output is not produced. For 
+		processing the output simply hardwire the name of the output. </span> </font></li>
+		<li><font face="Times New Roman">
+		<span style="background-color: #FFFFFF">Sometimes server may crash 
+		without you noticing. This can be seen in server command console. </span>
+		</font></li>
+		<li><font face="Times New Roman">
+		<span style="background-color: #FFFFFF">&gt;
+		On non-Windows platforms only. 
+		CyDIW createfile command will not work. But the binary image of storage 
+		that we have provided will work. This means you refresh the entire 
+		contents of P4_Storage. </span></font></li>
+	</ul>
+	<p><b><i><font face="Arial">What to submit? </font></i></b></p>
+	</div>
+<ul>
+	<li><font face="Times New Roman"><span style="background-color: #FFFFFF">Your code for 1B and 
+	its output; electronically as well as in 
+	hardcopies. </span> </font></li>
+</ul>
+<div align="left"><hr>&nbsp;</div>
+<div align="left"><b><i><font face="Arial">How to scale up? </font></i></b>
+</div>
+<ul>
+	<li><font face="Times New Roman">Bigger files will require the storage to be 
+	expanded. The specifications of the storage are in P4_StorageConfig.xml 
+	file. You will need to edit it for a larger storage, possibly in a different 
+	location. The storage and bxml files can be created using the batch of 
+	commands P4_Create_Storage_And_Test_Documents.txt from CyDIW. A copyfile 
+	command is available to create .xml versions of .bxml files. </font></li>
+	<li><font face="Times New Roman">Be careful when creating storage. Although 
+	we do not expect that the storage will harm your computer but you would not 
+	like to make sure that you have the desired space on your computer (or your 
+	quota on our machines in Pearson). For creation of storage a folder with a 
+	name in the storage config file has to exist, meaning it has to be created 
+	manually. Storage is deleted by deleting the contents of the folder 
+	containing the storage manually. This kind of manual handling is intentional 
+	on our part so that the users of CyDIW are mindful of storages they create.
+	</font></li>
+</ul>
+	<p><b><i><font face="Arial">Optional&nbsp;&nbsp; </font></i></b> </p>
+	<ul>
+		<li><font face="Times New Roman">Continue 2A on auctions(100).xml and 
+		auctions(1000).xml documents. We suspect the second one would choke the 
+		system with up to 4 gigabytes of memory. </font></li>
+		<li><font face="Times New Roman">Continue 2B on auctions(100).bxml and 
+		auctions(1000).bxml documents. We anticipate that you will have no 
+		problems. </font></li>
+	</ul>
+<p>&nbsp;</p>
+
+<!--msnavigation--></td></tr><!--msnavigation--></table></body>
+
+
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Projects/04_DOM_API/Project_4.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:01:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+</html>

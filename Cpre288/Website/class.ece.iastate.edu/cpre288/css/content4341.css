@@ -1,0 +1,10 @@
+.italics{
+	font-weight: normal;
+	font-style: italic;
+}
+
+.no-bullets{
+	list-style: none;
+	margin-left: 0;
+	padding-left: 0;
+}

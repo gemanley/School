@@ -1,0 +1,33 @@
+<html lang="en">
+
+	<head>
+		<title>GHDL guide</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+		<meta name="description" content="GHDL guide">
+		<meta name="generator" content="makeinfo 4.1">
+		<link href="http://texinfo.org/" rel="generator-home">
+		<link href="../../../resources/base_style.css" rel="stylesheet" type="text/css" media="all">
+	</head>
+
+	<body>
+		<p>Node:<a name="Starting%20a%20simulation%20from%20a%20foreign%20program">Starting a simulation from a foreign program</a>, Next:<a href="Linking-with-Ada.html#Linking%20with%20Ada" rel="next">Linking with Ada</a>, Previous:<a href="Linking-with-foreign-object-files.html#Linking%20with%20foreign%20object%20files" rel="previous">Linking with foreign object files</a>, Up:<a href="Interfacing-to-other-languages.html#Interfacing%20to%20other%20languages" rel="up">Interfacing to other languages</a></p>
+		<hr>
+		<br>
+		<h4>Starting a simulation from a foreign program</h4>
+		<p>You main run your design from an external program. You just have to call the <code>ghdl_main</code> function which can be defined:</p>
+		<p>in C:<br>
+		</p>
+		<pre>extern int ghdl_main (int argc, char **argv);
+</pre>
+		<p>in Ada:<br>
+		</p>
+		<pre>with System;
+<small>...</small>
+function Ghdl_Main (Argc : Integer; Argv : System.Address)
+   return Integer;
+pragma import (C, Ghdl_Main, &quot;ghdl_main&quot;);
+</pre>
+		<p>This function must be called once, and returns 0 at the end of the simulation. In case of failure, this function does not return. This has to be fixed.</p>
+	</body>
+
+</html>

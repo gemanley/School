@@ -1,0 +1,52 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			<tr>
+				<td>For:
+					<p></p>
+					<pre>
+    reg [15:0] arr [1:35];
+</pre>
+					<p>If the data file looked like this:</p>
+					<p></p>
+					<pre>
+        ffff
+        fffe
+        fffd
+        fffc
+        0001
+        0002
+        0003
+        0004
+        abcd
+        deff
+</pre>
+					<p>then</p>
+					<p></p>
+					<pre>
+$readmemh(&quot;data_file&quot;, arr, 1, 10);
+    arr [1]   [2]   [3]   [4]   [5]   [6]   [7]   [8]   [9]   [10]
+        ffff  fffe  fffd  fffc  0001  0002  0003  0004  abcd  deff
+      
+$readmemh(&quot;data_file&quot;, arr, 26);
+    arr[26]  [27]  [28]  [29]  [30]  [31]  [32]  [33]  [34]  [35]
+       ffff  fffe  fffd  fffc  0001  0002  0003  0004  abcd  deff
+
+$readmemh(&quot;data_file&quot;, arr, 10, 1);
+    arr [1]   [2]   [3]	  [4]   [5]   [6]   [7]	  [8]	[9]   [10]
+        deff  abcd  0004  0003	0002  0001  fffc  fffd	fffe  ffff
+
+</pre>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

@@ -1,0 +1,32 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="496">The $strobe system task is just like $display, except that it waits until the end of the time step before printing. This can be useful to be sure that the output comes after all value changes.
+					<p>Example:</p>
+					<p></p>
+					<pre>
+    always @(posedge clock)
+        state1 = newstate1;
+    
+    always @(posedge clock)
+        state2 = newstate2;
+        
+    always @(posedge clock)
+        $strobe($stime,,state1,,state2);
+</pre>
+					<p>This code would print out the new values of <tt>state1</tt> and <tt>state2</tt> at each rising clock edge, after all other processing had been completed. If you simply used $display here, you could not be sure that the displayed values were the new ones.</p>
+				</td>
+				<td valign="top" width="204"><img src="images/v0624g1.gif" height="124" width="204"></td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

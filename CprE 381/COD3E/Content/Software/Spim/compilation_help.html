@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0039)http://www.cs.wisc.edu/~larus/spim.html -->
+<!-- saved from url=(0039)http://www.cs.wisc.edu/~larus/spim.html --><!-- saved from url=(0039)http://www.cs.wisc.edu/~larus/spim.html --><HTML>
+
+	<HEAD><TITLE>Compilation Instructions for spim</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<META content="MSHTML 6.00.2800.1276" name=GENERATOR>
+		<link href="../../resources/base_style.css" rel="stylesheet" type="text/css" media="all">
+	</HEAD>
+
+	<body>
+		<h1 align=center>Compiliation Instructions for spim</h1>
+		<p>This page provides some advice for compiling the spim source code for various systems.</p>
+		<ul>
+			<li><a href="#Unix">Compiling on Unix and Mac OS X systems.</a>
+			<li><a href="#Windows">Compiling on Windows systems.</a>
+		</ul>
+		<hr noshade width="80%">
+		<h2><a id="Unix" name="Unix"></a>Compiling on Unix and Mac OS X systems</h2>
+		<ol>
+			<li>Copy the &quot;spim.tar.gz&quot; file included on this CD to a convenient temporary location on your local hard drive.
+			<li>Decompress the spim.tar.gz file using the <i>gzip</i> program:<br>
+				&nbsp;&nbsp;&nbsp; <i>% gzip -d spim.tar.gz</i>
+			<li>Untar it:<br>
+				&nbsp;&nbsp;&nbsp; <i>% tar xf spim.tar</i>
+			<li>Configure <b>spim</b> for your system by running the Configure script:<br>
+				<i>&nbsp;&nbsp;&nbsp; % Configure<br>
+				</i><b>Note:</b> Configure compiles a program with the C compiler named cc. If you want it to use another compiler, set the environment variable CC to its name before running the script. E.g. under (t)csh:<br>
+				<i>&nbsp;&nbsp;&nbsp; % setenv CC gcc<br>
+					&nbsp;&nbsp;&nbsp; % Configure<br>
+				</i>or under bash/ksh/etc:<br>&nbsp;&nbsp;&nbsp;&nbsp;%&nbsp;<i>CC=gcc; Configure</i>
+			<li>Next, you must set the directories in which <b>spim </b>will be installed by editing a makefile (the file that tells how to build <b>spim</b>).<br>
+				If you are installing <b>spim</b> and want the windowing version (<i>xspim</i>), you will edit the file <u><i>Imakefile</i></u>. If you don't want <i>xspim</i> or are running on a system without X-windows installed, you can use the file <i><u>Makefile.std</u></i>. Finally, if you are running under Microsoft Windows using Cygwin, edit the file <i><u>Makefile.cygwin</u></i>.
+			<li>Set these pathnames to the appropriate locations for your system:<br>
+				<i>TRAP_DIR</i> -- The full pathname of the directory in which to install the <b>spim </b>trap handler.<br>
+				<i>BIN_DIR</i> -- The full pathname of the directory in which <i>spim</i> and <i>xspim</i> should be installed.<br>
+				<i>MAN_DIR</i> -- The full pathname of the directory in which the manual pages for <i>spim</i> and <i>xspim</i> should be installed.<br>
+				In general, the remaining parameters in the makefile need not be changed.
+			<li>Then, if you are using <u><i>Imakefile</i></u><i> </i>type:<br>
+				&nbsp;&nbsp;&nbsp; <i>% xmkmf<br>
+					&nbsp;&nbsp;&nbsp; % make</i>
+			<li>If you want an X-window version of <b>spim</b>, also type:<br>
+				&nbsp;&nbsp;&nbsp; <i>% make xspim</i><br>
+				If you do not have X-windows or the program <i>xmkmf</i>, edit either <i>Makefile.std</i> or <i>Makefile.cygwin</i> and type:<br>
+				<i>&nbsp;&nbsp;&nbsp; % make -f Makefile.std<br>
+				</i>or<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;<i>% make -f Makefile.cygwin </i>
+			<li>To run <i>spim</i> or <i>xspim</i>, the trap handler must be installed in the directory specified by the variable TRAP_DIR in the makefile. If the file <i>trap.handler</i> is not installed, <i>spim</i> and <i>xspim</i> fail with a message before they start running. You can either install this file by hand or by typing<br>
+				<i>&nbsp;&nbsp;&nbsp; % make install</i><br>
+				which also installs spim, xspim, and the manual pages in the directories that you set above.
+			<li>To test that <b>spim </b>is correctly built, type<br>
+				<i>&nbsp;&nbsp;&nbsp; % make test</i><br>
+				and examine the output of the test. Note the trap handler must be installed before running the test.
+		</ol>
+		<hr noshade width="80%">
+		<h2><a id="Windows" name="Windows"></a>Compiling on Windows systems</h2>
+		<p>On Windows machines you have two options for compiling spim.</p>
+		<ol>
+			<li>You can compile the text-driving interface using Cygwin tools.<br>
+				Follow the instructions above and use <i>Makefile.cygwin</i> when invoking make.
+			<li>You can compile the graphical interface (<b>PCSpim</b>) using Visual C++ (version 4.1 or later).
+				<br>
+				Check the <i>readme.txt</i> file within the source for more information.
+				<ol>
+					<li>Extract the ZIP file of source code included on this CD to a convenient location on your hard drive.
+					<li>Open the &quot;PCSpim&quot; workspace in the &quot;Larus\Software\SPIM\PCSpim&quot; folder.
+				
+					<li>Build PCSpim.exe
+				</ol>
+			
+			
+			
+			
+		</ol>
+	</body>
+
+</HTML>

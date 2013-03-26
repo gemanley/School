@@ -1,0 +1,49 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="301">Upward references may also be done with a module instance name as the first component of the XMR. Thus, if you want to reference:
+					<p></p>
+					<pre>
+        top.childB.leaf3.x
+</pre>
+					<p>from:</p>
+					<p></p>
+					<pre>
+        top.childB.node1.leaf1
+</pre>
+					you can do it like this:
+					<p></p>
+					<pre>
+        leaf3.x
+</pre>
+				</td>
+				<td valign="top" width="299">
+					<center>
+						<img src="images/v0608g1.gif" height="174" width="299"></center>
+				</td>
+			</tr>
+		</table>
+		<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">The rules for resolving these types of reference are:
+					<ol>
+						<li>Look in the current module for a module instance with that name, and if found, proceed downward in that instance.
+						<li>Look in the parent module for a module instance with the given name, and if found, proceed downward from there.
+						<li>Repeat step 2, going up the hierarchy.
+					</ol>
+					<p>This is a well-defined procedure. However, you can construct XMRs and module hierarchies in which an upwards XMR can be resolved in some instances and not in others.</p>
+					<p></p>
+				</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

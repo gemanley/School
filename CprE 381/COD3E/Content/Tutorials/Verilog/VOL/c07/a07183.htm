@@ -1,0 +1,49 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body onload=" parent.initBtnMchMA(2);" bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600" cellpadding="10">
+			<b>Which of the statements about the following code fragment are true? Assume that &quot;z&quot; changes at &quot;negedge clk&quot; and &quot;clk&quot; has a period of 20 time units.</b>
+			<p></p>
+			<pre>
+	always @(posedge clk) begin
+		x 
+				
+				
+				<= f(y); @(y) ; end always @(posedge clk) begin y <= g(z);
+		@(z) ;
+	end
+</pre> <HR> <FORM> <INPUT TYPE="checkbox" NAME="A"> <font color="#4B0082"> 1. This code will work.</font>
+				
+				
+				<br>
+				
+				
+				
+<input type="checkbox" name="B"><font color="#4B0082">2. This code is efficient. It reduces the simulation activity if &quot;y&quot; or &quot;z&quot; does not change on every &quot;clk.&quot;</font>
+				
+				
+				<p>
+</FORM>
+
+<a name="answer">
+<b>Right. Both statements are true. Statement 1 is true because the non-blocking assign causes the &quot;@(y)&quot; and &quot;@(z)&quot; to be reached before the values of &quot;x&quot; or &quot;y&quot; change. Statement 2 is true because the &quot;@(y)&quot; and &quot;@(z)&quot; cause the &quot;always&quot; block to suspend until &quot;y&quot; or &quot;z&quot; change.</b></a></p>
+				
+				
+				
+				
+				<p>
+
+</p>
+				
+				
+			</pre>
+		</table>
+	</body>
+
+</html>

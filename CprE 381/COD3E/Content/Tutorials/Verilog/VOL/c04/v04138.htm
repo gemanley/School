@@ -1,0 +1,63 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600"><b>What is the output of the following model? Click Done to check your answer.</b>
+					<p></p>
+					<pre>
+primitive xxx (w, x, y, z);
+	output w;
+	input x, y, z;
+	table
+//	x	y	z	:	w
+	0	0	0	:	0;
+	0	0	1	:	0;
+	0	1	0	:	1;
+	0	1	1	:	0;
+	1	0	0	:	1;
+	1	0	1	:	0;
+	1	1	0	:	1;
+	1	1	1	:	0;
+	endtable
+
+endprimitive
+
+module t;
+	reg b, c, d;
+	xxx  xxx1 (a, b, c, d);
+
+	initial begin
+		b = 0; c = 0; d = 0;
+	#1	$display(a);
+		b = 1;
+	#1	$display(a);
+		c = 1;
+	#1	$display(a);
+		d = 1;
+	#1	$display(a);
+	end
+endmodule
+</pre>
+					<hr>
+					<form>
+						<input onclick="parent.setValue(0,0)" type="radio" name="A" value="A">1. 0 1 1 0<br>
+						<input onclick="parent.setValue(0,1)" type="radio" name="A" value="B">2. 0 0 0 0<br>
+						<input onclick="parent.setValue(0,2)" type="radio" name="A" value="C">3. 1 0 0 1<br>
+						<input onclick="parent.setValue(0,3)" type="radio" name="A" value="D">4. x x x x<br>
+						<input onclick="parent.setValue(0,4)" type="radio" name="A" value="E">5. none of the above
+						<p></p>
+					</form>
+					<b>Click Done to check your answer.</b>
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:parent.checkAnswer(0,0)"><img src="images/vdone.gif" height="39" width="74" border="0"></a></p>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

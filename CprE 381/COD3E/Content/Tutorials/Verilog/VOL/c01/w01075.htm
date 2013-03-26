@@ -1,0 +1,53 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body onload="parent.initBtnM(3)" bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td>Given the following module:
+					<p></p>
+					<pre>
+
+	module modB (port1, port2, port3, port4);
+		input port1, port2;
+		inout port3;
+		output port4;
+		...
+		parameter par1 = 1,
+			par2 = 2,
+			par3 = par1+par2;
+		...
+	endmodule
+</pre>
+				</td>
+			</tr>
+		</table>
+		<hr>
+		<form>
+			<b>Indicate whether the following instances of modB above are legal or illegal.</b>
+			<p></p>
+			<table width="600">
+				<td width="160" HALIGN="LEFT">a. <input type="radio" name="LEGAL1" value="A"><font color="#4B0082"><b>Legal</b></font>&nbsp;&nbsp;&nbsp;<input type="radio" name="LEGAL1" value="A">Illegal</td>
+				<td width="420" HALIGN="LEFT">modB #(7,8) mb2 (p4, p2, p3, q4);</td>
+				<tr>
+					<td width="160" HALIGN="LEFT">b. <input type="radio" name="LEGAL2" value="B"><font color="#4B0082"><b>Legal</b></font>&nbsp;&nbsp;&nbsp;<input type="radio" name="LEGAL2" value="B">Illegal</td>
+					<td width="420" HALIGN="LEFT">modB mb2 (p4, p2, p3, q4);</td>
+				</tr>
+				<tr>
+					<td width="160" HALIGN="LEFT">c. <input type="radio" name="LEGAL3" value="C">Legal&nbsp;&nbsp;&nbsp;<input type="radio" name="LEGAL3" value="C"><font color="#4B0082"><b>Illegal</b></font></td>
+					<td width="420" HALIGN="LEFT">modB (p1, p2, p3, p4);</td>
+				</tr>
+				<tr>
+					<p><br>
+					</p>
+				</tr>
+			</table>
+		</form>
+		</TABLE><a name="answer"><b>These are the correct answers.</b></a>
+	</body>
+
+</html>

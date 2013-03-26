@@ -1,0 +1,276 @@
+<html>
+
+
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Tests/02_Test/Sample_Test_02_Solutions.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:31:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Tests</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta name="Microsoft Border" content="t, default">
+</head>
+
+<body><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td>
+
+<p><font face="AGaramond" size="3">Com S 363: Introduction to Database Systems</font><br>
+<font face="AGaramond" size="5">Introduction to Database Systems </font></p>
+<p>
+
+</p>
+<p>&nbsp; </p>
+
+</td></tr><!--msnavigation--></table><!--msnavigation--><table dir="ltr" border="0" cellpadding="0" cellspacing="0" width="100%"><tr><!--msnavigation--><td valign="top">
+<p><i><font size="5">Sample Test 2 with solutions </font></i></p>
+<p>Color conventions </p>
+<ul>
+  <li><font face="Times New Roman">Black: problem statement </font></li>
+  <li><font face="Times New Roman"><font color="#FF0000">Red: Solution</font>
+  </font></li>
+  <li><font face="Times New Roman"><font color="#0000FF">Blue: Observation</font>
+  </font></li>
+</ul>
+<p>Problems are not necessarily in increasing order of difficulty. Although 
+exact compliance with SQL, JDBC, Java, OQL, and XML standards is not required, 
+your answers should be thoughtful. For example, to register a JDBC-driver, a 
+statement such as &quot;Register (MyDriver);&quot; can be used. <br>
+<br>
+<font FACE="Times New Roman" SIZE="3"><b>1.</b> You are given the following 
+object-oriented database. In this particular example you see reference attributes and 
+inheritance, but there are no relationships.</p>
+<p ALIGN="LEFT">Person(Name, DOB) <br>
+Employee (Salary, WorksIn: Department) extends Person&nbsp; <br>
+Department (Dname, ManagedBy: Manager)&nbsp; <br>
+Manager (Budget()) extends Employee; Assume that Budget( ) 
+is a function that returns a numeric value.</p>
+<p ALIGN="LEFT">Express &quot;List names of employees and names and date of birth of 
+their managers who have a budget above 1 million dollars&quot; as an OQL-like query. </p>
+<p ALIGN="LEFT"><font color="#FF0000">select e.Name as EName, 
+e.WorksIn.ManagedBy.Name as MName, e.WorksIn.ManagedBy.DOB as MDOB <br>
+from Employee e <br>
+where e.WorksIn.ManagedBy.Budget() &gt; 1000000 </font></p>
+<p ALIGN="LEFT"><font color="#0000FF">This problem could have been formulated in 
+terms of our objected-oriented version of XQuery. Assuming that the whole 
+information is stored in a single document named personnel.xml, the answer would 
+be along the following lines: </font></p>
+<p ALIGN="LEFT"><font color="#0000FF">&lt;EMD&gt;<br>
+for $e in document (&quot;personnel.xml&quot;) <br>
+where $e/WorksIn/ManagedBy.Budget() &gt; 1000000 <br>
+return <br>
+&nbsp;&nbsp; &lt;entry&gt; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Name&gt; $e/Name/text() &lt;/Name&gt;, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;MName&gt; $e/WorksIn/ManagedBy/Name/text() &lt;/MName&gt;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;MDOB&gt; $e/WorksIn.ManagedBy/DOB/text() &lt;/MDOB&gt;
+<br>
+&nbsp;&nbsp; &lt;/entry&gt; <br>
+&lt;/EMD&gt; </font></p>
+<p ALIGN="LEFT"><font color="#0000FF">As you have seen in Project 4, the above 
+will not work literally in Kweelt or other XQuery platforms because, e.g., Name 
+is not an element in $e. But you will not be required to memorize the required 
+criptic expressions. The logical answer, such as the one above, will be 
+acceptable.</font><font color="#FF0000">&nbsp; </font></p>
+</font>
+<p><b>2.</b> Assume that a mediator database consisting of the following 
+relations is given: </p>
+<p>PCMed (Model, ProcessorSpeed, DiskSize, MemorySize, ScreenSize, Price, 
+Dealer)<br>
+pMed (ProcessorSpeed, Dealer)<br>
+dMed (DiskSize, Dealer)<br>
+mMed (MemorySize, Dealer) <br>
+sMed (ScreenSize, Dealer)</p>
+<ul>
+  <li>Four templates are available to query PCMed by specific a value of 
+  processor speed, or by a specific value of disk size, or by specific value of 
+  memory size, or by specific value of screen size. </li>
+  <li>Four templates are available for querying the pMed, dMed, mMed, and sMed, 
+	relations by a specific Dealer-value. </li>
+</ul>
+<p>With SQL and JDBC frameworks at your disposal, how would you retrieve 
+inventory of Dealer = “MaxPC” for models priced below $1,000? No code is 
+necessary, just describe your idea in plain English. Assume that the query is 
+asked frequently. </p>
+<p><font color="#0000FF">Only two templates, one from each group, are necessary to 
+solve the problem. Let us suppose we choose  processor 
+speed as our pivotal attribute. Then we will use the template for ProcessorSpeed 
+for PCMed and the template for pMed relations. We do not need the other six templates 
+to solve this problem. </font></p>
+<p><font color="#FF0000">Establish one connection to the mediator and another 
+connection to the local database. Use the template for pMed and use Dealer = &quot;MaxPC&quot; to 
+retrieve the resultset rs1 containing all processor speeds in models sold by 
+MaxPC. Use the template query for processor speeds for PCMed as a 
+prepared statement. Also create MaxInventory, a table that would hold the 
+required inventory of MaxPX. In an outer loop scan through rs1 query PCMed to 
+retrieve the models supplied by all dealers for the given processor speed in 
+resultset rs2. In a nested while loop, scan through the tuples of rs2. For tuples where Dealer is MaxPC and 
+Price is below $1000, using a prepared statement insert Model, ProcessorSpeed, DiskSize, MemorySize, ScreenSize 
+values in the MaxInventory table. Commit and close statements, and connections. </font></p>
+<p><font color="#0000FF">The knowledge of JDBC at the level of this problem will 
+be included in the course for Test 2. </font></p>
+<p>
+<b>3.</b> Consider a summary relation Sales (Model, Color, Dealer, Value, 
+TheCount) to which data cube operator is applied. Assume that Sales (?,?,?,?,?) 
+can be used in the from clause of an SQL statement, where each “?” is a 
+variable, a constant, or *. <i>Express for the  Turbo model, list the count and 
+average value of all cars sold by each dealer for each color</i>. </p>
+<p><font color="#FF0000" face="Courier New" size="2">select c, d, TheCount, Value/TheCount <br>
+from Sales ('Turbo', c, d, Value, TheCount) </font></p>
+<p><font color="#0000FF">The data cube stores aggregated summaries. Therefore, 
+the above query is processed very efficiently. As above, your answer must 
+reflect a good understanding of a data cube concept. As another example consider 
+the query <i>for the Turbo model, list the count and average value of all cars sold 
+by each dealer</i>. Note that this query does not require grouping by Color-values. 
+The query will be expressed as follows. </font></p>
+<p><font color="#0000FF" face="Courier New" size="2">select c, d, TheCount, Value/TheCount <br>
+from Sales ('Turbo', *, d, Value, TheCount) </font></p>
+<p><font face="Times New Roman" color="#0000FF">Another problem on data cubes 
+will be as follows: Suppose that there are 5 different models, 10 different 
+colors, and 1000 different dealers. Then what will be the percentage overhead in 
+terms of storage requirements to store all the summaries relative to the 
+original tuples. </font></p>
+<p><font face="Times New Roman" color="#0000FF">There are 5 * 10 * 1000 = 50,000 
+original tuples. The data cube has (5 + 1) * (10 + 1) * (1000 + 1) = 66,066 
+tuples. The percentage overhead = ((66066 -50000)/50000) * 100 = 32.12%. By the 
+way, the ratio of the sizes of the cube to the original data is 66066/50000 = 
+1.20. </font></p>
+<p>
+<b>4.</b> Contents of an XML file Catalog.xml, for information about books, is shown below. Assume all 
+books have one or more authors. Write a FLWR expression that would create a 
+single ‘authors’ element for each book where all “author” elements for the book 
+will be nested. <br>
+&lt;bib&gt;<br>
+&nbsp;&nbsp;
+&lt;book year = &quot;2000&quot;&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;title&gt;Data on the Web&lt;/title&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;author&gt;&lt;last&gt;Abiteboul&lt;/last&gt;&lt;first&gt;Serge&lt;/first&gt;&lt;/author&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;author&gt;&lt;last&gt;Buneman&lt;/last&gt;&lt;first&gt;Peter&lt;/first&gt;&lt;/author&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;author&gt;&lt;last&gt;Suciu&lt;/last&gt;&lt;first&gt;Dan&lt;/first&gt;&lt;/author&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;publisher&gt;Morgan Kaufmann Publishers&lt;/publisher&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;price&gt; 39.95&lt;/price&gt;<br>
+&nbsp;&nbsp;
+&lt;/book&gt;<br>
+...<br>
+&lt;/bib&gt; </p>
+<p><font face="Courier New" size="2" color="#FF0000">&lt;bib&gt; <br>
+for $b in (document(&quot;Catalog.xml&quot;)//book)<br>
+let $a := $b/author <br>
+return <br>
+&nbsp;&nbsp; &lt;book&gt; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $b/title, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;authors&gt; $a &lt;/authors&gt;, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $b/publisher, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $b/price <br>
+&nbsp;&nbsp; &lt;/book&gt; <br>
+&lt;/bib&gt; </font></p>
+<p><font color="#0000FF">A query requiring restructuring is very likely to 
+appear on the test. </font></p>
+<p><font FACE="Times New Roman" SIZE="3"><b>5.</b> Give concrete example of a 
+relation ABC such that its decomposition (AB, BC) is lossy. This happens when 
+you join the two relations AB and BC by matching their B-values, what you get is 
+not the same as the original relation ABC. </font>
+</p>
+<table border="1" cellspacing="3" style="border-collapse: collapse" bordercolor="#FF0000" width="90" id="AutoNumber1" cellpadding="3">
+  <tr>
+    <td align="left" width="30" valign="top"><font color="#FF0000">A</font></td>
+    <td align="left" width="30" valign="top"><font color="#FF0000">B</font></td>
+    <td align="left" width="30" valign="top"><font color="#FF0000">C</font></td>
+  </tr>
+  <tr>
+    <td align="left" width="30" valign="top"><font color="#FF0000">a1</font></td>
+    <td align="left" width="30" valign="top"><font color="#FF0000">b</font></td>
+    <td align="left" width="30" valign="top"><font color="#FF0000">c1</font></td>
+  </tr>
+  <tr>
+    <td align="left" width="30" valign="top"><font color="#FF0000">a2</font></td>
+    <td align="left" width="30" valign="top"><font color="#FF0000">b</font></td>
+    <td align="left" width="30" valign="top"><font color="#FF0000">c2</font></td>
+  </tr>
+</table>
+<font FACE="Times New Roman" SIZE="3">
+<p ALIGN="LEFT"><font color="#FF0000">The join of projections on AB and BC will 
+give rise to </font></p>
+<table border="1" cellspacing="3" style="border-collapse: collapse" bordercolor="#FF0000" width="90" id="AutoNumber1" cellpadding="3">
+  <tr>
+    <td align="left" width="30" valign="top"><font color="#FF0000">A</font></td>
+    <td align="left" width="30" valign="top"><font color="#FF0000">B</font></td>
+    <td align="left" width="30" valign="top"><font color="#FF0000">C</font></td>
+  </tr>
+  <tr>
+    <td align="left" width="30" valign="top"><font color="#FF0000">a1</font></td>
+    <td align="left" width="30" valign="top"><font color="#FF0000">b</font></td>
+    <td align="left" width="30" valign="top"><font color="#FF0000">c1</font></td>
+  </tr>
+  <tr>
+    <td align="left" width="30" valign="top"><font color="#FF0000">a1</font></td>
+    <td align="left" width="30" valign="top"><font color="#FF0000">b</font></td>
+    <td align="left" width="30" valign="top"><font color="#FF0000">c2</font></td>
+  </tr>
+  <tr>
+    <td align="left" width="30" valign="top"><font color="#FF0000">a2</font></td>
+    <td align="left" width="30" valign="top"><font color="#FF0000">b</font></td>
+    <td align="left" width="30" valign="top"><font color="#FF0000">c1</font></td>
+  </tr>
+  <tr>
+    <td align="left" width="30" valign="top"><font color="#FF0000">a2</font></td>
+    <td align="left" width="30" valign="top"><font color="#FF0000">b</font></td>
+    <td align="left" width="30" valign="top"><font color="#FF0000">c2</font></td>
+  </tr>
+</table>
+<p ALIGN="LEFT"><font color="#0000FF">A question where a concrete example is 
+either required explicitly or implicitly for refutation of a statement is likely 
+to appear on the test. The role of concrete counter-examples is very important 
+in formalisms and should be offered readily and clearly. Keep your examples 
+small to maintain a focus of your answer and avoid wasting your time on the 
+tests. </font></p>
+<p ALIGN="LEFT"><b>6.</b> Can functional dependencies A </font>
+<font FACE="Symbol" SIZE="3">-&gt; </font><font FACE="Times New Roman" SIZE="3">B, B
+</font><font FACE="Symbol" SIZE="3">-&gt; </font>
+<font FACE="Times New Roman" SIZE="3">C, C </font><font FACE="Symbol" SIZE="3">
+-&gt;
+</font><font FACE="Times New Roman" SIZE="3">A be enforced in the database 
+consisting of relations AB and BC through individual relations? Justify your 
+answer.
+</font></p>
+<p ALIGN="LEFT"><font color="#FF0000"><font face="Times New Roman">Suppose F = {</font><font FACE="Times New Roman" SIZE="3">A </font>
+<font FACE="Symbol" SIZE="3">-&gt; </font><font FACE="Times New Roman" SIZE="3">B, B
+</font><font FACE="Symbol" SIZE="3">-&gt; </font>
+<font FACE="Times New Roman" SIZE="3">C, C </font><font FACE="Symbol" SIZE="3">
+-&gt;
+</font><font FACE="Times New Roman" SIZE="3">A}, the given set of functional 
+dependencies. Define G = {A
+</font>
+<font FACE="Symbol" SIZE="3">-&gt; </font><font FACE="Times New Roman" SIZE="3">B, B
+</font><font FACE="Symbol" SIZE="3">-&gt; </font>
+<font FACE="Times New Roman" SIZE="3">A, B </font>
+<font FACE="Symbol" SIZE="3">-&gt;
+</font><font FACE="Times New Roman" SIZE="3">C, C
+</font><font FACE="Symbol" SIZE="3">-&gt;
+</font><font FACE="Times New Roman" SIZE="3">B}. Of the latter, A
+</font>
+<font FACE="Symbol" SIZE="3">-&gt; </font><font FACE="Times New Roman" SIZE="3">B, B
+</font><font FACE="Symbol" SIZE="3">-&gt; </font>
+<font FACE="Times New Roman" SIZE="3">A can be enforced in AB, and B </font>
+<font FACE="Symbol" SIZE="3">-&gt;
+</font><font FACE="Times New Roman" SIZE="3">C, C
+</font><font FACE="Symbol" SIZE="3">-&gt;
+</font><font FACE="Times New Roman" SIZE="3">B can be enforced in BC. Therefore 
+fds in G can be enforced in the decomposition (AB,BC). But F+ = G+. Therefore F+ 
+can be enforced in the decomposition. But then F can be enforced in the 
+decomposition as well.
+</font></font></p>
+<p ALIGN="LEFT"><font face="Times New Roman" color="#0000FF">The test has not 
+covered every topic, e.g. BCNF. You should be prepared for all topics required 
+on this test. Review all homeworks, projects, and lecture slides. </font></p>
+
+<!--msnavigation--></td></tr><!--msnavigation--></table></body>
+
+
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Tests/02_Test/Sample_Test_02_Solutions.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:31:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+</html>

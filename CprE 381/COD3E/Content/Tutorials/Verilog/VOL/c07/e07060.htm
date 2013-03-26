@@ -1,0 +1,40 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td width="600">Click each of the complications to learn more about it.
+				<p><a href="a07060.htm">Timing</a><br>
+					<a href="b07060.htm">Efficiency</a><br>
+					<a href="c07060.htm">Initialization</a><br>
+					<a href="d07060.htm">Register Selection</a><br>
+					<a href="e07060.htm">State Encoding</a><br>
+					<a href="f07060.htm">Latch Inferencing</a></p>
+				<p>The encoding of states to state vector values can have an important effect on the ultimate area and timing of the synthesized logic. The choice seldom matters to simulation.</p>
+				<p>Basically, there are two popular ways to encode states: highly encoded and one-hot. Highly encoded means to use as few bits as possible for the state vector, while one-hot means that each state has only one bit of the state vector on.</p>
+				<p>Because Verilog has no enumerated type, you must pick the state assignment yourself. That is, the numbers which you put into the source code are the state numbers which will be used. In our example, we used the following state assignment:</p>
+				<pre>
+    `define A 3'b001
+    `define B 3'b010
+    `define C 3'b100
+</pre>
+				In order to choose a different assignment, it would be necessary only to change the defines. For example, an alternative would be:
+				<pre>
+    `define A 0
+    `define B 1
+    `define C 2
+</pre>
+				In this case, the state vector could be 2 bits instead of 3 bits.
+				<p></p>
+				<center>
+					<a href="JavaScript:parent.dispWindow('v07060r1.htm','Reading')"><img src="images/v0720b1.gif" height="39" width="194" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="JavaScript:parent.dispWindow('v07060r2.htm','Reading')"><img src="images/v0720b2.gif" height="39" width="140" border="0"></a></center>
+			</td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

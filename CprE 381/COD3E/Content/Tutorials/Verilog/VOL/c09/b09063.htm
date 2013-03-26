@@ -1,0 +1,47 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">This example is an addition to the previous example (fetch/set 4-value). We add a check routine so that the bad call could be caught at compile time (or at least before simulation starts) instead of run time.
+					<p>To do this, there are no changes to the Verilog source, and no changes to the set_longReg routine. All that is necessary is to include a check= field in the PLI table, and add the check routine.</p>
+					<p>Utility routines used:</p>
+					<p>acc_fetch_type ( acc_handle_tfarg(1) )<br>
+						Returns the type of the object. The return value is an int.</p>
+					<p>acc_fetch_type_str ( arg1type) )<br>
+						Returns the type as a string.</p>
+					<p>tf_error ( &quot;word parameter is out of range!&quot; )<br>
+						Causes an error message to be printed. Does not stop the simulation.</p>
+					<p>tf_dofinish()<br>
+						Stop the simulation.</p>
+				</td>
+			</tr>
+		</table>
+		<table width="600">
+			<tr>
+				<td align="center" width="150"><a href="a09063.htm"><img src="images/vverilog.gif" height="39" width="139" border="0"></a></td>
+				<td align="center" width="150"><a href="b09063.htm"><img src="images/vpli.gif" height="39" width="136" border="0"></a></td>
+				<td align="center" width="190"><a href="c09063.htm"><img src="images/vuser.gif" height="39" width="177" border="0"></a></td>
+				<td align="center" width="110"><a href="d09063.htm"><img src="images/vresults.gif" height="39" width="87" border="0"></a></td>
+			</tr>
+		</table>
+		<p><br>
+		</p>
+		<table width="600">
+			<tr>
+				<td>
+					<pre>
+/* ex6_check.tab */
+$set_longReg call=set_longReg check=check_longReg acc+=rw:%TASK
+</pre>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

@@ -1,0 +1,97 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">This is an implementation of a simple command language which can be used to write stimulus (tests) in. The Verilog model can then read its tests from a file, so many tests can be run without recompiling the model.
+					<p>Notice the use of &quot;tf_putp (0, cmd)&quot; where cmd is the command number. Using parameter 0 is the way to return the function value.</p>
+				</td>
+			</tr>
+		</table>
+		<table width="600">
+			<tr>
+				<td align="center" width="200"><a href="a09081.htm"><img src="images/vverilog.gif" height="39" width="139" border="0"></a></td>
+				<td align="center" width="290"><a href="b09081.htm"><img src="images/vpli.gif" height="39" width="136" border="0"></a></td>
+				<td align="center" width="200"><a href="c09081.htm"><img src="images/vuser.gif" height="39" width="177" border="0"></a></td>
+			</tr>
+		</table>
+		<center>
+			<table width="380">
+				<tr>
+					<td align="center" width="190"><a href="d09081.htm"><img src="images/vinput.gif" height="39" width="75" border="0"></a></td>
+					<td align="center" width="190"><a href="e09081.htm"><img src="images/vresults.gif" height="39" width="87" border="0"></a></td>
+				</tr>
+			</table>
+		</center>
+		<p><br>
+		</p>
+		<table width="600">
+			<tr>
+				<td>
+					<pre>
+/* ex11_testLang.v */
+module ex11_testLang;
+   reg [2:0]address;
+   reg [31:0]data;
+   integer cmd;
+   initial forever begin
+      cmd = $get_cmd ( address, data );
+      case ( cmd )
+        1 : begin 
+              mem.read_mem ( address, data );
+              $display ( &quot;READ - mem[%0d]=%0x&quot;, address, data );
+            end
+&nbsp;
+        2 : begin
+              mem.write_mem ( address, data );
+              $display (&quot;WRITE- setting mem[%0d] to %0x&quot;,address,data);
+            end
+
+        3 : mem.print_mem;
+        default : $finish;
+      endcase
+   end    
+endmodule /* ex11_testLang */
+&nbsp;
+module mem;
+   reg [31:0] mem [0:7];
+   
+   task read_mem;
+      input [2:0] addr;
+      output [7:0] data;
+      begin
+         #2 data = mem[addr];
+      end
+   endtask
+&nbsp;
+   task write_mem;
+      input [2:0] addr;
+      input [7:0] data;
+      begin
+         #2 mem[addr] = data;
+      end
+   endtask
+&nbsp;
+   task print_mem;
+      integer i;
+      begin
+         $write ( &quot;Memory=&quot; );
+
+         for ( i=0; i
+						
+						
+						<8; i="i+1)" begin $write ( "%0h ", mem[i] ); end $display ( "" ); end endtask endmodule /* mem */ </PRE> </table> </BODY> </HTML>>
+						
+						
+					</pre>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

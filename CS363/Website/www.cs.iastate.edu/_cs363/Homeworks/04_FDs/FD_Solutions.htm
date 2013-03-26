@@ -1,0 +1,323 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0066)http://www.cs.iastate.edu/~cs363/Homeworks/05_FDs/FD_Exercises.htm -->
+<HTML>
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Homeworks/04_FDs/FD_Solutions.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:01:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD><TITLE>Homework</TITLE>
+<META http-equiv=Content-Language content=en-us>
+<META content="Microsoft FrontPage 6.0" name=GENERATOR>
+<META content=FrontPage.Editor.Document name=ProgId>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name="Microsoft Border" content="t, default">
+</HEAD>
+<BODY><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td>
+
+<p><font face="AGaramond" size="3">Com S 363: Introduction to Database Systems</font><br>
+<font face="AGaramond" size="5">Introduction to Database Systems </font></p>
+<p>
+
+</p>
+<p>&nbsp; </p>
+
+</td></tr><!--msnavigation--></table><!--msnavigation--><table dir="ltr" border="0" cellpadding="0" cellspacing="0" width="100%"><tr><!--msnavigation--><td valign="top"><FONT size=5>
+      <P><I><FONT face=Arial>Homework 4 Solution 
+      </FONT></I></FONT><I><FONT face=Arial size=5>&nbsp;</FONT></I></P><FONT 
+      face="Times New Roman">
+<p ALIGN="JUSTIFY">1.&nbsp;Given the following relation r with B
+-&gt; ACD and C -&gt; D. </p>
+<table border="1" cellpadding="2" style="border-collapse: collapse" bordercolor="#111111" width="100" id="table1">
+  <tr>
+    <td align="center" colspan="4">
+    <p align="left">r</td>
+  </tr>
+  <tr>
+    <td align="center">A</td>
+    <td align="center">B</td>
+    <td align="center">C</td>
+    <td align="center">D</td>
+  </tr>
+  <tr>
+    <td align="center">6</td>
+    <td align="center">2</td>
+    <td align="center">3</td>
+    <td align="center">4</td>
+  </tr>
+  <tr>
+    <td align="center">1</td>
+    <td align="center">3</td>
+    <td align="center">8</td>
+    <td align="center">5</td>
+  </tr>
+  <tr>
+    <td align="center">6</td>
+    <td align="center">7</td>
+    <td align="center">8</td>
+    <td align="center">5</td>
+  </tr>
+</table>
+<p ALIGN="JUSTIFY">(A) The only key is B. </p>
+<p ALIGN="JUSTIFY">(B) BC. </p>
+<p ALIGN="JUSTIFY">(C) B. </p>
+<p ALIGN="JUSTIFY">(D) BC (because it is not minimal; B is minimal). Another 
+example is D (because D it is not sufficient to determine ABCD).&nbsp; </p>
+<p ALIGN="JUSTIFY">(E) ABCD, the whole scheme of the relation. We do not even 
+have to consider the given functional dependencies. </p>
+<p ALIGN="JUSTIFY"><span style="background-color: #FFFF99">(F) A -&gt; A is 
+trivial. As another example, AB -&gt; A is also trivial.&nbsp;&nbsp; </span> </p>
+<p ALIGN="JUSTIFY">(<span style="background-color: #FFFFFF"><strike>F</strike></span><span style="background-color: #FFFF99">G</span>) D 
+-&gt; C is satisfied by the above state of relation r. For 2nd and 3rd tuples D-values agree and so do C-values. In all 
+other cases either (i) the same tuple is considered twice or (ii) different 
+tuples are considered but they do not agree on C. </p>
+<p ALIGN="JUSTIFY">(<strike><span style="background-color: #FFFFFF">G</span></strike><span style="background-color: #FFFF99">H</span>) D 
+-&gt; B is not dsatisfied by the above state of relation r. Consider 2nd and 3rd tuples. D-values agree (5 and 5), but B values 
+do not agree (3 and 7).&nbsp;&nbsp; </p>
+      <P align=justify>2. Suppose we have a database containing a single 
+		relation r over ABCD <font color="#0000FF">where functional dependencies 
+		AB </font> </FONT><FONT face="Times New Roman" color="#0000FF">-&gt; C, C -</FONT><FONT 
+      face="Times New Roman"><font color="#0000FF">&gt; D are required to hold</font>. 
+		Give example of functional dependency that is satisfied in some state of 
+		relation r, but does not hold in r. </FONT></P>
+      <TABLE id=AutoNumber1 style="BORDER-COLLAPSE: collapse; border-top-width:0; border-bottom-width:0" 
+      borderColor=#111111 cellPadding=2 width=246 border=1 height="99">
+        <TR>
+          <FONT 
+      face="Times New Roman">
+          <TD align=middle width="109" height="19" style="border-left-style: solid; border-left-width: 1; border-right-style: none; border-right-width: medium; border-top: 1px solid #111111; border-bottom-style: solid; border-bottom-width: 1" colspan="4">
+            <P align=left>r (state 1)</P></TD> </FONT>
+          <TD align=middle width="27" height="19" style="border-top: medium none #111111; border-bottom-style: none; border-bottom-width: medium">
+            &nbsp;</TD>
+          <TD align=left width="108" height="19" style="border-left-style: solid; border-left-width: 1; border-right-style: none; border-right-width: medium; border-top: 1px solid #111111; border-bottom-style: solid; border-bottom-width: 1" colspan="4">
+            <font face="Times New Roman">r (state 2) </font></TD>
+          </TR>
+        <TR>
+          <FONT 
+      face="Times New Roman">
+          <TD align=middle width="27" height="19" style="border-left-color: #111111; border-left-width: 1">
+          <font face="Times New Roman">A</font></TD>
+          <TD align=middle width="27" height="19"><font face="Times New Roman">B</font></TD>
+          <TD align=middle width="27" height="19"><font face="Times New Roman">C</font></TD>
+          <TD align=middle width="27" height="19" style="border-right-style: solid; border-right-width: 1">
+          <font face="Times New Roman">D</font></TD> </FONT>
+          <TD align=middle width="27" height="19" style="border-top-style: none; border-top-width: medium; border-bottom-style: none; border-bottom-width: medium">&nbsp;</TD>
+          <TD align=middle width="27" height="19" style="border-left-style: solid; border-left-width: 1">
+          <font face="Times New Roman">A</font></TD>
+          <TD align=middle width="27" height="19"><font face="Times New Roman">B</font></TD>
+          <TD align=middle width="27" height="19"><font face="Times New Roman">C</font></TD>
+          <TD align=middle width="28" height="19" style="border-right-color: #111111; border-right-width: 1">
+          <font face="Times New Roman">D</font></TD></TR>
+        <TR>
+          <FONT 
+      face="Times New Roman">
+          <TD align=middle width="27" height="20" style="border-left-color: #111111; border-left-width: 1">
+          <font face="Times New Roman">1</font></TD>
+          <TD align=middle width="27" height="20"><font face="Times New Roman">8</font></TD>
+          <TD align=middle width="27" height="20"><font face="Times New Roman">3</font></TD>
+          <TD align=middle width="27" height="20" style="border-right-style: solid; border-right-width: 1">
+          <font face="Times New Roman">5</font></TD> </FONT>
+          <TD align=middle width="27" height="20" style="border-top-style: none; border-top-width: medium; border-bottom-style: none; border-bottom-width: medium">&nbsp;</TD>
+          <TD align=middle width="27" height="20" style="border-left-style: solid; border-left-width: 1">
+          <font face="Times New Roman">1</font></TD>
+          <TD align=middle width="27" height="20"><font face="Times New Roman">8</font></TD>
+          <TD align=middle width="27" height="20"><font face="Times New Roman">3</font></TD>
+          <TD align=middle width="28" height="20" style="border-right-color: #111111; border-right-width: 1">
+          <font face="Times New Roman">5</font></TD></TR>
+        <TR>
+          <FONT 
+      face="Times New Roman">
+          <TD align=middle width="27" height="20" style="border-left-color: #111111; border-left-width: 1; border-bottom-color: #111111; border-bottom-width: 1">
+          <font face="Times New Roman">6</font></TD>
+          <TD align=middle width="27" height="20" style="border-bottom-color: #111111; border-bottom-width: 1">
+          <font face="Times New Roman">8</font></TD>
+          <TD align=middle width="27" height="20" style="border-bottom-color: #111111; border-bottom-width: 1">
+          <font face="Times New Roman">7</font></TD>
+          <TD align=middle width="27" height="20" style="border-right-style: solid; border-right-width: 1; border-bottom-color: #111111; border-bottom-width: 1">
+          <font face="Times New Roman">5</font></TD> </FONT>
+          <TD align=middle width="27" height="20" style="border-top-style: none; border-top-width: medium; border-bottom-style: none; border-bottom-width: medium">&nbsp;</TD>
+          <TD align=middle width="27" height="20" style="border-left-style: solid; border-left-width: 1; border-bottom-color: #111111; border-bottom-width: 1">
+          <font face="Times New Roman">6</font></TD>
+          <TD align=middle width="27" height="20" style="border-bottom-color: #111111; border-bottom-width: 1">
+          <font face="Times New Roman">8</font></TD>
+          <TD align=middle width="27" height="20" style="border-bottom-color: #111111; border-bottom-width: 1">
+          <font face="Times New Roman">7</font></TD>
+          <TD align=middle width="28" height="20" style="border-right-color: #111111; border-right-width: 1; border-bottom-color: #111111; border-bottom-width: 1">
+          <font color="#FF0000" face="Times New Roman">6</font></TD></TR></TABLE>
+      <P align=justify><FONT 
+      face="Times New Roman">
+      Two possible state of the relation r are shown above. Each state satisfies 
+      AB -&gt; C and C -&gt; D. <font color="#FF0000">The meaning of 
+      this is that the two states are legal. <br>
+      </font>B® D is satisfied in r1 but 
+      not in r2. <br>
+      <font color="#FF0000">The meaning of this is that one should not count on
+      </font> </FONT><font face="Times New Roman" color="#FF0000">B® D in all legal states of 
+      the database. </font></P>
+      <P align=justify><FONT face="Times New Roman">3. Deduce AC -&gt; E from A -&gt; B, C 
+		-&gt; D, and BD 
+      -&gt; E.</FONT></P>
+      <font FACE="TimesNewRoman">
+<p ALIGN="LEFT"></font><font FACE="Times New Roman">Proof:</font><font FACE="Times New Roman" SIZE="4"><br>
+</font><font FACE="Times New Roman">Augmentation of 
+A -&gt; B by C gives AC -&gt; BC.<br>
+Augmentation of C -&gt; D by B gives BC -&gt; BD.<br>
+AC -&gt; BC 
+and BC -&gt; BD 
+give AC -&gt; BD 
+by transitivity.<br>
+AC -&gt; BD 
+and BD 
+      -&gt; E give AC 
+      -&gt; E by transitivity.</font></p>
+      <P align=justify><FONT face="Times New Roman">4. Show that the following 
+      is not a valid rule for deduction of functional dependencies. <br>
+      AB -&gt; C, B -&gt; C, then A -&gt; C</FONT></P>
+      <P align=justify><font face="Times New Roman">Prove this by counterexample. In the below relation r,&nbsp; 
+      AB -&gt; C and B -&gt; C hold, but A does not 
+      determine C.</font></P>
+      <TABLE id=AutoNumber1 style="BORDER-COLLAPSE: collapse" 
+      borderColor=#111111 cellPadding=2 width=100 border=1>
+        <TR>
+          <FONT 
+      face="Times New Roman">
+          <TD align=middle colSpan=3>
+            <P align=left>r</P></TD> </FONT></TR>
+        <TR>
+          <FONT 
+      face="Times New Roman">
+          <TD align=middle><font face="Times New Roman">A</font></TD>
+          <TD align=middle><font face="Times New Roman">B</font></TD>
+          <TD align=middle><font face="Times New Roman">C</font></TD>
+          </FONT></TR>
+        <TR>
+          <FONT 
+      face="Times New Roman">
+          <TD align=middle><font face="Times New Roman">2</font></TD>
+          <TD align=middle><font face="Times New Roman">3</font></TD>
+          <TD align=middle><font face="Times New Roman">4</font></TD>
+          </FONT></TR>
+        <TR>
+          <FONT 
+      face="Times New Roman">
+          <TD align=middle><font face="Times New Roman">2</font></TD>
+          <TD align=middle><font face="Times New Roman">4</font></TD>
+          <TD align=middle><font face="Times New Roman">5</font></TD>
+          </FONT></TR></TABLE>
+      <P align=justify><b><font color="#FF0000" face="Times New Roman">Note that to disprove an rule, an 
+      example involving only two tuples can always be given </font></b></P>
+      <P align=justify><FONT face="Times New Roman">5. Prove that {A 
+      -&gt; B, B 
+      -&gt; C, 
+      C -&gt; 
+      A}<SUP>+</SUP> = {A -&gt; B, B -&gt; A, B -&gt; C, C -&gt; B}<SUP>+</SUP>.  
+      </FONT></P>
+      <P align=justify><FONT face="Times New Roman">First prove that {A 
+      -&gt; B, B 
+      -&gt; C, 
+      C -&gt; 
+      A} &#8658; {A -&gt; B, B -&gt; A, B -&gt; C, C -&gt; B}. So we need to prove the following statements:<br>
+      {A -&gt; B, B 
+      -&gt; C, 
+      C -&gt; 
+      A} implies {A -&gt; B}. trivially true.<br>
+      {A -&gt; B, B 
+      -&gt; C, 
+      C -&gt; 
+      A} implies {B -&gt; A}. B -&gt; 
+      C and C -&gt; A 
+      gives B -&gt; A by transitivity.<br>
+      {A -&gt; B, B 
+      -&gt; C, 
+      C -&gt; 
+      A} implies {B -&gt; C}. trivially true.<br>
+      {A -&gt; B, B 
+      -&gt; C, 
+      C -&gt; 
+      A} implies {C -&gt; B}. C -&gt; 
+      A and A -&gt; B 
+      gives C -&gt; B by transitivity.</FONT></P>
+      <P align=justify><font face="Times New Roman">Then prove that {A -&gt; B, B 
+		-&gt; A, B -&gt; C, C -&gt; B} implies 
+      {A 
+      -&gt; B, B 
+      -&gt; C, 
+      C -&gt; 
+      A}. So we need to prove the following statements:<br>
+      {A -&gt; B, B -&gt; A, B -&gt; C, C -&gt; B} implies 
+      {A 
+      -&gt; B}. 
+      trivially true.<br>
+      {A 
+      -&gt; B, B -&gt; A, B -&gt; C, C -&gt; B} implies 
+      {B 
+      -&gt; C}. 
+      trivially true.<br>
+      {A -&gt; B, B -&gt; A, B -&gt; C, C -&gt; B} implies 
+      {C -&gt; 
+      A}. C -&gt; B and 
+      B -&gt; A gives C -&gt; A by transitivity.</font></P>
+      <P align=justify><FONT face="Times New Roman">6. Given functional 
+      dependencies A -&gt; B, BC -&gt; D.<br>
+      (A) Prove that the 
+      decomposition (AB, BCD) is lossy. </FONT></P>
+      <font FACE="Times New Roman">
+<p ALIGN="LEFT">R</font><font FACE="Times New Roman" SIZE="2">1 </font>
+<font face="Times New Roman">=AB and R</font><font FACE="Times New Roman" SIZE="2">2</font><font FACE="Times New Roman"> 
+= BCD. R</font><font FACE="Times New Roman" SIZE="2">1 </font>
+<font face="Times New Roman">&#8745; R</font><font FACE="Times New Roman" SIZE="2">2 </font>
+<font FACE="Times New Roman">=B<br>
+R</font><font FACE="Times New Roman" SIZE="2">1 </font>
+<font face="Times New Roman">&#8745; R</font><font FACE="Times New Roman" SIZE="2">2 </font>
+<FONT face="Times New Roman">-&gt; 
+R</FONT><font FACE="Times New Roman" SIZE="2">1 </font>
+<font FACE="Times New Roman">
+is B -&gt; AB which 
+does not hold.<br>
+R</font><font FACE="TimesNewRoman"><font FACE="Times New Roman" SIZE="2">1 </font><font face="Times New Roman">&#8745; </font>
+</font>
+      <font FACE="Times New Roman">R</font><font FACE="TimesNewRoman"><font FACE="Times New Roman" SIZE="2">2 </font>
+<FONT face="Times New Roman">-&gt; 
+R<font size="2">2</font></FONT><font FACE="Times New Roman" SIZE="2"> </font>
+<font FACE="Times New Roman">is B</font></font><FONT face="Times New Roman"> -&gt; 
+BCD which does not hold either.<br>
+Hence, the decomposition (AB, BCD) is lossy.</FONT><font FACE="TimesNewRoman"></p>
+</font>
+      <P align=justify><FONT face="Times New Roman">(B) Prove (ABC, BCD) is 
+      lossless.</FONT></P>
+      <P align=justify><font FACE="Times New Roman">R</font><font FACE="Times New Roman" SIZE="2">1
+      </font><font face="Times New Roman">=ABC and R</font><font FACE="Times New Roman" SIZE="2">2</font><font FACE="Times New Roman"> = 
+      BCD. R</font><font FACE="Times New Roman" SIZE="2">1 </font>
+      <font face="Times New Roman">&#8745; R</font><font FACE="Times New Roman" SIZE="2">2
+      </font><font FACE="Times New Roman">=BC<br>
+      R</font><font FACE="TimesNewRoman"><font FACE="Times New Roman" SIZE="2">1
+      </font><font face="Times New Roman">&#8745; </font></font>
+		<font FACE="Times New Roman">R</font><font FACE="TimesNewRoman"><font FACE="Times New Roman" SIZE="2">2&nbsp; </font>
+		<FONT face="Times New Roman">-&gt; R<font size="2">2</font></FONT><font FACE="Times New Roman" SIZE="2">
+      </font><font FACE="Times New Roman">is BC -&gt; BCD which holds.<br>
+      Hence, the decomposition (AB, BCD) is lossless. </font></font></P>
+      <P align=justify><FONT face="Times New Roman">7. Given a database with 
+      attributes A, B, C and D where the functional dependencies AB -&gt; C, C -&gt; D, and D 
+		-&gt; A are supposed to hold.
+      <br>
+      (A) Give a BCNF decomposition.</FONT></P>
+      <P align=justify><font face="Times New Roman">Keys are AB, BC, BD.<br>
+      AB -&gt; C does not violate BCNF in ABCD.<br>
+      C -&gt; D and D -&gt; A 
+      are violations of BCNF in ABCD.<br>
+      The following figure is an example of BCNF decomposition:<b><br>
+      <img border="0" src="fig1.jpg" width="216" height="171"><br>
+      <br>
+      </b>ABCD is decomposed into (AD, 
+      CD, BC).</font></P>
+      <P align=justify><FONT face="Times New Roman">(B) Can all the functional 
+      dependencies be enforced in your design in (A). 
+      </FONT></P>
+      <p align="justify"><FONT face="Times New Roman">AB -&gt; C can not be enforced.<br>
+      C -&gt; D can be enforced in the 
+      relation CD.<br>
+      D -&gt; A can  be enforced in the 
+      relation AD.<b><br>
+&nbsp;</b></FONT></p>
+
+<!--msnavigation--></td></tr><!--msnavigation--></table></BODY>
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Homeworks/04_FDs/FD_Solutions.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:01:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+</HTML>

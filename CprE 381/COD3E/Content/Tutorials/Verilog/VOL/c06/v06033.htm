@@ -1,0 +1,50 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">The <b><a href="javascript:parent.goGlossHash('#proconas')"><font color="#B22222">procedural continuous assign</font></a></font></b> is simply an assign statement used in procedural code. It works just like a continuous assign, but it is applied only to a register. That is, the left-hand side of the assignment must be a register.
+					<p></p>
+					<pre>
+        assign lhs = rhs;
+</pre>
+					<p>The effect of the assignment is like a continuous assignment, in that the left-hand side register will be updated with a new value whenever the right-hand side expression changes value.</p>
+					<p>Unlike a continuous assignment, however, the procedural continuous assign may be in effect for a limited period of time. It does not take effect until the assign statement is executed (remember, this is a procedural statement, so it does not get executed until the program counter reaches it).</p>
+					<p>Once the assign statement has been executed, the right-hand side expression writes over any previous value in the register. Subsequent blocking and non-blocking assignments to that register will be ignored as long as the assign is in effect.</p>
+					<p>The assign is in effect until either another assign statement for that register is executed, or until a <a href="javascript:parent.goGlossHash('#deassign')"><font color="#B22222"><b>deassign</b></font></a></font> statement is executed.</p>
+					<p>A common use of QCAs is for modelling asynchronous reset, like this:</p>
+					<p></p>
+					<pre> 
+
+    module dff (q, d, clear, preset, clock);
+        output q;
+        input d, clear, preset, clock;
+        reg q;
+        
+        always @(clear or preset)
+            if (!clear)
+                assign q = 0;
+            else if (!preset)
+                assign q = 1;
+            else
+                deassign q;
+        
+        always @(posedge clock)
+            q = d;
+    endmodule
+</pre>
+					<p>In this example, if either clear or preset are held low, the output q will remain forced to 0 or 1 regardless of the input d at subsequent clock edges.</p>
+					<p>It is worth noting that the always @(posedge clock) loop will continue to trigger on rising clock edges, but the q = d assignment will be ignored as long as one of the assigns is in effect.</p>
+					<p>When the deassign is executed, the value of q remains unchanged until the next q = d assignment, which is no longer ignored.</p>
+				</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

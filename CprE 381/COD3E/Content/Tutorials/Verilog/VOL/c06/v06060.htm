@@ -1,0 +1,60 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">The general format of an output task is:
+					<p></p>
+					<pre>
+        $task_name(arg1, arg2, ...);
+</pre>
+					<p>where <tt>argi</tt> is either</p>
+					<p></p>
+					<dl>
+						<dd>a <a href="javascript:parent.goGlossHash('#formatstring')"><font color="#B22222">format string</font></a> or
+						<dd>an expression
+					</dl>
+					<p>Format strings and specifiers are used in all of the output tasks:</p>
+					<p></p>
+				</td>
+			</tr>
+		</table>
+		<table width="400">
+			<tr>
+				<td width="100"><font size="3" face="courier">$display<br>
+						$displayb<br>
+						$displayh<br>
+						$displayo</font></td>
+				<td width="100"><font size="3" face="courier">$write<br>
+						$writeb<br>
+						$writeh<br>
+						$writeo</font></td>
+				<td width="100"><font size="3" face="courier">$monitor<br>
+						$monitorb<br>
+						$monitorh<br>
+						$monitoro</font></td>
+				<td width="100"><font size="3" face="courier">$strobe<br>
+						$strobeb<br>
+						$strobeh<br>
+						$strobec</font></td>
+			</tr>
+		</table>
+		<p></p>
+		<table width="600">
+			<tr>
+				<td>If an argument is a string constant, then it is interpreted as a format string, which is very much like a C format string. That is, it consists of literal characters and format specifiers, which will cause output conversion of following argument expressions.
+					<p>Special characters can be printed by using escape sequences in the format string.</p>
+					<p></p>
+					<center>
+						<a href="JavaScript:parent.dispWindow('v06060r1.htm','Example')"><img src="images/v0620b1.gif" height="39" width="154" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="JavaScript:parent.dispWindow('v06060r2.htm','Example')"><img src="images/v0620b2.gif" height="39" width="164" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="JavaScript:parent.dispWindow('v06060r3.htm','Example')"><img src="images/vexample.gif" height="39" width="91" border="0"></a></center>
+					</FONT></td>
+			</tr>
+		</table>
+	</body>
+
+</html>

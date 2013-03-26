@@ -1,0 +1,236 @@
+<html>
+
+
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Homeworks/01_Opt/Opt_Exercises.Fall-2012.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:01:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Homework</title>
+<meta name="Microsoft Border" content="t, default">
+</head>
+
+<body><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td>
+
+<p><font face="AGaramond" size="3">Com S 363: Introduction to Database Systems</font><br>
+<font face="AGaramond" size="5">Introduction to Database Systems </font></p>
+<p>
+
+</p>
+<p>&nbsp; </p>
+
+</td></tr><!--msnavigation--></table><!--msnavigation--><table dir="ltr" border="0" cellpadding="0" cellspacing="0" width="100%"><tr><!--msnavigation--><td valign="top">
+<p><font face="Arial" size="5">Exercises in Query Processing</font><br>
+&nbsp;</p>
+<p>You are given two relations r and s. The details about the relations are 
+given below. The main information is shown without any emphasis, but the derived 
+information is shown in italics. In general, you should carefully verify that the derived 
+information could in fact be derived, because it may not always be provided to 
+you explicitly.</p>
+<table border="1" cellspacing="3" style="border-collapse: collapse" bordercolor="#111111" width="631" id="AutoNumber1" cellpadding="3">
+  <tr>
+    <td align="left" valign="top" width="160"><font FACE="Arial" SIZE="3">
+    <p ALIGN="LEFT">Feature</font></td>
+    <td align="left" valign="top" width="300"><font FACE="Arial" SIZE="3">
+    <p ALIGN="LEFT">Relation r</font></td>
+    <td align="left" valign="top" width="160"><font FACE="Arial" SIZE="3">
+    <p ALIGN="LEFT">Relation s</font></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top" width="160">
+    <font FACE="TimesNewRoman" SIZE="3">
+    <p ALIGN="LEFT">Attributes</font></td>
+    <td align="left" valign="top" width="300">
+    <font FACE="TimesNewRoman" SIZE="3">
+    <p ALIGN="LEFT">A, B, C, D; 10 bytes each</font></td>
+    <td align="left" valign="top" width="160">
+    <font FACE="TimesNewRoman" SIZE="3">
+    <p ALIGN="LEFT">B, E, F, G, H; 10 bytes each</font></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top" width="160">
+    <font FACE="TimesNewRoman" SIZE="3">
+    <p ALIGN="LEFT">Primary key</font></td>
+    <td align="left" valign="top" width="300">
+    <font FACE="TimesNewRoman" SIZE="3">
+    <p ALIGN="LEFT">B</font></td>
+    <td align="left" valign="top" width="160">
+    <font FACE="TimesNewRoman" SIZE="3">
+    <p ALIGN="LEFT">B, E</font></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top" width="160">
+    <font FACE="TimesNewRoman" SIZE="3">
+    <p ALIGN="LEFT">Number of tuples</font></td>
+    <td align="left" valign="top" width="300">
+    <font FACE="TimesNewRoman" SIZE="3">
+    <p ALIGN="LEFT">n</font><font FACE="TimesNewRoman" SIZE="1">1 </font>
+    <font FACE="TimesNewRoman" SIZE="3">= 20,000</font></td>
+    <td align="left" valign="top" width="160">
+    <font FACE="TimesNewRoman" SIZE="3">
+    <p ALIGN="LEFT">n</font><font FACE="TimesNewRoman" SIZE="1">2 </font>
+    <font FACE="TimesNewRoman" SIZE="3">= 30,000</font></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top" width="160">
+    <font FACE="TimesNewRoman" SIZE="3">
+    <p ALIGN="LEFT">Size of a page</font></td>
+    <td align="left" valign="top" width="300">
+    <font FACE="TimesNewRoman" SIZE="3">
+    <p ALIGN="LEFT">1,000 bytes</font></td>
+    <td align="left" valign="top" width="160">
+    <font FACE="TimesNewRoman" SIZE="3">
+    <p ALIGN="LEFT">1,000 bytes</font></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top" width="160">
+    <font FACE="TimesNewRoman,Italic" SIZE="3"><i>
+    <p ALIGN="LEFT">Tuple size</i></font></td>
+    <td align="left" valign="top" width="300">
+    <font FACE="TimesNewRoman,Italic" SIZE="3"><i>
+    <p ALIGN="LEFT">40 Bytes</i></font></td>
+    <td align="left" valign="top" width="160">
+    <font FACE="TimesNewRoman,Italic" SIZE="3"><i>
+    <p ALIGN="LEFT">50 Bytes</i></font></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top" width="160">
+    <font FACE="TimesNewRoman,Italic" SIZE="3"><i>
+    <p ALIGN="LEFT">Number of tuples per page</i></font></td>
+    <td align="left" valign="top" width="300">
+    <font FACE="TimesNewRoman,Italic" SIZE="3"><i>25 </i></font></td>
+    <td align="left" valign="top" width="160">
+    <font FACE="TimesNewRoman,Italic" SIZE="3"><i>20</i></font></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top" width="160">
+    <font FACE="TimesNewRoman,Italic" SIZE="3"><i>
+    <p ALIGN="LEFT">Number of data pages</i></font></td>
+    <td align="left" valign="top" width="300"><i>
+    <font FACE="TimesNewRoman,Italic" SIZE="3">
+    <p ALIGN="LEFT">N</font><font FACE="TimesNewRoman,Italic" SIZE="1">1 </font>
+    <font FACE="TimesNewRoman,Italic" SIZE="3">= 800</font></i></td>
+    <td align="left" valign="top" width="160"><i>
+    <font FACE="TimesNewRoman,Italic" SIZE="3">
+    <p ALIGN="LEFT">N</font><font FACE="TimesNewRoman,Italic" SIZE="1">2 </font>
+    <font FACE="TimesNewRoman,Italic" SIZE="3">= 1,500</font></i></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top" width="160">
+    <font FACE="TimesNewRoman" SIZE="3">
+    <p ALIGN="LEFT">Structure</font></td>
+    <td align="left" valign="top" width="300">
+    <font FACE="TimesNewRoman" SIZE="3">
+    <p ALIGN="LEFT">• Parts 1-6: Ad hoc </p>
+    <p ALIGN="LEFT">• Parts 7, 8, and 9: Assume that a permanent B</font><font FACE="TimesNewRoman" SIZE="1">+</font><font FACE="TimesNewRoman" SIZE="3">-tree 
+    on the primary key, with a height of 3 and 700 pages in the sequence set, 
+    has been created.</font></td>
+    <td align="left" valign="top" width="160">
+    <font FACE="TimesNewRoman" SIZE="3">Ad hoc</font></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top" width="160">
+    <font FACE="TimesNewRoman" SIZE="3">
+    <p ALIGN="LEFT">Selectivity of condition ...</font></td>
+    <td align="left" valign="top" width="300">
+    <font FACE="TimesNewRoman" SIZE="3">
+    <p ALIGN="LEFT">A &gt; 55 is 20%</font></td>
+    <td align="left" valign="top" width="160">
+    <font FACE="TimesNewRoman" SIZE="3">
+    <p ALIGN="LEFT">H = 100 is 2%</font></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top" width="160">
+    <font FACE="TimesNewRoman" SIZE="3">
+    <p ALIGN="LEFT">Size of natural join involving relations r and s, or their 
+    fragments</p>
+    </font>
+    <p>&nbsp;</td>
+    <td colspan="2" align="left" valign="top" width="446">
+    <font FACE="TimesNewRoman" SIZE="3">
+    <p ALIGN="LEFT">Natural join involves the common attribute B. Because 
+    attribute B is a unique key in r, a given tuple of s can have at most one 
+    matching tuple in r. Therefore, in the worst case the number of tuples in 
+    the join can not exceed the number of tuples in s (or a fragment of s). Use 
+    this as the worst case scenario whenever you need to estimate the size of 
+    the join. For example, if r and s are joined without any prior filtering, 
+    their join has (at most) 20,000 tuples.</font></td>
+  </tr>
+</table>
+<p>You are given the following SQL query. Assume that for evaluating this query 
+you have 10 buffers available for your use. The size of a buffer is same as size 
+of a page on the disk. The cost of a plan to execute a query is measured in 
+terms of disk accesses. A disk access consists of either reading a single page 
+from disk into a buffer, or writing a buffer onto a single page. Therefore, 
+e.g., the cost of reading 5 pages is 5, irrespective of how and when those 5 
+pages are read. You are not required to do any duplication removal; this makes 
+projection operator straightforward.</p>
+<p>&nbsp;&nbsp;&nbsp; select x.A<br>
+&nbsp;&nbsp;&nbsp; from r x, s y<br>
+&nbsp;&nbsp;&nbsp; where x.B = y.B<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; and x.A &gt; 55<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; and y.H = 100</p>
+<p><b>1.</b> Express the above query as an algebraic expression by converting 
+the from clause to a cross product, where clause to a single selection, and the 
+select clause to a projection.</p>
+<p><b>2.</b> Replace the cross product in the expression of Part 1 by a natural 
+join.</p>
+<p><b>3.</b> Transform the algebraic expression of Part 2 to an expression tree. 
+Your conversion should be literal at this point, without any consideration for 
+algebraic optimization.</p>
+<p><b>4.</b> Estimate the cost of evaluating the expression tree of Part 3. 
+ 
+Remember that you have 10 buffers available to you in all parts. Don’t forget to 
+use buffers to your advantage whenever you can.</p>
+<p><b>5.</b> Now restructure your expression tree of Part 3 to make it as 
+optimal as you can. </p>
+<p>Note that when you do this, you implicitly use algebraic identities. These 
+identities have a lot of different varieties. For example, (a) breaking a 
+selection involving two conditions into a sequence of two selections involving a 
+single condition each (b) Commuting a selection with a join, and (c) creating 
+explicit projections in order to reduce the number of attributes that are put 
+into the pipeline as input to a join operator.</p>
+<p><b>6.</b> Estimate the cost of evaluating your expression tree of Part 5. 
+This is similar to Part 4, but produces a more optimal performance. Consider 
+preprocess r and/or s writing the results as temporary relation(s). 
+Preprocessing means applying selection and projection operators first to reduce 
+the size of inputs for the natural join. </p>
+<p><b>7.</b> Proceed along the lines of Part 6. However, for this part assume 
+that the selectivity for the condition &quot;H = 100&quot; were 4%.&nbsp; </p>
+<p><b>8.</b> Now use the B+-tree  on relation r. Estimate the cost of evaluating your expression tree 
+of Part 5 by using index nested loop to compute the join. To do this, use s as 
+the outer relation and r, the one with the index, as the inner relation. Scan 
+relation s page by page, and within a page tuple by tuple. Verify if a tuple 
+satisfies H = 100. If it does, catch hold of its B-value. For this B value, try 
+to find a match in the B+-tree of relation r, by going through its index. </p>
+<p><b>9.</b> Now consider a sort-merge and estimate the cost of evaluating your 
+expression tree of Part 5. For the sake of simplicity assume that the selection 
+and projections will be applied to r and s first. Outputs will be written to the 
+disk. Then both relations will be sorted. Then their join will be performed by 
+merging them and performing the final projection on the fly. The cost of sorting 
+N pages using k buffers is 2Nlog<sub>k-1</sub>N. To ease your calculations for cost of 
+sorting, assume that you have 11 buffers available to you for sorting.</p>
+<p><font color="#FF0000">Com S 363: SKIP THE REST </font></p>
+<p><b>10.</b> Assume that every disk access requires 10 milliseconds. 
+Multiplying the number of disk accesses with 10/1000 gives you a good estimation 
+of the number of seconds it takes to process a query. During this time the 
+evaluating requires a variable number of buffers from one phase to another. For 
+every phase the product of the time spent during the phase, and the number of 
+buffers actually used, gives a good measure of buffer utilization during that 
+phase. The total buffer utilization in evaluating a query is the sum total of 
+buffer utilization during all phases. By dividing this number with the total 
+time spent in disk accesses will give the average buffer requirement during 
+query processing.</p>
+<p>Now revisit every plan and calculate the time spent in disk accesses and the 
+average buffer requirement. Rank order your plans in increasing order of time 
+and buffer utilization. You should have only one sorted list with time as 
+primary and average buffer utilization as the secondary sort criteria.</p>
+
+<!--msnavigation--></td></tr><!--msnavigation--></table></body>
+
+
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Homeworks/01_Opt/Opt_Exercises.Fall-2012.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:01:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+</html>

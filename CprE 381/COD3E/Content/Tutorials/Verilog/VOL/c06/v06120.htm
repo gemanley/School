@@ -1,0 +1,32 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">Specify blocks use a lot of numbers - that's the nature of timing information. A class of parameters called specify parameters, or <b><a href="javascript:parent.goGlossHash('#specparam')"><font color="#B22222">specparams</font></a></b>, is defined to provide some readability, but more importantly, to provide names for back annotation.
+					<p>A module may be defined with generic delay values as specparams which are then updated with specific delay values obtained from a delay calculator. The back annotation process is simulator-specific, but the mechanism used is the specparam.</p>
+					<p>Specify parameters are defined within the specify block, and can only be used within it. The general form is:</p>
+					<p></p>
+					<pre>
+        specparam list_of_specparam_assignments ;
+</pre>
+					<p>A specparam assignment is simply an assignment of the same form as a normal parameter assignment.</p>
+					<p></p>
+					<pre>
+        specparam_name = constant_expression
+</pre>
+					<p>The differences between a specparam and a regular parameter are somewhat artificial. You cannot use a parameter within a specify block, and you cannot use a specparam outside of the specify block. You cannot use defparam to override specparam values, but you can use the PLI to change them.</p>
+					<p></p>
+					<center>
+						<a href="JavaScript:parent.dispWindow('v06120r1.htm','Example')"><img src="images/vexample.gif" height="39" width="91" border="0"></a></center>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

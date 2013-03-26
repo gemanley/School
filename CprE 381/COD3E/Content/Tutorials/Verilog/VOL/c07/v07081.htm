@@ -1,0 +1,99 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td valign="top" width="530">A zero-delay model, by definition, does not have any delays in it. However, in order for a synchronous design to work, there must be at least two events in each cycle.
+				<p>1. Sample Event<br>
+					The sample event is usually the one that we think of as happening on the clock edge. The new value for each clocked component is determined at this time.</p>
+				<p>2. Change Event<br>
+					The change event is the one where state values are updated. New state values are then computed as a result of propagation.</p>
+				<p>If we look at a typical piece of delayless code:</p>
+				<p></p>
+				<pre>
+    assign nextstate = f(state, in);
+    always @(posedge clock)
+        state 
+					
+					
+					<= nextstate; </PRE> The events which occur are:<p>
+					
+					
+					 
+
+1. Sample Event<br>
+					
+					
+					
+
+					
+					
+					<ul>
+						
+						
+						 
+              
+						
+						
+						<li>save nextstate in temp 
+              
+						
+						
+						<li>schedule NBA update (the change event) 
+
+					
+					
+					</ul>
+					
+					
+					
+					
+					<p>
+2. Change Event<br>
+						
+						
+						
+</p>
+					
+					
+					
+					
+					<ul>
+						
+						
+						
+              
+						
+						
+						<li>update state with temp and propagate state 
+              
+						
+						
+						<li>compute f(state, in) due to propagation of state and in (in comes from some other register, just like state) 
+
+					
+					
+					</ul>
+					
+					
+					
+					
+					<p>
+
+Even though the simulation time has only one value for each clock cycle, there are really two events at each cycle boundary. 
+
+</p>
+					
+					
+				</pre>
+			</td>
+			<td valign="top" width="70"><img src="images/v0727g1.gif" height="276" width="61"></td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

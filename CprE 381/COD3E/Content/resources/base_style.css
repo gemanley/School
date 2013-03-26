@@ -1,0 +1,22 @@
+body            { color: black; font-family: Arial, Helvetica, sans-serif; background-image: url("light-blue-hessian-smudge2.gif"); background-repeat: repeat; right: 300px; width: 650px }
+h1             { color: black; font-size: 18pt; font-family: Helvetica, Arial, sans-serif; font-weight: 900; text-align: center; padding-top: 0; padding-bottom: 12pt }
+h2             { color: black; font-size: 15pt; font-family: Helvetica, Arial, sans-serif; font-weight: bold; padding-top: 24pt; padding-bottom: 6pt }
+h3             { color: black; font-size: 13pt; font-family: Helvetica, Arial, sans-serif; font-weight: bold; padding-top: 12pt; padding-bottom: 3pt }
+p              { color: black }
+li             { padding-bottom: 3pt }
+il             { padding-bottom: 3pt }
+ol             { padding-bottom: 3pt }
+hr             { padding-top: 3pt }
+.nomargins     { margin: 0; width: 120px }
+.sidebar       { background-color: navy; margin-top: 4px; margin-bottom: 4px; width: 142px }
+
+.menuLeafLinked           { color: blue; text-decoration: underline; width: 600px; height: 20px }
+.menuLeafLinkedRollover   { color: blue; text-decoration: underline; background-color: red; width: 600px; height: 20px }
+.menuLeafNotLinked        { color: black; text-decoration: none; text-indent: 0; word-spacing: normal; letter-spacing: normal; margin-bottom: 0; padding-left: 0; width: 600px; height: 20px }
+.menuNodeLinked           { color: blue; font-style: italic; text-decoration: underline; width: 600px; height: 20px }
+.menuNodeLinkedRollover   { color: blue; font-style: italic; text-decoration: underline; background-color: red; width: 600px; height: 20px }
+.menuNodeNotLinked        { color: black; font-style: italic; text-decoration: none; text-indent: 0; word-spacing: normal; letter-spacing: normal; margin-bottom: 0; padding-left: 0; width: 600px; height: 20px }
+.menuRootLinked           { color: blue; font-weight: bold; font-stretch: semi-expanded; text-decoration: underline; width: 600px; height: 20px }
+.menuRootLinkedRollover   { color: blue; font-weight: bold; font-stretch: semi-expanded; text-decoration: underline; background-color: red; width: 600px; height: 20px }
+.menuRootNotLinked        { color: black; font-weight: bold; font-stretch: semi-expanded; text-decoration: none; text-indent: 0; word-spacing: normal; letter-spacing: normal; width: 600px; height: 20px }
+.pointer                  { cursor: pointer }

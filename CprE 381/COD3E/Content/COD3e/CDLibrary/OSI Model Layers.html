@@ -1,0 +1,298 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0068)http://www.geocities.com/SiliconValley/Monitor/3131/ne/osimodel.html -->
+<HTML><HEAD><TITLE>OSI Model Layers</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252">
+<META http-equiv=description 
+content="MSCE Networking Essentials Exam Study Notes from Networking Essentials: Hands-On, Self-Paced Training for Supporting Local and Wide Area Networks.">
+<META content="MSHTML 6.00.2800.1276" name=GENERATOR></HEAD>
+<BODY bgColor=#ffffff background="resources/lighttex.gif">
+		<TABLE width="100%" border=0 align="left">
+			<TR>
+				<TD vAlign=top align=left width="80%">
+					<H1 align=center><FONT face=verdana>OSI Model 
+      Layers</FONT></H1>
+					<HR width="100%" SIZE=0>
+				</TD>
+			</TR>
+			<TR>
+				<TD vAlign=top>
+					<TABLE cellSpacing=1 cellPadding=2 width="100%" border=1 align="left">
+						<TR>
+							<TD vAlign=top align=middle width="20%" bgColor=#c0c0c0>
+								<P align=left><FONT 
+            face=verdana><BIG><STRONG>Layer</STRONG></BIG></FONT></P>
+							</TD>
+							<TD vAlign=top width="35%" bgColor=#c0c0c0><FONT 
+            face=verdana><BIG><STRONG>Function</STRONG></BIG></FONT></TD>
+							<TD vAlign=top width="23%" bgColor=#c0c0c0><FONT 
+            face=verdana><BIG><STRONG>Protocols</STRONG></BIG></FONT></TD>
+							<TD vAlign=top width="12%" bgColor=#c0c0c0><FONT 
+            face=verdana><STRONG><BIG>Network 
+        Components</BIG></STRONG></FONT></TD>
+						</TR>
+						<TR>
+							<TD vAlign=top align=middle width="20%"><STRONG><BIG>Application</BIG></STRONG>
+								<P align=center><STRONG><SMALL>User Interface</SMALL></STRONG></P>
+							</TD>
+							<TD vAlign=top width="35%">
+								<UL>
+									<LI><SMALL>used for applications specifically written to run over 
+              the network</SMALL>
+									<LI><SMALL>allows access to network services that support 
+              applications;</SMALL>
+									<LI><SMALL>directly represents the services that directly support 
+              user applications </SMALL>
+									<LI><SMALL>handles network access, flow control and error 
+              recovery</SMALL>
+									<LI><SMALL>Example apps are file transfer,e-mail, 
+              NetBIOS-based&nbsp; applications 
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+              </SMALL></LI>
+								</UL>
+							</TD>
+							<TD vAlign=top width="23%">DNS; FTP; TFTP; BOOTP; SNMP;RLOGIN; SMTP; 
+            MIME; NFS; FINGER; TELNET; NCP; APPC; AFP; SMB</TD>
+							<TD vAlign=top width="12%"><STRONG>Gateway</STRONG></TD>
+						</TR>
+						<TR>
+							<TD vAlign=top align=middle width="20%"><BIG><STRONG>Presentation</STRONG></BIG>
+								<P align=center><STRONG><SMALL>Translation</SMALL></STRONG></P>
+							</TD>
+							<TD vAlign=top width="35%">
+								<UL>
+									<LI><SMALL>Translates from application to network format and 
+              vice-versa</SMALL>
+									<LI><SMALL>all different formats from all sources are made into a 
+              common uniform format that the rest of the OSI model can 
+              understand</SMALL>
+									<LI><SMALL>responsible for protocol conversion, character 
+              conversion,data encryption / decryption, expanding graphics 
+              commands, data compression</SMALL>
+									<LI><SMALL>sets standards for different systems to provide 
+              seamless communication from multiple protocol stacks</SMALL>
+									<LI><SMALL>not always implemented in a network protocol</SMALL></LI>
+								</UL>
+							</TD>
+							<TD vAlign=top width="23%">&nbsp;</TD>
+							<TD vAlign=top width="12%"><STRONG>Gateway</STRONG>
+								<P><STRONG>Redirector</STRONG></P>
+							</TD>
+						</TR>
+						<TR>
+							<TD vAlign=top align=middle width="20%"><BIG><STRONG>Session</STRONG></BIG>
+								<P><SMALL><STRONG>"syncs and sessions"</STRONG></SMALL></P>
+							</TD>
+							<TD vAlign=top width="35%">
+								<UL>
+									<LI><SMALL>establishes, maintains and ends sessions across the 
+              network </SMALL>
+									<LI><SMALL>responsible for name recognition (identification) so 
+              only the designated parties can participate in the session</SMALL>
+									<LI><SMALL>provides synchronization services by planning check 
+              points in the data stream =&gt; if session fails, only data after 
+              the most recent checkpoint need be transmitted</SMALL>
+									<LI><SMALL>manages who can transmit data at a certain time and for 
+              how long</SMALL>
+									<LI><SMALL>Examples are interactive login and file transfer 
+              connections, the session would connect and re-connect if there was 
+              an interruption; recognize names in sessions and register names in 
+              history</SMALL></LI>
+								</UL>
+							</TD>
+							<TD vAlign=top width="23%">NetBIOS
+								<P>Names Pipes</P>
+								<P>Mail Slots</P>
+								<P>RPC </P>
+							</TD>
+							<TD vAlign=top width="12%"><STRONG>Gateway</STRONG></TD>
+						</TR>
+						<TR>
+							<TD vAlign=top align=middle width="20%">
+								<P align=center><B><A 
+name=Transport><BIG>Transport</BIG></A></B></P>
+								<P align=center><FONT size=3></FONT><FONT size=2><STRONG>packets; 
+            flow control &amp; error-handling</STRONG></FONT></P>
+							</TD>
+							<TD vAlign=top width="35%">
+								<UL>
+									<LI><SMALL>additional connection below the session layer</SMALL>
+									<LI><SMALL>manages the flow control of data between parties across 
+              the network</SMALL>
+									<LI><SMALL>divides streams of data into chunks or packets; the 
+              transport layer of the receiving computer reassembles the message 
+              from packets</SMALL>
+									<LI><SMALL>"train" is a good analogy =&gt; the data is divided 
+              into identical units</SMALL>
+									<LI><SMALL>provides error-checking to guarantee error-free data 
+              delivery, with on losses or duplications</SMALL>
+									<LI><SMALL>provides acknowledgment of successful transmissions; 
+              requests retransmission if some packets don’t arrive 
+              error-free</SMALL>
+									<LI><SMALL>provides flow control and error-handling</SMALL></LI>
+								</UL>
+							</TD>
+							<TD vAlign=top width="23%">TCP, ARP, RARP;
+								<P>SPX</P>
+								<P>NWLink</P>
+								<P>NetBIOS / NetBEUI</P>
+								<P>ATP </P>
+							</TD>
+							<TD vAlign=top width="12%"><STRONG>Gateway</STRONG>
+								<P><STRONG>Advanced Cable Tester</STRONG></P>
+								<P><STRONG>Brouter</STRONG></P>
+							</TD>
+						</TR>
+						<TR>
+							<TD vAlign=top align=middle width="20%">
+								<P align=center><B><BIG>Network</BIG></B></P>
+								<P><FONT size=3></FONT><FONT size=2><STRONG>addressing; 
+            routing</STRONG></FONT></P>
+							</TD>
+							<TD vAlign=top width="35%">
+								<UL>
+									<LI><SMALL>translates logical network address and names to their 
+              physical address (e.g. computername ==&gt; MAC address)</SMALL>
+									<LI><SMALL>responsible for</SMALL>
+										<UL>
+											<LI><SMALL>addressing</SMALL>
+											<LI><SMALL>determining routes for sending</SMALL>
+											<LI><SMALL>managing network problems such as packet switching, 
+                data congestion and routing</SMALL></LI>
+										</UL>
+									<LI><SMALL>if router can’t send data frame as large as the source 
+              computer sends, the network layer compensates by breaking the data 
+              into smaller units. At the receiving end, the network layer 
+              reassembles the data</SMALL>
+									<LI><SMALL>think of this layer stamping the addresses on each 
+              train car</SMALL></LI>
+								</UL>
+							</TD>
+							<TD vAlign=top width="23%"><B>IP</B>; ARP; RARP, ICMP; 
+            RIP; OSFP;
+								<P>IGMP;</P>
+								<B>
+									<P>IPX</P>
+								</B>
+								<P>NWLink</P>
+								<P>NetBEUI</P>
+								<P>OSI</P>
+								<P>DDP</P>
+								<P>DECnet </P>
+							</TD>
+							<TD vAlign=top width="12%"><STRONG>Brouter</STRONG>
+								<P><STRONG>Router</STRONG></P>
+								<P><STRONG>Frame Relay Device</STRONG></P>
+								<P><STRONG>ATM Switch</STRONG></P>
+								<P><STRONG>Advanced Cable Tester</STRONG></P>
+							</TD>
+						</TR>
+						<TR>
+							<TD vAlign=top align=middle width="20%" rowSpan=2>
+								<P align=center><B><BIG>Data 
+            Link</BIG></B></P>
+								<P><FONT size=4></FONT><FONT size=2><STRONG>data frames to 
+            bits</STRONG></FONT></P>
+							</TD>
+							<TD vAlign=top width="35%" rowSpan=2>
+								<UL>
+									<LI><SMALL>turns packets into raw bits 100101 and at the receiving 
+              end turns bits into packets.</SMALL>
+									<LI><SMALL>handles data frames between the Network and Physical 
+              layers</SMALL>
+									<LI><SMALL>the receiving end packages raw data from the Physical 
+              layer into data frames for delivery to the Network layer</SMALL>
+									<LI><SMALL>responsible for error-free transfer of frames to other 
+              computer via the Physical Layer</SMALL>
+									<LI><SMALL>this layer defines the methods used to transmit and 
+              receive data on the network. It consists of the wiring, the 
+              devices use to connect the NIC to the wiring, the signaling 
+              involved to transmit / receive data and the ability to detect 
+              signaling errors on the network media</SMALL></LI>
+								</UL>
+							</TD>
+							<TD vAlign=top width="23%"><B>Logical Link Control</B>
+								<UL>
+									<LI><FONT size=1></FONT><FONT size=2>error correction and flow 
+              control</FONT>
+									<LI><FONT size=3></FONT><FONT size=2>manages link control and 
+              defines SAPs</FONT></LI>
+								</UL>
+								<P><SMALL>802.1 OSI Model </SMALL></P>
+								<P><SMALL>802.2 Logical Link Control</SMALL></P>
+							</TD>
+							<TD vAlign=top width="12%" rowSpan=2><STRONG>Bridge</STRONG>
+								<P><STRONG>Switch</STRONG></P>
+								<P><STRONG>ISDN Router</STRONG></P>
+								<P><STRONG>Intelligent Hub</STRONG></P>
+								<P><STRONG>NIC</STRONG></P>
+								<P><STRONG>Advanced Cable Tester</STRONG></P>
+							</TD>
+						</TR>
+						<TR>
+							<TD vAlign=top width="23%"><B>Media Access Control</B>
+								<UL>
+									<LI><FONT size=2>communicates with the adapter 
+              card</FONT> 
+									<LI>controls the type of media being used: </LI>
+								</UL>
+								<P><SMALL>802.3 CSMA/CD (Ethernet)</SMALL></P>
+								<P><SMALL>802.4 Token Bus (ARCnet)</SMALL></P>
+								<P><SMALL>802.5 Token Ring</SMALL></P>
+								<P><SMALL>802.12 Demand Priority</SMALL></P>
+							</TD>
+						</TR>
+						<TR>
+							<TD vAlign=top align=middle width="20%">
+								<P align=center><B><A name=Physical><BIG>Physical</BIG></A></B></P>
+								<P align=center><FONT size=3></FONT><STRONG><FONT size=2>hardware; 
+            raw bit stream</FONT></STRONG></P>
+							</TD>
+							<TD vAlign=top width="35%">
+								<UL>
+									<LI><FONT size=2>transmits raw bit stream over physical 
+              cable</FONT>
+									<LI><FONT size=2>defines cables, cards, and physical 
+              aspects</FONT>
+									<LI><FONT size=2>defines NIC attachments to hardware, how cable is 
+              attached to NIC</FONT>
+									<LI><FONT size=2>defines techniques to transfer bit stream to 
+              cable</FONT></LI>
+								</UL>
+							</TD>
+							<TD vAlign=top width="23%">IEEE 802
+								<P>IEEE 802.2</P>
+								<P>ISO 2110</P>
+								<P>ISDN </P>
+							</TD>
+							<TD vAlign=top width="12%"><STRONG>Repeater</STRONG>
+								<P><STRONG>Multiplexer</STRONG></P>
+								<P><STRONG>Hubs</STRONG>
+								<UL>
+									<LI><STRONG>Passive</STRONG>
+									<LI><STRONG>Active</STRONG></LI>
+								</UL>
+								<P><STRONG>TDR</STRONG></P>
+								<P><STRONG>Oscilloscope</STRONG></P>
+								<P><STRONG>Amplifier</STRONG></P>
+							</TD>
+						</TR>
+						
+					</TABLE>
+				</TD>
+			</TR>
+			<TR>
+				<TD vAlign=top align=left width="80%">
+					<HR>
+					<TABLE width="80%" border=0 align="center">
+						<TR>
+							<TD><SMALL><SMALL>Last Updated: August 6, 2001 </SMALL></SMALL></TD>
+							<TD vAlign=top align=right><SMALL><SMALL>Grant Wilson, Edmonton, AB 
+            Canada</SMALL></SMALL></TD>
+						</TR>
+					</TABLE>
+					
+				</TD>
+			</TR>
+			
+		</TABLE>
+	</BODY></HTML>

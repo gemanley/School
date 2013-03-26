@@ -1,0 +1,31 @@
+<html>
+
+	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+
+	<body bgcolor="#FFFFFF">
+		<pre>
+
+        module top;
+                type1 childA(ports...); // &quot;ports...&quot; indicates a port list
+                type2 childB(ports...); // which will be explained later
+        endmodule
+        
+        module type1(ports...);
+                type3 leaf1(ports...);
+                type3 leaf2(ports...);
+        endmodule
+        
+        module type2(ports...);
+                type3 leaf3(ports...);
+                type1 node1(ports...);
+        endmodule
+        
+        module type3(ports...);
+                // this module does not instantiate any other modules
+        endmodule
+
+
+</pre>
+	</body>
+
+</html>

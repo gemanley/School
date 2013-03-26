@@ -1,0 +1,63 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+		<style type="text/css" media="screen"><!--
+#answer  { visibility: hidden; position: absolute }
+--></style>
+		<csactions>
+			<csaction name="19EB03723" class="ShowHide" type="onevent" val0="answer" val1="1"></csaction>
+		</csactions>
+		<csscriptdict import>
+			<script type="text/javascript" src="../../../../resources/CSScriptLib.js"></script>
+		</csscriptdict>
+		<csactiondict>
+			<script type="text/javascript"><!--
+CSAct[/*CMP*/ '19EB03723'] = new Array(CSShowHide,/*CMP*/ 'answer',1);
+
+// --></script>
+		</csactiondict>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td><b>Complete the following module so that &quot;clka&quot; and &quot;clkb&quot; have the following waveforms.</b>
+					<p><img src="images/v07q8g1.gif" height="137" width="529" border="0"></p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<tt><textarea name="SCRIPT1" rows="20" cols="60">
+module clkgen (clka, clkb);
+	output clka, clkb;
+endmodule
+</textarea></tt> 
+				</td>
+			</tr>		</table>
+			<a href="javascript:parent.gotoScreen('07','168',0)"><img src="images/vreset.gif" border="0"></a>
+			<center><a onclick="CSAction(new Array(/*CMP*/'19EB03723'));return CSClickReturn()" href="#" csclick="19EB03723"><img src="images/vanswer.gif" height="39" width="74" border="0"></a></center>
+		<div id="answer"><pre>
+module clkgen (clka, clkb);
+	output clka, clkb;
+	reg clka, clkb;
+	initial begin
+		clka = 0; clkb = 0;
+	end
+	initial
+	#1	forever begin
+	#9	clka = 1;
+	#1	clka = 0;
+		end
+	initial
+	#3	forever begin
+	#9	clkb = 1;
+	#1	clkb = 0;
+		end
+endmodule				 				
+</pre>
+			</div>
+	</body>
+
+</html>

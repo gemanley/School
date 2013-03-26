@@ -1,0 +1,39 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">Click a type of module path to learn more about it.
+					<p><map name="road"><area shape="polygon" coords="239,13,309,6,329,17,312,30,241,44" href="a06135.htm"><area shape="polygon" coords="229,39,309,39,335,52,309,65,230,63" href="b06135.htm"><area shape="polygon" coords="237,64,312,72,342,93,315,103,235,88" href="e06135.htm"><area shape="polygon" coords="240,93,314,115,334,134,311,141,239,113" href="d06135.htm"></map> <img src="images/v0645g1.gif" alt="road signs" height="336" width="500" usemap="#road" border="0"></p>
+					<p>State-dependent paths allow path delays to be applied to paths only under given conditions, or states. The state-dependent path description includes a conditional expression that enables the path when it is true. It looks like:</p>
+					<p></p>
+					<pre>
+       if (cond_expression) simple_path 
+       if (cond_expression) edge_sensitive_path 
+       ifnone simple_path 
+</pre>
+					<p>The conditional expression can only contain module input or inout ports, or bit- or part-selects of them, local registers, or their bit- or part-selects, and constant expressions. The conditional expression may only use the following operators</p>
+					<p></p>
+					<pre>
+       bit-wise logical operators: ~ &amp; | ^ ~^ 
+       relational operators: == != &amp;&amp; || ! 
+       reduction operators: &amp; | ^ ~&amp; ~| ~^ 
+       concatenation operators: {} {{}} 
+       conditional operator: ?: 
+</pre>
+					<p>Specifically missing from this list are the arithmetic operators.</p>
+					<p>If the conditional expression has a result of 1, x, or z, then the path is enabled, and if it has a result of 0, the path is disabled. If the result is more than one bit wide, the least significant bit is used as the result.</p>
+					<p></p>
+					<center>
+						<a href="JavaScript:parent.dispWindow('v06135r3.htm','Example')"><img src="images/vexample.gif" height="39" width="91" border="0"></a></center>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

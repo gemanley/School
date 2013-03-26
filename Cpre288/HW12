@@ -1,0 +1,94 @@
+if (a>b)...
+
+load a
+load b
+b >= a -> else
+max = a
+jump endif
+max = b
+
+LDS r24, a
+LDS r25, a+1
+LDS r22, b
+LDS r23, b+1
+CP r22, r24
+CPC r23, r25
+BRGZ else
+STS max, r24
+STS max+1, r25
+RJUMP endif
+else:
+STS max, r22
+STS max+1, r23
+endif:
+
+--
+
+if(a <= 20)...
+
+load a
+a >= 21 -> else
+flag = 0
+jump endif
+else
+flag = 1
+endif
+
+LDS r24, a
+LDS r25, a+1
+CPI r24, 21
+CPC r25, r1
+BRGE else
+STS flag, r1
+RJMP endif
+else:
+LDI r22, 1
+STS flag, r22
+endif:
+
+--
+
+// Return the max...
+
+; a=> r25:r24
+; b=> r23:r22
+a < b -> else
+return a
+else
+return b
+
+CP r24, r22
+CPC r25, r23
+BRLO else ; LO because unsigned
+RET
+else:
+MOVW r24, r22
+RET
+
+--
+
+// Copy the contents...
+
+; X=>r25:r24
+; Y=>r23:r22
+; N=>r21:r20
+mov X->X-reg
+mov Y->Z-reg
+loop:
+load *X+
+store *Y+
+dec N
+N != 0 -> loop
+ret
+
+MOVW r26, r24
+MOVW r30, r22
+loop:
+LD r18, X+
+LD r19, X+
+ST Z+, r18
+ST Z+, r19
+SUBI r20, 1
+SBC r21, r1
+BRNE loop
+RET

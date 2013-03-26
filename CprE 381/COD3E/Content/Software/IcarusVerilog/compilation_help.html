@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<meta name="generator" content="Adobe GoLive 6">
+		<title>Compilation Instructions for Icarus Verilog</title>
+		<link href="../../resources/base_style.css" rel="stylesheet" media="screen">
+	</head>
+
+	<body bgcolor="#ffffff">
+		<h1>Compilation Instructions for Icarus Verilog</h1>
+		<p>This page contains advice for compiling and installing Icarus Verilog, taken from the source code distribution. You should read these instructions thoroughly before commencing compilation. If you run into trouble, check the documentation within the source code for more information.</p>
+		<p>There are generic installation instructions that apply for all systems. The procedure below should work under a Unix-based system.</p>
+		<ul>
+			<li>To compile under Windows, you need to install software that makes a Windows system seem like a Unix system; see the <a href="#Windows">Windows compilation advice</a> for details.
+			<li>Mac OS X is already quite &quot;Unix-like&quot;, however consult the <a href="#Mac">Mac OS X compilation advice</a> before proceeding.
+		</ul>
+		<hr noshade width="80%">
+		<h2><a id="General" name="General"></a>General Compilation Advice</h2>
+		<p>The 'configure' shell script attempts to guess correct values for various system-dependent variables used during compilation. It uses those values to create a 'Makefile' in each directory of the package. It may also create one or more '.h' files containing system-dependent definitions. Finally, it creates a shell script 'config.status' that you can run in the future to recreate the current configuration, a file 'config.cache' that saves the results of its tests to speed up reconfiguring, and a file 'config.log' containing compiler output (useful mainly for debugging 'configure'). If at some point 'config.cache' contains results you don't want to keep, you may remove or edit it.</p>
+		<p>The file 'configure.in' is used to create 'configure' by a program called 'autoconf'. You only need 'configure.in' if you want to change it or regenerate 'configure' using a newer version of 'autoconf'.</p>
+		<p>The simplest way to compile this package is:</p>
+		<ol>
+			<li>'cd' to the directory containing the package's source code and type './configure' to configure the package for your system. If you're using 'csh' on an old version of System V, you might need to type 'sh ./configure' instead to prevent 'csh' from trying to execute 'configure' itself. Running 'configure' takes a while. While running, it prints some messages telling which features it is checking for.<li>Type 'make' to compile the package.<li>Optionally, type 'make check' to run any self-tests that come with the package.<li>Type 'make install' to install the programs and any data files and documentation.<li>You can remove the program binaries and object files from the source code directory by typing 'make clean'. To also remove the files that 'configure' created (so you can compile the package for a different configuration), type 'make distclean'. There is also a 'make maintainer-clean' target, but that is intended mainly for the package's developers. If you use it, you may have to get all sorts of other programs in order to regenerate files that came with the distribution.<br>
+			
+		</ol>
+		<h3>Compilers and Options<br>
+		</h3>
+		<p>Some systems require unusual options for compilation or linking that the 'configure' script does not know about. You can give 'configure' initial values for variables by setting them in the environment. Using a Bourne-compatible shell, you can do that on the command line like this:</p>
+		<p>&nbsp;&nbsp;&nbsp;<i>CC=c89; CFLAGS=-O2; LIBS=-lposix; ./configure</i></p>
+		<p>Or on systems that have the 'env' program, you can do it like this:</p>
+		<p>&nbsp;&nbsp;&nbsp;<i>env CPPFLAGS=-I/usr/local/include LDFLAGS=-s; ./configure</i></p>
+		<h3>Installation Names</h3>
+		<p>By default, 'make install' will install the package's files in '/usr/local/bin', '/usr/local/man', etc. You can specify an installation prefix other than '/usr/local' by giving 'configure' the option '<i>--prefix=PATH</i>'.</p>
+		<p>You can specify separate installation prefixes for architecture-specific files and architecture-independent files. If you give 'configure' the option '<i>--exec-prefix=PATH</i>', the package will use PATH as the prefix for installing programs and libraries. Documentation and other data files will still use the regular prefix.</p>
+		<p>In addition, if you use an unusual directory layout, you can give options like '<i>--bindir=PATH</i>' to specify different values for particular kinds of files. Run '<i>configure --help</i>' for a list of the directories you can set and what kinds of files go in them.</p>
+		<p>If the package supports it, you can cause programs to be installed with an extra prefix or suffix on their names by giving 'configure' the option '<i>--program-prefix=PREFIX</i>' or '<i>--program-suffix=SUFFIX</i>'.</p>
+		<h3>Optional Features</h3>
+		<p>Some packages pay attention to '<i>--enable-FEATURE</i>' options to 'configure', where <i>FEATURE</i> indicates an optional part of the package. They may also pay attention to '<i>--with-PACKAGE</i>' options, where <i>PACKAGE</i> is something like 'gnu-as' or 'x' (for the X Window System). The 'README' should mention any '<i>--enable-</i>' and '<i>--with-</i>' options that the package recognizes.</p>
+		<p>For packages that use the X Window System, 'configure' can usually find the X include and library files automatically, but if it doesn't, you can use the 'configure' options '<i>--x-includes=DIR</i>' and '<i>--x-libraries=DIR</i>' to specify their locations.</p>
+		<h3>Specifying the System Type</h3>
+		<p>There may be some features 'configure' can not figure out automatically, but needs to determine by the type of host the package will run on. Usually 'configure' can figure that out, but if it prints a message saying it can not guess the host type, give it the '<i>--host=TYPE</i>' option. <i>TYPE</i> can either be a short name for the system type, such as 'sun4', or a canonical name with three fields:</p>
+		<p>&nbsp;&nbsp;&nbsp;<i>CPU-COMPANY-SYSTEM</i></p>
+		<p>See the file 'config.sub' for the possible values of each field. If 'config.sub' isn't included in this package, then this package doesn't need to know the host type.</p>
+		<h3>Operation Controls<br>
+		</h3>
+		<p>'configure' recognizes the following options to control how it operates.</p>
+		<ul>
+			<li>'<i>--cache-file=FILE</i>'<br>Use and save the results of the tests in FILE instead of './config.cache'. Set FILE to '/dev/null' to disable caching, for debugging 'configure'.<li>'<i>--help</i>'<br>Print a summary of the options to 'configure', and exit.<li>'<i>--quiet</i>'<br>'<i>--silent</i>'<br>'<i>-q</i>'<br>
+				Do not print messages saying which checks are being made.
+			<li>'<i>--srcdir=DIR</i>'<br>Look for the package's source code in directory DIR. Usually 'configure' can determine that directory automatically.<li>'<i>--version</i>'<br>Print the version of Autoconf used to generate the 'configure' script, and exit.</ul>
+		<p>'configure' also accepts some other, not widely useful, options.</p>
+		<hr noshade width="80%">
+		<h2><a id="Windows" name="Windows"></a>Windows Compilation Advice</h2>
+		<p>Icarus Verilog source can be compiled with the Mingw C/C++ compilers to get a Windows binary that does not require the posix compatibility cruft of the Cygwin.dll library. The configure scripts automatically detect that the compilers in use are the Mingw compilers and will configure the Makefiles appropriately.</p>
+		<p>However, the Mingw tools do not include all the other tools around the compiler, including the shell interpreter for the configure script, bison, flex, gperf, etc. Therefore, you still need Cygwin to compile Icarus Verilog, even if you don't need the Cygwin compilers.</p>
+		<ol>
+			<li><b>Install Cygwin<br>
+				</b>See the web site <a href="http://cygwin.com">http://cygwin.com</a> for instructions and the files to do this. Alternatively you can use the <a href="../extras/CygwinNetrelease-2.427.exe">Network Installer</a> included on this CD (however there may be more recent versions on the web site).<br>In particular, you need the Cygwin base, bison (see notes) flex, make and gperf packages. If you are compiling from CVS, you also need cvs, rcs and automake packages. You will also need tar and gunzip. Installing the &quot;which&quot; package is recommended as well. Beyond the basics, be sure to install these Cygwin packages:<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;<i>bison</i> (<b>not</b> 1.875; see notes)<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;<i>flex</i><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;<i>ghostscript</i> (makes the documentation)<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;<i>perf</i><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;<i>gzip</i><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;<i>make</i><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;<i>strip</i><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;<i>tar</i> (tar and gunzip for unpacking the source)<br>
+				&nbsp;&nbsp;&nbsp;<i>unzip</i> (for unpacking zip compressed packages.)<br>
+				&nbsp;&nbsp;&nbsp;<i>which</i><br>
+				<i><b>NOTES</b><br>
+					1:&nbsp;&nbsp;</i>bison-1.875 is broken; it generates invalid C/C++ code. You don't want that version for anything. If you have that version (use &quot;bison -V&quot; to check the version) then use the Cygwin setup program to get a different version. Try downgrading to 1.75 or upgrading to 1.875b.<br>
+				<i>2:&nbsp;&nbsp;</i>There is a mingw32 runtime package included in the Cygwin distribution. You do <i>not</i> need that, as you will be getting everything from the mingw32 distribution itself.
+			<li><b>Install Mingw<br>
+				</b>These can be found at the project web page <a href="http://mingw.org">http://mingw.org</a>. From the download section you can select various components. Alternatively, just <a href="../extras/MinGW-3.1.0-1.exe">run the installer</a> included on this CD. This gives you all the Mingw packages.<br>When I install Mingw32 (using the installer), I typically set a destination directory of d:\mingw-2.0.0 or the like. Remember what you choose because you will be using that path later.<br>
+				<i><b>NOTE</b></i><br>If you intend to compile VPI modules for Icarus Verilog, you need Mingw32, even if you are using a precompiled version of Icarus Verilog. VPI modules only require Mingw32, and none of the other libraries.<li><b>Install Mingw32 Packages</b><br>
+				There is a collection of precompiled libraries and add-on packages that are intended for use with the Mingw32 compiler. Icarus Verilog uses the readline-4.2 package from that collection.<br>To open the ZIP file for this package click here:&nbsp;<a href="../extras/readline-4.2-20010727.zip">readline-4.2-20010727.zip</a>.<br>
+				Since I installed Mingw32 in d:\mingw-2.0.0, I also created a Mingw-packages directory called d:\mingw-packages. The install, then, is as easy as this:<br>
+				&nbsp;<i>&lt;cygwin shell&gt;</i><br>
+				&nbsp;&nbsp;&nbsp;<i>$ cd d:/mingw-packages</i><br>
+				&nbsp;&nbsp;&nbsp;<i>$ unzip readline-4.2-20010727.zip</i><br>
+				&nbsp;&nbsp;&nbsp;<i>[ lots of inflating... ]</i>
+			<li><b>Install GnuWin32 Packages</b><br>
+				The GnuWin32 project (<a href="http://gnuwin32.sourceforge.net">gnuwin32.sourceforge.net</a>) is a collections of open source programs and libraries ported to Windows. These also work well with the Mingw compiler, and in fact Icarus Verilog uses a few libraries from this collection.<br>
+				You will need these gnuwin32 packages (included on this CD) to compile Icarus Verilog:<br>
+				&nbsp;&nbsp;&nbsp;<i><a href="../extras/bzip2-1.0.2-2.exe">bzip2-1.0.2</a><br>
+					&nbsp;&nbsp;&nbsp;</i><a href="../extras/zlib-1.2.1-1.exe"><i>zlib-1.2.1</i></a><br>
+				Click the links above to lauch installers and place the packages in a common directory for holding all your GnuWin32 packages. I use D:\gnuwin32.
+			<li><b>Unpack Icarus Verilog source</b><br>
+				Most of the remaining steps are best done in a Cygwin window. When you installed Cygwin, a start menu entry was created to allow you to start up the Cygwin window. I'll use the string &quot;$ &quot; to represent a command prompt in this window, because that is the usual bash prompt. Anyhow, unpack the compressed tar file (.tar.gz) of the source with a command like this:<br>
+				&nbsp;&nbsp;&nbsp;<i>$ gunzip -d verilog-20040220.tar.gz | tar xvf -</i><br>
+				This will create a directory &quot;verilog-20040220&quot; that contains all the source. Descend into that directory, as that is where we will work from now on.<br>
+				&nbsp;&nbsp;&nbsp;<i>$ cd verilog-20040220</i><br>
+			<li><b>Select the Mingw compilers</b><br>
+				In your cygwin window, if you type &quot;which c++&quot; you will get the response path &quot;/usr/bin/c++&quot; which is the cygwin compiler. This is not the one we want to use, however. Tell the shell where the Mingw compilers are by setting the search path like so:<br>
+				&nbsp;&nbsp;&nbsp;<i>$ PATH=/cygdrive/d/mingw/bin:$PATH<br>
+				</i>This assumes that you installed Mingw in D:\mingw. The actual programs are in the bin directory under the root. After this command, check that you are now getting the right compilers with this &quot;which&quot; command:<br>
+				&nbsp;&nbsp;&nbsp;<i>$ which c++</i><br>
+				&nbsp;&nbsp;&nbsp;<i>/cygdrive/d/mingw/bin/c++</i><br>
+				Good!
+			<li><b>Configure Icarus Verilog</b><br>Choose a destination path where you will want to install the binaries. I chose on my system the directory &quot;D:\iverilog&quot;. This choice is not permanent, so don't get too much angst over it. Just choose a name without white space. Now, configure the source to make the makefiles and configuration details. Run this command:<br>
+				&nbsp;&nbsp;&nbsp;<i>$ ./configure --prefix=d:/iverilog</i><br>
+				Substitute your chosen directory for the prefix. This will cause the makefiles to build and the source code to configure. The configure program will detect that this is a Mingw environment and set things up to build properly.<br>
+				(For a prefix, use the drive letter notation, the Mingw compiled parts require it, and the Cygwin tools should be able to handle it. You may need to check or upgrade your Cygwin installation if this causes problems for you.)
+			<li><b>Compile Icarus Verilog</b><br>
+				This, believe it or not, should be the easy part:<br>
+				&nbsp;&nbsp;&nbsp;<i>$ /usr/bin/make</i><br>
+				It could take a while. Now is a good time to go get some coffee or take a tea break. I suggest using the complete path to make, because the Mingw version will not know how to execute the /usr/bin/install program.
+			<li><b>Install Icarus Verilog</b><br>
+				If the compile ran OK, then next you install Icarus Verilog in the directory you have chosen. This is a little tricky, however, because the tools like &quot;strip&quot;, &quot;ranlib&quot; and etc. that come with Mingw do not understand the Cygwin style paths that are in the makefile. To get around that problem, first remove the Mingw from your path before doing the next step. An easy way to do that is to open a fresh Cygwin window. When you are ready, install like this:<br>
+				&nbsp;&nbsp;&nbsp;<i>$ /usr/bin/make install</i><br>
+				This is part of what the configure program did for you. The Makefiles now know to put the files under the D:\iverilog (or whatever directory you chose) directory, and away you go.
+			<li><b>Running Icarus Verilog</b><br>
+				Finally, put the D:\iverilog\bin directory in your Windows path, and you should be able to run the iverilog and vvp commands to your heart's content.
+		</ol>
+		<p>Currently, the iverilog.exe uses the path to itself to locate the libraries and modules associated with itself. In other words, if you execute the D:\iverilog\bin\iverilog.exe program, it will locate its subparts in the D:\iverilog directory and subdirectories below that. This means you can move the Icarus Verilog installation by simply moving the root directory and all its contents.</p>
+		<hr noshade width="80%">
+		<h2><a id="Mac" name="Mac"></a>Mac OS X Compilation Advice</h2>
+		<p>The following procedure will build and install Icarus Verilog on Mac OS X. It is assumed that you already have experience with Unix and Terminal.app and a basic knowledge of how to download, compile and install software from source form.</p>
+		<ol>
+			<li>Obtain and install a libdl compatibility library.<br>
+				If you don't already have /usr/local/lib/libdl.{a,dylib} and /usr/local/include/dlfcn.h, you can obtain the source for a compatibility layer from<br>
+				&nbsp;&nbsp;&nbsp;<a href="http://prdownloads.sourceforge.net/fink">http://prdownloads.sourceforge.net/fink<br>
+				</a>or use the file included on this CD:<br>
+				&nbsp;&nbsp;&nbsp;<a href="../extras/dlcompat-20030629.tar.gz">dlcompat-20030629.tar.gz</a><br>
+				Unpack this tar file and read the README and Makefile. Install the library according to the instructions. Installation in /usr/local is strongly recommended since otherwise autoconf very likely won't be able to find it.
+			<li>Make sure you have a copy of the 'gperf' tool. This does not come with the Mac OS X 10.1 developer tools, so you probably don't. You can check with:<br>
+				&nbsp;&nbsp;&nbsp;<i>% which gperf</i><br>
+				If not found, grab a gperf source package and install it. See <a href="#gperfmacosx">GPERF for MacOSX</a> below.<li>Configure, build and install the Icarus Verilog sources as normal.<br>
+				The only change you need to make here is to use a configure command like:<br>
+				&nbsp;&nbsp;&nbsp;<i>% CC=&quot;cc -no-cpp-precomp&quot; ./configure</i><br>
+				This assumes you are using 'sh', 'zsh', or 'bash'. If you are using 'csh' or 'tcsh', then you'll want something like:<br>
+				&nbsp;&nbsp;&nbsp;<i>% setenv CC &quot;cc -no-cpp-precomp&quot;</i><br>
+				&nbsp;&nbsp;&nbsp;<i>% ./configure</i><br>
+				You can, of course, add other configure options.
+			<li><b>NOTE</b>: 'make check' will not work until after 'make install' has been run since dynamically loaded code is searched for in the install location rather than the build location. The dlopen emulation library doesn't support a search path option.<br>
+				If you are worried about overwriting a working installation with a new, potentially broken one, you can always configure using <i>--prefix=&quot;/some/path&quot;</i>, and install there to make sure everything is working and then re-configure with the real path you want to install at, make clean, and make install.<li>Done!
+		</ol>
+		<h3><a id="gperfmacosx" name="gperfmacosx"></a><b>GPERF for MacOSX<br>
+			</b></h3>
+		<p>Unpack gperf source code for version 2.7.2 (included on this CD):<br>
+			&nbsp;&nbsp;&nbsp;<a href="../extras/gperf-2.7.2.tar.gz">gperf-2.7.2.tar.gz</a></p>
+		<p>Apply a patch to the gperf-2.7.2 source (also on this CD):<br>
+			&nbsp;&nbsp;&nbsp;<a href="../extras/gperf-2.7.2-macosx-patch.gz">gperf-2.7.2-macosx-patch.gz<br>
+			</a>using the &quot;patch&quot; program (see the patch documentation for help on how to do this).</p>
+		<p>Now compile and install according to the instructions given in the gperf source code.</p>
+	</body>
+
+</html>

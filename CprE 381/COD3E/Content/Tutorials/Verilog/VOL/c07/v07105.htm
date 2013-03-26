@@ -1,0 +1,25 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td valign="top" width="600">
+				<center>
+					<img src="images/v0735g1.gif" height="209" width="369">
+					<p></p>
+				</center>
+				Another type of race condition does not involve sampling a signal, but involves two concurrent updates of a signal. The simplest example of this type of race is:
+				<pre>
+    initial #1 x = 1;
+    initial #1 x = 0;
+</pre>
+				It is pretty obvious that this is an indeterminate situation. It is not so obvious that it remains indeterminate if the assignments were replaced with non-blocking assignments.</td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

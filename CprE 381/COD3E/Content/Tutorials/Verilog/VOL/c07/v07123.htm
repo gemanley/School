@@ -1,0 +1,63 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td valign="top" width="235"><img src="images/v0741g1.gif" height="93" width="235">
+				<p></p>
+			</td>
+			<td valign="top" width="335">It is usually the case that the most effective way to reduce the number of events is to write the code at the highest level of abstraction possible. The most common manifestation of a higher level of abstraction is the use of vectors and vector operations wherever possible.
+				<p></p>
+			</td>
+		</table>
+		<table width="600">
+			Consider this example:
+			<pre>
+    reg [7:0] out, in1, in2;
+    assign out = in1 &amp; in2;
+vs.
+    reg [7:0] out, in1, in2;
+    and (out[0], in1[0], in2[0]);
+    and (out[1], in1[1], in2[1]);
+    and (out[2], in1[2], in2[2]);
+    and (out[3], in1[3], in2[3]);
+    and (out[4], in1[4], in2[4]);
+    and (out[5], in1[5], in2[5]);
+    and (out[6], in1[6], in2[6]);
+    and (out[7], in1[7], in2[7]);
+</pre>
+			Performing the and operation on the entire vector requires just a handful of machine instructions. Performing eight single-bit and operations, on the other hand, requires several instructions each, and extracting and inserting the individual bits out of/into the vectors likewise requires several instructions. The end result is that the gate-level version of the above will take about ten times longer to execute than the RTL version.
+			<p>Another example is often found in library modules.</p>
+			<pre>
+    module dff4 (out, out_, in, clock);
+        output [3:0] out, out_;
+        input  [3:0] in, clock;
+        
+        dff1 d3 (out[3], out_[3], in[3], clock);
+        dff1 d2 (out[2], out_[2], in[2], clock);
+        dff1 d1 (out[1], out_[1], in[1], clock);
+        dff1 d0 (out[0], out_[0], in[0], clock);
+    endmodule
+vs.
+    module dff4 (out, out_, in, clock);
+        output [3:0] out, out_;
+        input  [3:0] in, clock;
+        reg    [3:0] out;
+        
+        assign out_ = ~out;
+        always @(posedge clock)
+            out 
+				
+				
+				<= in; endmodule </PRE> The second version of this is at least 4 times faster than the first version. </TABLE> </FONT> </BODY> </HTML>>
+				
+				
+			</pre>
+		</table>
+	</body>
+
+</html>

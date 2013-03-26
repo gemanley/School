@@ -1,0 +1,38 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td>UDPs are defined just like modules, but with a different set of keywords. The definition starts with <b>primitive</b> and ends with <b>endprimitive</b>. The description of the logic function is done by means of a table.
+					<p>Example:</p>
+					<p></p>
+					<pre>
+    primitive AO( OUT, A, B, C );
+        output OUT;             
+        input A, B, C;
+        
+        table
+        //    A    B    C  :  OUT
+              1    1    ?  :  1;
+              ?    ?    1  :  1;
+              0    ?    0  :  0;
+              ?    0    0  :  0;
+        endtable
+    endprimitive
+</pre>
+					<p></p>
+					<center>
+						<img src="images/v0428g1.gif" height="145" width="272"></center>
+					<p>In the example, notice the use of the comment. This is not required, but it is a convention which is universally used to provide labels for the table columns.</p>
+				</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

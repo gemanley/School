@@ -1,0 +1,34 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td width="600">Click each of the complications to learn more about it.
+				<p><a href="a07060.htm">Timing</a><br>
+					<a href="b07060.htm">Efficiency</a><br>
+					<a href="c07060.htm">Initialization</a><br>
+					<a href="d07060.htm">Register Selection</a><br>
+					<a href="e07060.htm">State Encoding</a><br>
+					<a href="f07060.htm">Latch Inferencing</a></p>
+				<p>Another problem which must be addressed is state machine initialization. In general, the state machine is supposed to start in a well-defined state, and there is usually a reset signal which is supposed to put it into that state.</p>
+				<p>Sometimes, you simply assume a valid starting state, which is what we have done up to now in the examples. This is done by means of an initial statement with an assignment to the state vector. This, however, is not synthesizable, so if this design is to be synthesized, a better solution must be used.</p>
+				<p>Synthesizers use a stylized method of inferring flip-flops with reset, so that method is what you should usually use. For example,</p>
+				<pre>
+    always @(posedge clock or negedge reset)
+        if (!reset)
+            state 
+					
+					
+					<= START; else state <= nextstate;</PRE> This assumes an active-low reset signal which will put the state vector in the proper state (START). Note that START would typically be a parameter or a constant (usually 0). </TABLE> </FONT> </BODY> </HTML>>
+					
+					
+				</pre>
+			</td>
+		</table>
+	</body>
+
+</html>

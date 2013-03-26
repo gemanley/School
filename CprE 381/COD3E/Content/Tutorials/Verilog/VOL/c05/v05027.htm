@@ -1,0 +1,27 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>The most notable feature of events is their transient nature. When an event happens, all event controls which are <b>currently</b> waiting for that event will be satisfied. That is, any statement which is blocked from executing by its event control will now be unblocked. However, any new event control for that event will not be satisfied, and must wait for the next occurrence.
+					<p>For example,</p>
+					<p><tt></tt></p>
+					<dl>
+						<dd>always begin<br>
+						<dd>@(posedge clk) state1 = newstate1;<br>
+						<dd>@(posedge clk) state2 = newstate2;<br>
+						<dd>end
+							<p></p>
+					</dl>
+					</TT>In the above, <tt>state1</tt> would be assigned on the first rising edge of <tt>clk</tt>, and <tt>state2</tt> would be assigned on the second rising edge of <tt>clk</tt>. The always loop would take two cycles to complete, and each assignment would be made every other cycle.</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

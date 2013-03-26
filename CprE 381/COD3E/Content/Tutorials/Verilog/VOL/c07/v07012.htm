@@ -1,0 +1,58 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td valign="TOP" width="480">As we've seen, making a clock with a single not gate doesn't work, because the initial value of the net is x. You might think that you could force the value of the net to 0 or 1 for half the period and then release it, thus starting the clock. In fact, this doesn't work, because when you release the net, it goes back to x.
+				<p>In real life, clock circuits usually start out at either 0 or 1 and oscillate from there. You really can't do that in Verilog. The best you can do is to force a net to have a non-x value for some period of time and then release it. The following works:</p>
+				<pre>
+    not #period/2 (clk, clk);
+
+    initial begin
+    #start      force clk = 0;
+    #period/2+1 release clk;
+    end
+</pre>
+				The above works because the force overrides other drivers on the clk net, but it doesn't cancel them, so the not gate drives a 1 after period/2. When the release is done, the not gate drives the net to 1, which starts the next cycle.
+				<p>If start=5 and period=20, the clk signal would look like this:</p>
+				<p></p>
+			</td>
+			<td valign="TOP" width="120"><img src="images/v0704g1.gif" height="219" width="117"></td>
+		</table>
+		<center>
+			<table width="150" border="1">
+				<td align="center" width="75"><b><tt>time</tt></b></tt></td>
+				<td align="center" width="75"><b><tt>clk</tt></b></td>
+				<tr>
+					<td align="center" width="75"><tt>0</tt></td>
+					<td align="center" width="75"><tt>x</tt></td>
+				</tr>
+				<tr>
+					<td align="center" width="75"><tt>5</tt></td>
+					<td align="center" width="75"><tt>0</tt></td>
+				</tr>
+				<tr>
+					<td align="center" width="75"><tt>16</tt></td>
+					<td align="center" width="75"><tt>1</tt></td>
+				</tr>
+				<tr>
+					<td align="center" width="75"><tt>26</tt></td>
+					<td align="center" width="75"><tt>0</tt></td>
+				</tr>
+			</table>
+		</center>
+		<p></p>
+		<table width="600">
+			Notice that the 0-&gt;1 transition takes place at 16, not 15.
+			<p></p>
+			<center>
+				<a href="JavaScript:parent.dispWindow('v07012r1.htm','FlipFlop')"><img src="images/v0704b1.gif" height="39" width="153" border="0"></a></center>
+		</table>
+		</FONT>
+	</body>
+
+</html>

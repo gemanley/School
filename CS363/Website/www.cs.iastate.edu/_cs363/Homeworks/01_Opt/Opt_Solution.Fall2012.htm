@@ -1,0 +1,122 @@
+<html>
+
+
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Homeworks/01_Opt/Opt_Solution.Fall2012.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:01:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>New Page 1</title>
+<meta name="Microsoft Border" content="t, default">
+</head>
+
+<body><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td>
+
+<p><font face="AGaramond" size="3">Com S 363: Introduction to Database Systems</font><br>
+<font face="AGaramond" size="5">Introduction to Database Systems </font></p>
+<p>
+
+</p>
+<p>&nbsp; </p>
+
+</td></tr><!--msnavigation--></table><!--msnavigation--><table dir="ltr" border="0" cellpadding="0" cellspacing="0" width="100%"><tr><!--msnavigation--><td valign="top">
+
+<p><font size="5">Homework 1 Solution</font></p>
+<p>1. &#928; <sub>A</sub> (&#963; <sub>r.B = s.B &#8743; r.A &gt; 55 &#8743; s.H = 100</sub> (r 
+x s))
+</p>
+<p>2. &#928; <sub>A</sub> ( &#963; <sub>r.A &gt; 55 &#8743; s.H = 100</sub> (r <span LANG="EN">
+<font FACE="Arial Unicode MS" LANG="KO">&#8904;</font></span> s))</p>
+<p>3. The expression tree is shown below. </p>
+<p><img border="0" src="UnoptimizedTree.gif" width="181" height="181"></p>
+<p>4. Use 8 buffers for input of r, 1 buffer for inputting s, and 1 buffer for 
+writing the output. Compute natural join and perform selection and projection on 
+the fly. <br>
+The costs are as follows: </p>
+<p>Cost of input r: 800 page accesses. </p>
+<p>Cost of input s: 1500 * ceiling(800/8) = 150,000. Because, s consisting of 
+1500 pages will have to be read ceiling(800/8) times. </p>
+<p>Cost of output. The natural join would yield 
+<span style="background-color: #FFFF00">30,000</span> tuples (given). The 
+conditions x.A &gt; 55<br>
+and y.H will reduce this to 20000 * 0.20 *0.02 tuples . Only attribute A, consisting of 10 bytes is projected. 
+The output is to be stored in 1000 byte pages. Therefore, the number of pages in 
+the output is ceiling(30000 * 0.02 *0.2 * 10 / 1000) = ceiling(1.2 =
+<span style="background-color: #FFFFFF">2</span>. 
+Therefore, the cost of output is 2 page accesses. </p>
+<p>Total cost = 800 + 150,000 + 2 = 150,802 page accesses. All 10 buffers are 
+used. </p>
+<p>5. The optimized expression tree is shown below. <br>
+</p>
+<p><img border="0" src="OptimizedTree.gif" width="181" height="181"></p>
+<p>6. Solution: Preprocess s and join with r. </p>
+<p>Preprocessing s and storing its output s1 on the disk: Use 2 buffers; 
+instream s costing 1500 page accesses; harness the output s1 which consists of 
+1500 (size of s) * 2% (due to H = 100) * 1/5 (only one out of 5 equal-length 
+attributes is projected) = 6 pages. Total page accesses required = 1500 + 6 = 
+1506 page accesses. Size of s1 = 6 pages. </p>
+<p>Perform join of s1 with r: Use 6 buffers to store all of s1 in memory, use 1 
+buffer to instream r, use 1 buffer to outstream the output consisting of 1 page. 
+Cost: 6 + 800 + 2 = 808. </p>
+<p>Total page accesses = 1506 + 807 = 2313.</p>
+<p>Observation: Keep in mind two things: (1) Note that while s is being 
+preprocessed, the output can be left in the buffers. This would save 6 pages 
+accesses to write to the disk and another 6 to read. (2) For performing join without any 
+additional knowledge or structures on relations r and s, each relation has to be 
+instreamed at least once. (3) Therefore, the main problem is that for computing 
+the join one relation has to be instreamed multiple times. This gives rise to 
+the following strategy. </p>
+<p>General strategy: Consider preprocessing the relation that produces smaller 
+output; call it relation 1 and the other relation as relation 2. If while 
+computing the join of the output of relation 1 will fit in available buffers (10 
+- 1 - 1 = 8 in this case), there is no need to preprocess relation 2 as it will 
+need to be instreamed only once. If the available buffers are not enough to hold 
+the whole output of relation 1, preprocessing of relation 2 may be considered. 
+Beware in that case too, if the size of relation 2 does not reduce appreciably, 
+preprocessing it may not lead to a better solution.</p>
+<p>Question 1. In this case, what if we preprocessed r as well? Not a good idea 
+as preprocessing will require all of r to be instreamed once. In the above 
+strategy r has been instreamed only once anyway. If the size of s1 turned out to 
+be more than 8 pages, preprocessing r may become a viable option. </p>
+<p>Question 2. In this case, what if we preprocessed r instead of s? The output 
+after preprocessing r will consist of 800 * 20% * 2/4 = 800 pages. The join will 
+require the other relation s to be instreamed multiple times. </p>
+<p>7. Preprocessing s will produce an output of 12 pages. Cost of preprocessing 
+1500 + 12 = 1512. </p>(See Question 1 above) In this case the output will not fit in 8 buffers, 
+meaning s will have to be instreamed twice (ceiling (12/8) = 2). Will it help to 
+preprocess r? Let's try. 
+<p>Preprocess r: 800 (input) + 800 * 0.2 * 2/4 (output) = 880 page accesses, The size 
+of r reduces to 80. </p>
+<p>Now join: 12 (input s) + 80 * ceiling(12/8) + 2 (new size of output) = 174 page accesses. </p>
+<p>Total cost: 1512 (preprocess s) + 880 (preprocess r) + 174 (join) (output) = 
+2566 page accesses. </p>
+<p>Observation. It is clear that r will have to be instreamed twice. 
+Preprocessing can be done during the first pass of r while performing the join. 
+This would require 1 of the 8 buffers diverted for this purpose. Luckily, we do 
+have the buffer available. Why? celing(12/7) is still 2. </p>
+<p>8. Use s as the outer relation, and r with B+ tree as the inner relation.</p>
+<p>Basic solution: The usage of buffers: Total 3, 1 for reading s, 1 for reading 
+r, 1 for writing output. To access s: 1500. To access r using B+ tree: 30000 * 
+2% * 3 = 1800. To write output: 1. Total = 1500 + 1800 + 2 = 3302.</p>
+<p>Improvement: At the cost of an additional buffer, store the root of the 
+B-tree in a buffer. In the above calculations 30000 * 2% * 3 becomes 30000 * 2% 
+* 2 = 1200. Total = 1500 + 1200 + 2 = 2702.</p>
+<p>9. Cost </p>
+<p>Prepare r: Preprocess: 1506 page accesses, size reduces to 6, can be sorted 
+in memory requiring no cost. </p>
+<p>Prepare s: Preprocess: 880 page accesses, size reduces to 80 pages. Sort: 2 
+* 80 * ceiling(log<sub>10</sub>80) = 320 page accesses. Total 880 + 320 = 1200 
+page accesses. </p>
+<p>Join amounts to a merge operation where r and s are instreamed simultaneously 
+only once, 3 buffers required. Cost = 6 (read r) + 80 (read s) + 2 (output) = 
+88 page accesses. </p>
+<p>Grand total = 1506 + 1200 + 87 = 2793 page accesses. </p>
+<p>Observation: As all of s after preprocessing fits in memory, sorting is NOT a 
+good strategy. But on the other hand, please keep in mind that these plans are 
+only proposals where costs are being estimated without any promise that the plan 
+will actually be chosen. </p><!--msnavigation--></td></tr><!--msnavigation--></table></body>
+
+
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Homeworks/01_Opt/Opt_Solution.Fall2012.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:01:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+</html>

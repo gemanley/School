@@ -1,0 +1,116 @@
+<html>
+
+
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Homeworks/05_InfoInt/InfoInt_Solution.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:01:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Homework</title>
+<meta name="Microsoft Border" content="t, default">
+</head>
+
+<body><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td>
+
+<p><font face="AGaramond" size="3">Com S 363: Introduction to Database Systems</font><br>
+<font face="AGaramond" size="5">Introduction to Database Systems </font></p>
+<p>
+
+</p>
+<p>&nbsp; </p>
+
+</td></tr><!--msnavigation--></table><!--msnavigation--><table dir="ltr" border="0" cellpadding="0" cellspacing="0" width="100%"><tr><!--msnavigation--><td valign="top">
+
+<font SIZE="5">
+<p><i><font face="Arial">Homework on information integration&nbsp; </font></i></font><i><font SIZE="5" face="Arial">&nbsp;</font></i></p>
+<p><font face="Times New Roman">1A. </font></p>
+<p class="MsoNormal"><span style="font-family: Times New Roman">insert into
+</span><span style="font-family: Times New Roman; color: black">Computers(speed, 
+memory, hd) <br>
+&nbsp;&nbsp; select processor, mem, disk/1024 <br>
+&nbsp;&nbsp; from Systems; </span></p>
+<p class="MsoNormal"><span style="font-family: Times New Roman">insert into</span><span style="font-family: Times New Roman; color: black"> 
+screenSize <br>
+&nbsp;&nbsp; from Systems;</span></p>
+<p><span style="font-family: Times New Roman; color: black">1B. </span></p>
+<p class="MsoNormal"><span style="font-family: Times New Roman">insert into</span><span style="font-family: Times New Roman; color: black"> 
+Systems(processor, mem, disk, screenSize) <br>
+</span><span style="font-family: Times New Roman">&nbsp;&nbsp; select</span><span style="font-family: Times New Roman; color: black"> 
+speed, memory, hd*1024, screen <br>
+&nbsp;&nbsp; from Computers cross join Monitors; </span></p>
+<p class="MsoNormal"><span style="font-family: Times New Roman">2. </span></p>
+<p class="MsoNormal"><span style="font-family: Times New Roman; color: black">At 
+Company A we need: </span></p>
+<p class="MsoNormal"><span style="font-family: Times New Roman">select</span><span style="font-family: Times New Roman; color: black"> 
+* <br>
+from PCMed <br>
+where mem = ‘$m’ and disk = ‘$d’; </span></p>
+<p class="MsoNormal"><span style="font-family: Times New Roman; color: black">=&gt;
+</span></p>
+<p class="MsoNormal"><span style="font-family: Times New Roman">select</span><span style="font-family: Times New Roman; color: black"> 
+'A', speed, memory, hd, screen <br>
+from Computers cross join Monitors <br>
+where memory = ‘$m’ and hd = ‘$d’;</span></p>
+<p class="MsoNormal"><span style="font-family: Times New Roman; color: black">At 
+B we use: </span></p>
+<p class="MsoNormal"><span style="font-family: Times New Roman">select</span><span style="font-family: Times New Roman; color: black"> 
+* <br>
+from PCMed <br>
+where mem = ‘$m’ and disk = ‘$d’; </span></p>
+<p class="MsoNormal"><span style="font-family: Times New Roman; color: black">=&gt;
+</span></p>
+<p class="MsoNormal"><span style="font-family: Times New Roman">select</span><span style="font-family: Times New Roman; color: black"> 
+'B', processor, mem, disk, screenSize <br>
+from Systems <br>
+where mem = ‘$m’ and disk = ‘$d’; </span></p>
+<p class="MsoNormal"><span style="font-family: Times New Roman">3A. </span>
+<span style="font-family: Times New Roman; color: black">The dimension 
+attributes are: cust, date, proc, memory, disk and cd. The dependent attributes 
+are: quant and price. </span></p>
+<p class="MsoNormal"><span style="font-family: Times New Roman">3B. </span>
+<font face="Times New Roman">We assume that there is an ID attribute for each of 
+the attributes of Orders; the ID's appear in the tuples of Orders and link those 
+tuples to tuples of the dimension tables. We use the same names for attributes 
+of Orders and their corresponding dimension tables. </font></p>
+<p class="MsoNormal"><span style="font-family: Times New Roman; color: black">&nbsp;&nbsp; 
+Cust(ID, name address, phone, creditCard) <br>
+&nbsp;&nbsp; Date(day, month, year) <br>
+&nbsp;&nbsp; Proc(ID, manf, model, name, speed) <br>
+&nbsp;&nbsp; Disk(ID, manf, model, cylinders, capacity, surfaces, rotSpeed) <br>
+&nbsp;&nbsp; CD(ID, manf, type, speed) </span></p>
+<p class="MsoNormal"><span style="font-family: Times New Roman">4A. </span>
+<span style="font-family: Times New Roman; color: black">The ratio is 
+(11/10)^10, or about 2.59. </span></p>
+<p class="MsoNormal"><span style="font-family: Times New Roman">4B. </span>
+<span style="font-family: Times New Roman; color: black">The ratio is (3/2)^10, 
+or about 57.67. </span></p>
+<p class="MsoNormal"><span style="font-family: Times New Roman">5A. </span>
+<span style="font-family: Times New Roman; color: black">We would use the tuples 
+of the form </span></p>
+<p class="MsoNormal"><span style="font-family: Times New Roman; color: black">
+&nbsp;&nbsp;&nbsp;&nbsp; Sales(*, 'blue', *, d, val, cnt)</span></p>
+<p class="MsoNormal"><span style="font-family: Times New Roman; color: black">
+where d ranges over all dealers. </span></p>
+<p class="MsoNormal"><span style="font-family: Times New Roman; color: black">
+5B. We would use the tuples of the form </span></p>
+<p class="MsoNormal"><span style="font-family: Times New Roman; color: black">
+Sales(‘Gobi’, ‘green’, *, ‘Smilin Sally’, val, cnt) </span></p>
+<p class="MsoNormal"><span style="font-family: Times New Roman">5C. </span>
+<span style="font-family: Times New Roman; color: black">The answer to the query 
+is the set of (d, cnt/31) obtained from all tuples of CUBE(Sales) with the form</span></p>
+<p class="MsoNormal"><span style="font-family: Times New Roman; color: black">
+Sales(‘Gobi’, *, c, d, val, cnt)</span></p>
+<p class="MsoBodyTextIndent2" style="text-indent: .5in; font-family: Times New Roman; color: black; margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">
+where c ranges from March 1, 2000 to March 31, 2000; and d ranges over all 
+dealers.</p>
+<p class="MsoBodyTextIndent2" style="text-indent: .5in; font-family: Times New Roman; color: black; margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">
+&nbsp;</p>
+
+<!--msnavigation--></td></tr><!--msnavigation--></table></body>
+
+
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Homeworks/05_InfoInt/InfoInt_Solution.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:01:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+</html>

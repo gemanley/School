@@ -1,0 +1,39 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<script language="JavaScript">
+
+
+function dispWindow(url, windowName) {
+	var pghtm = document.location.href
+	if (pghtm.indexOf("\\c") > -1) {var i = pghtm.indexOf("\\c")}
+	else if (pghtm.indexOf("\/c") > -1) {var i = pghtm.lastIndexOf("\/c")}
+	else if (pghtm.indexOf("\/") > -1) {var i = pghtm.lastIndexOf("\/")}
+	else {var i = pghtm.lastIndexOf("\\")}
+	var newLocation = pghtm.substring(0,i+5) + url
+	window.open(newLocation,windowName,'width=640, height=240, scrollbars, resizable');
+}
+
+</script>
+
+	<body bgcolor="white">
+		<target="v01183">
+		<table width="600" cellpadding="10">
+			<BASEFONT="courier" size="3">
+			<tr>
+				<td valign="TOP" width="380">Continuous assignments are sometimes known as data flow statements because they describe how data moves from one place, either a net or register, to another. They are usually thought of as representing combinational logic. In general, any logic functionality which can be implemented by means of a continuous assignment can also be implemented using primitive instances. A continuous assignment looks like this:
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assign [<a href="JavaScript:dispWindow('v01183r2.htm','drive_strength')">drive_strength</a>] [<a href="JavaScript:dispWindow('v01183r3.htm','delay3')">delay3</a>] list_of_net_assignments ;</p>
+					<p>Examples:</p>
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assign w1 = w2 &amp; w3;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assign (strong1, pull0) mynet = enable;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assign #1 busout = enable ? data : 16'bz;<br>
+					</p>
+				</td>
+				<td valign="BOTTOM" width="210"><img src="images/v0132g1.gif" height="86" width="208"></td>
+			</tr>
+		</table>
+	</body>
+
+</html>

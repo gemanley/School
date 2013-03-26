@@ -1,0 +1,63 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<form>
+			<b>What is the correct way to sample the signal x whenever clock transitions from 0 to 1?</b>
+			<p></p>
+			<table width="600">
+				<tr>
+					<td width="20"><input onclick="parent.setValue(0,0)" type="radio" name="A" value="A"></td>
+					<td width="580">a. always (clock) sample = x;</td>
+				</tr>
+				<tr>
+					<td width="20" HALIGN="LEFT"><input onclick="parent.setValue(0,1)" type="radio" name="A" value="B"></td>
+					<td width="580" HALIGN="LEFT">b. always @(posedge clock) #1 sample = x;)</td>
+				</tr>
+				<tr>
+					<td width="20" HALIGN="LEFT"><input onclick="parent.setValue(0,2)" type="radio" name="A" value="C"></td>
+					<td width="580" HALIGN="LEFT">c. always @(posedge clock) sample = #1 x;</td>
+				</tr>
+				<tr>
+					<td width="20" HALIGN="LEFT"><input onclick="parent.setValue(0,3)" type="radio" name="A" value="D"></td>
+					<td width="580" HALIGN="LEFT">d. always @(posedge clock) sample = x;</td>
+				</tr>
+				<tr>
+					<td width="20" HALIGN="LEFT"><input onclick="parent.setValue(0,4)" type="radio" name="A" value="E"></td>
+					<td width="580" HALIGN="LEFT">e. always @(clock) sample = x;</td>
+				</tr>
+				<tr>
+					<td width="20" HALIGN="LEFT"><input onclick="parent.setValue(0,5)" type="radio" name="A" value="F"></td>
+					<td width="580" HALIGN="LEFT">f. always (posedge clock) sample = x;</td>
+				</tr>
+				<tr>
+					<td width="20" HALIGN="LEFT"><input onclick="parent.setValue(0,6)" type="radio" name="A" value="G"></td>
+					<td width="580" HALIGN="LEFT">g. a or f</td>
+				</tr>
+				<tr>
+					<td width="20" HALIGN="LEFT"><input onclick="parent.setValue(0,7)" type="radio" name="A" value="H"></td>
+					<td width="580" HALIGN="LEFT">h. b or c</td>
+				</tr>
+				<tr>
+					<td width="20" HALIGN="LEFT"><input onclick="parent.setValue(0,8)" type="radio" name="A" value="I"></td>
+					<td width="580" HALIGN="LEFT">i. c or d</td>
+				</tr>
+				<tr>
+					<td width="20" HALIGN="LEFT"><input onclick="parent.setValue(0,9)" type="radio" name="A" value="J"></td>
+					<td width="580" HALIGN="LEFT">j. none of the above</td>
+				</tr>
+				<tr>
+					<p><br>
+					</p>
+				</tr>
+			</table>
+		</form>
+		<b>Click Done to check your answer.</b>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:parent.checkAnswer(0,8)"><img src="images/vdone.gif" height="39" width="74" border="0"></a></TD></TABLE></p>
+	</body>
+
+</html>

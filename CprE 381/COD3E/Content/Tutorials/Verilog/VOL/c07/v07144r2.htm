@@ -1,0 +1,209 @@
+<script language="JavaScript">
+
+function dispWindow(url, windowName) {
+	var pghtm = parent.location.href
+	if (pghtm.indexOf("\\c") > -1) {var i = pghtm.indexOf("\\c")}
+	else if (pghtm.indexOf("\/c") > -1) {var i = pghtm.lastIndexOf("\/c")}
+	else if (pghtm.indexOf("\/") > -1) {var i = pghtm.lastIndexOf("\/")}
+	else {var i = pghtm.lastIndexOf("\\")}
+	var newLocation = pghtm.substring(0,i+5) + url
+	var newWindow = window.open(newLocation, windowName, 'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1');
+	if (navigator.appName == "Netscape") {
+		newWindow.focus();
+	}
+	else if (navigator.appName.indexOf("Explorer") > -1 && navigator.appVersion.indexOf("4") > -1) {
+		newWindow.focus();
+	}
+}
+
+</script>
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			<b>LocalInterruptController</b>
+			<p></p>
+			<pre>
+/*  LocalInterruptController.v
+    Copyright (c) 1990 NeXT, Inc.
+    Originated:  Wed Oct 10 08:53:51 PDT 1990 by Mark Ross
+    Last Edited:  $Date$ by $Author$
+    
+Overview:
+    Performs the control to send interrupt, reset, and NMI transactions to
+    the CMC.  It monitors all of the interrupt lines which come from the 
+    devices and acts on any 0 to 1 transition on those lines (by requesting
+    a write transaction on the NextBus).  During the time between receiving
+    the first interrupt and when the transaction actually goes out on the
+    bus, intervening interrupts can happen.  ALL interrupts which arrive 
+    before the data cycle of the interrupt write will be sent to the 
+    CMC and subsequently masked.  Any which come after this time will cause
+    another transaction to be run to report the new interrupt.  
+    
+    This module instantiates the data path module and the state machine 
+    module.  
+    
+IMPORTS:
+    ../Verilog/LocalInterruptController.h  USING [sizes]
+    
+EXPORTS:
+    modules:  LocalInterruptController
+    tasks:  none
+    
+Internal Tasks:
+    none
+Internal Functions:
+    none
+CHANGE LOG:
+    $Log$
+    
+*/
+
+module  LocalInterruptController(
+    /*  General signals  */
+    reset, 
+    clock,
+    /*  Data bus signals  */
+    localIODataBusOut,
+    /*  Interrupt signals  */
+    deviceInterruptVector,
+    nmiRequest,
+    resetRequest,
+    forceInterruptTransaction, 
+    /*  Interrupt Number and valid bits  */
+    interruptValidVector,
+    interrruptNumberVector,
+    /*  Signals to interact with the NextBusInterfaceLogic  */
+    nextBusRequest, 
+    nextBusGrant,
+    masterStart, 
+    ioMasterStart,
+    masterDataStrobe,
+    /*  Scan signals  */
+    scanShiftIn,
+    scanShiftOut,
+    scanShiftEnable
+    );
+    /*  IO Declarations  */
+    /*  General signals  */
+        input                   reset;
+        input                   clock;
+    /*  Data bus signals  */
+        output [32-1:0]         localIODataBusOut;
+    /*  Interrupt signals  */
+        input [3-1:0]           deviceInterruptVector;
+        input                   nmiRequest;
+        input                   resetRequest;
+        input                   forceInterruptTransaction;
+    /*  Interrupt Number and valid bits  */
+        input [3-1:0]           interruptValidVector;
+        input [(3*4)-1:0]       interrruptNumberVector;
+    /*  Signals to interact with the NextBusInterfaceLogic  */
+        output                  nextBusRequest;
+        input                   nextBusGrant;
+        input                   masterStart;
+        output                  ioMasterStart;
+        input                   masterDataStrobe;
+    /*  Scan signals  */
+        input                   scanShiftIn;
+        output                  scanShiftOut;
+        input                   scanShiftEnable;
+        
+    /*  Internal Wires  */
+    wire                    selectDeviceInterruptAddress;
+    wire                    selectNextBusNMIAddress;
+    wire                    selectNextBusResetAddress;
+    wire                    selectDeviceInterruptData;
+    wire                    maskDeviceInterrupts;
+    wire                    maskNMI;
+    wire                    maskReset;
+    wire                    unmaskedDeviceInterruptPending;
+    wire                    unmaskedNMIPending;
+    wire                    unmaskedResetPending;
+    
+    wire [2-1:0]            internalScanShiftIn;
+    wire [2-1:0]            internalScanShiftOut;
+    wire                    realUnmaskedInterruptPending;
+    
+    /*  Scan assignment  */
+    assign {scanShiftOut, internalScanShiftIn} = 
+        {internalScanShiftOut, scanShiftIn};
+        
+    /* Other assignments */
+    assign unmaskedDeviceInterruptPending = 
+        realUnmaskedInterruptPending | 
+        forceInterruptTransaction;
+    
+    /*  Instances  */
+
+    <a href="JavaScript:dispWindow('v07144rf.htm','Window2')">LocalInterruptStateMachine</a> localInterruptStateMachine(
+        /*  General inputs  */
+        reset,
+        clock,
+        /*  Control outputs  */
+        selectDeviceInterruptAddress,
+        selectNextBusNMIAddress,
+        selectNextBusResetAddress,
+        selectDeviceInterruptData,
+        maskDeviceInterrupts, 
+        maskNMI, 
+        maskReset, 
+        /*  Status signals from the data path  */
+        unmaskedDeviceInterruptPending,
+        unmaskedNMIPending,
+        unmaskedResetPending, 
+        /*  Signals to interact with the NextBusInterfaceLogic  */
+        nextBusRequest, 
+        nextBusGrant,
+        masterStart, 
+        ioMasterStart,
+        masterDataStrobe,
+        /*  Scan signals  */
+        internalScanShiftIn[0], 
+        internalScanShiftOut[0],
+        scanShiftEnable
+        );
+        
+    <a href="JavaScript:dispWindow('v07144rg.htm','Window2')">LocalInterruptDataPath</a> localInterruptDataPath(
+        /*  General signals  */
+        reset, 
+        clock,
+        /*  Data signal  */
+        localIODataBusOut,
+        /*  Interrupt signals  */
+        deviceInterruptVector,
+        nmiRequest,
+        resetRequest,
+        /*  Interrupt Number and valid bits  */
+        interruptValidVector,
+        interrruptNumberVector,
+        /*  Control inputs from the state machine  */
+        selectDeviceInterruptAddress,
+        selectNextBusNMIAddress,
+        selectNextBusResetAddress,
+        selectDeviceInterruptData,
+        maskDeviceInterrupts, 
+        maskNMI, 
+        maskReset, 
+        /*  Status signals from the data path  */
+        realUnmaskedInterruptPending,
+        unmaskedNMIPending,
+        unmaskedResetPending, 
+        /*  Scan signals  */
+        internalScanShiftIn[1], 
+        internalScanShiftOut[1],
+        scanShiftEnable
+        );
+endmodule  /*  LocalInterruptController  */
+</pre>
+		</table>
+	</body>
+
+</html>

@@ -1,0 +1,24 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="420">Tasks are essentially subroutines in Verilog, but they are subroutines which correspond to hardware. Click each of the bulleted items to learn more about it.
+					<p><map name="menu"><area shape="RECT" coords="1,1,188,21" href="v06042.htm?i=1"><area shape="RECT" coords="1,35,184,59" href="v06042.htm?i=2"><area shape="RECT" coords="1,74,338,92" href="v06042.htm?i=3"></map> <img src="images/v0614g1.gif" height="96" width="338" usemap="#menu" VALIGN="TOP" HALIGN="LEFT" border="0"></p>
+					<p><% x=Request.QueryString("i") %><% select case x %><% case "1" %>Storage which is local to the task is not dynamic, like in most programming languages, but it is static. Thus, tasks are not recursive. <% case "2" %>Because time can pass while in a task, and a task can be enabled from several places, it is common for a task to be enabled from more than one place at the same time. Because of the static storage in the task, this can cause unexpected results. <% case "3" %>Arguments to tasks are specified by input, output, and inout statements that have the same syntax as port declarations in a module. However, they are not the same. All the formal arguments to a task are registers. Input and inout arguments have their actual values copied into the formal arguments at the time of the task enable, and inout and output arguments have their formal arguments copied out to the actual values when the task finishes. <% case else %><% end select %></p>
+					<p></p>
+					<center>
+						<a href="JavaScript:parent.dispWindow('v06042ra.htm','Example')"><img src="images/vexample.gif" height="39" width="91" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="JavaScript:parent.dispWindow('v06042r2.htm','Example')"><img src="images/vexamplg.gif" height="39" width="91" border="0"></a></center>
+				</td>
+				<td valign="top" width="180"><img src="images/v0614g2.gif" height="195" width="179"></td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

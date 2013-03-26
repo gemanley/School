@@ -1,0 +1,54 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>Given the following module:
+				<p></p>
+				<pre>
+
+	module modB (port1, port2, port3, port4);
+		input port1, port2;
+		inout port3;
+		output port4;
+		...
+		parameter par1 = 1,
+			par2 = 2,
+			par3 = par1+par2;
+		...
+	endmodule
+</pre>
+			</tr>
+		</table>
+		<hr>
+		<form>
+			<b>Indicate whether the following instances of modB above are legal or illegal.</b>
+			<p></p>
+			<table width="600">
+				<tr>
+					<td width="160" HALIGN="LEFT">a. <input onclick="parent.setValue(0,0)" type="radio" name="LEGAL1" value="A">Legal&nbsp;&nbsp;&nbsp;<input onclick="parent.setValue(0,1)" type="radio" name="LEGAL1" value="A">Illegal</td>
+					<td width="420" HALIGN="LEFT">modB #(7,8) mb2 (p4, p2, p3, q4);</td>
+				</tr>
+				<tr>
+					<td width="160" HALIGN="LEFT">b. <input onclick="parent.setValue(1,0)" type="radio" name="LEGAL2" value="B">Legal&nbsp;&nbsp;&nbsp;<input onclick="parent.setValue(1,1)" type="radio" name="LEGAL2" value="B">Illegal</td>
+					<td width="420" HALIGN="LEFT">modB mb2 (p4, p2, p3, q4);</td>
+				</tr>
+				<tr>
+					<td width="160" HALIGN="LEFT">c. <input onclick="parent.setValue(2,0)" type="radio" name="LEGAL3" value="C">Legal&nbsp;&nbsp;&nbsp;<input onclick="parent.setValue(2,1)" type="radio" name="LEGAL3" value="C">Illegal</td>
+					<td width="420" HALIGN="LEFT">modB (p1, p2, p3, p4);</td>
+				</tr>
+				<tr>
+					<p><br>
+					</p>
+				</tr>
+			</table>
+		</form>
+		</TABLE><b>Click Done to check your answer.</b>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:parent.checkAnswerM(3,0,0,1,-1,-1,-1)"><img src="images/vdone.gif" height="39" width="74" border="0"></a></TD></TABLE></p>
+	</body>
+
+</html>

@@ -1,0 +1,61 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body onload=" parent.initBtn0()" bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td><b>What change will result from changing module test1 to module test2?</b>
+					<p></p>
+				</td>
+			</tr>
+		</table>
+		<table width="500" cellpadding="10">
+			<tr>
+				<td></td>
+				<td width="250">
+					<pre>
+module test1;
+  wire clk;
+  assign #10 clk =~clk;
+  initial begin
+	force clk = 0;
+  #1	release clk;
+  end
+endmodule
+</pre>
+				</td>
+				<td width="250">
+					<pre>
+module test2;
+  wire clk;
+  assign #10 clk =~clk;
+  initial begin
+	force clk = 0;
+  #1	clk = 1;
+  end
+endmodule
+</pre>
+				</td>
+			</tr>
+		</table>
+		<table width="600">
+			<tr>
+				<td><a name="answer">
+						<form>
+							<input type="radio" name="A" value="-1">1. clk stays x forever<br>
+							<input type="radio" name="A" value="-1">2. clk changes from x to 0 at time 0, changes to 1 at time 10, 0 at time 20, 1 at time 30, ...<br>
+							<input type="radio" name="A" value="-1">3. clk changes from x to 0 at time 0 and stays 0 thereafter<br>
+							<input type="radio" name="A" value="-1"><font color="#4B0082">4. module test2 will not compile</font><br>
+						</form>
+						<b>The correct answer is 4. Module test2 will not compile because clk is a wire and cannot be used as the left-hand side of a procedural assignment.</b>
+						<p></p>
+					</a></td>
+			</tr>
+		</table>
+	</body>
+
+</html>

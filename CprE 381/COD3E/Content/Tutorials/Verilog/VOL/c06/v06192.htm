@@ -1,0 +1,124 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+		<style type="text/css" media="screen"><!--
+#answer  { visibility: hidden; position: absolute }
+--></style>
+		<csactions>
+			<csaction name="16DC5B217" class="ShowHide" type="onevent" val0="answer" val1="1"></csaction>
+		</csactions>
+		<csscriptdict import>
+			<script type="text/javascript" src="../../../../resources/CSScriptLib.js"></script>
+		</csscriptdict>
+		<csactiondict>
+			<script type="text/javascript"><!--
+CSAct[/*CMP*/ '16DC5B217'] = new Array(CSShowHide,/*CMP*/ 'answer',1);
+
+// --></script>
+		</csactiondict>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td><b>Revise the testbench of the following model to print the value of result inside alu in case of an error.</b>
+					<pre>
+module alu (op, res, d1, d2, clk);
+	output [3:0] res;
+	input [3:0] op;
+	input [11:0] d1, d2;
+	input clk;
+	reg [11:0] result;
+	assign #1 res = result;
+	
+	always @(posedge clk) begin
+		case (op)
+		1:	result = d1 + d2;
+		2:	result = d1 - d2;
+		3:	result = -d1;
+		4:	result = d1 &amp; d2;
+		5:	result = ~d1;
+		6:	result = d1 | d2;
+		endcase
+	end
+
+endmodule
+
+module top;
+	wire [11:0] res, d1, d2;
+	wire [3:0] op;
+	reg clk;
+
+	alu a (op, res, d1, d2, clk);
+	testbench tb (op, res, d1, d2, clk);
+	
+	initial begin
+		clk = 0;
+		forever 
+			#10 clk = ~clk;
+	end
+
+endmodule
+
+</pre>
+						<tt><textarea name="SCRIPT1" rows="12" cols="60">
+module testbench (op, res, d1, d2, clk);
+	input [11:0] res;
+	output [3:0] op;
+	output [11:0] d1, d2;
+	input clk;
+	reg [3:0] op;
+	reg [11:0] d1, d2;
+	integer opcnt, errcnt;
+
+	initial begin
+		opcnt = 0; errcnt = 0;
+		doadd('h111, 'h111, 'h222);
+		$display(&quot;%0d operations, %0d errors&quot;, opcnt, errcnt);
+		$finish;
+	end
+
+	task doadd;
+		input [11:0] a, b, r;
+		begin
+			op = 1; d1 = a; d2 = b;
+		@(posedge clk) ;
+		#1	$strobe (&quot;op %0d: %h + %h = %h&quot;, opcnt, d1, d2, res);
+		end
+	endtask
+endmodule
+
+</textarea></tt>
+						<p><a href="javascript:parent.gotoScreen('06','192',0)"><img src="images/vreset.gif" border="0"></a></p>
+						<center>
+							<p><b>Click Answer to see a sample solution.</b></p>
+							<p><a onclick="CSAction(new Array(/*CMP*/'16DC5B217'));return CSClickReturn()" href="#" csclick="16DC5B217"><img src="images/vanswer.gif" height="39" width="74" border="0"></a></p>
+						</center>
+					<div id="answer">
+						<b>Answer:</b>
+						<tt><pre>
+task doadd;
+	input [11:0] a, b, r;
+	begin
+		op = 1;
+		d1 = a;
+		d2 = b;
+	@(posedge clk) ;
+	#2	if (res !== r) begin	// or @(negedge clk)
+			$display(&quot;error: op %0d  %h != %h&quot;, opcnt, 
+					top.a.result, r);
+			errcnt = errcnt + 1;
+		end
+	end
+endtask 
+					 				
+</pre></tt>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

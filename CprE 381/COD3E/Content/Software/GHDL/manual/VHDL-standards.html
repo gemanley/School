@@ -1,0 +1,51 @@
+<html lang="en">
+
+	<head>
+		<title>GHDL guide</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+		<meta name="description" content="GHDL guide">
+		<meta name="generator" content="makeinfo 4.1">
+		<link href="http://texinfo.org/" rel="generator-home">
+		<link href="../../../resources/base_style.css" rel="stylesheet" type="text/css" media="all">
+	</head>
+
+	<body>
+		<p>Node:<a name="VHDL%20standards">VHDL standards</a>, Next:<a href="Source-representation.html#Source%20representation" rel="next">Source representation</a>, Previous:<a href="GHDL-implementation-of-VHDL.html#GHDL%20implementation%20of%20VHDL" rel="previous">GHDL implementation of VHDL</a>, Up:<a href="GHDL-implementation-of-VHDL.html#GHDL%20implementation%20of%20VHDL" rel="up">GHDL implementation of VHDL</a></p>
+		<hr>
+		<br>
+		<h3>VHDL standards</h3>
+		<p>This is very unfortunate, but there are many versions of the VHDL language.</p>
+		<p>The VHDL language was first standardized in 1987 by IEEE as IEEE 1076-1987, and is commonly referred as VHDL-87. This is certainly the most important version, since most of the VHDL tools are still based on this standard.</p>
+		<p>Various problems of this first standard have been analyzed by experts groups to give reasonable ways of interpreting the unclear portions of the standard.</p>
+		<p>VHDL was revised in 1993 by IEEE as IEEE 1076-1993. This revision is still well-known.</p>
+		<p>Unfortunatly, VHDL-93 is not fully compatible with VHDL-87, ie some perfectly valid VHDL-87 programs are invalid VHDL-93 programs. Here are some of the reasons:</p>
+		<ul>
+			<li>the syntax of file declaration has changed (this is the most visible source of incompatibility),
+			<li>new keywords were introduced (group, impure, inertial, literal, postponed, pure, reject, rol, ror, shared, sla, sll, sra, srl, unaffected, xnor),
+			<li>some dynamic behaviours have changed (the concatenation is one of them),
+			<li>rules have been added.
+		</ul>
+		<p>Shared variables were replaced by protected types in the 2000 revision of the VHDL standard. This modification is also known as 1076a. Note that this standard is not fully backward compatible with VHDL-93, since the type of a shared variable must now be a protected type (there was no such restriction before).</p>
+		<p>Minors corrections were added by the 2002 revision of the VHDL standard. This revision is not fully backward compatible with VHDL-00 since, for example, the value of the <code>'instance_name</code> attribute has slighly changed.</p>
+		<p>You can select the VHDL standard expected by GHDL with the <code>--std=VER</code> option, where <var>VER</var> is one of the left column of the table below:</p>
+		<dl>
+			<dt><code>87</code>
+			<dd>Select VHDL-87 standard as defined by IEEE 1076-1987. LRM bugs corrected by later revisions are taken into account.<br>
+			<dt><code>93</code>
+			<dd>Select VHDL-93; VHDL-87 file declarations are not accepted.<br>
+			<dt><code>93c</code>
+			<dd>Select VHDL-93 standard with relaxed rules:
+				<ul>
+					<li>VHDL-87 file declarations are accepted;
+					<li>default binding indication rules of VHDL-98 are used. Default binding rules are often used, but they are particulary obscure before VHDL-98.
+				</ul>
+				<br>
+			<dt><code>00</code>
+			<dd>Select VHDL-2000 standard, which adds protected types.<br>
+			<dt><code>02</code>
+			<dd>Select VHDL-2002 standard (partially implemented).
+		</dl>
+		<p>You cannot mix VHDL-87 and VHDL-93 units. A design hierarchy must have been completly analyzed using either the 87 or the 93 version of the VHDL standard.</p>
+	</body>
+
+</html>

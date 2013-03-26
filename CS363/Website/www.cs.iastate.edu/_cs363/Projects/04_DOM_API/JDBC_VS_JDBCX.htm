@@ -1,0 +1,229 @@
+<html>
+
+
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Projects/04_DOM_API/JDBC_VS_JDBCX.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:31:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Project 4</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta name="Microsoft Border" content="t, default">
+</head>
+
+<body><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td>
+
+<p><font face="AGaramond" size="3">Com S 363: Introduction to Database Systems</font><br>
+<font face="AGaramond" size="5">Introduction to Database Systems </font></p>
+<p>
+
+</p>
+<p>&nbsp; </p>
+
+</td></tr><!--msnavigation--></table><!--msnavigation--><table dir="ltr" border="0" cellpadding="0" cellspacing="0" width="100%"><tr><!--msnavigation--><td valign="top">
+
+    <p><i><font face="Arial" color="#000000" size="5">A side by side comparison 
+	of JDBC and two versions of JDBCX </font></i> </p>
+<ul>
+	<li>JDBC (Java Database Connectivity) allows one to use Java as a host to connect 
+to a relational database and execute SQL commands and in case of queries process 
+	the result of queries one tuple at a time in linear iterator style. </li>
+	<li><font color="#000000">JDBCX (Java Database Connectivity for XML) is our 
+	term for the counterpart of JDBC for XML. </font></li>
+	<li>We consider two versions of JDBCX: JDOM and our client server 
+	architecture together with our own Csx DOM.&nbsp; </li>
+	<li><font color="#000000">The following table shows JDBC 
+and JDBCX side by side. </font></li>
+</ul>
+<div align="left">
+	<table border="1" width="754" align="left" id="table1">
+		<tr>
+			<td valign="top" width="226" bgcolor="#FFFF99">Issue</td>
+			<td valign="top" width="254" bgcolor="#FFFF99">JDBC</td>
+			<td valign="top" width="252" bgcolor="#FFFF99">JDBCX with JDOM</td>
+			<td valign="top" width="252" bgcolor="#FFFF99">JDBCX with CanStoreX</td>
+		</tr>
+		<tr>
+			<td valign="top" width="226">Database type</td>
+			<td valign="top" width="254">Relational database stored in a binary 
+			page-based storage at the server. </td>
+			<td valign="top" width="252">XML documents stored in O.S. as <b>.</b>xml 
+			files.
+			An example is XQJ.
+			<p>&nbsp;</td>
+			<td valign="top" width="252">XML documents
+			stored as <b>.</b>bxml paginated CanStoreX file in our own binary 
+			page-based storage.&nbsp;
+			<p>&nbsp;</td>
+		</tr>
+		<tr>
+			<td valign="top" width="226">Types of values supported </td>
+			<td valign="top" width="254">Atomic values such as integers and 
+			strings </td>
+			<td valign="top" width="252">Values are subtrees </td>
+			<td valign="top" width="252">Values are subtrees </td>
+		</tr>
+		<tr>
+			<td valign="top" width="984" colspan="4" bgcolor="#FFFF99">Query 
+			language and resource issues </td>
+		</tr>
+		<tr>
+			<td valign="top" width="226">Query language</td>
+			<td valign="top" width="254">SQL</td>
+			<td valign="top" width="252">XQuery</td>
+			<td valign="top" width="252">XQuery</td>
+		</tr>
+		<tr>
+			<td valign="top" width="226">Query engine </td>
+			<td valign="top" width="254">MySQL, Oracle, etc.</td>
+			<td valign="top" width="252">Saxon or some other XQuery engine - 
+			typically built on the top of some DOM API. </td>
+			<td valign="top" width="252">Our own CsxXQuery built on the top of 
+			our own CsxDOM API (both under continued development)</td>
+		</tr>
+		<tr>
+			<td valign="top" width="226">Memory requirements for say, an 100 
+			megabyte database or xml document</td>
+			<td valign="top" width="254">Small number of buffers as learned in 
+			Chapter 6 in our course. </td>
+			<td valign="top" width="252">3X to 10X main memory (300 to 1,000 
+			megabytes)</td>
+			<td valign="top" width="252">Small number of buffers. </td>
+		</tr>
+		<tr>
+			<td valign="top" width="226">Limit on database / documents size</td>
+			<td valign="top" width="254">No limit </td>
+			<td valign="top" width="252">Limited because of large memory 
+			requirements</td>
+			<td valign="top" width="252">No limit (we are aiming at terabyte 
+			range) </td>
+		</tr>
+		<tr>
+			<td valign="top" width="984" colspan="4" bgcolor="#FFFF99">
+			Client-server architecture </td>
+		</tr>
+		<tr>
+			<td valign="top" width="226">Host language</td>
+			<td valign="top" width="254">Java - adequate for handling atomic values 
+			at native level </td>
+			<td valign="top" width="252">Java + DOM API - adequate for handling 
+			subtrees (node) and forests (nodeset) at native level. </td>
+			<td valign="top" width="252">Java + our own CsxDOM API. The bxml 
+			pagination is transparent to the user. </td>
+		</tr>
+		<tr>
+			<td valign="top" width="226">Where is a command executed? </td>
+			<td valign="top" width="254">Server, for example on mySQL server in 
+			Pearson. </td>
+			<td valign="top" width="252">Server (say, Saxon)</td>
+			<td valign="top" width="252">Our own Csx Server. This semester the 
+			server and client will be on your own machine (or your account in 
+			Pearson)</td>
+		</tr>
+		<tr>
+			<td valign="top" width="226">What does a query command return?</td>
+			<td valign="top" width="254">A relation</td>
+			<td valign="top" width="252">An XML node or nodeset at 
+			the server.
+			<p>&nbsp;</td>
+			<td valign="top" width="252">An XML document or a forest
+			stored as .bxml paginated CanStoreX file in our storage on the 
+			server.
+			<p>&nbsp;</td>
+		</tr>
+		<tr>
+			<td valign="top" width="226">Where is the result of the command 
+			stored</td>
+			<td valign="top" width="254">Server</td>
+			<td valign="top" width="252">Server</td>
+			<td valign="top" width="252">Server</td>
+		</tr>
+		<tr>
+			<td valign="top" width="226">Where is the result processed </td>
+			<td valign="top" width="254">Client</td>
+			<td valign="top" width="252">Client</td>
+			<td valign="top" width="252">Client</td>
+		</tr>
+		<tr>
+			<td valign="top" width="226">What is the nature of processing </td>
+			<td valign="top" width="254">A relation is processed as a single 
+			stream (called a result set) from first to last tuple. The sequence is predetermined and 
+			independent of the state of the result tuples and the nature of 
+			processing. There is a single cursor pointing at the tuple being 
+			processed currently. </td>
+			<td valign="top" width="252">An XML document is traversed as a tree 
+			in an arbitrary manner that depends upon state of subtrees as well as 
+			nature of processing. There can be any number of cursors. The 
+			pattern cannot be predicted in advance. </td>
+			<td valign="top" width="252">Same as one on left - the bxml 
+			pagination is transparent to the user. </td>
+		</tr>
+		<tr>
+			<td valign="top" width="226">How much buffer is necessary?&nbsp;
+			Nature of buffering.
+			</td>
+			<td valign="top" width="254">1 buffer at server, 1 buffer at client 
+			(more if tuples are large or for better speed). So a small 
+			number of buffers is needed. Pages are read in a single linear 
+			stream. </td>
+			<td valign="top" width="252">3X - 10X of the size of output document 
+			size. (At least 300 megabytes for a 100 megabyte XML document 
+			returned by a query.) </td>
+			<td valign="top" width="252">Small number of buffers. The sequence 
+			in which pages will be read cannot be predicted. (Such prediction 
+			will be an unsolvable problem.) We find 10 buffers (160 kilobytes) 
+			to be adequate in some rudimentary experiments we have conducted. </td>
+		</tr>
+		<tr>
+			<td valign="top" width="226">Who takes care of buffering? </td>
+			<td valign="top" width="254">A driver in the middleware. </td>
+			<td valign="top" width="252">As the whole document is in memory, 
+			buffering issues are severe. </td>
+			<td valign="top" width="252">A client has to have its own buffer 
+			manager with some appropriate replacement policy. For this project 
+			the buffer manager will be provided to you under our 
+			storageManagerClient class. You will be able to choose the number of 
+			buffers to be used. </td>
+		</tr>
+	</table>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	</div><!--msnavigation--></td></tr><!--msnavigation--></table></body>
+
+
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Projects/04_DOM_API/JDBC_VS_JDBCX.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:31:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+</html>

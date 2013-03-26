@@ -1,0 +1,42 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td>This is the same adder as the previous example, but it is implemented with two combinational UDPs.
+					<p>This version replaces 5 primitive operations with 2. Even though the UDPs appear to be more complex, the time required to evaluate them is the same as the time to evaluate the built-in primitives. Consequently, significant savings can be realized using the UDP version.</p>
+					<p></p>
+					<center>
+						<table width="580" border="1" cellpadding="5">
+							<tr>
+								<td valign="top" width="290"><TT>Original adder1 module
+									<p>module adder1 (s, cout, a, b, cin);<br>
+										output s, cout;<br>
+										input a, b, cin;</p>
+									<p>xor (t1, a, b)<br>
+										xor (s, t1, cin);<br>
+										and (t2, t1, cin),<br>&nbsp;&nbsp;&nbsp;&nbsp;(t3, a, b);<br>
+										or (cout, t2, t3);<br>
+										endmodule</TT></p>
+								</td>
+								<td valign="top" width="290"><TT>module adder1 (s, cout, a, b, cin);<br>
+									output s, cout;<br>
+									input a, b, cin;
+									<p><a href="JavaScript:parent.dispWindow('v04126r1.htm','addler')">adder1s</a> (s, a, b, cin);<br>
+										<a href="JavaScript:parent.dispWindow('v04126r1.htm','addler')">adder1c</a> (cout, a, b, cin);<br>
+										endmodule</TT></p>
+								</td>
+							</tr>
+						</table>
+					</center>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

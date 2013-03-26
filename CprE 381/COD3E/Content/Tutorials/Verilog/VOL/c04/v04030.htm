@@ -1,0 +1,26 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td>What happens when you connect a driven net to an output port? If the module has a port defined to be an output, and you connect a net which has other drivers to that port, then the result is much the same as if you had a net on the left-hand side of two continuous assignments. While this might seem like an error, it may not be, so Verilog allows you to do this. It is up to you to synchronize the multiple drivers, however.
+					<pre>
+...
+assign outnet = a &amp; b;
+vabc v1 (outnet, s);    // there are two drivers of outnet
+...
+</pre>
+					<center>
+						<img src="images/v0409g1.gif" height="208" width="356"></center>
+				</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

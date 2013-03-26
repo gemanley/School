@@ -1,0 +1,37 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<script language="JavaScript">
+
+
+function dispWindow(url, windowName) {
+	var pghtm = document.location.href
+	if (pghtm.indexOf("\\c") > -1) {var i = pghtm.indexOf("\\c")}
+	else if (pghtm.indexOf("\/c") > -1) {var i = pghtm.lastIndexOf("\/c")}
+	else if (pghtm.indexOf("\/") > -1) {var i = pghtm.lastIndexOf("\/")}
+	else {var i = pghtm.lastIndexOf("\\")}
+	var newLocation = pghtm.substring(0,i+5) + url
+	window.open(newLocation,windowName,'width=640, height=240, scrollbars, resizable');
+}
+
+</script>
+
+	<body bgcolor="white">
+		<TARGET="v01177">
+		<table width="640" cellpadding="10">
+			Parameters are useful because they can be redefined on a module instance basis. That is, each different instance of module foo can have different parameter values. This is particularly useful for vector widths. For example, the following module implements a shifter:
+			<p><font size="3" face="courier">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;module shift (shiftOut, dataIn, shiftCount);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameter width = 4;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;output [width-1:0] shiftOut;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;input [width-1:0] dataIn;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;input [31:0] shiftCount;</font></p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assign shiftOut = dataIn &lt;&lt; shiftCount;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;endmodule</p>
+			<p></font>This is module can now be used for shifters of various sizes, simply by changing the width parameter. Parameters can be changed per instance in either of two ways.</p>
+			<p>There are two other techniques that are useful in assigning parameter values, defparam statements and module instance paramenter assignment. <b>Click each button to learn more about that technique.</b></p>
+			<p></p>
+			<center>
+				<a href="JavaScript:dispWindow('v01177r2.htm','Example')"><img src="images/v0122b1.gif" height="38" width="102" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="JavaScript:dispWindow('v01177r3.htm','Example')"><img src="images/v0122b2.gif" height="38" width="170" border="0"></a></center>
+		</table>
+	</body>
+
+</html>

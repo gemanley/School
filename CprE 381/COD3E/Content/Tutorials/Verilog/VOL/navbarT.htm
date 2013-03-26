@@ -1,0 +1,86 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title>window.parent.frames property</title>
+	</head>
+
+	<script language="JavaScript">
+
+function mIcon(whichButton) {
+	var pghtm = parent.frames[2].location.href
+	//alert (pghtm)
+	var len = pghtm.length
+	if (pghtm.indexOf("#") != -1) { len = pghtm.indexOf("#") }
+	if (pghtm.indexOf("?") != -1) { len = pghtm.indexOf("?") }
+	var newLocation
+	var newLocationNB
+	var Ch = pghtm.substring(len-9,len-7)
+	var pgNum = pghtm.substring(len-7,len-5)
+	var ChPg
+
+	if (whichButton == -1) {
+		// alert ("verilog.com")
+	}
+	if (whichButton == -3) {
+		// alert ("About")
+		window.open('about.htm','John', 'width=640,height=340,toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1')
+	}
+	if (whichButton == -4) {
+		//alert ("Credits")
+		window.open('credits.htm','Credits', 'width=640,height=340,toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1')
+	}
+	if (whichButton == 5) {
+		//alert ("Glossary")
+		parent.goGlossHash('#')
+	}
+	if (whichButton == 6) {
+		//alert ("Index")
+		document.cookie="PreSearchPghtm=" + parent.frames[2].location.href
+		newLocation = parent.appPath() + "index.htm"
+		newLocationNB = "navbarin.htm"
+		parent.frames[2].location.href = newLocation
+		parent.frames[1].location.href = newLocationNB
+		var imgName="images/m0hdin.gif"
+		parent.writeHeader(imgName, -1, 0, 0)
+	}
+	if (whichButton == 10) {
+		//alert ("Back")
+		var cp = parent.getCookieData("BackPghtm")
+		if (cp.length > 1) {
+			parent.gotoScreen (cp.substring(1,3), cp.substring(3,6), 0)
+		}
+		document.cookie="BackPghtm=" + ""
+	}
+}
+
+</script>
+
+	<body bgcolor="#FFFFFF">
+		<table width="64" border="0" cellspacing="0" cellpadding="0" align="center" height="250">
+			<tr align="center" valign="middle" height="50">
+				<td height="50"><a href="JavaScript:mIcon(-3)"><img src="images/about.gif" alt="" height="33" width="64" border="0"></a></td>
+			</tr>
+			<tr align="center" valign="middle" height="50">
+				<td height="50"><a href="JavaScript:mIcon(-4)"><img src="images/credits.gif" alt="" height="33" width="64" border="0"></a></td>
+			</tr>
+			<tr align="center" valign="middle" height="50">
+				<td height="50"><a href="JavaScript:mIcon(5)"><img src="images/glossary.gif" alt="" height="33" width="64" border="0"></a></td>
+			</tr>
+			<tr align="center" valign="middle" height="50">
+				<td height="50"><a href="JavaScript:mIcon(6)"><img src="images/index.gif" alt="" height="33" width="64" border="0"></a></td>
+			</tr>
+			<tr align="center" valign="middle" height="50">
+				<td height="50">
+						<script language="JavaScript">
+							if (parent.getCookieData("BackPghtm").length>1)
+								document.write('<a href="JavaScript:mIcon(10)"><img src="images/back.gif" alt="" height="33" width="64" border="0"></a>');
+							else
+								document.write('<img src="images/back-fade.gif" alt="" height="33" width="64" border="0">');
+						</script>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

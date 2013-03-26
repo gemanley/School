@@ -1,0 +1,30 @@
+<html lang="en">
+
+	<head>
+		<title>GHDL guide</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+		<meta name="description" content="GHDL guide">
+		<meta name="generator" content="makeinfo 4.1">
+		<link href="http://texinfo.org/" rel="generator-home">
+		<link href="../../../resources/base_style.css" rel="stylesheet" type="text/css" media="all">
+	</head>
+
+	<body>
+		<p>Node:<a name="Make%20mode">Make mode</a>, Next:<a href="Find-mode.html#Find%20mode" rel="next">Find mode</a>, Previous:<a href="Import-mode.html#Import%20mode" rel="previous">Import mode</a>, Up:<a href="GHDL-modes.html#GHDL%20modes" rel="up">GHDL modes</a></p>
+		<hr>
+		<br>
+		<h4>Make mode</h4>
+		<br>
+		<pre>$ ghdl -m [<var>options</var>] <var>primary</var> [<var>secondary</var>]
+</pre>
+		<p>Analyze automatically outdated files and elaborate a design.</p>
+		<p>The primary unit denoted by the <var>primary</var> argument must already be known by the system, either because you have already analyzed it (even if you have modified it) or because you have imported it. GHDL compile all outdated files. A file may be outdated because it has been modified (e.g. you just have edited it), or because a design unit contained in the file depends on a unit which is outdated. This rule is of course recursive.</p>
+		<p>With the <code>-f</code> (force) option, GHDL analyzes all the units of the work library needed to create the design hierarchy. Not outdated units are recompiled. This is useful if you want to compile a design hierarch with new compilation flags (for example, to add the <code>-g</code> debugging option).</p>
+		<p>The make mode will only re-analyze design units in the work library. GHDL fails if it has to analyze an outdated unit from another library.</p>
+		<p>The purpose of this mode is to be able to compile a design without prior knowledge of file order. In the VHDL model, some units must be analyzed before others (e.g. an entity before its architecture). It might be a nightmare to analyze a full design of several files, if you don't have the ordered list of file. This mode computes an analysis order.</p>
+		<p>The make mode fails when a unit was not previously parsed. For example, if you split a file containing several design units into several files, you must either import these new files or analyze them so that GHDL knows in which file these units are.</p>
+		<p>The make mode imports files which have been modified. Then, a design hierarchy is internally built as if no units are outdated. Then, all outdated design units, using the dependences of the design hierarchy, are analyzed. If necessary, the design hierarchy is elaborated.</p>
+		<p>This is not perfect, since defaults architecture (the most recently analyzed one) may change while outdated desing files are analyzed. In such a case, re-run the make mode of GHDL.</p>
+	</body>
+
+</html>

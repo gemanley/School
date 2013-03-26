@@ -1,0 +1,32 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">The $time system function simply returns the current simulation time. Simulation time is a 64-bit unsigned quantity, and that is what $time is assumed to be when it is used in an expression.
+					<p>Example:</p>
+					<p></p>
+					<pre>
+        $display (&quot;The current time is %d&quot;, $time);
+        $display ($time,&quot; now the value of x is %h&quot;, x);
+</pre>
+					<p></p>
+				</td>
+			</tr>
+		</table>
+		<table width="600">
+			<tr>
+				<td valign="top" width="251"><img src="images/v0634g1.gif" height="196" width="251"></td>
+				<td width="349">The value returned is scaled by the timescale units in effect for that module. See the discussion of time scale later in this chapter.
+					<p><tt>$stime</tt> (short time) is just like $time, except that it returns a 32-bit value of time. The low order 32 bits of the time are returned. If any high-order bits are non-zero, there is no warning or error message.</p>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

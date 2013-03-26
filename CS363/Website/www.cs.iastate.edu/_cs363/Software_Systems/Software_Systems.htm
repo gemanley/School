@@ -1,0 +1,246 @@
+<html>
+
+
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Software_Systems/Software_Systems.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:00:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Software Systems</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta name="Microsoft Border" content="t, default">
+</head>
+
+<body><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td>
+
+<p><font face="AGaramond" size="3">Com S 363: Introduction to Database Systems</font><br>
+<font face="AGaramond" size="5">Introduction to Database Systems </font></p>
+<p>
+<nobr>[&nbsp;<a href="../index.html" target="">Home</a>&nbsp;]</nobr> <nobr>[&nbsp;<a href="../Getting_Help/Getting_Help.htm" target="">Getting&nbsp;Help</a>&nbsp;]</nobr> <nobr>[&nbsp;<a href="../CourseInfo/CourseInfo.htm" target="">Course&nbsp;Info</a>&nbsp;]</nobr> <nobr>[&nbsp;<a href="../Homeworks/Homeworks.htm" target="">Homeworks</a>&nbsp;]</nobr> <nobr>[&nbsp;<a href="../Projects/Projects.htm" target="">Projects</a>&nbsp;]</nobr> <nobr>[&nbsp;Software&nbsp;Systems&nbsp;]</nobr> <nobr>[&nbsp;<a href="../Tests/Tests.htm" target="">Tests</a>&nbsp;]</nobr> <nobr>[&nbsp;<a href="../Reports/Reports.htm" target="">Reports</a>&nbsp;]</nobr> <nobr>[&nbsp;<a href="../Getting_Help/FAQ.htm" target="">FAQ</a>&nbsp;]</nobr>
+</p>
+<p>&nbsp; </p>
+
+</td></tr><!--msnavigation--></table><!--msnavigation--><table dir="ltr" border="0" cellpadding="0" cellspacing="0" width="100%"><tr><!--msnavigation--><td valign="top"><p><font size="4" face="Arial"><i>This page describes the software systems 
+you will need in the course&nbsp;</i></font></p>
+<ul>
+	<li><b><font face="Times New Roman">O</font></b><font face="Times New Roman"><b>perating 
+	system to be used for project development. </b>In this course we will only 
+	support Windows operating system. If you want to use Linux, Mac, or some 
+	other operating system, please talk to the instructor. </font></li>
+	<li><font face="Times New Roman"><b>Operating system to be used for 
+	electronic submission of the projects.</b> You will use Unix for electronic 
+	submission of your projects. The details or on [Projects] web page.&nbsp;
+	</font></li>
+	<li><font face="Times New Roman"><b>Computer to be used.</b> You have a 
+	choice to use your own computer or use computers in our laboratory in 
+	Pearson Hall. You are advised to use the U: drive on our computers in 
+	Pearson. </font></li>
+	<li><font face="Times New Roman"><b>Software artifacts to be used for 
+	project development.</b> Cyclone Database Implementation Workbench (CyDIW), Java, MySQL, JDBC, Saxon XQuery Engine, and turnin script. </font></li>
+	<li><font face="Times New Roman"><b>Demos and Projects.</b> We have a demo 
+	for each project. For each project you should make sure that you can run the 
+	demo before starting on the project. </font></li>
+</ul>
+<hr>
+<h3>Preliminary Steps&nbsp;</h3>
+      <ul>
+		<li><font face="Times New Roman">Windows users: We strongly recommend 
+		that the file extensions be visible in the File Explorer in Windows. By 
+		default the extensions are invisible when Windows is installed. After 
+		Googling &quot;Show file extensions&quot; I found a link
+		<a href="http://support.microsoft.com/kb/865219">
+		http://support.microsoft.com/kb/865219</a> that describes it for Windows 
+		XP and Windows 7. </font></li>
+		<li><font face="Times New Roman">Create a folder named
+		<span style="background-color: #FFFF00">P0</span> anywhere on your 
+		system. All files to be submitted for this project will be stored here. 
+		For your convenience on this page we have
+		<span style="background-color: #FFFF00">highlighted</span> names of all 
+		files to be stored in P0. Be sure that you do not store any other files 
+		in this folder. </font></li>
+</ul>
+<hr>
+<h3>A. CyDIW&nbsp;</h3>
+      <hr>
+      <p align="left">CyDIW is a seamless low profile GUI-based multi-purpose develop 
+		environment for experimenting with multiple command-based systems. It 
+		can be used to connect to multiple database servers and our own database 
+		prototypes and use them simultaneously with 
+		great ease. Batches of commands from multiple systems can be developed 
+		and executed. </p>
+<p align="left"><b>Install CyDIW.</b> Obtain CyDIW from
+		<a href="../Resources/CyDIW_Root.zip">Resources/CyDIW_Root.zip</a> and unzip it in a folder of 
+your choice. (On computers in Pearson store it in a folder on U: drive.) That 
+is all what is needed to install it. </p>
+<p align="left"><b>Run a demo in CyDIW (Windows users).</b> Double click on StartCyDIW.bat. 
+A GUI window will open. As stated above, the GUI is provides an integrated 
+development environment (IDE) for command-based systems. It has an editor - cum - launchpad&nbsp; for batches 
+of commands that are stored as plain text files. Use the [Open] button to load 
+ComS363_XQuery(Saxon)_Demo.txt file. (This file is in the ComS363 folder created 
+earlier.) This is a demo for XQuery that uses the Saxon 
+XQuery query engine pre-packaged and configured in CyDIW for immediate use. Click [Run 
+All] button. You should see the output in the output pane. Save this output in 
+the <span style="background-color: #FFFF00">ComS363_XQuery(Saxon)_Demo.htm</span> 
+file in a folder P0. </p>
+<p align="left"><b>Non-Windows users.</b> Instead of StartCyDIW.bat, execute 
+startcydiw.sh instead in a Unix-based system. Caution: CyDIW is not stress 
+tested for non-Windows platforms. If you have problems, we will work with you to 
+some extent, but any feedback will especially be useful in future. If problems 
+persist, you may consider switching to Windows. </p>
+<p align="left"><b>FYI - What is CyDIW.</b> Any command-based system can be 
+configured and used with CyDIW (Cyclone Database Implementation Workbench). More 
+significantly, it also includes infrastructure for implementation of database 
+internals. This infrastructure is used by several database prototype platforms 
+that we are implementing. The platform offers a good paradigm for database 
+implementation leading to very high level encapsulation in terms of batches of 
+commands.&nbsp;CyDIW can be used by students, TAs, instructors, developers, and 
+project directors. <a href="../Resources/TKDE-2010-07-0425.R1_Zhao.pdf">Get this</a> 
+if you want to learn more; a knowledge of this is not required for the course.
+</p>
+<p align="left"><span style="background-color: #FFFFFF"><b>Difficulties with 
+CyDIW and suggestions.</b> </span>Please keep us posted and discuss them with 
+us. CyDIW includes numerous suggestions made by students in past. We are very 
+keen on making improvements. </p>
+<hr>
+<h3>B. Java &nbsp;&nbsp; </h3>
+<hr>
+<p>You will use Java explicitly in Project 0, 2 and 4. In other 
+projects it will be used implicitly by CyDIW.&nbsp;</p>
+<p><b>Install Java.</b> You probably 
+	already have Java installed on your computer. Our labs in Pearson already 
+have Java installed on them. If you do not have java on your computer, <font size="3">
+download and install the latest version of java JDK from&nbsp; <a href="http://java.com/">
+http://java.com</a>. (Make sure that you get JDK.) </font> </p>
+<p><b>Setup the demo for Java.</b> Create a working directory on your computer and store
+<a href="Java/Java_Demo.java">Java_Demo.java</a> it it. (In Pearson create the 
+working directory on U: drive.) </p>
+<p><b>Expected output of the demo.</b> When demo is run you should see the output &quot;JAVA IS WORKING&quot;. 
+Save the contents of the output in <span style="background-color: #FFFF00">
+Java_Demo_Output.txt</span> file in folder P0. 
+</p>
+<p> <font size="3">Below we have described three options on how to run Java. </font>
+You should decide on a preferred manner in which you will use Java on your 
+machine.&nbsp; </p>
+<p><b>Option A. Running the demo for Eclipse users (Windows or non-Windows).</b> If you use an Integrated Development 
+Environment (IDE), such as Eclipse, we assume you know how to do it. </p>
+<p><b>Option B. Running the demo from command line.</b> If you wish to use command line 
+interface, we assume you know how to do it. </p>
+<ul>
+	<li><b>Windows Users:</b> Available on Windows via [Start Button] &gt; 
+	[Run], enter cmd &gt; [Enter key]. </li>
+	<li><b>Non-Windows users:</b> If you tell us how you use it on your system, 
+	we will publicize it for others. </li>
+</ul>
+<p><b>Option C. Windows users: running the demo from a .bat file.</b> If you want to use Windows .bat file, here is some help. Fetch
+	<a href="Java/Java_Demo.bat.txt">Java_Demo.bat.txt</a> and store it on the working 
+	folder that you have created. Edit this file in a text editor such as WordPad. Modify the setting for path and classpath variable
+<span style="background-color: #FFFFCC">for the 
+  computer that you are using</span>. Save the file
+	<span style="background-color: #FFFFCC">as a text file</span>. (Make sure 
+that you have saved it as a plain text file.)&nbsp; Remove the &quot;.txt&quot; suffix 
+from its name. This configures the .bat file for your machine. Now double click 
+on the batch file to execute it. A file named Java_Demo_Output.txt will be created. In this file you should see 
+the expected output. </p>
+<ul>
+	<li><b>Non-Windows users:</b> If you tell us how you use it on your system, 
+	we will publicize it for others. </li>
+</ul>
+<hr>
+<h3 align="left"><b>C. Configuration of CyDIW for MySQL</b> </h3>
+<hr>
+<P>CyDIW is preconfigured for MySQL - a popular quasi Open Source SQL database engine. 
+A<FONT size=3> database named <span style="background-color: #FFFF00">xyz</span>DB - where xyz is your ISU NetID - has 
+been created for your individual use on our MySQL server in Pearson. CyDIW needs 
+to be configured so that it can connect to your database. </FONT> 
+</P>
+<p align="left"><b>Configure CyDIW for your database.</b> First close CyDIW if 
+it is running. Open SystemConfig.xml file for editing. Make sure to use a plain 
+text or XML editor that will not leave any hidden characters in the file. The following shows 
+the configuration setting for MySQL. <FONT size=3> Carefully replace
+<span style="background-color: #FFFF00">highlighted</span> portions with your 
+information provided below. Be careful that the file is </FONT>saved 
+as a plain text file<FONT size=3> </FONT> 
+</p>
+<P>&nbsp;&lt;Client Name=&quot;MySQL&quot; Prefix=&quot;$MySQL&quot; Enabled=&quot;yes&quot;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ClassPath=&quot;&quot; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LibraryPath=&quot;sql\drivers&quot; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ClientAdapter=&quot;clientsmanager.clients.SQLClientAdapter&quot; 
+DriverClass=&quot;com.mysql.jdbc.Driver&quot; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ConnectionString=&quot;jdbc:mysql://csdb.cs.iastate.ed<span style="background-color: #FFFFFF">u:3306</span>/<span style="background-color: #FFFF00">NameOfYourDatabase</span>&quot;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Username=&quot;<span style="background-color: #FFFF00">YourUserName</span>&quot; 
+Password=&quot;<span style="background-color: #FFFF00">YourPassword&quot;</span> /&gt; 
+</P>
+<p class="MsoNormal">For example, if your ISU Net ID were “<span style="background-color: #FFFF00">lexluthor</span>” 
+and your Student ID number was “6016246<span style="background-color: #FFFF00">56</span>”, 
+you would use:</p>
+<ul>
+	<li>
+	<p class="MsoNormal">YourUsername is your ISU Net ID (<span style="background-color: #FFFF00">lexluthor</span>)</li>
+	<li>
+	<p class="MsoNormal">YourPassword is your ISU Net ID + &quot;-&quot; + Last 2 of 
+	Student ID Number (<span style="background-color: #FFFF00">lexluthor-56</span>)</li>
+	<li>
+	<p class="MsoNormal">NameOfYourDatabase is your ISU Net ID + &quot;DB&quot; (<span style="background-color: #FFFF00">lexluthorDB</span>)</li>
+</ul>
+<P>Note that as a database lexluthorDB is empty. In this database you have the privilege to create tables, populate them, query and 
+update them, and delete them. This is all what matters for the project. You 
+cannot delete the database. The password we have provided is a low security 
+issue. By using your username and password, others can perhaps look at your 
+database but they cannot see your code (the batch of commands) that was used to 
+arrive at the current state of your database. 
+</P>
+<P><b>Run a demo.</b> Double click on StartCyDIW.bat to 
+start CyDIW. Using the [Open] button load the batch of commands in 
+ComS363_MySQL_Demo.txt. (This file is in the ComS363 folder created earlier.) Then press [Run All] button. The demo should run. Save 
+the contents of the Output Pane in <span style="background-color: #FFFF00">
+ComS363_MySQL_Demo_Output.htm</span> file in folder P0. Be sure to provide the 
+.htm extension as a part of your file name. You will submit this file as a part 
+of Project P0.&nbsp;  
+</P>
+<hr>
+<h3>D. Setup JDBC and run a demo&nbsp; </h3>
+<hr>
+<p align="left"><b>Setup JDBC.</b> Download and store MySQL driver 
+<a href="../Resources/mysql-connector-java-5.0.5.jar">mysql-connector-java-5.0.5.jar</a> 
+and the demo program <a href="JDBC/JDBC_Demo.java">JDBC_Demo.java</a> in the 
+same 
+working directory. 
+	Open the java file for editing and replace NameOfYourDatabase, YourUserName, 
+and YourPassword&quot; with the same values as in Part C. above. 
+	</p>
+<p align="left"><b>Setup the database.</b> Run the MySQL demo, covered in 
+Section C above, so that your database has two tables 
+	with tuples in them. </p>
+<p align="left"><b>Expected output of the demo.</b> To see the expected output 
+of the demo please <a href="JDBC/JDBC_Demo_Output.txt">click here</a>.&nbsp; </p>
+<p><b>Option A. Setup and running the demo for Eclipse users.</b> <span style="font-size:12.0pt;line-height:115%">
+Follow the steps below. (i) Create a project congaing JDBC_Demo.java. (ii) Add 
+the MySQL driver to your build path. To see it in a picture,
+<a href="JDBC/BuildPathInEclipse.JPG">click here</a>. (iii) Run the demo 
+program.&nbsp; </span> </p>
+<p><b>Option B. Running the demo for command line users.</b> The commands are as follows: </p>
+<p><font face="Courier New" size="2">javac 
+JDBC_Demo.java <br>
+java -cp &quot;.;mysql-connector-java-5.0.5.jar;&quot; JDBC_Demo &gt; output.txt </font></p>
+<p><b>Option C. Running the demo using a batch file.</b> Download
+<a href="JDBC/JDBC_Demo.bat.txt">JDBC_Demo.bat.txt</a> and store it in the 
+working folders with other files. Edit the path and class path variables in the 
+same manner as Option C in Section C. After saving the .bat file and removing 
+the &quot;.txt&quot; suffix from its name, double click on it to run. The file
+<span style="background-color: #FFFF00">JDBC_Demo_Output.txt</span> congaing the expected output will be created. 
+Store this file in folder P0. </p>
+<hr>
+<h3>E. Demo to test Schema-awareness of Saxon XQuery engine&nbsp;&nbsp;&nbsp; </h3>
+<hr>
+<p align="left">Note that with the consent of Saxonica, their XQuery engine is 
+included and configured to work in CyDIW under the &quot;$Saxon:&gt;&quot; prefix. With the 
+included version, a light version of Saxon is invoked. In order to use the id(.) 
+function, needed for Project 3, the Enterprise version has to be invoked. Then run the 
+<span style="background-color: #FFFF00">ComS363_Test_ID_Function_in_XQuery(Saxon).txt</span> batch file in the ComS363 
+folder. Save the output in the file <span style="background-color: #FFFF00">
+ComS363_Test_ID_Function_in_XQuery(Saxon)_Output.htm</span> in folder P0. 
+	</p><!--msnavigation--></td></tr><!--msnavigation--></table></body>
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Software_Systems/Software_Systems.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:00:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+</html>

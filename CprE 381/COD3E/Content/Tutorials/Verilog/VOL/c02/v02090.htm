@@ -1,0 +1,30 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td width="390">The Verilog word for a multi-bit quantity is a vector. If arithmetic is performed on a vector, the vector value is considered to be an unsigned integer.
+					<p>Both nets and registers can be declared as vectors. They are declared by using a range specifier in the declaration:</p>
+					<p><tt></tt></p>
+					<dl>
+						<dd>wire [msb:lsb] w1;<br>
+							and
+						<dd>reg [msb:lsb] r1;
+					</dl>
+					</TT>Both msb and lsb must be constant valued expressions. The bit order can be either big-endian or little-endian, i.e. both msb&lt;lsb and msb&gt;lsb are allowed.
+					<p></p>
+					<center>
+						<a href="JavaScript:parent.dispWindow('v02090r1.htm','Example')"><img src="images/vexample.gif" height="39" width="91" border="0"></a></center>
+				</td>
+				<td valign="top" width="210"><img src="images/v0231g1.gif" height="169" width="208"></td>
+			</tr>
+		</table>
+	</body>
+
+</html>

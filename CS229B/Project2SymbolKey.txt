@@ -1,0 +1,8 @@
+F Fog
+R red robot
+B blue robot
+X rock
+r red paint
+b blue paint
+M Fog-Rock
+W Wall

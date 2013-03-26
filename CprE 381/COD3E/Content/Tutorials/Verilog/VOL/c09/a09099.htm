@@ -1,0 +1,105 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body onload=" parent.initBtnMT(4);" bgcolor="white">
+				<table width="600" cellpadding="10">
+			<b>The following C routine checks the state of the first argument of $monitorStateVar whenever it changes. If the value is ever greater than 10, it prints an error. Note that there are placeholders (e.g. &lt;**acc1**&gt;) for four acc routines.</b>
+			<p></p>
+		</table>
+		<pre>
+#include &lt;stdio.h&gt;
+#include &quot;acc_user.h&quot;
+#include &quot;vcsuser.h&quot;
+
+handle      argHandle;
+
+void callbackFunc ( p_vc_record vc_record ) 
+{
+    int v;
+ 
+    sscan(
+			
+			
+			<**acc1**>
+			
+			
+			 , &quot;%d&quot;, v);
+    if (v &gt; 10)
+         io_printf(&quot;***error, %s has value %d ***&quot;, 
+			
+			
+			<**acc2**>
+			
+			
+			, 
+		    v);
+}
+
+int MonitorStateVar  (int data, int reason)
+{
+    argHandle = 
+			
+			
+			<**acc3**>
+			
+			
+			;
+    
+			
+			
+			<**acc4**>
+			
+			
+			;
+}
+</pre>
+		<hr>
+		<b>Enter the correct letters to match the acc routines with their placeholders:</b>
+		<p></p>
+		<table width="200">
+			<form>
+				<td width="100">
+					<center>
+						<b><u>Placeholders</u></b></center>
+				</td>
+				<td width="100"></td>
+				<tr>
+					<td width="100">1. &lt;**acc1**&gt;</td>
+					<td width="100"><input type="TEXT" size="2" maxlength="2" onchange="parent.setValue(0,this.value)"></td>
+				</tr>
+				<tr>
+					<td width="100">2. &lt;**acc2**&gt;</td>
+					<td width="100"><input type="TEXT" size="2" maxlength="2" onchange="parent.setValue(1,this.value)"></td>
+				</tr>
+				<tr>
+					<td width="100">3. &lt;**acc3**&gt;</td>
+					<td width="100"><input type="TEXT" size="2" maxlength="2" onchange="parent.setValue(2,this.value)"></td>
+				</tr>
+				<tr>
+					<td width="100">4. &lt;**acc4**&gt;</td>
+					<td width="100"><input type="TEXT" size="2" maxlength="2" onchange="parent.setValue(3,this.value)"></td>
+				</tr>
+			</form>
+		</table>
+		<p><b>Good going. You got them all correct.</b></p>
+		<p></p>
+		<table width="600">
+			<td><u><b>acc routines:</b></u>
+				<p>a. acc_handle_object(&quot;argHandle&quot;)<br>
+					b. acc_handle_tfarg(1)<br>
+					c. acc_vcl_add ( argHandle, callbackFunc, 0, vcl_verilog_logic )<br>
+					d. acc_fetch_value (argHandle, &quot;%d&quot;, null )<br>
+					e. acc_next_load ( net, load )<br>
+					f. acc_fetch_name(argHandle),<br>
+					g. acc_vcl_add ( argHandle )<br>
+				</p>
+			</td>
+			</TR>
+		</table>
+	</body>
+
+</html>

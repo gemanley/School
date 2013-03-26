@@ -1,0 +1,24 @@
+<html lang="en">
+
+	<head>
+		<title>GHDL guide</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+		<meta name="description" content="GHDL guide">
+		<meta name="generator" content="makeinfo 4.1">
+		<link href="http://texinfo.org/" rel="generator-home">
+		<link href="../../../resources/base_style.css" rel="stylesheet" type="text/css" media="all">
+	</head>
+
+	<body>
+		<p>Node:<a name="What%20is%20GHDL">What is GHDL</a>, Previous:<a href="What-is-VHDL.html#What%20is%20VHDL" rel="previous">What is VHDL</a>, Up:<a href="Introduction.html#Introduction" rel="up">Introduction</a></p>
+		<hr>
+		<br>
+		<h3>What is <code>GHDL</code>?</h3>
+		<p><dfn>GHDL</dfn> is a shorthand for G Hardware Design Language. Currently, <code>G</code> has no meaning.</p>
+		<p><dfn>GHDL</dfn> is a <code>VHDL</code> compiler that can execute (nearly) any <code>VHDL</code> program. <code>GHDL</code> is <em>not</em> a synthesis tool: you cannot create a netlist with <code>GHDL</code>.</p>
+		<p>Unlike some other simulators, <code>GHDL</code> is a compiler: it directly translates a <code>VHDL</code> file to machine code, using the <code>GCC</code> back-end and without using an intermediary language such as <code>C</code> or <code>C++</code>. Therefore, the compiled code should be faster and the analysis time should be shorter than with a compiler using an intermediary language.</p>
+		<p>The current version of <code>GHDL</code> does not contain any graphical viewer: you cannot see signal waves. You can still check with a test bench. The current version can produce a <code>VCD</code> file which can be viewed with a wave viewer.</p>
+		<p><code>GHDL</code> aims at implementing <code>VHDL</code> as defined by IEEE 1076. It supports most of the 1987 standard and most features added by the 1993 standard.</p>
+	</body>
+
+</html>

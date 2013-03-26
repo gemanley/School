@@ -1,0 +1,58 @@
+<!-- #include virtual ="/dev/visd/procs.txt" -->
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+		<style type="text/css" media="screen"><!--
+#answer  { visibility: hidden; position: absolute }
+--></style>
+		<csactions>
+			<csaction name="14DFBA29" class="ShowHide" type="onevent" val0="answer" val1="1"></csaction>
+		</csactions>
+		<csscriptdict import>
+			<script type="text/javascript" src="../../../../resources/CSScriptLib.js"></script>
+		</csscriptdict>
+		<csactiondict>
+			<script type="text/javascript"><!--
+CSAct[/*CMP*/ '14DFBA29'] = new Array(CSShowHide,/*CMP*/ 'answer',1);
+
+// --></script>
+		</csactiondict>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td width="600"><b>Write a Verilog module named mod that corresponds to the following schematic (input is in1, in2, s and output is out). Click Done to see a sample solution.</b>
+					<p></p>
+					<center>
+						<img src="images/v04q2.gif" height="205" width="450">
+							<tt><textarea name="Text1" rows="12" cols="80">
+							</textarea></tt>
+							<p><a onclick="CSAction(new Array(/*CMP*/'14DFBA29'));return CSClickReturn()" href="#" csclick="14DFBA29"><img src="images/vanswer.gif" height="39" width="87" border="0"></a></p>
+					</center>
+					<div id="answer">
+			<b>One possible answer is:</b><br>
+			<tt><pre>
+module mod (in1, in2, s, out);
+   input in1, in2, s;
+   output out;
+
+   or (out, o1, o2);
+   and (o1, in1, s);
+   and (o2, in2 s_);
+   not (s_, s);
+
+endmodule
+			</pre></tt>
+					</div>
+				</td>
+			</tr>
+		</table>
+		<div id="layer1">
+		</div>
+	</body>
+
+</html>

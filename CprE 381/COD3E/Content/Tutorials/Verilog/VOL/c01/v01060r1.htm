@@ -1,0 +1,43 @@
+<html>
+
+	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+
+	<body bgcolor="#FFFFFF">
+		Typically, a module would look like this:
+		<p></p>
+		<pre>
+   module example (port1, port2, ...);
+        input port1;                // port definitions
+        output port2;
+        ...
+        parameter width = 64;       // parameter definitions
+        ...
+        wire n1, n2, n3;            // net definitions
+        ...
+        reg r1, r2, r3;             // register definitions
+        ...
+        and a1(n1, r1, r2);         // primitive instantiations
+        ...
+        foo f1(r1, r2, n2, ...);    // module instantiations
+        ...
+        assign n3 = r1 | r2;        // continuous assignments
+        ...
+        initial begin               // procedural blocks
+            r1 = 0;
+        #1  r2 = 1;
+            ...
+        end
+        
+        always @(posedge clock)     // more procedural blocks
+            r2 = #1 r3;
+        ...
+        
+        task t1 (ports...);         // task/function definitions
+            ...
+        endtask
+        
+    endmodule
+</pre>
+	</body>
+
+</html>

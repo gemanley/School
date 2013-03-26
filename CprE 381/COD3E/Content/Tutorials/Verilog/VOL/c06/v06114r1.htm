@@ -1,0 +1,37 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			<tr>
+				<td>
+					<pre>
+module test;
+        reg r, s;
+        parameter d1 = 1.24, d2 = 1.26;
+        
+        `timescale 10ns/1ns
+        initial begin
+            #d1 r = 0;    // delay scaled to 12ns
+            #d2 r = 1;    // delay scaled to 13ns
+        end
+        
+        `timescale 100ns/1ns
+        initial begin
+            #d1 s = 0;    // delay scaled to 124ns
+            #d2 s = 1;    // delay scaled to 126ns
+        end
+endmodule
+</pre>
+					<p>Note: this is a somewhat contrived example. It is much more common to have timescale directives associated with a single file or library, such that each module has a single timescale. The primary motivation for putting this feature in the language was to deal with multiple libraries being used in a single model.</p>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

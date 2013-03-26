@@ -1,0 +1,32 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<td valign="TOP" width="256"><img src="images/v0601g1.gif" height="299" width="256"></td>
+			<td width="344">This is the system task which allows you to checkpoint a simulation run. $save is not part of the standard language, but most simulator implementations support it or something similar.
+				<p>The format of the system task is</p>
+				<p></p>
+				<dl>
+					<dd><tt>$save(&quot;file_name&quot;);</tt>
+				</dl>
+				<p>When it is executed, all of the information necessary to restart the simulation at that point is saved into the file whose name is given as an argument.</p>
+				<p>The format of the saved information is implementation-dependent. The most efficient way to save the model is to simply dump a memory-image, and some simulators do it this way (VCS does this). Verilog-XL dumps the data in its own format, which requires interpretation when restarting. However, from an operational point of view, the only difference is how long it takes to actually dump the data and then read it back in when restarting.</p>
+				<p>Checkpoint files can be very large - typically they are the same size as the executable memory image of the simulation process. As a result, you would not normally save a lot of checkpoint files. It is common to simply use one, and overwrite it periodically. Another common technique is to alternate between a small number of save files, like this:</p>
+				<p></p>
+				<pre>
+    always begin
+        #100000 $save(&quot;chkpt1&quot;);
+        #100000 $save(&quot;chkpt2&quot;);
+    end
+</pre>
+			</td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

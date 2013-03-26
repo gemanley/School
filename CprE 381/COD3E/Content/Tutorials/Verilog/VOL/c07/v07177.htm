@@ -1,0 +1,91 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+		<style type="text/css" media="screen"><!--
+#answer   { visibility: hidden; position: absolute }
+--></style>
+		<csactions>
+			<csaction name="1AFD97726" class="ShowHide" type="onevent" val0="answer" val1="1"></csaction>
+		</csactions>
+		<csscriptdict import>
+			<script type="text/javascript" src="../../../../resources/CSScriptLib.js"></script>
+		</csscriptdict>
+		<csactiondict>
+			<script type="text/javascript"><!--
+CSAct[/*CMP*/ '1AFD97726'] = new Array(CSShowHide,/*CMP*/ 'answer',1);
+
+// --></script>
+		</csactiondict>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td width="600"><b>Rewrite the following model as a 0-delay model where all signals change at the falling edge of clk. Click Answer to see a sample solution. </b>
+				<p></p>
+			</td>
+		</table>
+			<textarea name="SCRIPT1" rows="20" cols="35">
+module autom (out, in, clk);
+	output [3:0] out;
+	input in;
+	input clk;
+	reg [1:0] state;
+
+	initial state = 0;
+	assign #1 out = state * 5;
+	always @(posedge clk)
+		case (state)
+	0:		state = in ? 1 : 0;
+	1:		state = in ? 2 : 1;
+	2:		state = in ? 0 : 2;
+		endcase
+endmodule
+</textarea> 
+			<textarea name="SCRIPT2" rows="20" cols="35">
+module test;
+	wire [3:0] out;
+	reg in, clk;
+	integer i;
+
+	autom a1 (out, in, clk);
+	
+	always #5 clk = ~clk;
+	initial begin
+		clk = 0;
+		in = 0;
+		$monitor ($stime,,&quot;clk: %b  in: %b  out: %d&quot;, clk, in, out);
+	#15  in &lt;= 1;
+		for (i=0; i&lt;10; i=i+1)
+	#10  	     in &lt;= ~in;
+		$finish;
+	end
+endmodule
+</textarea>
+			<p><a href="javascript:parent.gotoScreen('07','177',0)"><img src="images/vreset.gif" border="0"></a></p>
+			<center>
+			<a onclick="CSAction(new Array(/*CMP*/'1AFD97726'));return CSClickReturn()" href="#" csclick="1AFD97726"><img src="images/vanswer.gif" height="39" width="87" border="0"></a></center>
+
+		<div id="answer"><pre>
+module autom (out, in, clk);
+    output [3:0] out;
+    input in;
+    input clk;
+    reg [1:0] state;
+
+    initial state = 0;
+    assign out = state * 5;
+    always @(posedge clk)
+        case (state)
+    0:      state = @(negedge clk) in ? 1 : 0;
+    1:      state = @(negedge clk) in ? 2 : 1;
+    2:      state = @(negedge clk) in ? 0 : 2;
+        endcase
+endmodule
+</pre>
+		</div>
+
+	</body>
+
+</html>

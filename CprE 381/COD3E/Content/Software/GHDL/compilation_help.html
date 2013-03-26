@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<meta name="generator" content="Adobe GoLive 6">
+		<title>Compilation Instructions for GateSim</title>
+		<link href="../../resources/base_style.css" rel="stylesheet" media="screen">
+	</head>
+
+	<body bgcolor="#ffffff">
+		<h1>Compilation Instructions for GHDL</h1>
+		<p>GHDL is a front-end to gcc, so to compile GHDL you also need the gcc source code. GHDL-0.12 (the version on this CD) needs gcc-3.4.0 source, which is also included on this CD.</p>
+		<ul>
+			<li><a href="../extras/gcc-3.4.0.tar.gz">Click here</a> to open a tar.gz file containing the gcc-3.4.0 source code.<br>Unpack the archive to a good location for compiling a LARGE amount of source code. You need lots of free space!</ul>
+		<p>The GHDL code is itself written in Ada95, so you need an Ada compiler as well. For Linux, GNAT&nbsp;will be your best option.</p>
+		<ul>
+			<li>Most Linux distributions include GNAT. You can problably install it using the normal package installation tools of your distribution.
+			<li>Otherwise, install the binaries included on this CD.<br>
+				<a href="../extras/gnat-3.14p-i686-pc-linux-gnu-bin.tar.gz">Click here</a> to open a tar.gz file containing gnat-3.14p binaries.<br>
+				Unpack the contents of this archive to a temporary location, and follow the instructions in the README file. You just have to run a few scripts.</ul>
+		<p>Assuming you have both the gcc-3.4.0 source code and GNAT&nbsp;ready to go, here is the procedure:</p>
+		<ol>
+			<li>Untar the gcc source code:<br>
+				&nbsp;&nbsp;&nbsp;<i> % tar zxf gcc-3.4.0.tar.gz </i>
+			<li>Untar the ghdl source code:<br>
+				&nbsp;&nbsp;&nbsp;<i> % tar zxf ghdl-0.12.tar.gz </i>
+			<li>You now have two directories: one containing the GHDL source and one containing the gcc source. Move the 'vhdl' subdirectory of the GHDL source code into the 'gcc' subdirectory of the gcc source code:<br>
+				&nbsp;&nbsp;&nbsp;<i> % mv ghdl-0.12/vhdl gcc-3.4.0/gcc </i>
+			<li>Enter the gcc source directory and configure gcc with VHDL language enabled:<br>
+				&nbsp;&nbsp;&nbsp;<i>% cd gcc-3.4.0<br>
+					&nbsp;&nbsp;&nbsp;% ./configure --enable-languages=vhdl<br>
+				</i>
+				Of course, you can enable other languages and use other configuration options. Refer to the gcc documentation for help on this.
+			<li>Compile gcc:<br>
+				&nbsp;&nbsp;&nbsp;<i>
+				     % make
+			</i>
+			<li>Install gcc:<br>
+				&nbsp;&nbsp;&nbsp;<i>
+				     % make install
+		</i>
+			</ol>
+		<p><b><u>NOTE!</u></b></p>
+		<p>The procedure above creates a new version of gcc that only compiles VHDL. If you replace your original gcc version with this, you may loose the ability to compile C, C++, etc. programs! Make sure you either</p>
+		<ol>
+			<li>Enable other languages as well (e.g. <i>--enable-languages=vhdl,c,c++</i>), or<li>Install your new VHDL-only version in a different location from your original gcc version<br>
+				(<i>e.g.</i> <i>--prefix=/home/myname/ghdl</i>).</ol>
+	</body>
+
+</html>

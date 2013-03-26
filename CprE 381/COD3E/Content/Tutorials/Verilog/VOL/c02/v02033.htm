@@ -1,0 +1,280 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<a name="top">
+			<BASEFONT="times" size"3">
+			<table width="600" cellpadding="10">
+				<tr>
+					<td>Click each button to learn more about that aspect of integer constants.
+						<p></p>
+						<center>
+							<a href="#sized"><img src="images/v0211b1.gif" height="39" width="156" border="0"></a>
+							<p><a href="#signed"><img src="images/v0211b2.gif" height="39" width="171" border="0"></a></p>
+							<p><a href="#radix"><img src="images/v0211b3.gif" height="39" width="144" border="0"></a></p>
+							<p><a href="#padding"><img src="images/v0211b4.gif" height="39" width="196" border="0"></a></p>
+						</center>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<RB>
+						<br>
+						<RB>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<RB>
+						<br>
+						<RB>
+						<br>
+						<a name="sized"><u><b>Sized vs. Unsized</b></u><br>
+							A sized constant has the size specifier present, while an unsized constant does not. Unsized numbers have a default size of 32 bits.
+							<p><a href="#top">Return to top <img src="images/varrow.gif" with="38" height="39" border="0"></a></p>
+							<p><br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<RB>
+								<br>
+								<RB>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<RB>
+								<br>
+								<RB>
+								<br>
+								<a name="signed"><u><b>Signed vs. Unsigned</b></u><br>
+									If both the size and radix are omitted, the constant is a signed number, represented in 2's complement. Otherwise, the constant is an unsigned, positive number. This is only visible if the constant is preceded by a unary minus sign.</a></p>
+							<p><a href="#top">Return to top <img src="images/varrow.gif" with="38" height="39" border="0"></a></p>
+							<p><br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<RB>
+								<br>
+								<RB>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<RB>
+								<br>
+								<RB>
+								<br>
+								<a name="radix"><u><b>Radix Specifiers</b></u><br>
+									The radix specifier indicates that the digits following are decimal ('d), hexidecimal ('h), octal ('o), or binary ('b). Each digit represents the appropriate number of bits for the radix.</a></p>
+							<p><a href="#top">Return to top <img src="images/varrow.gif" with="38" height="39" border="0"></a></p>
+							<p><br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<RB>
+								<br>
+								<RB>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<RB>
+								<br>
+								<RB>
+								<br>
+								<a name="padding"><u><b>Padding and Truncation</b></u><br>
+								</a></p>
+							<table width="600">
+								<tr>
+									<td>The number of bits represented by the digits in the value part of the constant may be more or less than the given size. If there are more, then the high order bits are truncated. For example,
+										<p></p>
+										<center>
+											<table width="300">
+												<tr>
+													<td></td>
+													<td width="100">7'h8f</td>
+													<td width="200">is equivalent to</td>
+													<td width="200">7'h0f</td>
+												</tr>
+												<tr></tr>
+											</table>
+										</center>
+										<p>If the size is greater than the number of bits in the value part (which is a much more common case), then the number is padded on the left (high order part) with 0. However, if the left-most digit in the value part is x or z, then the number is padded with x or z.</p>
+										<center>
+											<table width="300">
+												<tr>
+													<td width="100">12'h3</td>
+													<td width="200">is equivalent to</td>
+													<td width="200">12'b000000000011</td>
+												</tr>
+												<tr><br>
+													<td width="100">12'h3x</td>
+													<td width="200">is equivalent to</td>
+													<td width="200">12'b00000011xxxx</td>
+												</tr>
+												<tr><br>
+													<td width="100">12'bx</td>
+													<td width="200">is equivalent to</td>
+													<td width="200">12'bxxxxxxxxxxxx</td>
+												</tr>
+												<tr><br>
+													<td width="100">12'oz37</td>
+													<td width="200">is equivalent to</td>
+													<td width="200">12'bzzzzzz011111</td>
+												</tr>
+												<tr><br>
+												</tr>
+											</table>
+										</center>
+									</td>
+								</tr>
+							</table>
+							<p><a href="#top">Return to top <img src="images/varrow.gif" with="38" height="39" border="0"></a></p>
+							<p><br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<RB>
+								<br>
+								<RB>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<RB>
+								<br>
+								<RB>
+								<br>
+							</p>
+						</a></td>
+				</tr>
+			</table>
+		</a>
+	</body>
+
+</html>

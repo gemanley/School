@@ -1,0 +1,479 @@
+; TinyMIPS (Machine Instruction Processing Simulator) -- 2003 November 6
+;                          Copyright 2003 T.Pittman
+;+DB+ 2
+
+; The first half of this file defines four memories: 
+;   Memry&Code are respectively the writable (data) and program main memory
+;     They are addressed from the same Ladd latched address register,
+;     and selected (one or the other) by a high bit, ALU.28, which is set
+;     by SPIM to 1 for data and 0 for code
+;   mCode&FDROM respectively decode the general instructions and the FP ops
+;
+; Then there are two register 32x32 files:
+;   FPR is the floating point registers
+;   Reg is the 32-wide x 32 registers
+;
+; Then there are four architectural registers, PC, IR, Hi, Lo,
+;   followed by some latches for catching and holding fleeting data until
+;   it is used at a later time in the instruction execution sequence
+;
+; The back half of this file is the random logic for instruction decoding and
+;   sequencing, plus some data paths connecting the memories and registers
+;
+; At the very end are the trace line specifications
+
+; RAM & ROM are loaded automagically from SPIM log file, up to 4K (bytes) each...
+;  THESE TWO MEMORIES MUST BE FIRST BEFORE ALL OTHERS, for the SPIM data to load
+Code  ROM 32 Madd.11 - - - - - - - - -
+; To initialize $sp, change 1st line of ROM DATA to:
+;  0 DATA  0x3c1d1001  0x8fa40000  0x27a60008  0x00041080 
+1023  DATA 13 ; (break) $ra initially points here
+Memry RAM 32 Madd.11 - - - - - - - - -  MWr MWD.0 + + + + + + + \
+             + + + + + + + +  + + + + + + + +  + + + + + + + +
+;   .. Memry write data comes only from the selected register
+1016  DATA 0xDEADBEEF 0xDEADBEEF 0xDEADBEEF 0xDEADBEEF
+1020  DATA 0xDEADBEEF 0xDEADBEEF 0xDEADBEEF 0xDEADBEEF
+
+; Microcode ROM bits:
+Jump = mCode.0  ;  =0 if unconditional jump
+CBT  = mCode.1  ;  =1 if conditional branch -> BTkn if branch is taken
+Js0  = mCode.2  ; Js1 Js0 = PC jump select: 00=IR, 01=Rs, 10=IR+PC, 11=FP.br
+Js1  = mCode.3
+NCmp = mCode.4  ; NCmp ZCmp uCmp = type of compare: inverted, zeroTest, unsigned
+ZCmp = mCode.5
+uCmp = mCode.6
+InvB = mCode.7  ; SB1 SB0 InvB = ALU Bin: 0, -1, 010=IRi, 011=IRn, 100=RtD, 101=Bmi
+SB0  = mCode.8
+SB1  = mCode.9
+AAnd = mCode.10 ; Adda AAnd = ALU op: 00=XOR, 01=AND, 10=Add
+Adda = mCode.11
+RWD0 = mCode.12 ; RegWrData:  PC4, MRD, ImmU, IRi, ALU, BCmp, MDlo, MDhi, FPRD, SRA
+RWD1 = mCode.13 ;              0    1    2     3    4    5     6     7     8     9
+RWD2 = mCode.14
+RWD3 = mCode.15
+RgWr = mCode.16 ; Register will be written
+R31  = mCode.17 ; Write to R31
+Tg0  = mCode.18 ; Write to other target: 01=fp, 10=lo, 11=hi
+Tg1  = mCode.19
+Mwrt = mCode.20 ; Write to memory
+FPop = mCode.21 ; start floating-point operation (not used yet)
+
+; Instruction decode ROM...
+mCode ROM 22 Iopa.7 - - - - - - - ; Iopa decodes opcode to function bits
+  0 DATA   0                      ; 0 is nop
+  1 DATA     0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0
+ 32 DATA   0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0
+;--------543210FEDCBA9876543210
+ 64 DATA 0000.0....100010001010 ; bltz: SB00i=-0, Adda
+ 65 DATA 0000.0....100010011010 ; bgez: ~, NCmp
+ 66 DATA       0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0
+ 96 DATA   0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0
+128 DATA   0 ; nop (also sll, but not implemented)
+129 DATA   0
+130 DATA  00 ; srl
+;--------543210FEDCBA9876543210
+131 DATA 0000011001..........00 ; sra  ; only works for shamt=1
+132 DATA  00 ; sllv
+133 DATA   0
+134 DATA  00 ; srlv
+135 DATA  00 ; srav
+;--------543210FEDCBA9876543210
+136 DATA 0000.0............0101 ; jr
+137 DATA 0000110000........0101 ; jalr
+138 DATA   0 0
+140 DATA   0 ; syscall = nop
+141 DATA   0 0 0
+;--------543210FEDCBA9876543210
+144 DATA 0000010111..........00 ; mfhi
+145 DATA 0011.00000..........00 ; mthi
+146 DATA 0000010110..........00 ; mflo
+147 DATA 0010.00000..........00 ; mtlo
+148 DATA   0 0 0 0 0 0  0 0 0 0 0 0
+;--------543210FEDCBA9876543210
+160 DATA 000001010010100.....00 ; add  ; same as addu
+161 DATA 000001010010100.....00 ; addu
+162 DATA 000001010010101.....00 ; sub  ; same as subu
+163 DATA 000001010010101.....00 ; subu
+164 DATA 000001010001100.....00 ; and
+165 DATA   0
+166 DATA 000001010000100.....00 ; xor
+167 DATA   0 0 0
+;--------543210FEDCBA9876543210
+170 DATA 000001010110101000..00 ; slt
+171 DATA 000001010110101100..00 ; sltu
+172 DATA   0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0 0
+192 DATA   0 0
+;--------543210FEDCBA9876543210
+194 DATA 0000.0............0001 ; jump
+195 DATA 000011............0001 ; jal
+196 DATA 0000.0....001000101010 ; beq
+197 DATA 0000.0....001000111010 ; bne
+198 DATA 0000.0....101010011010 ; blez
+199 DATA 0000.0....101010001010 ; bgtz
+;--------543210FEDCBA9876543210
+200 DATA 000001010010010.....00 ; addi ; same as addiu
+201 DATA 000001010010010.....00 ; addiu
+202 DATA 000001010110011000..00 ; slti
+203 DATA 000001010110011100..00 ; sltiu
+204 DATA 000001010001010.....00 ; andi
+205 DATA 000001010000010.....00 ; ori = xori, which works for li pseudo-instruction
+206 DATA 000001010000010.....00 ; xori
+207 DATA 0000010010..........00 ; lui
+208 DATA   0
+209 DATA 1000001000........1110 ; fp op
+210 DATA   0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0
+;--------543210FEDCBA9876543210
+227 DATA 000001000110010.....00 ; lw
+228 DATA   0 0  0 0 0 0 0
+235 DATA 0100.0....10010.....00 ; sw
+236 DATA   0 0 0 0 0
+241 DATA 100000....10010.....00 ; lwc1
+242 DATA   0 0 0 0 0 0 0
+249 DATA 0100.0....10010.....00 ; swc1 (same as sw)
+250 DATA   0 0 0 0 0 0
+
+; Floating-point decode bits:
+FPS0 = FDROM.0  ; FPS1 FPS0 sign select: 00=keep, 01=00, 10=neg
+FPS1 = FDROM.1
+FWS0 = FDROM.2  ; FWS1 FWS0 write select: 00=rt, 01=fs, 10=add, 11=mul
+FWS1 = FDROM.3
+FPcp = FDROM.4  ; set FP compare result
+FPwr = FDROM.5  ; FP reg write enable
+FPbc = FDROM.6  ; FP conditional branch, or load from memory
+FPcv = FDROM.7  ; start FP convert
+FPad = FDROM.8  ; start FP add/sub
+FPmp = FDROM.9  ; start FP multiply
+FPwG = FDROM.10 ; general reg write enable
+FPxx = FDROM.11 ; param (e.g. sub instead of add)
+
+; Floating-point decode ROM..
+FDA.0 gate IRz.0 IRz.3         ; merge these two bits (no overlap)
+FDA.1 =    IR.1
+FDA.2 gate IRz.31 IRz.24 IRz.23 IRz.2 ; forced =1 for lwc1/bc1t/bc1f/mtc1
+FDA.3 gate IRz.31 IRz.24 IRz.5        ; =1 for lwc1/bc1t/bc1f/cvt/compare
+FDA.4 gate IRz.31 IR.25               ; =1 for lwc1/mfc1/mtc1/bc1t/bc1f
+FDROM ROM  12 FDA.4 - - - -
+;--------BA9876543210
+  0 DATA 000100100010 ; add.s
+  1 DATA 100100100010 ; sub.s
+  2 DATA 001000100011 ; mul.s
+  3 DATA 000000000000 ; div.s (not implemented)
+  4 DATA  0
+  5 DATA .00000100101 ; abs.s
+  6 DATA .00000100100 ; mov.s
+  7 DATA .00000100110 ; neg.s
+;--------BA9876543210
+  8 DATA 000010100010 ; cvt.s.w
+  9 DATA  0
+ 10 DATA .000000100.. ; c.eq.s
+ 11 DATA  0
+ 12 DATA 100010100010 ; cvt.w.s
+ 13 DATA .000000100.. ; c.lt.s
+ 14 DATA  0
+ 15 DATA .000000100.. ; c.le.s
+;--------BA9876543210
+ 16 DATA .100000000.. ; mfc1
+ 17 DATA  0 0 0
+ 20 DATA .00000100000 ; mtc1
+ 21 DATA  0 0 0  0 0 0 0
+ 28 DATA .000010000.. ; lwc1/bc1t/bc1f
+ 29 DATA .000010000.. ; lwc1/bc1t/bc1f
+ 30 DATA .000010000.. ; lwc1/bc1t/bc1f
+ 31 DATA .000010000.. ; lwc1/bc1t/bc1f
+;--------BA9876543210
+
+; 31-Register File Macro
+Rfile CHIP  42 RsOut RtOut ; Inputs: Rs.4-0, Rt.4-0, Wdata, RdWr.1-31
+Wdata =     Rfile.10
+RsR   Renum Rfile.4 - - - -
+RtR   Renum Rfile.9 - - - -
+RdS   Renum Rfile.11 + + + + + +  + + + + + + + +  + + + + + + + +  + + + + + + + +
+RsOut Mux5  RsR.0 + + + +  Regs.0 + + + + + + + \
+               + + + + + + + +  + + + + + + + +  + + + + + + + +
+RtOut Mux5  RtR.0 + + + +  Regs.0 + + + + + + + \
+               + + + + + + + +  + + + + + + + +  + + + + + + + +
+Regs  Renum 0 RegB.0 + + + + + +  + + + + + + + + \
+                 + + + + + + + +  + + + + + + + +
+RegB.* FF   Wdata RdS.*  ; RegB.0.0 (Q) is Regs.1
+30 *
+Rfile END
+
+; Floating-point register file, 32x32...
+FwD.* Mux2   IR.31 IR.25  RD.* RT.* RX.* RX.* ; $fd: IR.6-10, except mtc1/lwc1
+4 *
+FdS3  =      FwD.3
+FdS4  =      FwD.4
+FdS3/ gate   FdS3
+FdS4/ gate   FdS4
+Fdec0 Decode FwD.0 + + FRUp FdS3/ FdS4/
+Fdec1 Decode FwD.0 + + FRUp FdS3  FdS4/
+Fdec2 Decode FwD.0 + + FRUp FdS3/ FdS4
+Fdec3 Decode FwD.0 + + FRUp FdS3  FdS4
+FRUp  gate   FRUp/ FRMR/
+FRUp/ gate   FPop Doit FPwr
+FRMR/ gate   FPop Doit FPbc IR.31 
+FPR.* Rfile  RD.4 - - - - RT.4 - - - - FWrD.* Fdec0.1 + + + + + + \
+                Fdec1.0 + + + + + + +  Fdec2.0 + + + + + + +  Fdec3.0 + + + + + + +
+31 *
+FsD.* =  FPR.*.0
+31 *
+FtD.* =  FPR.*.1
+31 *
+
+; Register File, 32x32...
+RselW =      Iopa.6   ; =0 selects Rd, =1 selects Rt
+RdSel.* Mux2 RselW R31  RD.* RT.* 1 1
+4 *
+RdS3  =      RdSel.3
+RdS4  =      RdSel.4
+RdS3/ gate   RdS3
+RdS4/ gate   RdS4
+Rdec0 Decode RdSel.0 + + RegUp RdS3/ RdS4/
+Rdec1 Decode RdSel.0 + + RegUp RdS3  RdS4/
+Rdec2 Decode RdSel.0 + + RegUp RdS3/ RdS4
+Rdec3 Decode RdSel.0 + + RegUp RdS3  RdS4
+RegUp gate   RegNC RegFC
+RegNC gate   RgWr Doit
+Reg.* Rfile  RS.4 - - - - RT.4 - - - - RWrD.* Rdec0.1 + + + + + + \
+                Rdec1.0 + + + + + + +  Rdec2.0 + + + + + + +  Rdec3.0 + + + + + + +
+31 *
+RsD.* =  Reg.*.0
+31 *
+RtD.* =  Reg.*.1
+31 *
+
+; Here follow some singleton registers: PC, IR, Hi, Lo
+
+; Program Counter...
+PC   Renum 0 0 PCL.0 + + + PCM.0 + + + PCH.0 + + + 0 0  0 0 0 0 0 0 1 0  0 0 0 0 0 0 0 0
+PCL   Cnt4  JS.0 + + + Fech Pcnt ; load it from ALU on any jump or branch
+PCM   Cnt4  JS.4 + + + Fech PCMC
+PCH   Cnt4  JS.8 + + + Fech PCHC
+RsJ   Renum RsD.2 + + + + + + +  + + + + + + + +
+PCn   Renum PC.2 + + +  + + + +  + + + +  + +
+JS.*  Mux3  Js0 Js1 FPbr/  IR.* RsJ.* Pad.*.1 Pad.*.1  IR.* RsJ.* Pad.*.1 PCn.*
+11 *
+Pad.* Add  IR.* PPC.* Pcy.* ; do this add on (saved) unincremented PC
+11 *
+Pcyo.* =   Pad.*.0
+11 *
+PPC.*  FF  PCn.* Fclk ; capture unincremented PC for relative branches
+13 *
+Pcy   Renum 0 Pcyo.0 + + +  + + + +  + + + +
+Pcnt  gate  Finc Jmp/ Bc/ FBc/      ; program counter clock
+Fmid  gate  Fclk PC.2 + + +         ; enables PC mid to count
+Fhi   gate  Fclk PC.2 + + + + + + + ; enables PC high to count
+PCHC  gate  Fhi  Jmp/ Bc/ FBc/
+PCMC  gate  Fmid Jmp/ Bc/ FBc/
+
+; Instruction Register, with some selected subfields..
+IR.*  FF  MRD.* LdIR ; 32-bit instruction register, loaded from memory read data
+31 *
+IRz.* =  IR.*.1  ; IR inverted, for zero-test
+31 *
+IRi  Renum IR.0  + + + + + + +  + + + + + + + +  ~ ~ ~ ~ ~ ~ ~ ~  ~ ~ ~ ~ ~ ~ ~ ~
+IRn  Renum IRz.0 + + + + + + +  + + + + + + + +  ~ ~ ~ ~ ~ ~ ~ ~  ~ ~ ~ ~ ~ ~ ~ ~
+ImmU Renum 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0  IR.0 + + + + + + +  + + + + + + + +
+HiR  Renum IR.26 + + + + + ; renumber these hi-6 for Iopa line..
+MiR  Renum IR.16 IR.20 0 0 0 0 ; renumber these 2 bits for Iopa line..
+RS   Renum IR.21 + + + + ; Rs bits renumbered from 0
+RT   Renum IR.16 + + + + ; Rt bits renumbered from 0
+RD   Renum IR.11 + + + + ; Rd bits renumbered from 0
+RX   Renum IR.6  + + + + ; Rx bits renumbered from 0
+
+; Instruction register & opcode decode; Iopa.* is the address on the mCode ROM
+LdIR   =    Fclk ; loads IR at end of fetch
+Iopa.7 gate IRz.31 - - - - IR.26 ; lo if bgez/bltz
+Iopa.6 gate IRz.31 - - - - -     ; lo when hi-6 IR =0
+Iopa.* Mux2 Iopa.6 Iopa.7 MiR.* MiR.* IR.* HiR.* ; 6 more bits here
+5 *
+TgWr Decode Tg0 Tg1 0 DoIt 1 1 ; Write to other target: 01=fp, 10=lo, 11=hi
+MDlg   gate TgWr.2
+MDhg   gate TgWr.3
+
+; Multiply/Divide Aux registers (unused, except for transfers)...
+MDlo.* FF Reg.* MDlg
+31 *
+MDhi.* FF Reg.* MDhg
+31 *
+
+; The following macro defines one bit of the Arithmetic-Logic Unit (ALU):
+;   ALU.0 is ALUout, ALU.1 is CarryOut
+Pbit  CHIP 5 Sum Cy ; Ins: Ain Bin Ci Adda An
+A   = Pbit.0 ; A input
+B   = Pbit.1 ; B input
+Ci  = Pbit.2 ; carry input
+Ade = Pbit.3 ; =1 when adding, =0 disables Ci (which is XOR)
+Ane = Pbit.4 ; =1 when ANDing, must =0 to add; Ade=Ane=1 is undefined
+Sum gate anb abc ao bo co ; similar to full-adder, but gated
+Cy  gate ab ac bc 
+abc gate A B Ci Ade
+ab  gate A B 
+ac  gate A Ci Ade
+bc  gate B Ci Ade
+ao  gate A ab ac 
+bo  gate B ab bc 
+co  gate Ci ac bc Ade
+anb gate A B Ane ; AND output term
+Pbit  END
+
+; This defines 32 bits of ALU:
+ALU.* Pbit Ain.* Bin.* Cin.* Adda AAnd ; 32 processor bits
+31 *
+ALZ.* gate ALU.* ; complement bits, for zero-test
+31 *
+Co.*  = ALU.*.1 ; relabel carry-out for the following line..
+31 *
+; Renumber the carry-out as carry-in:
+Clob  = InvB ; low carry into ALU (needed for subtract/compare)
+Cin  Renum Clob Co.0 + + + + + +  + + + + + + + +  + + + + + + + +  + + + + + + + +
+; Renumber the Register output for a right-shifted (sign-extended) input to ALU
+SRA  Renum RtD.1 + + + + + + +  + + + + + + + +  + + + + + + + +  + + + + + + + ~
+
+; ALU input selection...
+SR1g gate IR.6 IRz.7 + + + ; shamt=00001, for SRA
+Ain.* = RsD.* ; select A-inputs to ALU
+31 *
+Bin.* Mux3 InvB SB0 SB1   0 1 IRi.* IRn.* RtD.* Bmi.* 0 0 ; B-inputs to ALU
+31 *
+Bmi.* gate RtD.* ; invert B-input reg Rt for subtract/compare
+31 *
+
+; Register write data selection..
+BCmp Renum CmpR 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0
+RWrD.*  Mux4  RWD0 RWD1 RWD2 RWD3    PC.* MRD.* ImmU.* IRi.*  \
+         ALU.* BCmp.* MDlo.* MDhi.*  FsD.* SRA.* 0 0 0 0 0 0 ; 32 bits total
+31 *
+
+; Memory Address & Data Selection & write timing..
+MRD.*   Mux1 Madd.12  Code.* Memry.* ; Memory Read Data RAM/ROM bank switching
+31 *
+MWD.*   Mux1 IR.30  RtD.* FtD.* ; Memory Read Data RAM/ROM bank switching
+31 *
+Madd.12 Mux1 Exec 0 ALU.28.0 ; memory address (PC/L/S) selector (high address bit)
+Madd.*  Mux1 Exec PC.* ALU.*.0
+11 * 
+MWr    gate  Mwrt DoIt
+tMWr   gate  MWr
+
+; Floating-point operations decode..
+FPbr/ gate  FPop FPsfg FPbc IRz.31 ; FPbr/ =0 takes the branch
+FPsfg Mux1  IR.16  FPflg.1 FPflg.0
+FPop/ gate  FPop
+FPflg FF    FPCmx FPFgS  ; compare flag for future bc1t/bc1f
+FPFgS gate  FPFg/
+FPFg/ gate  FPcp Doit
+FPCmx Mux4  CpNe CpLt IR.1 IR.2  0 0 0 0  1 0 1 0   0 0 1 1   1 0 1 1
+FWrD.* Mux3 FWS0 FWS1 IRz.31  MRD.* MRD.* MRD.* MRD.*  RtD.* FsD.* xxx  xxx
+30 *                                           ; not yet defined: (add)(mul)
+FWrD.31 Mux5 FWS0 FWS1 FPS0 FPS1 IRz.31  \
+         MDs MDs MDs MDs  MDs MDs MDs MDs  MDs MDs MDs MDs  MDs MDs MDs MDs \
+           RtD.31 FsD.31 xxx  xxx  0 0 0 0  FsDn FsDn  xxx  xxx  0 0 0 0
+MDs   =     MRD.31 ;    (add)(mul)  (abs)             (add)(mul) (unused)
+FsDn  gate  FsD.31 ; negate sign..
+RegFC gate  FPwG Doit ; write to general register
+xxx   = x
+
+; Floating-point compare..
+CpA.*  gate FsD.*
+30 *
+CpB.*  =    FtD.*
+30 *
+CpA.31 =    FsD.31 ; invert sign bits to use unsigned compare
+CpB.31 gate FtD.31
+CAd.*  Add  CpA.* CpB.* CpC.*
+31 *
+CpC   Renum 0 CAd.0 + + + + + +  + + + + + + + +  + + + + + + + +  + + + + + + + +
+CpS.*  =    CAd.*.1
+31 *
+CpNe   gate CpS.0 + + + + + +  + + + + + + + +  + + + + + + + +  + + + + + + + +
+CpLt  =     CAd.31.0 ; =1 if FsD<FtD
+
+; Conditional branch logic..
+BTkn   Mux3  NCmp ZCmp CBT  0 0 0 0 CmpR ANeg AZT/ AZT ; true if branch taken
+AZT/   gate  ALZ.0 + + + + + + +  + + + + + + + +  + + + + + + + +  + + + + + + + +
+AZT    gate  AZT/ ; =1 if ALU out all =0
+ANeg   gate  CmpR ; Cin,Cout,sign,signed; ANeg=1 if Bin<AiL
+CmpR   Mux4  ALU.30.1 ALU.31.1 ALU.31.0 uCmp  0 1 1 0 1 0 0 1  0 0 1 1 0 0 1 1
+Jmp/   gate  Jump DoIt
+Bc/    gate  BTkn FPop/ DoIt
+FBc/   gate  FPop FPsfg FPbc IRz.31 DoIt
+
+; Execution timing...
+Early/ Pulse CLK
+Later/ Pulse Early/
+SysClk gate  Later/
+Early  gate  Early/
+Exec   FF    Fech SysClk
+Fech   =     Exec.1  ; 180 out of phase with Exec
+ExPls  gate  Exec Early ; (low) pulse near end of Exec cycle
+DoIt   gate  ExPls   ; a high pulse slightly later
+Finc   gate  Fech Early ; a (low) pulse near end of Fech cycle
+Fclk   gate  Finc    ; a high pulse slightly later
+
+; The following circuit provides a sequence of step-delayed reset signals
+ReDly  Renum Reset RDO.0 + + + + + + + + +
+RDO.*  FF   ReDly.* CLK
+9 *
+
+; Trace spec, cycle counter:
+Cyc0 Cnt4 0 0 0 0 CyDl CCk ; counts CCk's (see below)
+Cyc4 Cnt4 0 0 0 0 1 Cyc0.3
+Cyc8 Cnt4 0 0 0 0 1 Cyc4.3
+Cyc  Renum Cyc0.0 + + +  Cyc4.0 + + +  Cyc8.0 + + + ; 12-bit cycle counter
+CyDl = ReDly.0
+CCk  = DoIt                ; Cyc counts instructions
+
+; Trace line gates..
+Pcap   Pulse Fech      ; Pcap is a lo-pulse early in Fetch
+TrPC   gate  Pcap      ; TrPC is a hi-pulse during Fetch
+Ptr.*  FF    PC.* TrPC ; we only trace low 16 bits of PC, captured during Fetch
+15 *
+ReGate gate Reset    ; for tracing: largely invisible after reset releases
+
+; Actual Trace Spec...
+Cyc  HEX ReGate CLK 0 DoIt Fclk Exec Cyc.7 - - -  - - - - ; cycle counter (modified)
+;Cyc  HEX Cyc.11 - - -  - - - -  - - - - ; cycle counter (for reference)
+PC   HEX PC.22 0 0  Ptr.15 - - -  - - - -  - - - -  - - - -  ; Program Counter; IR:
+IR   HEX IR.31 - - -  - - - -  - - - -  - - - -  - - - -  - - - -  - - - -  - - - -
+$rD    HEX RegUp  RdSel.4 - - - - ; selected write register, if any; its write data:
+Wdata  HEX RWrD.31 - - - - - - -  - - - - - - - -  - - - - - - - -  - - - - - - - -
+$rs    HEX RS.4 - - - -    ; the selected $rs register; its value:
+RegVal HEX RsD.31 - - - - - - -  - - - - - - - -  - - - - - - - -  - - - - - - - -
+
+; omit these, after it works...
+W      HEX tMWr RegUp ; normally =0; =2 or =1 at write
+Madd   HEX Madd.12  - - - -  - - - -  - - - - ; current memory address
+;Code   HEX Code.31 - - - - - - -  - - - - - - - -  - - - - - - - -  - - - - - - - -
+;Memry  HEX Memry.31 - - - - - - -  - - - - - - - -  - - - - - - - -  - - - - - - - -
+MRD    HEX MRD.31 - - - - - - -  - - - - - - - -  - - - - - - - -  - - - - - - - -
+
+Ain    HEX Ain.31 - - -  Ain.7 - - - - - - -
+Bin    HEX Bin.31 - - -  Bin.7 - - - - - - - ; (short form)
+;Bin    HEX Bin.31 - - - - - - -  - - - - - - - -  - - - - - - - -  - - - - - - - -
+ALUout HEX 0 ALU.31.1 ALU.31 - - - - - - -  - - - - - - - -  - - - - - - - -  - - - - - - - -
+;  =4 at trace ^      ^ carry-out
+
+$fD    HEX FRUp  FwD.4 - - - - ; selected FP write register, if any; its write data:
+Fdata  HEX FWrD.31 - - - - - - -  - - - - - - - -  - - - - - - - -  - - - - - - - -
+;F+     HEX FWrD.31 MDs IR.31 FPS1 FPS0 FWS1 FWS0
+;$fs    HEX RD.4 - - - -    ; the $fs register; its value:
+;Fval   HEX FsD.31 - - - - - - -  - - - - - - - - ; - - - - - - - -  - - - - - - - -
+;$ft    HEX RT.4 - - - -    ; the $ft register; its value:
+;Fval   HEX FtD.31 - - - - - - -  - - - - - - - - ; - - - - - - - -  - - - - - - - -
+
+Iopa   HEX Iopa.7 - - - - - - - ; address of mCode ROM, decoded from IR
+mCode  HEX mCode.21 -  - - - -  - - - -  - - - -  - - - -  - - - - ; microcode ROM
+FDA    HEX FDA.4 - - - - ; address of FDROM
+FDROM  HEX FDROM.11 - - -  - - - -  - - - - ; FP microcode ROM
+
+; Branch conditions, for debugging conditional branches...
+;BTkn   HEX BTkn  0 CBT ZCmp NCmp  AZT AZT/ ANeg CmpR  uCmp ALU.31.0 ALU.31.1 ALU.30.1
+;FPbr   HEX FPsfg FPflg FPop FPbr/  0 0 0 FPCmx  0 0 0 FPFgS  0 0 0 FPcp
+;JmpA   HEX JS.11 - - -  - - - -  - - - -  0 0 ; calc'd jump address
+;(PC)   HEX PC.11 - - -  - - - -  - - - -  0 0 ; actual PC
+
+;200,50,2,1,0     ; run,ClkRate,PonDly,Trate,TracePhase -- trace everything
+;99,50,2,100,106  ; run,ClkRate,PonDly,Trate,TracePhase -- trace cycles
+1000,50,2,10,706 ; run,ClkRate,PonDly,Trate,TracePhase -- trace cycles/10
+;+DB+ 1 ; to get Net List

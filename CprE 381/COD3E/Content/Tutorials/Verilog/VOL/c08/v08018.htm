@@ -1,0 +1,31 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<td width="600">Unlike VHDL, Verilog does not include configuration management capabilities in the language itself. It relies on the host operating system and the simulator implementation to manage which version of each module it should use. The way the simulator does this is with libraries.
+				<p>Verilog simulators generally follow the procedures established by Verilog-XL. There are two types of libraries:</p>
+				<p>1. <a href="javascript:parent.goGlossHash('#libfile')"><font color="#B22222">library files</font></a><br>
+					A library file is a single file containing a collection of module defintions. Each module definition may instantiate other modules in that file (or defined elsewhere). A library file named library.v is indicated by:</p>
+				<p></p>
+				<dl>
+					<dd>-v library.v
+				</dl>
+				<p>The modules in a library file are only included in the model if some other module instantiates a module of that type.</p>
+				<p>2. library directories<br>
+					A <a href="javascript:parent.goGlossHash('#libdir')"><font color="#B22222">library directory</font></a> contains a collection of files, each of which contains a single module definition. A library directory named libdir is indicated to a Verilog compiler by</p>
+				<p></p>
+				<dl>
+					<dd>-y libdir
+				</dl>
+				<p>By convention, the module name is used for the file name, with a &quot;.v&quot; appended. E.g. file &quot;REG4X.v&quot; contains module REG4X.</p>
+			</td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

@@ -1,0 +1,35 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body onload=" parent.initBtnMchMA(6);" bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600" cellpadding="10">
+			<b>Given the state machine from the previous screen, select all of the following changes that would fix the problem. For each fix, assume that is the only change made to the original code.</b>
+			<p></p>
+			<pre>
+	assign nextstate = next(state, in);
+	assign out = func(state);
+	always @(posedge clk)
+		state = nextstate;
+</pre>
+			<hr>
+			<form>
+				<input type="checkbox" name="A"> <font color="#4B0082">1. state &lt;= nextstate; </font><br>
+				<input type="checkbox" name="B"> 2. assign #1 nextstate = next(state, in);<br>
+				<input type="checkbox" name="C"> <font color="#4B0082">3. state = #1 nextstate; </font><br>
+				<input type="checkbox" name="D"> <font color="#4B0082">4. assign #1 out = func(state); </font><br>
+				<input type="checkbox" name="E"> 5. #1 state = nextstate;<br>
+				<input type="checkbox" name="F"> <font color="#4B0082">6. always @(negedge clk) out = func(state); </font>
+				<p></p>
+			</form>
+			<a name="answer"><b>That's correct. Items 1, 3, 4, and 6 would all correct the problem. Item 2 wouldn't work because if &quot;in&quot; changed 1 time unit before &quot;posedge clk&quot;, then there would be a race. Item 5 is also inadequate because there is still a race condition if &quot;out&quot; from this module is used as &quot;in&quot; for another module coded the same way.</b>
+				<p></p>
+			</a>
+		</table>
+	</body>
+
+</html>

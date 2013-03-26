@@ -1,0 +1,24 @@
+<html>
+
+	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+
+	<body bgcolor="#FFFFFF">
+		The following module implements a 2-bit to 4 decoder.
+		<p></p>
+		<pre>
+        module decodeX4 (b0, b1, b2, b3, in0, in1);
+            output b0, b1, b2, b3;
+            input  in0, in1;             // select inputs
+        
+            not    N1 (t0, in0);         // invert inputs
+            not    N2 (t1, in1);
+                                 
+            and    A1 (b0, t1, t0);      // decode inputs =&gt; outputs
+            and    A2 (b1, t1, in0);
+            and    A3 (b2, in1, t0);
+            and    A4 (b3, in1, in0);
+        endmodule
+</pre>
+	</body>
+
+</html>

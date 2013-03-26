@@ -1,0 +1,22 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td valign="top" width="600">This model comes from the '92 High Level Synthesis Benchmarks, translated from VHDL by Sari Coumeri. The translation was done semi-automatically, which accounts for the poor aesthetics of the original source.
+				<p>We present here both the original, and a cleaned-up version. Compare the two for readability and also for efficiency. The modified version runs 30% faster on at least one Verilog simulator.</p>
+				<p><a href="JavaScript:parent.dispWindow('v07147ra.htm','Reading')">TARMS_COUNTER (original)</a></p>
+				<p><a href="JavaScript:parent.dispWindow('v07147rb.htm','Reading')">TARMS_COUNTER (modified)</a><br>
+					This module has a control input and a strobe signal which sets the function. The function is count up until the limit, count down until the limit, reset the counter, and set the limit. There is a data input to set the limit, and the counter value is output. The counter is incremented or decremented at each rising clock edge when it is enabled. When the counter reaches the limit, it simply disables itself.</p>
+				<p><a href="JavaScript:parent.dispWindow('v07147rc.htm','Reading')">TTest Module</a><br>
+					This is the top level module. It provides test patterns to the counter module, and checks the result. Notice the repeat placed around the test vectors. This is for timing purposes, and does not serve any useful verification purpose. Note that the error checking is not very helpful if an error actually occurs. It would be difficult to determine which pattern had a problem, since the error messages are all the same.</p>
+			</td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

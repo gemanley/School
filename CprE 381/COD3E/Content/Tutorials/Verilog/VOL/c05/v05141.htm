@@ -1,0 +1,43 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>The parallel block, is also a sequence of statements lexically. Semantically, however, the statements are not sequential, but they are concurrent. That is they can all be considered to begin at the same simulation time. The compound statement does not terminate until the last of the constituent statements has completed.
+					<p>The following illustrates the parallel block:</p>
+					<p><tt></tt></p>
+					<dl>
+						<dd>fork
+							<dl>
+								<dd>x = #1 y;
+							</dl>
+							<dl>
+								<dd>y = #1 x;
+							</dl>
+						<dd>join
+					</dl>
+					</TT>In this example, both statements begin at the current time and end at <tt>t+1</tt>. This would swap the contents of <tt>x</tt> and <tt>y</tt>.
+					<p>As another example, the following are equivalent:</p>
+					<p></p>
+				</td>
+			</tr>
+		</table>
+		<center>
+			<table width="500">
+				<tr>
+					<td width="250"><tt>always @(posedge clk)<br>&nbsp;&nbsp;&nbsp;state1 = newstate1;<br>
+							always @(posedge clk)<br>&nbsp;&nbsp;&nbsp;state2 = newstate2;</tt></td>
+					<td width="250"><tt>always @(posedge clk)<br>
+							fork<br>&nbsp;&nbsp;&nbsp;state1 = newstate1;<br>&nbsp;&nbsp;&nbsp;state2 = newstate2;<br>
+							join</tt></td>
+				</tr>
+			</table>
+		</center>
+	</body>
+
+</html>

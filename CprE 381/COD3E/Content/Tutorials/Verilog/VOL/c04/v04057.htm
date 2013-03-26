@@ -1,0 +1,19 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td>The bidirectional switches are <tt>tran, tranif1, tranif0,</tt> and their resistive variations. These switches differ from the others in that they do not allow delays propagating signals through them. The <tt>tran</tt> (and <tt>rtran</tt>) primitive simply passes the value of a signal on one of its ports through to the other one. The <tt>rtran</tt> reduces the strength one level as it passes the signal through. Both ports are inout, and signals can go through this switch in either direction.
+					<p>The conditional bidirects, <tt>tranif1 and tranif0</tt> (and <tt>rtranif1</tt> and <tt>rtranif0)</tt>, act like a <tt>tran (rtran)</tt> switch if the control is enabled, and do not pass anything if the control is disabled. These switches can have delays specified with them, but the delay only effects the turn-on and turn-off propagation time.</p>
+				</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

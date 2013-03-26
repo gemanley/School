@@ -1,0 +1,9 @@
+Trevor Lund
+Ex5.txt
+
+a. 0.125
+b. 0.05
+c. INVALID
+d. 2.5
+e. 5
+f. 1.0

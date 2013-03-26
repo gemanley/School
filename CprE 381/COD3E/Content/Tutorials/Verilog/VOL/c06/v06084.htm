@@ -1,0 +1,34 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">The data file must consist of the following:
+					<p>1. binary or hexidecimal numbers</p>
+					<p></p>
+					<dl>
+						<dd><code>[@address] datavalue</code>
+							<p></p>
+						<dd>where
+							<p></p>
+							<dl>
+								<dd><b>address</b> is a hexadecimal number (for both <code>$readmemb</code> and <code>$readmemh</code>)
+								<dd><b>datavalue</b> is a binary or hexadecimal number which may contain x, z, and _, but does not contain a size or base
+							</dl>
+					</dl>
+					<p>2. white space</p>
+					<p>3. comments (both types)</p>
+					<p>If an address appears before a datavalue, the datavalue will go in that memory location, and subsequent datavalues will go in subsequent memory locations, proceeding toward the <tt>last_index</tt>.</p>
+					<p>The <code>$readmem</code> task is a kludge, in the sense that it only works for memories, and the form of the input is very inflexible.</p>
+				</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

@@ -1,0 +1,120 @@
+<html>
+
+
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Homeworks/04_FDs/FD_Exercises.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:01:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Homework</title>
+<meta name="Microsoft Border" content="t, default">
+</head>
+
+<body><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td>
+
+<p><font face="AGaramond" size="3">Com S 363: Introduction to Database Systems</font><br>
+<font face="AGaramond" size="5">Introduction to Database Systems </font></p>
+<p>
+
+</p>
+<p>&nbsp; </p>
+
+</td></tr><!--msnavigation--></table><!--msnavigation--><table dir="ltr" border="0" cellpadding="0" cellspacing="0" width="100%"><tr><!--msnavigation--><td valign="top">
+
+<font SIZE="5">
+<p><i><font face="Times New Roman">Homework on functional dependencies </font></i></font><i>
+<font SIZE="5" face="Times New Roman">&nbsp;</font></i></p>
+<font FACE="Times New Roman">
+<p ALIGN="JUSTIFY"><b>1.</b>&nbsp;You are given the following relation r over 
+ABCD. </p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY">B
+-&gt; ACD and C -&gt; D. </p>
+<table border="1" cellpadding="3" cellspacing="3" style="border-collapse: collapse" bordercolor="#111111" width="100" id="AutoNumber1">
+  <tr>
+    <td align="center" colspan="4">
+    <p align="left">r</td>
+  </tr>
+  <tr>
+    <td align="center">A</td>
+    <td align="center">B</td>
+    <td align="center">C</td>
+    <td align="center">D</td>
+  </tr>
+  <tr>
+    <td align="center">6</td>
+    <td align="center">2</td>
+    <td align="center">3</td>
+    <td align="center">4</td>
+  </tr>
+  <tr>
+    <td align="center">1</td>
+    <td align="center">3</td>
+    <td align="center">8</td>
+    <td align="center">5</td>
+  </tr>
+  <tr>
+    <td align="center">6</td>
+    <td align="center">7</td>
+    <td align="center">8</td>
+    <td align="center">5</td>
+  </tr>
+</table>
+<p ALIGN="JUSTIFY">Recall that the term &quot;key&quot; without any qualification stands 
+for unique key that is required to be minimal in the sense that if any attribute 
+in the key is removed, the remaining attributes no longer form a key. Also, 
+recall that a key can contain multiple attributes and that a relation can have 
+more than one key. </p>
+<p ALIGN="JUSTIFY">(A) What are all the keys in this relation? </p>
+<p ALIGN="JUSTIFY">(B) Give example of a superkey that is not a key. </p>
+<p ALIGN="JUSTIFY">(C) Give example of a superkey that is also a key. </p>
+<p ALIGN="JUSTIFY">(D) Give example of a set of attributes that is not a key. 
+Prove your answer. </p>
+<p ALIGN="JUSTIFY">(E) Give the most obvious (no brainer) example of a superkey. </p>
+<p ALIGN="JUSTIFY">(F) Give example of a trivial functional dependency. </p>
+<p ALIGN="JUSTIFY">(G) Give example of a non-trivial functional dependency over 
+ABCD that is satisfied 
+by the given state of relation r. Prove your answer. </p>
+<p ALIGN="JUSTIFY">(H) Give example of a functional dependency over ABCD that is 
+not satisfied by r. Prove your answer.&nbsp; </p>
+<p ALIGN="JUSTIFY">2. Suppose we have a database containing a single relation r 
+over ABCD that is required to satisfy the functional dependencies AB
+®
+C, C
+®
+D. Give example of functional dependency that is satisfied in some state of 
+relation r, <font color="#0000FF">but does not hold in r.</font>
+</font>
+
+</p>
+<p ALIGN="JUSTIFY"><font face="Times New Roman">3. Deduce AC -&gt; E from A -&gt; B, C 
+-&gt;<b>
+</b>D, and BD -&gt; E. </font> </p>
+<p ALIGN="JUSTIFY"><font face="Times New Roman">4. Show that the following is 
+not a valid rule for deduction of functional dependencies. </font> </p>
+<p ALIGN="JUSTIFY"><font face="Times New Roman">AB -&gt; C, B -&gt; C, then A -&gt; C</font></p>
+<p ALIGN="JUSTIFY"><font face="Times New Roman">5. Prove that {A -&gt; B, B -&gt; C, C-&gt; 
+A}<sup>+</sup> = {A -&gt; B, B -&gt; A, B -&gt; C, C -&gt; B}<sup>+</sup>. </font> </p>
+<p ALIGN="JUSTIFY"><font face="Times New Roman">6. Given functional dependencies 
+A -&gt; B, BC -&gt; D. </font> </p>
+<p ALIGN="JUSTIFY"><font face="Times New Roman">(A) Prove that the decomposition 
+(AB, BCD) is lossy. </font> </p>
+<p ALIGN="JUSTIFY"><font face="Times New Roman">(B) Prove (ABC, BCD) is 
+lossless. </font> </p>
+<p ALIGN="JUSTIFY"><font face="Times New Roman">7. Given a database with 
+attributes A, B, C and D where the functional dependencies AB -&gt; C, C -&gt; D, and D 
+-&gt; A are supposed to hold. </font> </p>
+<p ALIGN="JUSTIFY"><font face="Times New Roman">(A) Give a BCNF decomposition.&nbsp;
+</font> </p>
+<p ALIGN="JUSTIFY"><font face="Times New Roman">(B) Can all the functional 
+dependencies be <font color="#0000FF">enforced in your design in (A).</font> </font> </p>
+<p ALIGN="JUSTIFY"> </p>
+
+<!--msnavigation--></td></tr><!--msnavigation--></table></body>
+
+
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Homeworks/04_FDs/FD_Exercises.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:01:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+</html>

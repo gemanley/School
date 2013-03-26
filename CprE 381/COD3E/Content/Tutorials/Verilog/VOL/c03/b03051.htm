@@ -1,0 +1,44 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="580" cellpadding="10">
+			<tr>
+				<td valign="top" width="365">Time is kept as a relative value, and is global to the entire set of processes (the model). We usually call this simulation time. In Verilog, simulation time is a 64-bit unsigned integer (time is always positive), and it can be obtained by the $time system function. The amount of time which passes between different events in a process affects the interaction with other processes. The total of all the delays in a given path through a process will determine how long that process takes.
+					<p><a href="b03051.htm"></a></p>
+					<center>
+						<img src="images/vexample.gif" height="39" width="91" border="0"></a></center>
+				</td>
+				<td valign="top" width="215"><img src="images/v0315g1.gif" height="257" width="214"></td>
+			</tr>
+		</table>
+		<table width="600">
+			<tr>
+				<td>
+					<p><br>
+						The following Verilog code takes 90 time units to execute:</p>
+					<pre>
+initial begin
+        x = 0;
+    #10 x = x + 1;
+    #20 x = x + 2;
+    #30 x = x + 3;
+    #20 x = x + 2;
+    #10 x = x + 1;
+end
+</pre>
+					When simulated, x takes on different values at the different time instants:
+					<p></p>
+					<dl>
+						<dd><img src="images/v0315g2.gif" height="209" width="142">
+					</dl>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

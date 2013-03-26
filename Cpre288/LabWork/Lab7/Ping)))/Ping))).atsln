@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Ping)))", "Ping)))\Ping))).cproj", "{81786A57-E054-4179-8ADE-AB2DBD1A0541}"
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "ping", "E:\EE288\Lab7\ping\ping\ping.cproj", "{E6D2E6CE-F4FE-4A37-B8A6-ED1B49BA423B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81786A57-E054-4179-8ADE-AB2DBD1A0541}.Debug|AVR.ActiveCfg = Debug|AVR
+		{81786A57-E054-4179-8ADE-AB2DBD1A0541}.Debug|AVR.Build.0 = Debug|AVR
+		{81786A57-E054-4179-8ADE-AB2DBD1A0541}.Release|AVR.ActiveCfg = Release|AVR
+		{81786A57-E054-4179-8ADE-AB2DBD1A0541}.Release|AVR.Build.0 = Release|AVR
+		{E6D2E6CE-F4FE-4A37-B8A6-ED1B49BA423B}.Debug|AVR.ActiveCfg = Debug|AVR
+		{E6D2E6CE-F4FE-4A37-B8A6-ED1B49BA423B}.Debug|AVR.Build.0 = Debug|AVR
+		{E6D2E6CE-F4FE-4A37-B8A6-ED1B49BA423B}.Release|AVR.ActiveCfg = Release|AVR
+		{E6D2E6CE-F4FE-4A37-B8A6-ED1B49BA423B}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

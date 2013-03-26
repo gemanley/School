@@ -1,0 +1,79 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<p></p>
+		<center>
+			<img src="images/v0553g1.gif" height="153" width="137"></center>
+		<p>In addition, the state machine has the following properties:</p>
+		<p></p>
+		<ul>
+			<li>The 1-bit input is sampled on the rising clock edge.
+			<li>State transitions are made after the clock edge.
+			<li>The output is available after the clock edge.
+			<li>The model is 0-delay.
+		</ul>
+		<p></p>
+		<center>
+			<a name="diagram"><a href="#source"><img src="images/vverilog.gif" height="39" width="139" border="0"></a>
+				<p><b>Click the Play button to see this model run the inputs and outputs shown below.</b><br>
+					<!-- 
+If you haven't already, <A HREF="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" TARGET="resource window">click here</a> to download the Flash plug-in.</b><p>
+--></p>
+				<p><!-- Aftershock v0553ani.swf 3=550 4=300 38 40 --><object id="v0553ani" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://active.macromedia.com/flash2/cabs/swflash.cab#version=3,0,0,0" height="300" width="550">
+						<param name="movie" value="v0553ani.swf">
+						<param name="quality" value="autohigh">
+						<param name="bgcolor" value="#FFFFFF">
+						<embed height="300" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" src="images/v0553ani.swf" swLiveConnect="FALSE" type="application/x-shockwave-flash" width="550" QUALITY="autohigh" BGCOLOR="#FFFFFF"> 
+					</object><!-- EndAftershock v0553ani.swf --></p>
+				<p><a href="JavaScript:parent.dispWindow('v05159r1.htm','Results')"><img src="images/vresults.gif" height="39" width="87" border="0"></a></p>
+			</a></center>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<a name="source"><b>Example: Finite State Machine</b>
+			<p></p>
+			<pre>
+module test;
+    /* this is a tester for a state machine */
+    reg clock;
+    reg din;
+    
+    stateMachine fsm1 (dout, din, clock);
+    
+    /* clock */
+    always
+        #10 clock = ~clock;
+    
+    /* test generator */
+    initial begin: testgen          // test state transitions
+        integer i;                  // local registers
+        reg [1:10] inputsequence, outputsequence;
+
+        clock = 0;                  // first edge is rising
+        inputsequence = 10'b0010110101;
+        $display(&quot;input sequence is: %b\n&quot;, inputsequence);
+        for (i=1; i
+				
+				<=10; i="i+1)" begin din="inputsequence[i];" @(negedge clock) outputsequence[i]="dout;" end $display("\noutput sequence is: %b", outputsequence); $finish; end always @(posedge clock) // monitor input-output $strobe($stime," input: %b output: %b", din, dout); endmodule module stateMachine (dout, din, clock); output dout; input din, clock; `define A 3'b001 `define B 3'b010 `define C 3'b100 reg dout; reg [2:0] state; initial state="`A;" always @(posedge clock) case (state) `A: begin dout <= din;                state <= din ? `C : `B;            end    `B:     begin                dout <= ~din;                state <= din ? `B : `C;            end    `C:     begin                dout <= din;                state <= `A;            end        endcaseendmodule </PRE><p><A HREF="#diagram">Return to Diagram</a></b>&nbsp;&nbsp;&nbsp;<A HREF="#diagram"><img src="images/varrow.gif" with="38" height="39" border="0"></a></BODY></HTML>>>						</pre>					</a></td>			</tr>		</table>	</body></html>																																																									>>			</pre>		</a>	</body></html>>>
+			</pre>
+		</a>
+	</body>
+
+</html>

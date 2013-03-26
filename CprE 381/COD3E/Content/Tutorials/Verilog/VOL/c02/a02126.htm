@@ -1,0 +1,29 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body onload=" parent.initBtnMchMA(6);" bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td><b>Which of the following statements are legal?</b>
+					<p></p>
+					<form>
+						<input type="checkbox" name="A" value="A"> 1. $time;<br>
+						<input type="checkbox" name="B" value="B"> <font color="#4B0082"><b>2. $display(&quot;hello sparky&quot;);</b></font><br>
+						<input type="checkbox" name="C" value="C"> <font color="#4B0082"><b>3. x = $time;</b></font><br>
+						<input type="checkbox" name="D" value="D"> 4. y = $display(&quot;hello sparky&quot;);<br>
+						<input type="checkbox" name="E" value="E"> <font color="#4B0082"><b>5. if (done) $finish;</b></font><br>
+						<input type="checkbox" name="F" value="F"> <font color="#4B0082"><b>6. always @(x) $display($time, &quot; x -&gt; &quot;, x);</b></font>
+						<p></p>
+					</form>
+					<p><b>Got it. Statement 1 is illegal because $time is a function, not a task. Therefore, it can't stand alone as a statement. Statement 4 is illegal because $display is a task and can't be used as a right-hand side of an expression.</b></p>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

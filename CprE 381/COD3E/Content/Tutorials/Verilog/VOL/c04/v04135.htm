@@ -1,0 +1,64 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+		<style type="text/css" media="screen"><!--
+#answer  { visibility: hidden; position: absolute }
+--></style>
+		<csactions>
+			<csaction name="1470FE78" class="ShowHide" type="onevent" val0="answer" val1="1"></csaction>
+		</csactions>
+		<csscriptdict import>
+			<script type="text/javascript" src="../../../../resources/CSScriptLib.js"></script>
+		</csscriptdict>
+		<csactiondict>
+			<script type="text/javascript"><!--
+CSAct[/*CMP*/ '1470FE78'] = new Array(CSShowHide,/*CMP*/ 'answer',1);
+
+// --></script>
+		</csactiondict>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">Change module abc so that its outputs change 3 time units after the inputs change. Call this module dabc. Click Answer to see a solution.
+					<p></p>
+						<tt><textarea name="SCRIPT1" rows="15" cols="45">
+module abc (a, b, c, d, s1, s0);
+   input s1, s0;
+   output a, b, c,d;
+
+   not  (s1_, s1), (s0_, s0);
+
+   and (a, s1_, s0_);
+   and (b, s1_, s0);
+   and (c, s1, s0_);
+   and (d, s1, s0);
+endmodule
+</textarea></tt>
+						<p><a href="javascript:parent.gotoScreen(04,135,0)"><img src="images/vreset.gif" border="0"></a></p>
+						<center>
+						<a onclick="CSAction(new Array(/*CMP*/'1470FE78'));return CSClickReturn()" href="#" csclick="1470FE78"><img src="images/vanswer.gif" height="39" width="87" border="0"></a></center>
+						<div id="answer">
+						<tt><pre>
+module dabc (a, b, c, d, s1, s0);
+   input s1, s0;
+   output a, b, c,d;
+
+   not  (s1_, s1), (s0_, s0);
+
+   and #3 (a, s1_, s0_);
+   and #3 (b, s1_, s0);
+   and #3 (c, s1, s0_);
+   and #3 (d, s1, s0);
+endmodule
+</pre></tt>
+						</div>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

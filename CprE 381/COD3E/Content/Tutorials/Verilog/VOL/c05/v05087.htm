@@ -1,0 +1,52 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>When a procedural assignment is made to a register, the new value must potentially be propagated to a number of places. Specifically, that register could appear on the right hand side of a continuous assignment, or it could appear in an event control in some other procedural statement.
+					<p>For example,</p>
+					<p></p>
+					<pre>
+    reg [7:0] x, y;
+    wire [8:0] out;
+    assign out = x + y;
+    
+    always 
+        @x y = y + 1;
+    
+    initial begin
+        x = 0; y = 0;
+        ...
+    #2  x = 5;
+        ...
+    end
+</pre>
+					In the above, when x changes value, its new value must be propagated to both the continuous assignment and to the event control &quot;<tt>@x</tt>&quot;. This propagation must occur before simulation time can advance. However, it is not defined exactly when in relation to other events at the current time the propagation will take place.
+					<p>Some simulators will propagate an assignment before the next procedural statement is executed, and some simulators will continue to execute procedural statements until encountering a statement which is blocked, at which time all left-hand sides of assignments will be propagated. Either method is logically correct.</p>
+					<p>If we added the following statement to this example:</p>
+					<p></p>
+					<pre>
+    always 
+        @y x = x + 1;
+</pre>
+					then there is a guaranteed order of execution at time 2:
+					<pre>
+        x = 5; -&gt; y = y + 1; -&gt; x = x + 1; -&gt; out = x + y;
+</pre>
+					The continuous assignment to out may execute before the last time as well, and could, in fact, execute as many as three times or as few as once.
+					<p>Question:<br>
+						In the above example, find the a race between the assignments of <tt>x</tt> and <tt>y</tt>, and the propagation of <tt>x</tt>. What are the two different possible outcomes if you display <tt>y</tt> at time 1?</p>
+					<p></p>
+					<center>
+						<a href="JavaScript:parent.dispWindow('v05087r1.htm','Answer')"><img src="images/vanswer.gif" height="39" width="87" border="0"></a></center>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

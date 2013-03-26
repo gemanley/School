@@ -1,0 +1,66 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+		<style type="text/css" media="screen"><!--
+#answer   { visibility: hidden; position: absolute }
+--></style>
+		<csactions>
+			<csaction name="163B25914" class="ShowHide" type="onevent" val0="answer" val1="1"></csaction>
+		</csactions>
+		<csscriptdict import>
+			<script type="text/javascript" src="../../../../resources/CSScriptLib.js"></script>
+		</csscriptdict>
+		<csactiondict>
+			<script type="text/javascript"><!--
+CSAct[/*CMP*/ '163B25914'] = new Array(CSShowHide,/*CMP*/ 'answer',1);
+
+// --></script>
+		</csactiondict>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">Upward references are much less straightforward than downward references. An upward reference is a reference to an identifier that is defined in some other part of the hierarchy than the reference point.
+					<p>Again, using our example</p>
+					<p></p>
+					<center>
+						<img src="images/v0107g1.gif" height="265" width="454"></center>
+					<p>if you want to reference:</p>
+					<p></p>
+					<pre>
+        top.childB.leaf3.x
+</pre>
+					<p>from:</p>
+					<p></p>
+					<pre>
+        top.childB.node1.leaf1
+</pre>
+					<p>you can do it like this:</p>
+					<p></p>
+					<pre>
+        type2.leaf3.x
+</pre>
+					<p>Note that the first component of the XMR is a module name, not an instance name. This type of reference is useful if there is a common parent module type for all instances of the module containing the XMR.</p>
+					<p>Question:<br>
+							What happens if there is an upward XMR of this type in module c, and module c is instantiated in both module a and module b? Can the XMR be resolved in both instances?</p>
+					<p></p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<center>
+						<a onclick="CSAction(new Array(/*CMP*/'163B25914'));return CSClickReturn()" href="#" csclick="163B25914"><img src="images/vanswer.gif" height="39" width="87" border="0"></a></center>
+				</td>
+			</tr>
+		</table>
+		<div id="answer">
+			Sometimes. It depends on what else is above modules a and b. For instance, if a type1 module in the above hierarchy had the following XMR:
+			<p>type2.leaf3.x then it would correctly find the variable x in the type3 module leaf3.</p>
+			<p>However, if childA instantiated a type1 module called leaf2, instead of a type3 module called leaf2, then the XMR would not be able to be resolved, since the XMR would try to find a type2 module above it in the hierarchy and that would fail.</p>
+		</div>
+	</body>
+
+</html>

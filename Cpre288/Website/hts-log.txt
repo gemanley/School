@@ -1,0 +1,70 @@
+HTTrack3.45-3-nossl launched on Wed, 12 Dec 2012 02:16:45 at http://class.ece.iastate.edu/cpre288/
+(httrack http://class.ece.iastate.edu/cpre288/ )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+02:16:45	Warning: 	Cache: damaged cache, trying to repair
+02:16:45	Warning: 	Cache: 122735 bytes successfully recovered in 215 entries
+02:16:46	Error: 	"Not Found" (404) at link class.ece.iastate.edu/cpre288/lectures/avr_intr_sample.zip (from class.ece.iastate.edu/cpre288/lecture.asp)
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/labs/Lab3/resources/docs/doc2467.html.tmp already exists
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/labs/Lab5/lab5_files/filelist.html.tmp already exists
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/labs/Lab5/lab5_files/editdata.html.tmp already exists
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/labs/Lab5/lab5_files/themedata.html.tmp already exists
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/labs/Lab5/lab5_files/colorschememapping.html.tmp already exists
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/labs/AtmelMega128UG.html.tmp already exists
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/labs/Lab_Feedback.html.tmp already exists
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/labs/Lab6/programs/lab6.html.tmp already exists
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/labs/Lab7/lab4_files/themedata.html.tmp already exists
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/labs/Lab7/lab4_files/colorschememapping.html.tmp already exists
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/labs/Lab7/programs/lab7.html.tmp already exists
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/labs/Lab8/lab8_files/editdata.html.tmp already exists
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/labs/Lab8/programs/lab8.html.tmp already exists
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/labs/Lab9/lab9_files/filelist.html.tmp already exists
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/labs/Lab9/lab9_files/editdata.html.tmp already exists
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/labs/Lab9/lab9_files/themedata.html.tmp already exists
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/labs/Lab9/lab9_files/colorschememapping.html.tmp already exists
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/labs/Lab9/programs/lab9.html.tmp already exists
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/lecture/Doxygen/html/tabs.css.tmp already exists
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/lecture/Doxygen/html/doxygen.css.tmp already exists
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/lecture/Doxygen/html/index.html.tmp already exists
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/lecture/Doxygen/html/globals.html.tmp already exists
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/lecture/Doxygen/html/lcd_8c.html.tmp already exists
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/lecture/Doxygen/html/lcd_8h.html.tmp already exists
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/lecture/Doxygen/html/lcd_8h-source.html.tmp already exists
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/lecture/Doxygen/html/util_8c.html.tmp already exists
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/lecture/Doxygen/html/util_8h.html.tmp already exists
+02:16:47	Info: 	engine: warning: temporary file class.ece.iastate.edu/cpre288/lecture/Doxygen/html/util_8h-source.html.tmp already exists
+03:10:22	Warning: 	file not stored in cache due to bogus state (broken size): class.ece.iastate.edu/cpre288/resources/programs/as6installer-6.0.1843.zip
+03:10:22	Warning: 	file not stored in cache due to bogus state (broken size): class.ece.iastate.edu/cpre288/resources/programs/as5installer-full-5.0.1223.zip
+03:10:22	Error: 	"Not Found" (404) at link class.ece.iastate.edu/cpre288/labs/Lab3/resources/docs/doc2467.pdf (from class.ece.iastate.edu/cpre288/labs/Lab3/index.asp)
+03:10:22	Error: 	"Not Found" (404) at link class.ece.iastate.edu/cpre288/labs/Lab5/lab5_files/filelist.xml (from class.ece.iastate.edu/cpre288/labs/Lab5/lab5.htm)
+03:10:22	Error: 	"Not Found" (404) at link class.ece.iastate.edu/cpre288/labs/Lab5/lab5_files/editdata.mso (from class.ece.iastate.edu/cpre288/labs/Lab5/lab5.htm)
+03:10:22	Error: 	"Not Found" (404) at link class.ece.iastate.edu/cpre288/labs/Lab5/lab5_files/themedata.thmx (from class.ece.iastate.edu/cpre288/labs/Lab5/lab5.htm)
+03:10:22	Error: 	"Not Found" (404) at link class.ece.iastate.edu/cpre288/labs/Lab5/lab5_files/colorschememapping.xml (from class.ece.iastate.edu/cpre288/labs/Lab5/lab5.htm)
+03:10:22	Error: 	"Not Found" (404) at link class.ece.iastate.edu/cpre288/labs/AtmelMega128UG.pdf (from class.ece.iastate.edu/cpre288/labs/Lab5/lab5.htm)
+03:10:22	Error: 	"Not Found" (404) at link class.ece.iastate.edu/cpre288/labs/Lab_Feedback.doc (from class.ece.iastate.edu/cpre288/labs/Lab5/lab5.htm)
+03:10:22	Error: 	"Not Found" (404) at link class.ece.iastate.edu/cpre288/labs/Lab6/programs/lab6.zip (from class.ece.iastate.edu/cpre288/labs/Lab6/lab6.htm)
+03:10:22	Error: 	"Not Found" (404) at link class.ece.iastate.edu/cpre288/labs/Lab7/lab4_files/themedata.thmx (from class.ece.iastate.edu/cpre288/labs/Lab7/lab7.htm)
+03:10:22	Error: 	"Not Found" (404) at link class.ece.iastate.edu/cpre288/labs/Lab7/lab4_files/colorschememapping.xml (from class.ece.iastate.edu/cpre288/labs/Lab7/lab7.htm)
+03:10:22	Error: 	"Not Found" (404) at link class.ece.iastate.edu/cpre288/labs/Lab7/programs/lab7.zip (from class.ece.iastate.edu/cpre288/labs/Lab7/lab7.htm)
+03:10:22	Error: 	"Not Found" (404) at link class.ece.iastate.edu/cpre288/labs/Lab8/lab8_files/editdata.mso (from class.ece.iastate.edu/cpre288/labs/Lab8/lab8.htm)
+03:10:22	Error: 	"Not Found" (404) at link class.ece.iastate.edu/cpre288/labs/Lab8/programs/lab8.zip (from class.ece.iastate.edu/cpre288/labs/Lab8/lab8.htm)
+03:10:22	Error: 	"Not Found" (404) at link class.ece.iastate.edu/cpre288/labs/Lab9/lab9_files/filelist.xml (from class.ece.iastate.edu/cpre288/labs/Lab9/Lab9.htm)
+03:10:22	Error: 	"Not Found" (404) at link class.ece.iastate.edu/cpre288/labs/Lab9/lab9_files/editdata.mso (from class.ece.iastate.edu/cpre288/labs/Lab9/Lab9.htm)
+03:10:22	Error: 	"Not Found" (404) at link class.ece.iastate.edu/cpre288/labs/Lab9/lab9_files/themedata.thmx (from class.ece.iastate.edu/cpre288/labs/Lab9/Lab9.htm)
+03:10:22	Error: 	"Not Found" (404) at link class.ece.iastate.edu/cpre288/labs/Lab9/lab9_files/colorschememapping.xml (from class.ece.iastate.edu/cpre288/labs/Lab9/Lab9.htm)
+03:10:22	Error: 	"Not Found" (404) at link class.ece.iastate.edu/cpre288/labs/Lab9/programs/lab9.zip (from class.ece.iastate.edu/cpre288/labs/Lab9/Lab9.htm)
+03:10:24	Error: 	"Receive Error" (-4) after 2 retries at link class.ece.iastate.edu/cpre288/resources/programs/as6installer-6.0.1843.zip (from class.ece.iastate.edu/cpre288/resources.asp)
+03:10:24	Error: 	"Receive Error" (-4) after 2 retries at link class.ece.iastate.edu/cpre288/resources/programs/as5installer-full-5.0.1223.zip (from class.ece.iastate.edu/cpre288/resources.asp)
+03:10:24	Error: 	"Receive Error" (-4) after 2 retries at link class.ece.iastate.edu/cpre288/lecture/Doxygen/html/tab_b.gif (from class.ece.iastate.edu/cpre288/lecture/Doxygen/html/tabs.css)
+03:10:24	Error: 	"Receive Error" (-4) after 2 retries at link class.ece.iastate.edu/cpre288/lecture/Doxygen/html/tab_r.gif (from class.ece.iastate.edu/cpre288/lecture/Doxygen/html/tabs.css)
+03:10:24	Error: 	"Receive Error" (-4) after 2 retries at link class.ece.iastate.edu/cpre288/lecture/Doxygen/html/tab_l.gif (from class.ece.iastate.edu/cpre288/lecture/Doxygen/html/tabs.css)
+03:10:24	Error: 	"Receive Error" (-4) after 2 retries at link class.ece.iastate.edu/cpre288/lecture/Doxygen/html/globals_func.html (from class.ece.iastate.edu/cpre288/lecture/Doxygen/html/globals.html)
+03:10:24	Error: 	"Receive Error" (-4) after 2 retries at link class.ece.iastate.edu/cpre288/lecture/Doxygen/html/globals_vars.html (from class.ece.iastate.edu/cpre288/lecture/Doxygen/html/globals.html)
+No files purged
+
+HTTrack Website Copier/3.45-3 mirror complete in 53 minutes 39 seconds : 236 links scanned, 195 files written (109399288 bytes overall), no files updated [79534720 bytes received at 24707 bytes/sec]
+(26 errors, 4 warnings, 28 messages)

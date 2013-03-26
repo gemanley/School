@@ -1,0 +1,88 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td width="600">An implicit FSM is simply one whose <a href="javascript:parent.goGlossHash('#stateenc')"><font color="#B22222">state encoding</font></a> is done by means of procedural code. In essence, the program counter is the current state variable.
+				<p>Consider the FSM used as an example in Chapter 5.</p>
+				<p><b>Click the Play button to see this model run the inputs and outputs shown below.<br>
+						<!-- 
+If you haven't already, <A HREF="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" TARGET="resource window">click here</a> to download the Flash plug-in.    
+--></b></p>
+				<p><!-- Aftershock v0553ani.swf 3=550 4=300 38 40 --><object id="v0553ani" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://active.macromedia.com/flash2/cabs/swflash.cab#version=3,0,0,0" height="300" width="550">
+						<param name="movie" value="v0553ani.swf">
+						<param name="quality" value="autohigh">
+						<param name="bgcolor" value="#FFFFFF">
+						<script language="JavaScript">
+<!--
+function checkForShockwave()
+{
+	navigator.plugins.refresh();
+	if ( navigator.plugins["Shockwave Flash"] ){ 
+		parent.location.reload();
+	} else {
+		setTimeout( "checkForShockwave()", 1000 );
+	}
+}
+var ShockMode = 0;
+if (navigator.mimeTypes && navigator.mimeTypes["application/x-shockwave-flash"] && navigator.mimeTypes["application/x-shockwave-flash"].enabledPlugin) {
+	if (navigator.plugins && navigator.plugins["Shockwave Flash"])
+		ShockMode = 1;
+}
+if (!ShockMode && navigator.appName && navigator.appName.indexOf("Netscape") != - 1 && navigator.appVersion.indexOf("4.") != - 1
+&& navigator.javaEnabled() && netscape.softupdate.Trigger.UpdateEnabled() && document.cookie.indexOf("StartedShockwaveInstall") == -1) {
+	var jarPath = new String("");
+	if (navigator.platform.indexOf("Win32") >= 0 )
+		jarPath = "http://download.macromedia.com/pub/shockwave/jars/english/silentflash32.jar"
+	else if (navigator.platform.indexOf("Win16") >= 0 )
+		jarPath = "http://download.macromedia.com/pub/shockwave/jars/english/silentflash16.jar"
+else if (navigator.platform.indexOf("MacPPC") >= 0 )
+		jarPath = "http://download.macromedia.com/pub/shockwave/jars/english/silentflashppc.jar"
+	if (jarPath.length) {
+		netscape.softupdate.Trigger.StartSoftwareUpdate (jarPath, netscape.softupdate.Trigger.FORCE_MODE);
+		document.cookie='StartedShockwaveInstall;path=/;'
+		setTimeout("checkForShockwave()", 1000);
+	}
+}
+//-->
+</script>
+						<embed height="300" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" src="v0553ani.swf" swLiveConnect="FALSE" type="application/x-shockwave-flash" width="550" QUALITY="autohigh" BGCOLOR="#FFFFFF"> 
+					</object><!-- EndAftershock v0553ani.swf --></p>
+				<p>The state machine could be coded as follows:</p>
+				<p></p>
+				<pre>
+module stateMachine (dout, din, clock);
+    output dout;
+    input din, clock;
+    reg dout;
+                
+    always begin
+        @(posedge clock)
+            dout = din;             // in state A
+            
+        if (din == 0)
+            begin
+            @(posedge clock) 
+                dout = 0;           // in state B
+                while (din)
+                    @(posedge clock) ;
+                dout = 1;
+            end
+                
+        @(posedge clock)
+            dout = din;             // in state C
+    end
+endmodule
+</pre>
+				In this representation, the location of the program counter determines which state the machine is in.
+				<p>A state machine coded this way cannot be synthesized, so this would typically only be found in test bench code. It is often convenient to write FSMs this way, but this style is usually harder to read and understand than explicit coding.</p>
+			</td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

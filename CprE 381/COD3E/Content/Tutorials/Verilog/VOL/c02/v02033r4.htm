@@ -1,0 +1,54 @@
+<html>
+
+	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+
+	<body bgcolor="#FFFFFF">
+				<table width="600">
+			<tr>
+				<td>The number of bits represented by the digits in the value part of the constant may be more or less than the given size. If there are more, then the high order bits are truncated. For example,
+					<p></p>
+					<center>
+						<table>
+							<tr>
+								<td></td>
+								<td width="100">7'h8f</td>
+								<td width="200">is equivalent to</td>
+								<td width="200">;7'h0f</td>
+							</tr>
+							<tr></tr>
+						</table>
+					</center>
+					<p>If the size is greater than the number of bits in the value part (which is a much more common case), then the number is padded on the left (high order part) with 0. However, if the left-most digit in the value part is x or z, then the number is padded with x or z.<br>
+					</p>
+					<center>
+						<table width="500">
+							<tr>
+								<td width="100">12'h3</td>
+								<td width="200">is equivalent to</td>
+								<td width="200">12'b000000000011</td>
+							</tr>
+							<tr><br>
+								<td width="100">12'h3x</td>
+								<td width="200">is equivalent to</td>
+								<td width="200">12'b00000011xxxx</td>
+							</tr>
+							<tr><br>
+								<td width="100">12'bx</td>
+								<td width="200">is equivalent to</td>
+								<td width="200">12'bxxxxxxxxxxxx</td>
+							</tr>
+							<tr><br>
+								<td width="100">12'oz37</td>
+								<td width="200">is equivalent to</td>
+								<td width="200">12'bzzzzzz011111</td>
+							</tr>
+							<tr><br>
+							</tr>
+						</table>
+					</center>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

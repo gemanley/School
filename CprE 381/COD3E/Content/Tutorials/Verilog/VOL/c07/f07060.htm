@@ -1,0 +1,65 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td width="600">Click each of the complications to learn more about it.
+				<p><a href="a07060.htm">Timing</a><br>
+					<a href="b07060.htm">Efficiency</a><br>
+					<a href="c07060.htm">Initialization</a><br>
+					<a href="d07060.htm">Register Selection</a><br>
+					<a href="e07060.htm">State Encoding</a><br>
+					<a href="f07060.htm">Latch Inferencing</a></p>
+				<p>When synthesizing a state machine, the synthesizer must be careful to preserve the semantics of the Verilog code. This can sometimes produce unwanted logic.</p>
+				<p>Specifically, if you have a case statement for nextstate assignment, the semantics may require some state storage if it is possible that the case expression does not match any of the case selectors.</p>
+				<p>In our example,</p>
+				<pre>
+    always @(state or din)              // Next State Logic
+        case (state)
+    3'b001:     nextstate = din ? `C : `B;
+    3'b010:     nextstate = din ? `B : `C;
+    3'b100:     nextstate = `A;
+        endcase
+</pre>
+				it may be possible for state to have a value other than 1, 2, or 4 (the synthesizer can't tell). So, in the absence of any other information, the logic generated would have to allow for the possibility that nextstate would retain its previous value. The way it would do that is to create a latch to hold nextstate. This process is called <b>latch inferencing</b> and it is usually not what is desired.
+				<p>To avoid this, the code should be written to cover all cases. There are several ways to do this:</p>
+				<pre>
+    always @(state or din) begin        // Next State Logic
+        nextstate = 3'bx;        // don't care, or a default value
+        case (state)
+    3'b001:     nextstate = din ? `C : `B;
+    3'b010:     nextstate = din ? `B : `C;
+    3'b100:     nextstate = `A;
+        endcase
+    end
+</pre>
+				<p>Alternatively, the default case item can be used:</p>
+				<pre>
+    always @(state or din)              // Next State Logic
+        case (state)
+    3'b001:     nextstate = din ? `C : `B;
+    3'b010:     nextstate = din ? `B : `C;
+    3'b100:     nextstate = `A;
+    default:    nextstate = 3'bx;
+        endcase
+</pre>
+				In the above examples, 3'bx was used as a don't care state. Synopsys knows enough to treat a constant x in this case as a real don't care, and will not synthesize any logic for it. It could be that a real state (like 3'b001) was desired, and, if that was used, Synopsys would generate the appropriate logic to set the default to that value.
+				<p>Finally, the same effect can be obtained by using a synthesis directive:</p>
+				<pre>
+    always @(state or din)              // Next State Logic
+        case (state)                    // <b>synopsys full_case</b>
+    3'b001:     nextstate = din ? `C : `B;
+    3'b010:     nextstate = din ? `B : `C;
+    3'b100:     nextstate = `A;
+        endcase
+</pre>
+				Many designers get in the habit of using &quot;synopsys full_case&quot; on all their state machine case statements. It is worth noting that if you say this, Synopsys will believe you. If in fact there is an unaccounted-for case, the pre-synthesis simulation may not match post-synthesis simulation. In this case, the synthesized circuit has a bug which may be difficult to find.</td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

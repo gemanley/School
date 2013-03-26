@@ -1,0 +1,44 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body onload="parent.initBtnM(3)" bgcolor="white">
+				<form>
+			<b>Are the following statements syntactically correct?</b>
+			<p></p>
+			<table width="600">
+				<tr>
+					<td width="120" HALIGN="LEFT">a. <input type="radio" name="YES1" value="A"><font color="#4B0082"><b>Yes</b></font>&nbsp;&nbsp;&nbsp;<input type="radio" name="YES1" value="A">No</td>
+					<td width="480" HALIGN="LEFT">and #1 a1 (a, b, c);</td>
+				</tr>
+				<tr>
+					<td width="120" HALIGN="LEFT">b. <input type="radio" name="YES2" value="B"><font color="#4B0082"><b>Yes</b></font>&nbsp;&nbsp;&nbsp;<input type="radio" name="YES2" value="B">No</td>
+					<td width="480" HALIGN="LEFT">and (a,b,c), (d,e,f);</td>
+				</tr>
+				<tr>
+					<td width="120" HALIGN="LEFT">c. <input type="radio" name="YES3" value="C">Yes&nbsp;&nbsp;&nbsp;<input type="radio" name="YES3" value="C"><font color="#4B0082"><b>No</b></font></td>
+					<td width="480" HALIGN="LEFT">AND #1 (a, b, c);</td>
+				</tr>
+				<tr>
+					<p><br>
+					</p>
+				</tr>
+			</table>
+		</form>
+		</TABLE>
+		<table width="600">
+			<tr>
+				<td><b>The first two statements are correct and the third statement is incorrect. Here are two examples of correct statements for c.:<br>
+						c. <font size="3" face="courier">and #1 (a,b,c);</font><br>
+						or<br>
+						c. <font size="3" face="courier">AND #1 myand (a,b,c);</font></b></font><br>
+					<b>Note that <font size="3" face="courier">&quot;AND #1 myand (a,b,c);&quot;</font> instantiates a module which is not a primitive.</b></td>
+			</tr>
+			<tr></tr>
+		</table>
+	</body>
+
+</html>

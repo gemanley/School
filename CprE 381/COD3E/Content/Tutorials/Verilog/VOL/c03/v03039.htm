@@ -1,0 +1,32 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td>When a complex expression is evaluated, the context of each operation is the entire expression. So, in the following expression,
+					<p>
+						<dd><tt>
+								<dl>
+									s16 = (r16 + p16) &gt;&gt; 1;
+								</dl>
+							</tt></TT>
+					</p>
+					<p>the context is <tt>16, L(r16) = L(p16) = 16</tt>, so the addition is done in 16 bits. Consequently, <font size="3" face="courier">s16[15]</font> will always be 0. This is probably not what you intend.</p>
+					<p>The solution to this is to modify the expression so that either one of the operands is at least 17 bits long, or to modify the context. Both of the following will work:</p>
+					<p></p>
+					<dl>
+						<tt>
+						<dd>s17 = (r16 + p16) &gt;&gt; 1;
+						<dd>s16 = (r16 + p16 + 17'd0) &gt;&gt; 1;</tt>
+					</dl>
+					</TT></td>
+			</tr>
+		</table>
+	</body>
+
+</html>

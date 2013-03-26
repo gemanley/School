@@ -1,0 +1,81 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body onload=" parent.initBtnMT(10);" bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>Given the following values,
+					<pre>
+	parameter p1 = 4;
+	reg [4:0] x;
+	wire [3:2] y;
+	reg z;
+
+	x = 4'b1011;
+	y = 2'b10;
+	z = 1'b1;
+	and the current time is 5
+</pre>
+					<hr>
+					<a answer><b>These are the correct answers. Statement 1 is illegal because $time is a function, not a task. Therefore, it can't stand alone as a statement. Statement 5 is illegal because $display is a task and can't be used as a right-hand side of an expression.</b></a>
+					<p></p>
+					<a answer>
+						<table width="570">
+							<tr>
+								<form>
+									<td valign="top" width="220">1. p1 + #(x+y)</td>
+									<td width="350"><b>illegal, because a delay expression (#(x+y)) cannot be an operand of another expression.</b></td>
+								</form>
+							</tr>
+							<tr>
+								<td valign="top" width="220">2. #($time+p1)</td>
+								<td width="350"><b>9</b></td>
+							</tr>
+							<tr>
+								<td valign="top" width="220">3. #($time == x)</td>
+								<td width="350"><b>0</b></td>
+							</tr>
+							<tr>
+								<td valign="top" width="220">4. ~{x, 1'bx}</td>
+								<td width="350"><b>5'b0100x</b></td>
+							</tr>
+							<tr>
+								<td valign="top" width="220">5. ~{x, 13}</td>
+								<td width="350"><b>illegal, because 13 is not sized, and all components of a concatenation must be sized.</b></td>
+							</tr>
+							<tr>
+								<td valign="top" width="220">6. x ^ |y</td>
+								<td width="350"><b>4'b1010</b></td>
+							</tr>
+							<tr>
+								<td valign="top" width="220">7. {x, p1}</td>
+								<td width="350"><b>illegal, because p1 is not sized, and all components of a concatenation must be sized.</b></td>
+							</tr>
+							<tr>
+								<td valign="top" width="220">8. z === 1'bx</td>
+								<td width="350"><b>1'b0</b></td>
+							</tr>
+							<tr>
+								<td valign="top" width="220">9. z == 1'bx</td>
+								<td width="350"><b>1'bx</b></td>
+							</tr>
+							<tr>
+								<td valign="top" width="220">10. 1'bx == 1'bx</td>
+								<td width="350"><b>1'bx</b></td>
+							</tr>
+							</FORM>
+						</table>
+					</a>
+					<p></p>
+					<p><a answer>To review content related to this question see <a href="javascript:parent.gotoScreen('03','027',1)">Operators</a>.</a></p>
+					<p></p>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

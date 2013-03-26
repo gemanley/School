@@ -1,0 +1,15 @@
+<html>
+
+	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+
+	<body bgcolor="#FFFFFF">
+				<TT>initial x = 0; // a simple initialization
+		<p>initial begin<br>&nbsp;&nbsp;&nbsp;x = 1;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// an initialization<br>&nbsp;&nbsp;&nbsp;y = f(x);<br>#1&nbsp;x = 0;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// a value change 1 time unit later<br>&nbsp;&nbsp;&nbsp;y = f(x);<br>
+			end</p>
+		<p>initial begin<br>&nbsp;&nbsp;&nbsp;a = 0;<br>
+			@(posedge clk)<br>&nbsp;&nbsp;&nbsp;a = 1;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// change value on the clock edge<br>&nbsp;&nbsp;&nbsp;for (I=0; I 
+			<10; i="i+1)<br">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@(posedge clk) ;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// wait for 10 clock cycles<br>&nbsp;&nbsp;&nbsp;$finish;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// terminate simulation<br>
+			end</TT></p>
+	</body>
+
+</html>

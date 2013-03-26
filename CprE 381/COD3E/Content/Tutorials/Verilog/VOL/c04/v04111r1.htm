@@ -1,0 +1,63 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600">
+			<tr>
+				<td>Consider this example of a JK flip-flop with active low asynchronous set and reset.
+					<p></p>
+					<pre>
+primitive JKPRS_UDP( Q, J, K, CK, RB, SB);
+    output Q;   reg Q;
+    input J, K, CK, RB, SB;
+
+    // Positive edge triggered JK flip-flop with active low
+    // asynchronous set and reset.  Reset is dominant.
+    
+    table
+    //  J    K   CK   RB   SB   :  Qt  : Qt+1                                  
+                                                                                             
+        0    0 (01)    1    1   :   ?  :    -; // clocked JK.                  
+        0    1 (01)    1    1   :   ?  :    0;                                 
+        1    0 (01)    1    1   :   ?  :    1;                                 
+        1    1 (01)    1    1   :   1  :    0;                                 
+        1    1 (01)    1    1   :   0  :    1;                                 
+                                                                                             
+        0    0 (x1)    1    1   :   ?  :    -; // possible clocked JK.         
+        0    1 (x1)    1    1   :   0  :    0;                                 
+        1    0 (x1)    1    1   :   1  :    1;                                 
+        1    1 (x1)    1    1   :   1  :    0;                                 
+        1    1 (x1)    1    1   :   0  :    1;                                 
+        0    0 (0x)    1    1   :   ?  :    -;                                 
+        0    1 (0x)    1    1   :   0  :    0;                                 
+        1    0 (0x)    1    1   :   1  :    1;                                 
+        1    1 (0x)    1    1   :   1  :    0;                                 
+        1    1 (0x)    1    1   :   0  :    1;                                 
+                                                                                             
+        ?    ?    ?    0    1   :   ?  :    0; // async reset.          
+        ?    ?    ?    1    0   :   ?  :    1; // async set.            
+        ?    ?    ?    0    0   :   ?  :    0; // async reset overrides.
+                                                                                             
+        ?    ?    ? (?1)    1   :   ?  :    -; // ignore changes on set     
+        ?    ?    ?    1 (?1)   :   ?  :    -; // and reset.                       
+                                                                                             
+        ?    ? (?0)    1    1   :   ?  :    -; // ignore falling clock.        
+        ?    ? (1x)    1    1   :   ?  :    -;                                 
+        ?    *    ?    ?    ?   :   ?  :    -; // ignore edges on J and K. 
+        *    ?    ?    ?    ?   :   ?  :    -;
+    endtable
+endprimitive
+</pre>
+					In the example above, all of the edge changes on CK are specified: <font size="3" face="courier">(01), (0x), (x1), (?0),</font> and <font size="3" face="courier">(1x)</font>. Because reset is asynchronous, level-sensitive entries will suffice when either set or reset becomes active (low). However, the <font size="3" face="courier">(?1)</font> entries are needed for when they both go inactive, since there is no other entry to provide the output for those cases. If these two table entries were not here, the output would go to <font size="3" face="courier">x</font> whenever <font size="3" face="courier">RB</font> or <font size="3" face="courier">SB</font> changed from <font size="3" face="courier">0</font> to <font size="3" face="courier">1</font>, undoing the set or reset.
+					<p>Notice the use of &quot;<font size="3" face="courier">-</font>&quot; in the output field of several of the table entries. This means &quot;don't change&quot;, or equivalently, &quot;use the last state value&quot;.</p>
+					<p>Notice also the last two table entries, which use the <font size="3" face="courier">*</font>. The <font size="3" face="courier">*</font> is used to represent <font size="3" face="courier">(??)</font>, or all value transitions. These entries take care of any transitions on <font size="3" face="courier">J</font> and <font size="3" face="courier">K</font>.</p>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

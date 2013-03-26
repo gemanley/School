@@ -1,0 +1,36 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td width="530">Source macros are a special case of a general class of statements called compiler directives. A Verilog source macro is very similar to the source macro facility in C which is implemented by the C preprocessor. In Verilog, the source macro is defined by means of a `define statement. Notice that the first character is &quot;`&quot;, the back-quote.
+					<p>An identifier is defined as a macro by associating a string of text to be substituted whenever the macro identifier is used. Macro identifiers are marked in the text by preceding them with the &quot;`&quot; (back-quote again). For example,</p>
+					<p><tt></tt></p>
+					<dl>
+						<dd>`define mymacro this is some text<br>
+						<dd>...<br>
+						<dd>$display(&quot;`mymacro&quot;);<br>
+						<dd>...<br>
+							</TT>
+					</dl>
+					This would print the string
+					<p></p>
+					<dl>
+						<dd><tt>this is some text</tt>
+					</dl>
+				</td>
+				<td valign="top" width="70"></td>
+			</tr>
+			<tr>
+				<td><img src="images/v0222g1.gif" height="338" width="60"></td>
+			</tr>
+		</table>
+	</body>
+
+</html>

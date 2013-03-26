@@ -1,0 +1,38 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td>A scope is a set of identifiers which must be unique. That is, all of the identifiers in the same scope must be different from each other, but they may be the same as identifiers in a different scope.
+					<p>Verilog defines several scopes in which identifiers are defined. They are:</p>
+					<p></p>
+				</td>
+			</tr>
+		</table>
+		<table width="570" border="1" cellpadding="5">
+			<tr>
+				<td valign="TOP" width="170">1. Module</td>
+				<td width="400">Net names, top-level register names, task names, function names, module and primitive instance names, and port names exist in the module's scope. That is, two different modules can each have a net named &quot;net1 or a module instance named &quot;foo_inst&quot;. However, there can be only one &quot;net1&quot; or &quot;foo_inst&quot; in a single module.</td>
+			</tr>
+			<tr>
+				<td valign="TOP" width="170">2. Task, Function, Block</td>
+				<td width="400">Tasks, functions, and named blocks allow registers, parameters, and named blocks to be defined within them. These names exist in hierarchical name spaces. That is, an identifier in an outer scope (module, task, function, or block) may be redefined in an inner scope (task, function, or block).</td>
+			</tr>
+			<tr>
+				<td valign="TOP" width="170">3. Global</td>
+				<td width="400">There is a single scope which contains all module types (i.e. the name used in the module definition). Thus, there can be only one module of type &quot;DF99&quot;.</td>
+			</tr>
+			<tr>
+				<td valign="TOP" width="170">4. Macros</td>
+				<td width="400">Source macros have a single global scope that crosses module boundaries.</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

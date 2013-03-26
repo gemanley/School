@@ -1,0 +1,19 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>Some nets are not expected to take a z value, so it is not necessary to specify the turnoff delay. For these nets, you can simply use the rise and fall delays. If, by chance, the net does make a transition to z (or to x), the delay used will be the smaller of the two which are specified.
+					<p>Similarly, most of the gate primitives cannot drive a z value, so it does not make sense to supply a turnoff delay for them. For these gates, the syntax specifies that you can only provide two delay values (the syntax description uses the term <tt>delay2</tt>, instead of <tt>delay3</tt>). The following gates take only two delay values:</p>
+					<p><tt>and, nand, or, nor, xor, xnor, buf, not</tt></p>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

@@ -1,0 +1,25 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="640" cellpadding="10">
+			<tr>Signal names in the instance port list can also be matched up with the signal names in the module definition by name.
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<tt>foo f1 (.in1(source1), .in2(source2), .out1(sink1),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.out2(sink2), .bidi(bus));</tt></p>
+				<p>The port name in the module definition follows the period, and the port expression to be connected to it is enclosed in parentheses.</p>
+				<p>When ports are assigned by name, there is no ordering consideration. Also, omitting a port assignment requires no special notation, you simply don't include an assignment for the omitted port. The following is equivalent to the previous example.</p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<tt>foo f1 (.bidi(bus), .out1(sink1), .in1(source1));</tt></p>
+				<p></p>
+				<center>
+					<img src="images/v0113g1.gif" height="137" width="404"></center>
+				<p></p>
+				<center>
+					<a href="JavaScript:parent.dispWindow('v01051r1.htm','Tips')"><img src="images/vtips.gif" width="43 HEIGHT=" 44" border="0"></a></center>
+			</tr>
+		</table>
+	</body>
+
+</html>

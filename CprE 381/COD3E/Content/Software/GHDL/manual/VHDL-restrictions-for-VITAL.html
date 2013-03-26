@@ -1,0 +1,24 @@
+<html lang="en">
+
+	<head>
+		<title>GHDL guide</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+		<meta name="description" content="GHDL guide">
+		<meta name="generator" content="makeinfo 4.1">
+		<link href="http://texinfo.org/" rel="generator-home">
+		<link href="../../../resources/base_style.css" rel="stylesheet" type="text/css" media="all">
+	</head>
+
+	<body>
+		<p>Node:<a name="VHDL%20restrictions%20for%20VITAL">VHDL restrictions for VITAL</a>, Next:<a href="Backannotation.html#Backannotation" rel="next">Backannotation</a>, Previous:<a href="VITAL-packages.html#VITAL%20packages" rel="previous">VITAL packages</a>, Up:<a href="GHDL-implementation-of-VITAL.html#GHDL%20implementation%20of%20VITAL" rel="up">GHDL implementation of VITAL</a></p>
+		<hr>
+		<br>
+		<h3>VHDL restrictions for VITAL</h3>
+		<p>The VITAL standard (partially) implemented is the IEEE 1076.4 standard published in 1995.</p>
+		<p>This standard defines restriction of the VHDL language usage on VITAL model. A <dfn>VITAL model</dfn> is a design unit (entity or architecture) decorated by the <code>VITAL_Level0</code> or <code>VITAL_Level1</code> attribute. These attributes are defined in the <code>ieee.VITAL_Timing</code> package.</p>
+		<p>Currently, only VITAL level 0 checks are implemented. VITAL level 1 models can be analyzed, but GHDL doesn't check they comply with the VITAL standard.</p>
+		<p>Moreover, GHDL doesn't check (yet) that timing generics are not read inside a VITAL level 0 model prior the VITAL annotation.</p>
+		<p>The analysis of a non-conformant VITAL model fails. You can disable the checks of VITAL restrictions with the <code>--no-vital-checks</code>. Even when restrictions are not checked, SDF annotation can be performed.</p>
+	</body>
+
+</html>

@@ -1,0 +1,347 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			<b>TTest Module</b>
+			<p></p>
+			<pre>
+`timescale 1ns / 100ps
+module ARMS_COUNTER_test;
+
+   reg CLK;
+   reg STRB;
+   reg [1:0] CON;
+   reg [3:0] DATA;
+   wire [3:0] COUT;
+   
+   event STROBE;
+
+   integer i;
+   ARMS_COUNTER ARMS_COUNTER_1 (CLK,STRB,CON,DATA,COUT);
+
+
+//////- The Clock always
+
+   always begin
+#1    CLK =  1'b0;
+#49   CLK =  1'b1;
+   end
+
+//////- The Strobe generator
+    always @(STROBE) begin
+        STRB = #10 1'b1;
+        STRB = #10 1'b0;
+    end
+    
+//////- The test patterns
+
+initial begin
+
+   repeat(1000) begin
+#30;
+
+// TEST 1 start off with simple test of reset, count up, &amp;&amp; count down, &amp;&amp; limit
+
+      // reset the counter
+      CON = 2'b00;
+    -&gt;STROBE;
+#50;
+      if (COUT !== 4'b0000) $display($time,,,&quot;COUT !== 4'b0000&quot;);
+      
+      // load the LIMIT to 2
+      DATA = 4'b0010;
+      CON = 2'b01;
+    -&gt;STROBE;
+#50;
+
+      // count up
+      CON = 2'b10;
+    -&gt;STROBE;
+#50;
+      if (COUT !== 4'b0001) $display($time,,,&quot;COUT !== 4'b0001&quot;);
+      
+      // count up again
+#50;
+      if (COUT !== 4'b0010) $display($time,,,&quot;COUT !== 4'b0010&quot;);
+
+      // count up, should not increment since hit limit
+#50;
+      if (COUT !== 4'b0010) $display($time,,,&quot;COUT !== 4'b0010&quot;);
+      
+      // count up, should not increment since limit is hit even
+      // though countup signal is enabled
+      CON = 2'b10;
+    -&gt;STROBE;
+#50;
+      if (COUT !== 4'b0010) $display($time,,,&quot;COUT !== 4'b0010&quot;);
+      
+      // count down, cannot decrement since limit is hit &amp;&amp; we do not know 
+      // from which direction the limit is hit
+      CON = 2'b11;
+    -&gt;STROBE;
+#50;
+      if (COUT !== 4'b0010) $display($time,,,&quot;COUT !== 4'b0010&quot;);
+      
+      // load the LIMIT to 0
+      DATA = 4'b0000;
+      CON = 2'b01;
+    -&gt;STROBE;
+#50;
+      
+      // count down
+      CON = 2'b11;
+    -&gt;STROBE;
+#50;
+      if (COUT !== 4'b0001) $display($time,,,&quot;COUT !== 4'b0001&quot;);
+
+// TEST2 Perform some extensive testing of the counter's limit handling
+
+      // set limit to 13
+      DATA = 4'b1101;
+      CON = 2'b01;
+    -&gt;STROBE;
+#50;
+
+      // reset the counter
+      CON = 2'b00;
+    -&gt;STROBE;
+#50;
+      if (COUT !== 4'b0000) $display($time,,,&quot;COUT !== 4'b0000&quot;);
+      
+      // count up to 13
+      CON = 2'b10;
+    -&gt;STROBE;
+      for (i = 1; i 
+				
+				
+				<= 13; i="i" + 1) #50 ; if (COUT !="=" 4'b1101) $display($time,,,"COUT !="=" 4'b1101"); // count up, should not increment since hit limit #50; if (COUT !="=" 4'b1101) $display($time,,,"COUT !="=" 4'b1101"); // count up, should not increment since hit limit CON="2'b10;" #50; if (COUT !="=" 4'b1101) $display($time,,,"COUT !="=" 4'b1101"); // change limit to 15 DATA="4'b1111;" CON="2'b01;" ->
+				
+				
+				STROBE;
+#50;
+
+      // count up
+      CON = 2'b10;
+    -&gt;STROBE;
+#50;
+      if (COUT !== 4'b1110) $display($time,,,&quot;COUT !== 4'b1110&quot;);
+
+      // count up
+#50;
+      if (COUT !== 4'b1111) $display($time,,,&quot;COUT !== 4'b1111&quot;);
+
+      // count up, should not increment since hit limit
+#50;
+      if (COUT !== 4'b1111) $display($time,,,&quot;COUT !== 4'b1111&quot;);
+      
+      // change limit to 7 
+      DATA = 4'b0111;
+      CON = 2'b01;
+    -&gt;STROBE;
+#50;
+
+      // count down, try counting below 7
+      CON = 2'b11;
+    -&gt;STROBE;
+      for (i = 1; i 
+				
+				
+				<= 10; i="i" + 1) #50 ; if (COUT !="=" 4'b0111) $display($time,,,"COUT !="=" 4'b0111"); // change limit to 0 DATA="4'b0000;" CON="2'b01;" ->
+				
+				
+				STROBE;
+#50;
+ 
+      // count down, try counting below 8
+      CON = 2'b11;
+    -&gt;STROBE;
+      for (i = 1; i 
+				
+				
+				<= 8; i="i" + 1) #50; if (COUT !="=" 4'b0000) $display($time,,,"COUT !="=" 4'b0000"); // count up, should not increment since hit limit CON="2'b10;" ->
+				
+				
+				STROBE;
+#50;
+      if (COUT !== 4'b0000) $display($time,,,&quot;COUT !== 4'b0000&quot;);
+      
+// TEST3 Try counting beyond the range, i.e. above 15 &amp;&amp; below 0
+
+      // reset the counter
+      CON = 2'b00;
+    -&gt;STROBE;
+#50;
+      if (COUT !== 4'b0000) $display($time,,,&quot;COUT !== 4'b0000&quot;);
+
+      // change limit to 7 
+      DATA = 4'b0111;
+      CON = 2'b01;
+    -&gt;STROBE;
+#50;
+
+      // count up 1 
+      CON = 2'b10;
+    -&gt;STROBE;
+#50;
+      if (COUT !== 4'b0001) $display($time,,,&quot;COUT !== 4'b0001&quot;);
+      
+      // count down  
+      CON = 2'b11;
+    -&gt;STROBE;
+#50;
+      if (COUT !== 4'b0000) $display($time,,,&quot;COUT !== 4'b0000&quot;);
+    
+      // count down  
+#50;
+      if (COUT !== 4'b1111) $display($time,,,&quot;COUT !== 4'b1111&quot;);
+      
+      // count down  
+#50;
+      if (COUT !== 4'b1110) $display($time,,,&quot;COUT !== 4'b1110&quot;);
+      
+      // count up 
+      CON = 2'b10;
+    -&gt;STROBE;
+#50;
+      if (COUT !== 4'b1111) $display($time,,,&quot;1 COUT(%b) !== 4'b1111&quot;, COUT);
+      
+      // count up 
+      CON = 2'b10;
+    -&gt;STROBE;
+#50;
+      if (COUT !== 4'b0000) $display($time,,,&quot;2 COUT(%b) !== 4'b0000&quot;, COUT);
+
+// TEST4 Checking for counting sequence from 0 to 15 &amp;&amp; from 15 to 0
+
+      // reset the counter
+      CON = 2'b00;
+    -&gt;STROBE;
+#50;
+      if (COUT !== 4'b0000) $display($time,,,&quot;COUT(%b) !== 4'b0000&quot;, COUT);
+
+      // change limit to 15
+      DATA = 4'b1111;
+      CON = 2'b01;
+    -&gt;STROBE;
+#50;
+
+      // count up 15 times
+      CON = 2'b10;
+    -&gt;STROBE;
+#50;
+      if (COUT !== 4'b0001) $display($time,,,&quot;COUT !== 4'b0001&quot;);
+
+#50;
+      if (COUT !== 4'b0010) $display($time,,,&quot;COUT !== 4'b0010&quot;);
+
+#50;
+      if (COUT !== 4'b0011) $display($time,,,&quot;COUT !== 4'b0011&quot;);
+
+#50;
+      if (COUT !== 4'b0100) $display($time,,,&quot;COUT !== 4'b0100&quot;);
+
+#50;
+      if (COUT !== 4'b0101) $display($time,,,&quot;COUT !== 4'b0101&quot;);
+
+#50;
+      if (COUT !== 4'b0110) $display($time,,,&quot;COUT !== 4'b0110&quot;);
+
+#50;
+      if (COUT !== 4'b0111) $display($time,,,&quot;COUT !== 4'b0111&quot;);
+
+#50;
+      if (COUT !== 4'b1000) $display($time,,,&quot;COUT !== 4'b1000&quot;);
+
+#50;
+      if (COUT !== 4'b1001) $display($time,,,&quot;COUT !== 4'b1001&quot;);
+
+#50;
+      if (COUT !== 4'b1010) $display($time,,,&quot;COUT !== 4'b1010&quot;);
+
+#50;
+      if (COUT !== 4'b1011) $display($time,,,&quot;COUT !== 4'b1011&quot;);
+
+#50;
+      if (COUT !== 4'b1100) $display($time,,,&quot;COUT !== 4'b1100&quot;);
+
+#50;
+      if (COUT !== 4'b1101) $display($time,,,&quot;COUT !== 4'b1101&quot;);
+
+#50;
+      if (COUT !== 4'b1110) $display($time,,,&quot;COUT !== 4'b1110&quot;);
+
+#50;
+      if (COUT !== 4'b1111) $display($time,,,&quot;COUT !== 4'b1111&quot;);
+      
+    // change limit to 0
+    DATA = 4'b0000;
+    CON = 2'b01;
+    -&gt;STROBE;
+#50;
+
+    // count down 15 times 
+    CON = 2'b11;
+    -&gt;STROBE;
+#50;
+      if (COUT !== 4'b1110) $display($time,,,&quot;COUT !== 4'b1110&quot;);
+
+#50;
+      if (COUT !== 4'b1101) $display($time,,,&quot;COUT !== 4'b1101&quot;);
+
+#50;
+      if (COUT !== 4'b1100) $display($time,,,&quot;COUT !== 4'b1100&quot;);
+
+#50;
+      if (COUT !== 4'b1011) $display($time,,,&quot;COUT !== 4'b1011&quot;);
+
+#50;
+      if (COUT !== 4'b1010) $display($time,,,&quot;COUT !== 4'b1010&quot;);
+
+#50;
+      if (COUT !== 4'b1001) $display($time,,,&quot;COUT !== 4'b1001&quot;);
+
+#50;
+      if (COUT !== 4'b1000) $display($time,,,&quot;COUT !== 4'b1000&quot;);
+
+#50;
+      if (COUT !== 4'b0111) $display($time,,,&quot;COUT !== 4'b0111&quot;);
+
+#50;
+      if (COUT !== 4'b0110) $display($time,,,&quot;COUT !== 4'b0110&quot;);
+
+#50;
+      if (COUT !== 4'b0101) $display($time,,,&quot;COUT !== 4'b0101&quot;);
+
+#50;
+      if (COUT !== 4'b0100) $display($time,,,&quot;COUT !== 4'b0100&quot;);
+
+#50;
+      if (COUT !== 4'b0011) $display($time,,,&quot;COUT !== 4'b0011&quot;);
+
+#50;
+      if (COUT !== 4'b0010) $display($time,,,&quot;COUT !== 4'b0010&quot;);
+
+#50;
+      if (COUT !== 4'b0001) $display($time,,,&quot;COUT !== 4'b0001&quot;);
+
+#50;
+      if (COUT !== 4'b0000) $display($time,,,&quot;COUT !== 4'b0000&quot;);
+#20;    
+    end
+    $display($time,,&quot;Test finished&quot;);
+    $finish;
+end
+endmodule
+
+
+</pre>
+		</table>
+	</body>
+
+</html>

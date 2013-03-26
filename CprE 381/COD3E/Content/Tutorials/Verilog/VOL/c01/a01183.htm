@@ -1,0 +1,27 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body onload="parent.initBtnM(2)" bgcolor="white">
+				<b>Are the following statements syntactically correct?</b>
+		<p></p>
+		<form>
+			a. <input type="radio" name="YES1" value="A"><font color="#4B0082"><b>Yes</b></font>&nbsp;&nbsp;&nbsp;<input type="radio" name="YES1" value="A">No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assign x = f(y), y = f(z);
+			<p>b. <input type="radio" name="YES2" value="B">Yes&nbsp;&nbsp;&nbsp;<input type="radio" name="YES2" value="B"><font color="#4B0082"><b>No</b></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assign #10 x 
+				<= a + b;<p>
+			</p>
+		</form>
+		<table width="600">
+			<tr>
+				<td><B>That's right. The second statement is incorrect because you can't use a non-blocking assign. Here is an example of a correct statement for b.:<br>
+					b. <font size="3" face="courier">assign #10 x = a + b;</font>
+					<p>To review content related to this question see <a href="javascript:parent.gotoScreen('01','114',1)">Modelling Structures: Tasks and Functions</a>.</b></p>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

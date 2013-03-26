@@ -1,0 +1,36 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>Verilog resolves the dangling else in the standard way. That is, if there is more than one if that the else could be associated with, it is associated with the lexically nearest one.
+					<p></p>
+					<pre>
+    if (cond_1)
+        if (cond_2)
+            result = x;
+        else
+            result = y;
+</pre>
+					In the above, the else is associated with the inner if, as implied by the indentation.
+					<p>If you want to associate the else with a different if, then you must use begin...end, like this:</p>
+					<p></p>
+					<pre>
+    if (cond_1) begin
+        if (cond_2)
+            result = x;
+    end
+    else
+        result = y;
+</pre>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

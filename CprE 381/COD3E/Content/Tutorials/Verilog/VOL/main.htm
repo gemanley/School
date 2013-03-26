@@ -1,0 +1,746 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title>Verilog Tutorial</title>
+
+
+		<script language="JavaScript">
+
+var newWindow, glossWindow;
+
+
+function appPath() {
+	var pghtm = frames[2].location.href;
+	var i = pghtm.indexOf("VOL/");
+	// alert( pghtm.substring(0,i+4) );
+	return pghtm.substring(0,i+4)
+	// return "file:\/\/\/\/\/Forest\/cod\/COD-cd%20folder\/COD-cd\/Content\/Tutorials\/Verilog\/VOL\/";
+}
+
+
+function goGlossHash(where) {
+	var newLocation = appPath() + "gmain.htm"
+	document.cookie="glossHash="+where
+	glossWindow=window.open(newLocation,"Glossary",'width=600, height=400, toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1');
+	glossWindow.focus();
+}
+
+
+function setValue(formIndex,i) {
+	document.cookie = "radioValue" + formIndex + "=" + i
+}
+
+function setValueMT(formIndex,i) {
+	document.cookie = "radioValue" + formIndex + "=" + EncodeSC(i)
+}
+
+function initBtn0() {
+	var label="radioValue"+"0"
+	var choice = getCookieData(label)
+	var i=choice.substring(1,choice.length)
+	//alert (i.length)
+	if (i.length > 0) {frames[2].document.forms[0].A[parseInt(i)].checked = "TRUE"}
+	document.cookie = label + "="
+}
+
+function initBtnM(rows) {
+	for (var j = 0; j < rows; j++) {
+		var label="radioValue"+j
+		var choice = getCookieData(label)
+		var i=choice.substring(1,choice.length)
+//alert (i)
+		if (i.length > 0) {frames[2].document.forms[0].elements[2*j+parseInt(i)].checked="TRUE"}
+		document.cookie = label + "="
+	}
+}
+
+function initBtnMchMA(rows) {
+	for (var j = 0; j < rows; j++) {
+		var label="radioValue"+j
+		var choice = getCookieData(label)
+		i=choice.substring(1,choice.length)
+		if (i=="true") { frames[2].document.forms[0].elements[j].checked = true }
+		else { frames[2].document.forms[0].elements[j].checked = false }
+		document.cookie = label + "="
+	}
+}
+
+function initBtnMT(rows) {
+	for (var j = 0; j < rows; j++) {
+		var label="radioValue"+j
+		var choice = getCookieData(label)
+		frames[2].document.forms[0].elements[j].value = choice.substring(1,choice.length)
+		document.cookie = label + "="
+	}
+}
+
+function checkAnswer(formIndex, answer) {
+	var pghtm = frames[2].location.href
+	var len = pghtm.length
+	if (pghtm.lastIndexOf("#") != -1) { len = pghtm.lastIndexOf("#") }
+	var Ch = pghtm.substring(len-9,len-7)
+	var pgNum = pghtm.substring(len-7,len-4)
+	var ChPg = Ch + pgNum
+	
+	if (pghtm.indexOf("\\c") > -1) {var i = pghtm.indexOf("\\c")}
+	else {var i = pghtm.lastIndexOf("\/c")}
+
+	var label="radioValue"+formIndex
+	var choice = getCookieData(label)
+	var k=choice.substring(1,choice.length)
+	//alert (k)
+	//alert (answer)
+	if (k!="" && k==answer) {var url="a"}
+	else {var url="w"}
+
+	var newLocation = pghtm.substring(0,i+5) + url + ChPg + ".htm#answer"
+	//alert (newLocation)
+	frames[2].location.href = newLocation
+	
+}
+
+function checkAnswer2(formIndex, answer1,answer2) {
+	var pghtm = frames[2].location.href
+	var len = pghtm.length
+	if (pghtm.lastIndexOf("#") != -1) { len = pghtm.lastIndexOf("#") }
+	var Ch = pghtm.substring(len-9,len-7)
+	var pgNum = pghtm.substring(len-7,len-4)
+	var ChPg = Ch + pgNum
+	
+	if (pghtm.indexOf("\\c") > -1) {var i = pghtm.indexOf("\\c")}
+	else {var i = pghtm.lastIndexOf("\/c")}
+
+	var label="radioValue"+formIndex
+	var choice = getCookieData(label)
+	var k=choice.substring(1,choice.length)
+	//alert (k)
+	//alert (answer)
+	
+	var url="w"
+	if (k!="" && (k==answer1 || k==answer2)) {var url="a"}
+
+	var newLocation = pghtm.substring(0,i+5) + url + ChPg + ".htm#answer"
+	alert (newLocation)
+	frames[2].location.href = newLocation
+	
+}
+
+function checkAnswerM(rows, ca0, ca1, ca2, ca3, ca4, ca5) {
+	myArray = new Array(6)
+	myArray[0] = ca0
+	myArray[1] = ca1
+	myArray[2] = ca2
+	myArray[3] = ca3
+	myArray[4] = ca4
+	myArray[5] = ca5
+	var pghtm = frames[2].location.href
+	var len = pghtm.length
+	if (pghtm.lastIndexOf("#") != -1) { len = pghtm.lastIndexOf("#") }
+	var Ch = pghtm.substring(len-9,len-7)
+	var pgNum = pghtm.substring(len-7,len-4)
+	var ChPg = Ch + pgNum
+	
+	if (pghtm.indexOf("\\c") > -1) {var i = pghtm.indexOf("\\c")}
+	else {var i = pghtm.lastIndexOf("\/c")}
+	
+	var url="a"
+	for (var j = 0; j < rows; j++) {
+		var label="radioValue"+j
+		var choice = getCookieData(label)
+		k=choice.substring(1,choice.length)
+		if (k != myArray[j]) {url="w"; break}
+	}
+
+	var newLocation = pghtm.substring(0,i+5) + url + ChPg + ".htm#answer"
+	//alert (newLocation)
+	frames[2].location.href = newLocation
+	
+}
+
+function checkAnswerMT(rows, ansList, hash) {
+	myArray = new Array(rows)
+	var tstr = ansList
+//alert (ansList)
+//alert (hash)
+	for (var i=0; i < rows-1; i++) {
+		myArray[i] = tstr.substring(0,tstr.indexOf(","))
+		tstr = tstr.substring(tstr.indexOf(",")+1, tstr.length)
+//alert (myArray[i])
+	}
+	myArray[i] = tstr
+//alert (myArray[i])
+
+	var pghtm = frames[2].location.href
+	var len = pghtm.length
+	if (pghtm.lastIndexOf("#") != -1) { len = pghtm.lastIndexOf("#") }
+	var Ch = pghtm.substring(len-9,len-7)
+	var pgNum = pghtm.substring(len-7,len-4)
+	var ChPg = Ch + pgNum
+	
+	if (pghtm.indexOf("\\c") > -1) {var i = pghtm.indexOf("\\c")}
+	else {var i = pghtm.lastIndexOf("\/c")}
+	
+	var url="a"
+	for (var j = 0; j < rows; j++) {
+		var label="radioValue"+j
+		var choice = getCookieData(label)
+		k=choice.substring(1,choice.length)
+		//alert (choice)
+		//alert (myArray[j])
+
+		var e = myArray[j].indexOf(":")
+		if (myArray[j] == "") {e = -1;}
+
+		if (e == -1) {
+			if (k != myArray[j]) { url="w"; break }
+		}
+		else {
+			var beg = 0
+			var hit, temp
+			while (e > -1) {
+				hit = 0
+				if (k == myArray[j].substring(beg,e)) {hit = 1; break;}
+				//alert ("k="+k)
+				//alert ("myArray="+myArray[j].substring(beg,e))
+				beg = e + 1
+				//alert ("beg="+beg)
+				temp = myArray[j].substring(beg,myArray[j].length)
+				//alert ("temp="+temp)
+				e = beg + temp.indexOf(":")
+				if (beg == myArray[j].length) { e = -1 }
+				//alert ("e="+e)
+			}	
+			if (hit == 0) {url="w"; break}
+		}
+	}
+
+	var newLocation = pghtm.substring(0,i+5) + url + ChPg + ".htm" + hash
+	//alert (newLocation)
+	frames[2].location.href = newLocation
+	
+}
+
+function dispWindow(url, windowName) {
+	var pghtm = frames[2].location.href
+	if (pghtm.indexOf("\\c") > -1) {var i = pghtm.indexOf("\\c")}
+	else if (pghtm.indexOf("\/c") > -1) {var i = pghtm.lastIndexOf("\/c")}
+	else if (pghtm.indexOf("\/") > -1) {var i = pghtm.lastIndexOf("\/")}
+	else {var i = pghtm.lastIndexOf("\\")}
+	var newLocation = pghtm.substring(0,i+5) + url
+	newWindow = window.open(newLocation, windowName, 'width=640,height=240,toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1');
+	if (navigator.appName == "Netscape") {
+		newWindow.focus();
+	}
+	else if (navigator.appName.indexOf("Explorer") > -1 && navigator.appVersion.indexOf("4") > -1) {
+		newWindow.focus();
+	}
+}
+
+
+function gotoScreen (Ch, Pg, flag) {
+	if (flag == 1) {
+		var pghtm = frames[2].location.href
+		var len = pghtm.length
+		if (pghtm.lastIndexOf("?") != -1) { len = pghtm.lastIndexOf("?") }
+		if (pghtm.lastIndexOf("#") != -1) { len = pghtm.lastIndexOf("#") }
+		var c = pghtm.substring(len-9,len-7)
+		var p = pghtm.substring(len-7,len-4)		
+		document.cookie="BackPghtm=" + c + p
+	}
+
+	var retval=gotoChPg(eval(Ch),Pg,0); 
+	//alert (retval)
+	var ChPg=retval.substring(2,7);
+	if (Pg!="00") {retval=gotoChPg(ChPg.substring(0,2),ChPg.substring(2,5),1)}
+	//alert (retval)
+	ChPg=retval.substring(2,7);
+	newLocation=appPath() + "c" + ChPg.substring(0,2) + "\/v" + ChPg + ".htm";
+	var imgName=appPath() + "images/v" + ChPg + "g0.gif";
+	var numOfPages = getNumOfPages(ChPg.substring(0,2));
+	writeHeader(imgName, ChPg.substring(0,2), retval.substring(0,2), numOfPages);
+
+	// alert (frames[1].name+" = "+appPath()+"navbar.htm")
+	frames[1].location.href=appPath()+"navbar.htm";
+	// alert (frames[2].name+" = "+newLocation)
+	frames[2].location.href=newLocation;
+}
+
+function pageHistIncrement(Ch, Pg, newLocation) {
+	//var i = newLocation.lastIndexOf("\c0")
+	var i = newLocation.lastIndexOf("\c")
+	var loc = appPath() + newLocation.substring(i,newLocation.length)
+
+	var tempCookie = getCookieData("HistCrumb")
+	tempCookie = tempCookie.substring(1,tempCookie.length)
+	
+	//var chHasChanged=0
+	//if (Ch != tempCookie.substring(0,2)) {
+	//	chHasChanged=1		
+	//}
+	// force update of History every page turn!!!
+	var chHasChanged=1
+
+	//alert( appPath()+"procHist.htm?loc="+loc+"&Ch="+Ch+"&Pg="+Pg+"&chHasChanged="+chHasChanged);
+	//frames[2].location.href= appPath()+"procHist.htm?loc="+loc+"&Ch="+Ch+"&Pg="+Pg+"&chHasChanged="+chHasChanged
+	frames[2].location.href= loc;
+	// note:  I changed this because prochist.htm, which is an ASP,
+	// needs to be rewritten into a javascript page. To change it back, write a new prochist.htm
+	// and comment out this line and uncomment the use of prochist.
+}
+
+function processHistValue(idx) {
+	var i = eval(idx) +1
+	if (i > 9) {
+		i = 9
+	}
+	i = "" + i
+	return i
+}
+
+function gotoChPg(Ch, Pg, whichFlag) {
+	var x=""
+	if (Ch==0) { x=gotoCh00Pg(Pg, whichFlag) }
+	else if (Ch==1) { x=gotoCh01Pg(Pg, whichFlag) }
+	else if (Ch==2) { x=gotoCh02Pg(Pg, whichFlag) }
+	else if (Ch==3) { x=gotoCh03Pg(Pg, whichFlag) }
+	else if (Ch==4) { x=gotoCh04Pg(Pg, whichFlag) }
+	else if (Ch==5) { x=gotoCh05Pg(Pg, whichFlag) }
+	else if (Ch==6) { x=gotoCh06Pg(Pg, whichFlag) }
+	else if (Ch==7) { x=gotoCh07Pg(Pg, whichFlag) }
+	else if (Ch==8) { x=gotoCh08Pg(Pg, whichFlag) }
+	else if (Ch==9) { x=gotoCh09Pg(Pg, whichFlag) }
+	return x;
+}
+
+function gotoCh00Pg(Pg, whichFlag) {
+	var numElements=7
+	ppList=new Array("003","006","009","012","013","015","998")
+	if (Pg=="00") {
+		return ("01" + "00" + ppList[eval(0)])
+	}
+	if (Pg=="999") {
+		return (getNumOfPages("00") + "00" + ppList[eval(numElements-2)])
+	}
+
+	for (var i=0; i<numElements; i++) { if (ppList[i]==Pg) { break; } }
+	if (whichFlag==0) { // get next(+) neighboring element
+		i++
+		if (i<numElements) {
+			var PgCnt = i+1
+			if (PgCnt<10) { PgCnt="0"+PgCnt }
+			return (PgCnt + "00" + ppList[eval(i)])
+		}
+		else { return ""}
+	}
+	else { // get next(-) neighboring element
+		i--
+		if (i>-1) {
+			var PgCnt = i+1
+			if (PgCnt<10) { PgCnt="0"+PgCnt }
+			return (PgCnt + "00" + ppList[eval(i)])
+		}
+		else { return ""}
+	}
+}
+
+function gotoCh01Pg(Pg, whichFlag) {
+	var numElements=62
+	ppList=new Array("003","006","009","012","015","018","021","024","027","030","033","036","039","045","048","051","054","057","060","063","066","069","072","075","078","084","087","090","093","096","099","102","105","108","111","114","117","120","123","126","129","132","135","138","141","144","147","150","153","154","156","159","162","165","168","171","174","177","180","186","189","998")
+	if (Pg=="00") {
+		return ("01" + "01" + ppList[eval(0)])
+	}
+	if (Pg=="999") {
+		return (getNumOfPages("01") + "01" + ppList[eval(numElements-2)])
+	}
+
+	for (var i=0; i<numElements; i++) { if (ppList[i]==Pg) { break; } }
+	if (whichFlag==0) { // get next(+) neighboring element
+		i++
+		if (i<numElements) {
+			var PgCnt = i+1
+			if (PgCnt<10) { PgCnt="0"+PgCnt }
+			return (PgCnt + "01" + ppList[eval(i)])
+		}
+		else { return ""}
+	}
+	else { // get next(-) neighboring element
+		i--
+		if (i>-1) {
+			var PgCnt = i+1
+			if (PgCnt<10) { PgCnt="0"+PgCnt }
+			return (PgCnt + "01" + ppList[eval(i)])
+		}
+		else { return ""}
+	}
+}
+
+function gotoCh02Pg(Pg, whichFlag) {
+	var numElements=47
+	ppList=new Array("003","006","009","012","015","018","021","024","027","030","033","036","039","042","045","048","051","054","057","060","063","066","069","072","075","078","081","084","087","090","093","096","099","102","105","108","111","114","117","120","123","126","129","132","135","138","998")
+	if (Pg=="00") {
+		return ("01" + "02" + ppList[eval(0)])
+	}
+	if (Pg=="999") {
+		return (getNumOfPages("02") + "02" + ppList[eval(numElements-2)])
+	}
+
+	for (var i=0; i<numElements; i++) { if (ppList[i]==Pg) { break; } }
+
+	if (whichFlag==0) { // get next(+) neighboring element
+		i++
+		if (i<numElements) {
+			var PgCnt = i+1
+			if (PgCnt<10) { PgCnt="0"+PgCnt }
+			return (PgCnt + "02" + ppList[eval(i)])
+		}
+		else { return ""}
+	}
+	else { // get next(-) neighboring element
+		i--
+		if (i>-1) {
+			var PgCnt = i+1
+			if (PgCnt<10) { PgCnt="0"+PgCnt }
+			return (PgCnt + "02" + ppList[eval(i)])
+		}
+		else { return ""}
+	}
+}
+
+
+function gotoCh03Pg(Pg, whichFlag) {
+	var numElements=47
+	ppList=new Array("003","006","009","012","015","018","021","024","027","030","033","036","039","042","045","048","051","054","057","060","063","066","069","072","075","078","081","084","087","090","093","096","099","102","105","108","111","114","117","120","123","126","129","132","135","138","998")
+	if (Pg=="00") {
+		return ("01" + "03" + ppList[eval(0)])
+	}
+	if (Pg=="999") {
+		return (getNumOfPages("03") + "03" + ppList[eval(numElements-2)])
+	}
+
+	for (var i=0; i<numElements; i++) { if (ppList[i]==Pg) { break; } }
+
+	if (whichFlag==0) { // get next(+) neighboring element
+		i++
+		if (i<numElements) {
+			var PgCnt = i+1
+			if (PgCnt<10) { PgCnt="0"+PgCnt }
+			return (PgCnt + "03" + ppList[eval(i)])
+		}
+		else { return ""}
+	}
+	else { // get next(-) neighboring element
+		i--
+		if (i>-1) {
+			var PgCnt = i+1
+			if (PgCnt<10) { PgCnt="0"+PgCnt }
+			return (PgCnt + "03" + ppList[eval(i)])
+		}
+		else { return ""}
+	}
+}
+
+function gotoCh04Pg(Pg, whichFlag) {
+	var numElements=49
+	ppList=new Array("003","006","009","012","015","021","024","027","028","030","036","039","042","045","048","049","050","051","052","057","060","063","066","069","072","075","078","081","084","087","090","093","096","099","102","105","108","111","117","120","123","126","129","132","135","138","141","106","998")
+	if (Pg=="00") {
+		return ("01" + "04" + ppList[eval(0)])
+	}
+	if (Pg=="999") {
+		return (getNumOfPages("04") + "04" + ppList[eval(numElements-2)])
+	}
+
+	for (var i=0; i<numElements; i++) { if (ppList[i]==Pg) { break; } }
+
+	if (whichFlag==0) { // get next(+) neighboring element
+		i++
+		if (i<numElements) {
+			var PgCnt = i+1
+			if (PgCnt<10) { PgCnt="0"+PgCnt }
+			return (PgCnt + "04" + ppList[eval(i)])
+		}
+		else { return ""}
+	}
+	else { // get next(-) neighboring element
+		i--
+		if (i>-1) {
+			var PgCnt = i+1
+			if (PgCnt<10) { PgCnt="0"+PgCnt }
+			return (PgCnt + "04" + ppList[eval(i)])
+		}
+		else { return ""}
+	}
+}
+
+function gotoCh05Pg(Pg, whichFlag) {
+	var numElements=64
+	ppList=new Array("003","006","009","012","015","018","021","024","027","030","031","033","036","039","042","045","048","051","054","057","060","063","066","069","072","075","078","081","084","087","090","093","096","099","102","105","108","111","114","117","120","123","126","129","132","133","135","138","141","144","147","150","153","156","159","162","165","168","171","174","040","041","088","998")
+	if (Pg=="00") {
+		return ("01" + "05" + ppList[eval(0)])
+	}
+	if (Pg=="999") {
+		return (getNumOfPages("05") + "05" + ppList[eval(numElements-2)])
+	}
+
+	for (var i=0; i<numElements; i++) { if (ppList[i]==Pg) { break; } }
+
+	if (whichFlag==0) { // get next(+) neighboring element
+		i++
+		if (i<numElements) {
+			var PgCnt = i+1
+			if (PgCnt<10) { PgCnt="0"+PgCnt }
+			return (PgCnt + "05" + ppList[eval(i)])
+		}
+		else { return ""}
+	}
+	else { // get next(-) neighboring element
+		i--
+		if (i>-1) {
+			var PgCnt = i+1
+			if (PgCnt<10) { PgCnt="0"+PgCnt }
+			return (PgCnt + "05" + ppList[eval(i)])
+		}
+		else { return ""}
+	}
+}
+
+function gotoCh06Pg(Pg, whichFlag) {
+	var numElements=67
+	ppList=new Array("003","006","009","012","015","018","021","024","027","030","033","036","039","042","045","048","051","054","057","060","063","066","069","072","075","078","081","084","087","090","093","096","099","102","105","108","111","114","115","117","120","123","126","129","132","135","138","141","147","144","150","153","156","159","162","165","168","171","174","177","180","183","186","189","192","195","998")
+	if (Pg=="00") {
+		return ("01" + "06" + ppList[eval(0)])
+	}
+	if (Pg=="999") {
+		return (getNumOfPages("06") + "06" + ppList[eval(numElements-2)])
+	}
+
+	for (var i=0; i<numElements; i++) { if (ppList[i]==Pg) { break; } }
+
+	if (whichFlag==0) { // get next(+) neighboring element
+		i++
+		if (i<numElements) {
+			var PgCnt = i+1
+			if (PgCnt<10) { PgCnt="0"+PgCnt }
+			return (PgCnt + "06" + ppList[eval(i)])
+		}
+		else { return ""}
+	}
+	else { // get next(-) neighboring element
+		i--
+		if (i>-1) {
+			var PgCnt = i+1
+			if (PgCnt<10) { PgCnt="0"+PgCnt }
+			return (PgCnt + "06" + ppList[eval(i)])
+		}
+		else { return ""}
+	}
+}
+
+
+function gotoCh07Pg(Pg, whichFlag) {
+	var numElements=69
+	ppList=new Array("003","006","009","021","012","015","018","019","024","027","030","033","036","039","042","045","048","051","054","057","060","061","063","066","069","072","073","075","078","081","084","087","088","090","093","096","099","102","105","108","109","111","114","117","120","123","124","126","127","129","132","135","138","141","144","147","150","153","156","159","162","165","168","171","174","177","180","183","998")
+	if (Pg=="00") {
+		return ("01" + "07" + ppList[eval(0)])
+	}
+	if (Pg=="999") {
+		return (getNumOfPages("07") + "07" + ppList[eval(numElements-2)])
+	}
+
+	for (var i=0; i<numElements; i++) { if (ppList[i]==Pg) { break; } }
+
+	if (whichFlag==0) { // get next(+) neighboring element
+		i++
+		if (i<numElements) {
+			var PgCnt = i+1
+			if (PgCnt<10) { PgCnt="0"+PgCnt }
+			return (PgCnt + "07" + ppList[eval(i)])
+		}
+		else { return ""}
+	}
+	else { // get next(-) neighboring element
+		i--
+		if (i>-1) {
+			var PgCnt = i+1
+			if (PgCnt<10) { PgCnt="0"+PgCnt }
+			return (PgCnt + "07" + ppList[eval(i)])
+		}
+		else { return ""}
+	}
+}
+
+function gotoCh08Pg(Pg, whichFlag) {
+	var numElements=31
+	ppList=new Array("003","006","009","012","015","018","021","024","027","030","031","032","033","036","037","038","039","042","045","048","051","054","057","060","063","066","069","072","075","078","998")
+	if (Pg=="00") {
+		return ("01" + "08" + ppList[eval(0)])
+	}
+	if (Pg=="999") {
+		return (getNumOfPages("08") + "08" + ppList[eval(numElements-2)])
+	}
+
+	for (var i=0; i<numElements; i++) { if (ppList[i]==Pg) { break; } }
+
+	if (whichFlag==0) { // get next(+) neighboring element
+		i++
+		if (i<numElements) {
+			var PgCnt = i+1
+			if (PgCnt<10) { PgCnt="0"+PgCnt }
+			return (PgCnt + "08" + ppList[eval(i)])
+		}
+		else { return ""}
+	}
+	else { // get next(-) neighboring element
+		i--
+		if (i>-1) {
+			var PgCnt = i+1
+			if (PgCnt<10) { PgCnt="0"+PgCnt }
+			return (PgCnt + "08" + ppList[eval(i)])
+		}
+		else { return ""}
+	}
+}
+
+function gotoCh09Pg(Pg, whichFlag) {
+	var numElements=34
+	ppList=new Array("003","006","009","012","015","018","021","024","027","030","033","036","039","042","045","048","051","054","057","060","063","066","069","072","075","078","081","084","087","090","093","096","099","998")
+	if (Pg=="00") {
+		return ("01" + "09" + ppList[eval(0)])
+	}
+	if (Pg=="999") {
+		return (getNumOfPages("09") + "09" + ppList[eval(numElements-2)])
+	}
+
+	for (var i=0; i<numElements; i++) { if (ppList[i]==Pg) { break; } }
+
+	if (whichFlag==0) { // get next(+) neighboring element
+		i++
+		if (i<numElements) {
+			var PgCnt = i+1
+			if (PgCnt<10) { PgCnt="0"+PgCnt }
+			return (PgCnt + "09" + ppList[eval(i)])
+		}
+		else { return ""}
+	}
+	else { // get next(-) neighboring element
+		i--
+		if (i>-1) {
+			var PgCnt = i+1
+			if (PgCnt<10) { PgCnt="0"+PgCnt }
+			return (PgCnt + "09" + ppList[eval(i)])
+		}
+		else { return ""}
+	}
+}
+
+
+function writeHeader(newImg, Ch, Pg, NumOfPages) {
+	frames[0].document.open()
+	frames[0].document.write()
+	if (Ch >= "00" && Ch < "10") {Ch = Ch.substring(1,2)}
+	if (eval(Pg) > 0 && eval(Pg) < 10) {Pg = Pg.substring(1,2)}
+	if (NumOfPages > "00" && NumOfPages < "10") {NumOfPages = NumOfPages.substring(1,2)}
+	if (eval(Ch) > -1) {
+		var msg = "<HTML><HEAD><TITLE>HEADER</TITLE></HEAD><BODY "
+		msg+= "BACKGROUND=" + "\"" + newImg + "\">"
+		if (eval(Ch) > 0) { msg+= "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Chapter ".fontsize(2) + Ch.fontsize(2) + "</b><br>" }
+		else { msg+= "<br>&nbsp;&nbsp;&nbsp;<b>Introduction ".fontsize(2) + "</b><br>" }
+		msg+= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + Pg.fontsize(2) + " of ".fontsize(2) + NumOfPages.fontsize(2)
+		msg+= "<FONT SIZE=\"2\">"
+		msg+= "</BODY></HTML>"
+	}
+	else	{
+		var msg = "<HTML><HEAD><TITLE>HEADER</TITLE></HEAD><BODY>"
+		msg+= "<IMG SRC="
+		msg+= "\"" + newImg + "\">"
+		msg+= "<FONT SIZE=\"2\">"
+		msg+= "</BODY></HTML>"
+	}
+	frames[0].document.write (msg)
+	frames[0].document.close()
+}
+
+function getNumOfPages (Chapter) {
+	if (Chapter=="00") { return ("06"); }
+	if (Chapter=="01") { return ("61"); }
+	if (Chapter=="02") { return ("46"); }
+	if (Chapter=="03") { return ("46"); }
+	if (Chapter=="04") { return ("48"); }
+	if (Chapter=="05") { return ("63"); }
+	if (Chapter=="06") { return ("66"); }
+	if (Chapter=="07") { return ("68"); }
+	if (Chapter=="08") { return ("30"); }
+	if (Chapter=="09") { return ("33"); }
+	return null;
+}
+
+function showStatus(msg) {
+	parent.window.status = msg
+	return true
+}
+
+
+function getCookieData(label) {
+	var labelLen = label.length
+	var cLen = document.cookie.length
+	var i = 0
+//
+	if (label == "VISDCRUMB") { return "jws" }
+	if (label == "VISDCOOKIE") { return "jws" }
+//	return "OK"	
+//
+	while (i < cLen) {
+		var j = i + labelLen
+		if (document.cookie.substring(i,j) == label) {
+			var cEnd = document.cookie.indexOf(";",j)
+			if (cEnd == -1) { cEnd = document.cookie.length }
+			return DecodeSC(unescape(document.cookie.substring(j,cEnd)))
+		}
+		i++
+	}
+	return ""
+}
+
+
+function EncodeSC(i) {
+	var sTemp = ""
+	var sLen = i.length
+	//alert (sLen)
+	for (j = 0; j < sLen; j++) {
+		x = i.substring(j,j+1)
+		if (x == ";") x = "â" //terminal character map 7,3
+		if (x == "%") x = "õ" //terminal character map 7,22
+		sTemp = sTemp + x
+	}
+	return sTemp
+}
+
+function DecodeSC(i) {
+	var sTemp = ""
+	var sLen = i.length
+	for (j = 0; j < sLen; j++) {
+		x = i.substring(j,j+1)
+		if (x == "â") x = ";"
+		if (x == "õ") x = "%"
+		sTemp = sTemp + x
+	}
+	return sTemp
+}
+
+
+	</script>
+
+	</head>
+
+	<frameset rows="72,*" border="0" frameborder="NO">
+		<frame name="Vheader" src="header.htm" marginwidth="0" marginheight="0" noresize scrolling="NO">
+		<frameset cols="108,*">
+			<frame name="VnavbarT" src="navbarT.htm" marginwidth="0" marginheight="0" noresize scrolling="NO">
+			<frame name="Vcontent" src="toc.htm">
+		</frameset>
+	</frameset>
+
+	<body>
+	</body>
+
+</html>

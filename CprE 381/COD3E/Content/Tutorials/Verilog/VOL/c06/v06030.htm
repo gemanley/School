@@ -1,0 +1,44 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="235"><img src="images/v0610g1.gif" height="229" width="235"></td>
+				<td width="365">It is often useful to be able to override the normal operation of a model in order to temporarily fix a problem, or to cause a behavior that does not yet have a physical realization. The Quasi-Continuous Assign, or <a href="javascript:parent.goGlossHash('#qca')"><font color="#B22222">QCA</font></a>, is used for these purposes.
+					<p>For example, you may know that you want the output of a flip-flop to be high for 2 cycles after the occurrence of a reference signal, but you haven't yet designed the logic to make that happen. The following would allow you to model that behavior:</p>
+					<p></p>
+					<pre>
+
+    module test;
+        ...
+        DFF dff1 (Q, D, clk);
+        ...
+        always @(posedge ref)
+            begin
+                assign Q = 1;
+                repeat (2)
+                    @(posedge clk) ;
+                deassign Q; 
+            end
+        ...
+    end
+</pre>
+					<p>Quasi-continuous assign is a procedural assignment statement that acts like a continuous assignment. There are two forms of QCA,</p>
+					<p></p>
+					<ul>
+						<li>Procedural Assign
+						<li>Force
+					</ul>
+					<p>They can both be used with cross-module references or with local identifiers for overriding the normally assigned value of the assigned identifier.</p>
+				</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

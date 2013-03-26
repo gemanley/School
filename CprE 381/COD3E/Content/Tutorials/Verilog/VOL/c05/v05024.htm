@@ -1,0 +1,47 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">Event controls indicate that execution of the attached statement must wait until the specified event occurs.
+					<p><tt></tt></p>
+					<dl>
+						<dd><b>@event_expression</b>
+							<p></p>
+					</dl>
+					</TT><a href="javascript:parent.goGlossHash('#eventexp')"><font color="#B22222">Event expressions</font></a> may be one of the following
+					<p><tt></tt></p>
+					<dl>
+						<dd>event_identifier<br>
+						<dd>net_or_register<br>
+						<dd>posedge net_or_register<br>
+						<dd>negedge net_or_register<br>
+						<dd>event_expression <b>or</b> event_expression
+							<p></p>
+					</dl>
+					</TT>Event controls have no analog in declarative code - they are only used in procedural code.
+					<p>Examples:</p>
+					<p></p>
+					<pre> 
+	wire clk;
+	reg state, newstate;
+	event e1;
+	...
+	@e1			a = f(x);
+	@state			out = g(state);
+	@(posedge clk)		x = x + 1;
+	@(negedge state)	;
+	@(e1 or posedge clk or newstate)	state = newstate;
+</pre>
+					Note the use of parentheses in the above examples. It is necessary to use parentheses whenever the event expression contains any white space. So, to use <a href="javascript:parent.goGlossHash('#posedge')"><font color="#B22222">posedge</font></a> or <a href="javascript:parent.goGlossHash('#negedge')"><font color="#B22222">negedge</font></a>, you must use parentheses, as well as whenever the event expression consists of more than one event linked with &quot;<font size="3" face="courier">or</font>&quot;.</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

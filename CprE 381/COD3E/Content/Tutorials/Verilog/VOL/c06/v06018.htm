@@ -1,0 +1,43 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">Cross-module references are particularly straightforward when they are downward references. That is, if the identifier being referenced is below the reference point in the hierarchy, it can be referenced beginning with the instance it is contained in.
+					<p>In our previous example, if the reference point was in:</p>
+					<p></p>
+					<pre>
+        top.childB.node1
+</pre>
+					<p>then:</p>
+					<p></p>
+					<pre>
+        top.childB.node1.leaf2.x
+</pre>
+					<p>could be simply referenced as:</p>
+					<p></p>
+					<pre>
+        leaf2.x
+</pre>
+					<p>Note that in our previous example, the top module could have been written:</p>
+					<p></p>
+					<pre>
+    module top;
+        wire x = 0;
+        wire y = childB.b;      // a downward reference
+        type1 childA();
+        type2 childB();
+    endmodule
+</pre>
+					The rule is that the XMR begins with an instance name and proceeds downward. The instance name is found in the module which contains the reference. Downward references are always unambiguous and well-defined.</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

@@ -1,0 +1,88 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td><b>Assuming a Verilog routine named $countval was associated with the C routine GetCounter, what code fragment would you add to a model in order to print an error if reset was 1 for more than 100 cycles?</b>
+					<p></p>
+				</td>
+			</tr>
+		</table>
+		<p></p>
+		<form>
+			<table width="550">
+				<tr>
+					<td valign="TOP" width="50"><input onclick="parent.setValue(0,0)" type="radio" name="A" value="A">1.</td>
+					<td width="450">
+						<pre>
+ always @(posedge clock)
+   if (reset) begin 
+     $positiveEdge; 
+     if ($countval &gt; 100) $display(&quot;***reset error***&quot;); 
+   end
+   else
+     $resetCount;
+&nbsp;
+</pre>
+					</td>
+				</tr>
+				<tr>
+					<td valign="TOP" width="50"><input onclick="parent.setValue(0,1)" type="radio" name="A" value="B">2.</td>
+					<td width="450">
+						<pre>
+ always @(reset or posedge clock)
+   if (reset)
+     $positiveEdge; 
+   else
+     $resetCount;
+ initial
+   if ($countval &gt; 100) $display (&quot;***reset error***&quot;);
+&nbsp;
+</pre>
+					</td>
+				</tr>
+				<tr>
+					<td valign="TOP" width="50"><input onclick="parent.setValue(0,2)" type="radio" name="A" value="A">3.</td>
+					<td width="450">
+						<pre>
+ always @( posedge clock)
+   $positiveEdge; 
+ always @(negedge reset)
+   $resetCount;
+ always @($countval)
+   if ($countval &gt; 100) $display (&quot;***reset error***&quot;);
+&nbsp;
+</pre>
+					</td>
+				</tr>
+				<tr>
+					<td valign="TOP" width="50"><input onclick="parent.setValue(0,3)" type="radio" name="A" value="A">4.</td>
+					<td width="450">
+						<pre>
+ always @(reset)
+   if (clock) begin 
+     $positiveEdge; 
+     if ($countval &gt; 100) $display (&quot;***reset error***&quot;); 
+   end
+   else
+     $resetCount;
+&nbsp;
+</pre>
+					</td>
+				</tr>
+				<tr>
+					<td valign="TOP" width="50"><input onclick="parent.setValue(0,4)" type="radio" name="A" value="A">5.</td>
+					<td width="450">none of the above</td>
+				</tr>
+			</table>
+		</form>
+		<b>Click Done to check your answer.</b>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href="javascript:parent.checkAnswer(0,0)"><img src="images/vdone.gif" height="39" width="74" border="0"></a></p>
+	</body>
+
+</html>

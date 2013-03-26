@@ -1,0 +1,63 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>Given
+					<pre>
+	parameter p1 = 4;
+	reg [4:0] x;
+	wire [3:2] y;
+	reg z;
+</pre>
+					<hr>
+					<b>Classify these expressions as &quot;constant&quot;, &quot;scalar&quot;, &quot;delay&quot;, &quot;fixed-size&quot;, or &quot;non-fixed-size&quot;:</b>
+					<p></p>
+				</td>
+			</tr>
+		</table>
+		<table width="260">
+			<tr>
+				<form>
+					<td width="160">1. p1-1</td>
+					<td width="100"><input type="TEXT" size="15" maxlength="15" onchange="parent.setValue(0,this.value)"></td>
+				</form>
+			</tr>
+			<tr>
+				<td width="160">2. #x</td>
+				<td width="100"><input type="TEXT" size="15" maxlength="15" onchange="parent.setValue(1,this.value)"></td>
+			</tr>
+			<tr>
+				<td width="160">3. x != p1</td>
+				<td width="100"><input type="TEXT" size="15" maxlength="15" onchange="parent.setValue(2,this.value)"></td>
+			</tr>
+			<tr>
+				<td width="160">4. z</td>
+				<td width="100"><input type="TEXT" size="15" maxlength="15" onchange="parent.setValue(3,this.value)"></td>
+			</tr>
+			<tr>
+				<td width="160">5. x*y</td>
+				<td width="100"><input type="TEXT" size="15" maxlength="15" onchange="parent.setValue(4,this.value)"></td>
+			</tr>
+			<tr>
+				<td width="160">6. x &amp; y</td>
+				<td width="100"><input type="TEXT" size="15" maxlength="15" onchange="parent.setValue(5,this.value)"></td>
+			</tr>
+			</FORM>
+		</table>
+		<p></p>
+		<table width="600">
+			<tr>
+				<td><b>Click Done to check your answer.</b>
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:parent.checkAnswerMT(6,'constant,delay,scalar,scalar,non-fixed-size,fixed-size','#answer')"><img src="images/vdone.gif" height="39" width="74" border="0"></a></p>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

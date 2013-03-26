@@ -1,0 +1,20 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="640" cellpadding="10">
+			<tr>Signal names in the instance port list are matched up left-to-right with signal names in the module definition port list. If you want to omit a port in the instance list, simply use consecutive commas. E.g.,
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<tt>foo f1 (source1, , sink1, , bus);</tt></p>
+				<p>would leave the second input port and the second output ports unconnected. Verilog imposes no restrictions on the order of ports in a port list in the definition. That is, inputs, outputs, and inouts can be mixed in any order in the definition. In the instantiation, however, the order must match the definition. Any number can be omitted in the instantiation. It does not make sense, however, to omit a port in the module definition.</p>
+				<p></p>
+				<center>
+					<img src="images/v0113g1.gif" height="137" width="404"></center>
+			</tr>
+		</table>
+	</body>
+
+</html>

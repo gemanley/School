@@ -1,0 +1,34 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">The point of this example is to show how a user routine can inspect the structure of a model. This routine (power) gets called with a module instance name as the argument, and it uses that to find out how many drivers and how many loads each net in the module has.
+					<p>New utility routines used:</p>
+					<p>acc_next_net ( module, net )<br>
+						Returns a handle to the next net in the module instance. All the nets in the module are ordered (somewhat arbitrarily), so &quot;next&quot; means &quot;the one after this one&quot;, where &quot;this one&quot; is the one whose handle is the second parameter.</p>
+					<p>acc_next_driver ( net, driver )<br>
+						Returns a handle to the next driver for this net. Again, the drivers of each net are ordered.</p>
+					<p>acc_next_load ( net, load )<br>
+						Returns the next load on this net. This is the fan-out of the net.</p>
+					<p>acc_fetch_fullname ( net )<br>
+						Returns the full hierarchical name of the object.</p>
+				</td>
+			</tr>
+		</table>
+		<table width="600">
+			<tr>
+				<td align="center" width="150"><a href="a09072.htm"><img src="images/vverilog.gif" height="39" width="139" border="0"></a></td>
+				<td align="center" width="150"><a href="b09072.htm"><img src="images/vpli.gif" height="39" width="136" border="0"></a></td>
+				<td align="center" width="190"><a href="c09072.htm"><img src="images/vuser.gif" height="39" width="177" border="0"></a></td>
+				<td align="center" width="110"><a href="d09072.htm"><img src="images/vresults.gif" height="39" width="87" border="0"></a></td>
+			</tr>
+		</table>
+	</body>
+
+</html>

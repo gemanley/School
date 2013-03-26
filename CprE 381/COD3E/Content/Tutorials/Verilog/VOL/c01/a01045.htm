@@ -1,0 +1,34 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body onload="parent.initBtn0()" bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td>What is wrong with the following module definition?
+					<p></p>
+					<pre>
+	module A (p1, p2, , p4);
+		input p1, p2;
+		output p4;
+		...
+	endmodule
+</pre>
+					<hr>
+					<form>
+						a. <input type="radio" name="A" value="A">the missing port must be declared<br>
+						b. <input type="radio" name="A" value="B"><font color="#4B0082"><b>missing ports are not allowed in module definitions</b></font><br>
+						c. <input type="radio" name="A" value="C">there must be at least one inout port<br>
+						d. <input type="radio" name="A" value="D">nothing is wrong
+						<p></p>
+					</form>
+				</td>
+				<td><b>That's right. Missing ports are not allowed in module definitions.</b></td>
+			</tr>
+		</table>
+	</body>
+
+</html>

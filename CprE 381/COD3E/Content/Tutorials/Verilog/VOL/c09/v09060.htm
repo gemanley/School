@@ -1,0 +1,34 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">This example is similar to the previous fetch/set example. The register which is to be modified is named &quot;longReg&quot;, and it is a vector of arbitrary bit width. The user-defined task takes two parameters, a value and a word number. The word number (32-bit words) is used to decide which bits of longReg to update with the value.
+					<p>New utility routines used:</p>
+					<p>acc_handle_object ( &quot;longReg&quot; )<br>
+						Function returns a handle to the named object. The name is either fully-qualified or relative, starting at the current PLI scope.</p>
+					<p>acc_fetch_size (longRegHandle)<br>
+						Returns the size of the object in number of bits.</p>
+					<p>acc_fetch_value ( longRegHandle, &quot;%%&quot;, &newValue )<br>
+						Returns the logic or strength value of the object. The result is returned either as a string or, as in this case, in a structure.</p>
+					<p>tf_warning ( &quot;word parameter is out of range!&quot; )<br>
+						Print a warning message.</p>
+				</td>
+			</tr>
+		</table>
+		<table width="600">
+			<tr>
+				<td align="center" width="150"><a href="a09060.htm"><img src="images/vverilog.gif" height="39" width="139" border="0"></a></td>
+				<td align="center" width="150"><a href="b09060.htm"><img src="images/vpli.gif" height="39" width="136" border="0"></a></td>
+				<td align="center" width="190"><a href="c09060.htm"><img src="images/vuser.gif" height="39" width="177" border="0"></a></td>
+				<td align="center" width="110"><a href="d09060.htm"><img src="images/vresults.gif" height="39" width="87" border="0"></a></td>
+			</tr>
+		</table>
+	</body>
+
+</html>

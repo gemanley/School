@@ -1,0 +1,80 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+		<style type="text/css" media="screen"><!--
+#answer  { visibility: hidden; position: absolute }
+--></style>
+		<csactions>
+			<csaction name="19B58EE22" class="ShowHide" type="onevent" val0="answer" val1="1"></csaction>
+		</csactions>
+		<csscriptdict import>
+			<script type="text/javascript" src="../../../../resources/CSScriptLib.js"></script>
+		</csscriptdict>
+		<csactiondict>
+			<script type="text/javascript"><!--
+CSAct[/*CMP*/ '19B58EE22'] = new Array(CSShowHide,/*CMP*/ 'answer',1);
+
+// --></script>
+		</csactiondict>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td><b>Rewrite the following model as a 0-delay model where all signals change at the rising edge of clk.</b>
+					<p></p>
+				</td>
+			</tr>
+		</table>
+		<table width="600" cellpadding="10">
+			<tr>
+				<td>
+					<tt><textarea name="SCRIPT1" rows="16" cols="65">
+module autom (out, in, clk);
+	output [3:0] out;
+	input in;
+	input clk;
+	reg [1:0] state;
+
+	initial state = 0;
+	assign #1 out = state * 5;
+	always @(posedge clk)
+		case (state)
+	0:		state = in ? 1 : 0;
+	1:		state = in ? 2 : 1;
+	2:		state = in ? 0 : 2;
+		endcase
+endmodule
+
+</textarea></tt>
+				</td>
+			</tr>
+		</table>
+<A HREF="javascript:parent.gotoScreen('07','088',0)"><img src="images/vreset.gif" border="0"></A>
+<A HREF="JavaScript:parent.dispWindow('v07088r1.htm','Test')"><img src="images/vtest.gif" width="124" height="38" border="0"></a>
+<center>
+			<a onclick="CSAction(new Array(/*CMP*/'19B58EE22'));return CSClickReturn()" href="#" csclick="19B58EE22"><img src="images/vanswer.gif" width="87" height="39" border="0"></a></center>
+		<div id="answer">
+			<pre>
+module autom (out, in, clk);
+	output [3:0] out;
+	input in;
+	input clk;
+	reg [1:0] state;
+
+	initial state = 0;
+	assign out = state * 5;
+	always @(posedge clk)
+		case (state)
+	0:		state &lt;= in ? 1 : 0; 
+	1:		state &lt;= in ? 2 : 1;
+	2:		state &lt;= in ? 0 : 2;
+		endcase
+endmodule
+</pre>
+		</div>
+	</body>
+
+</html>

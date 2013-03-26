@@ -1,0 +1,38 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			Because Verilog-XL is an interpreter, it has its compiler and its simulator all together in one executable file. Consequently, the hello.o object file must be linked in, along with the new veriuser.o. Cadence has instructions on how to perform this link (you can run a program they supply called vconfig which will produce a sample link command). It is usually best to run vconfig once, put the output into a make file, and then modify the make file as needed for your routines.
+			<p>The compile/link command would look like this:</p>
+			<p></p>
+			<pre>
+    cc -o verilog_custom                            \
+        $(VERILOG_HOME)/verilog/lib/vlog.o          \
+        $(VERILOG_HOME)/verilog/lib/omnitasks.o     \
+        $(VERILOG_HOME)/verilog/lib/env_vxl.o       \
+        $(VERILOG_HOME)/verilog/lib/cw_vlog.o       \
+        $(VERILOG_HOME)/verilog/lib/shm_vlog.o      \
+        hello_veriuser.c                            \
+        hello.c                                     \
+        $(VERILOG_HOME)/virtuos9404/lib/virtuos.a   \
+        -I$(VERILOG_HOME)/verilog/include           \
+        -L$(VERILOG_HOME)/verilog/lib               \
+        -lsdfa -lsdf                                \
+        $(VERILOG_HOME)/liib/libcman.a              \
+        -L/usr/openwin/lib                          \
+        -lxt -lx11 -lvoids -lm                      \
+        $(VERILOG_HOME)/lib/libansi.a               \
+        -L$(VERILOG_HOME)/cxx-3.0.1/External/lib    \
+        -lc
+</pre>
+			The important point about this is that you have to link all of Verilog-XL with your routines. Then, you run the simulation and Verilog-XL can make the connection.
+		</table>
+	</body>
+
+</html>

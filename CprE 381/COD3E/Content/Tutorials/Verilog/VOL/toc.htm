@@ -1,0 +1,88 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title>TOC</title>
+	</head>
+
+	<script language="JavaScript">
+function gotoCOV(Ch) {
+	newLocation = parent.appPath() + "c" + Ch + "\/v" + Ch + "cov" + ".htm";
+	newLocationNB = "navbarCO.htm";
+	var imgName="images/m0hdco" + Ch + ".gif";
+	parent.writeHeader(imgName, -1, 0, 0);
+	var framenames = "";
+	for ( i=0; i<parent.frames.length; i++ ) framenames = framenames+parent.frames[i].name+', ';
+	// alert(parent.frames[2].name+' = '+newLocation);
+	parent.frames[2].location.href = newLocation;
+	// alert(parent.frames[1].name+' = '+newLocationNB);
+	parent.frames[1].location.href = newLocationNB;
+}
+
+function gotoCOVr(Ch) {
+	var newLocation =  parent.appPath() + "c" + Ch + "\/v" + Ch + "cor" + ".htm"
+	var newLocationNB = "navbaCOT.htm"
+	var imgName="images/m0hdco" + Ch + ".gif"
+	parent.writeHeader(imgName, -1, 0, 0)
+	parent.frames[2].location.href = newLocation
+	parent.frames[1].location.href = newLocationNB
+}
+
+</script>
+
+	<body bgcolor="#FFFFFF">
+		<dl>
+			<dt><font face="Arial"><b><a href="javascript:gotoCOV('00')">How to Take This Course<br>
+						</a></b><br>
+				</font>
+			<dt><font face="Arial"><b><a href="javascript:gotoCOV('01')">CHAPTER 1</a> - Introduction, Hierarchy, and Modelling Structures</b><br>
+					<br>
+				</font>
+			<dd>This section provides background about the history of Verilog. It also introduces some of the basic contructs of Verilog models.
+				<p></p>
+			<dt><font face="Arial"><b><a href="javascript:gotoCOV('02')">CHAPTER 2</a> - Syntax, Lexical Conventions, Data Types, and Memories</b><br>
+					<br>
+				</font>
+			<dd>This section addresses the syntax and semantics of the core features of the language.
+				<p></p>
+			<dt><font face="Arial"><b><a href="javascript:gotoCOV('03')">CHAPTER 3</a> - Expressions and Simulation Mechanics</b><br>
+					<br>
+				</font>
+			<dd>This section covers the components of Verilog expressions and the order of execution in Verilog models.
+				<p></p>
+			<dt><font face="Arial"><b><a href="javascript:gotoCOV('04')">CHAPTER 4</a> - Gate Level Modelling</b><br>
+					<br>
+				</font>
+			<dd>This section covers gate level modelling constructs. It covers the semantics of Verilog primitives, port expressions, delays, strengths, and user-defined primitives.
+				<p></p>
+			<dt><font face="Arial"><b><a href="javascript:gotoCOV('05')">CHAPTER 5</a> - Behavioral and Register Transfer Level Modelling</b><br>
+					<br>
+				</font>
+			<dd>This section covers the remainder of the language basics: assignments of all kinds, control constructs, time and event controls, tasks and functions, and examples.
+				<p></p>
+			<dt><font face="Arial"><b><a href="javascript:gotoCOV('06')">CHAPTER 6</a> - Advanced Features</b><br>
+					<br>
+				</font>
+			<dd>Advanced features include all the details and less common features of the language. This includes cross-module references, quasi-continuous assigns, declared events, disable, and timing features, including timescales and specify blocks.
+				<p></p>
+			<dt><font face="Arial"><b><a href="javascript:gotoCOV('07')">CHAPTER 7</a> - Coding Style</b><br>
+					<br>
+				</font>
+			<dd>This section covers Verilog coding style. There are many different ways to write Verilog code, and some are better than others. It covers modelling clocks, state machines, pipelines, 0-delay code, and race conditions, as well as efficient coding techniques.
+				<p></p>
+			<dt><font face="Arial"><b><a href="javascript:gotoCOV('08')">CHAPTER 8</a> - Debugging Verilog Models</b><br>
+					<br>
+				</font>
+			<dd>This section discusses debugging techniques. It is simulator-independent as much as possible, as it covers broadly applicable debugging methods. These include setting breakpoints interactively, monitoring, using the CLI, using waveform viewers, and using $save.
+				<p></p>
+			<dt><font face="Arial"><b><a href="javascript:gotoCOV('09')">CHAPTER 9</a> - The Programming Language Interface</b><br>
+					<br>
+				</font>
+			<dd>This section is an introduction to the PLI. It covers what the PLI is used for, how user routines are connected to a Verilog model, passing information to and from the model and user routine, the TF routines, and the ACC routines. This section covers everything needed to write a PLI routine and link it into a simulator.
+		</dl>
+		<br>
+		<br>
+		<font size="2">Copyright &copy; 1999, 2001, 2002 <i>John Sanguinetti.</i> All rights reserved. </font>
+	</body>
+
+</html>

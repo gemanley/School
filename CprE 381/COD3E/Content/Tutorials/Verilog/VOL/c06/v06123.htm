@@ -1,0 +1,36 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">PATHPULSE$ is a special specparam which allows you to specify a range of pulse widths which will be allowed to propagate from the start to the end of a path.
+					<p>In Verilog terminology, a pulse is a series of two transitions on a scalar which occur in a shorter period of time than the delay. That is, if there is a 10 unit delay on a <a href="javascript:parent.goGlossHash('#modulepath')"><font color="#B22222">module path</font></a></font> from x to y, a pulse would be a rise and fall (or fall and rise) which took place in less than 10 units. The normal case is that pulses are rejected (see inertial delay in Chapter 4). That is, the output does not change if the input changes faster than the delay value.</p>
+					<p>With the PATHPULSE$ specparam, you can set a <b><a href="javascript:parent.goGlossHash('#rejlimit')"><font color="#B22222">reject limit</font></a></b> and an <a href="javascript:parent.goGlossHash('#errorlimit')"><font color="#B22222">error limit</font></a> for any path within the module. (Paths begin at an input port and end at an output port - see module paths later in this chapter).</p>
+					<p>reject limit<br>
+					</p>
+					<blockquote>
+						This is a time value which sets a minimum length for a pulse. Any pulse less than this limit will not propagate to the output, but will be ignored.</blockquote>
+					<p>error limit<br>
+					</p>
+					<blockquote>
+						This is a time value which sets a length for a pulse below which the output value will be x. If the pulse is greater than the reject limit but less than the error limit, the output will be x. If it is greater than the error limit, the output will be as normal. The error limit is optional.</blockquote>
+					<p>Pathpulse limits can be specified for all paths in the module or for specific paths. A specific path is indicated by appending the path source and sink identifiers to the PATHPULSE$ keyword, like this:</p>
+					<p></p>
+					<pre>
+        PATHPULSE$in$out
+</pre>
+					<p>where in is an input port name and out is an output port name.</p>
+					<p></p>
+					<center>
+						<a href="JavaScript:parent.dispWindow('v06123r1.htm','Example')"><img src="images/vexample.gif" height="39" width="91" border="0"></a></center>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

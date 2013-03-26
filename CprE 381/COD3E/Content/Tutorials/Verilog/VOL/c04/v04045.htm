@@ -1,0 +1,22 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">The bufif0 and bufif1 primitives are the tri-state drivers. They take two inputs, a data and a control input. Their behavior is described by the following tables:
+					<p></p>
+					<center>
+						<img src="images/v0413g1.gif" height="370" width="369"></center>
+					<p>In the above tables, the L symbol represents an output value of either 0 or x. The H symbol represents an output value of either 1 or x. In both cases the output value is an ambiguous signal (see screen 4-24) whose value is a range of signal strengths. For L, the values range from HiZ0 through the driving strength of the gate with value 0, and for H, the values range from HiZ1 through the driving strength of the gate with value 1.</p>
+					<p>For example, if the driving strength of the gate was (Weak0, Strong1), then L would have the range (We0-HiZ0) and H would have the range (HiZ1-St1). See <a href="javascript:parent.gotoScreen('04','072',1)">More on Signal Strength</a> later in this chapter for the discussion of signal strength ranges.</p>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

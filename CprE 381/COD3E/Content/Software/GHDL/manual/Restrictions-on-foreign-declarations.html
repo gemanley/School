@@ -1,0 +1,36 @@
+<html lang="en">
+
+	<head>
+		<title>GHDL guide</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+		<meta name="description" content="GHDL guide">
+		<meta name="generator" content="makeinfo 4.1">
+		<link href="http://texinfo.org/" rel="generator-home">
+		<link href="../../../resources/base_style.css" rel="stylesheet" type="text/css" media="all">
+	</head>
+
+	<body>
+		<p>Node:<a name="Restrictions%20on%20foreign%20declarations">Restrictions on foreign declarations</a>, Next:<a href="Linking-with-foreign-object-files.html#Linking%20with%20foreign%20object%20files" rel="next">Linking with foreign object files</a>, Previous:<a href="Interfacing-to-other-languages.html#Interfacing%20to%20other%20languages" rel="previous">Interfacing to other languages</a>, Up:<a href="Interfacing-to-other-languages.html#Interfacing%20to%20other%20languages" rel="up">Interfacing to other languages</a></p>
+		<hr>
+		<br>
+		<h4>Restrictions on foreign declarations</h4>
+		<p>Any subprogram can be imported. GHDL puts no restrictions on foreign subprograms. However, the representation of a type or of an interface in a foreign language may be obscur. Most of non-composite types are easily imported:</p>
+		<dl>
+			<dt><code>integer types</code>
+			<dd>They are represented on a 32 bits word. This generally corresponds to <code>int</code> for <code>C</code> or <code>Integer</code> for <code>Ada</code>.<br>
+			<dt><code>physical types</code>
+			<dd>They are represented on a 64 bits word. This generally corresponds to the <code>long long</code> for <code>C</code> or <code>Long_Long_Integer</code> for <code>Ada</code>.<br>
+			<dt><code>floating point types</code>
+			<dd>They are represented on a 64 bits floating point word. This generally corresponds to <code>double</code> for <code>C</code> or <code>Long_Float</code> for <code>Ada</code>.<br>
+			<dt><code>enumeration types</code>
+			<dd>They are represented on 8 bits or 32 bits word, if the number of literals is greater than 256. There is no corresponding C types, since arguments are not promoted.
+		</dl>
+		<p>Non-composite types are passed by value. For the <code>in</code> mode, this corresponds to the <code>C</code> or <code>Ada</code> mechanism. The <code>out</code> and <code>inout</code> interfaces of non-composite types are gathered in a record and this record is passed by reference as the first argument to the subprogram. As a consequence, you shouldn't use <code>in</code> and <code>inout</code> modes in foreign subprograms, since they are not portable.</p>
+		<p>Records are represented like a <code>C</code> structure and are passed by reference to subprograms.</p>
+		<p>Arrays with static bounds are represented like a <code>C</code> array, whose length is the number of elements, and are passed by reference to subprograms.</p>
+		<p>Unconstrained array are represented by a fat pointer. Do not use unconstrained arrays in foreign subprograms.</p>
+		<p>Accesses to an unconstrained array is a fat pointer. Other accesses corresponds a an address and are passed to a subprogram like other non-composite types.</p>
+		<p>Files are represented by a 32 bits word, which corresponds to an index in a table.</p>
+	</body>
+
+</html>

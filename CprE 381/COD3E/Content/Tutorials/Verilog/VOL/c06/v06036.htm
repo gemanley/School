@@ -1,0 +1,30 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">The force quasi-continuous assign statement has the same syntax as assign, but uses the force keyword:
+					<p></p>
+					<pre> 
+        force lhs = rhs;
+</pre>
+					<p>The primary difference between force and the assign QCA is that the lhs of a force can be either a register or a net. If it is a register, then force acts very much like assign, the only difference being that force has higher precedence than assign.</p>
+					<p>If the lhs of the force is a net, then when the force is removed, the net reverts back to its &quot;normal&quot; value immediately, unlike a register, which will not change until the next procedural assignment.</p>
+					<p>The lhs may be a bit-select or part-select of a net, but not of a register.</p>
+					<p>The <a href="javascript:parent.goGlossHash('#relstate')"><font color="#B22222">release statement</font></a></font> is used to remove a force condition from a register or net:</p>
+					<p></p>
+					<pre>
+        release lhs; 
+</pre>
+				</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

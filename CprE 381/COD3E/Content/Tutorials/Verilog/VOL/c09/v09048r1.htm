@@ -1,0 +1,62 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			Some of the ACC routines are:
+			<dl>
+				<dt>acc_fetch_fullname ( net )
+				<dd>Returns the full hierarchical name of the object.
+					<p></p>
+				<dt>acc_fetch_name ( handle )
+				<dd>Returns the name of the given object.
+					<p></p>
+				<dt>acc_fetch_size ( handle )
+				<dd>Returns the size of the object in number of bits.
+					<p></p>
+				<dt>acc_fetch_tfarg ( narg )
+				<dd>Function returns the value of the nth parameter to the user-defined task.
+					<p></p>
+				<dt>acc_fetch_type ( handle )
+				<dd>Returns the type of the object. The return value is an int.
+					<p></p>
+				<dt>acc_fetch_type_str ( arg1type) )
+				<dd>Returns the type as a string. The argument is the type as returned by acc_fetch_type.
+					<p></p>
+				<dt>acc_fetch_value ( handle, formatstring, newValue_p )
+				<dd>Returns the logic or strength value of the object. The result is returned either as a string or in a structure, depending on the format string.
+					<p></p>
+				<dt>acc_handle_by_name ( name, scope )
+				<dd>Returns a handle (32-bit quantity) to the object whose name is &quot;name&quot;. The scope parameter is a handle to a scope (module instance, task, function, or named block). A null scope handle means the name is a fully-qualified hierarchical name.
+					<p></p>
+				<dt>acc_handle_object ( name )
+				<dd>Function returns a handle to the named object. The name is either fully-qualified or relative, starting at the current PLI scope.
+					<p></p>
+				<dt>acc_handle_tfarg ( narg )
+				<dd>Returns the handle of the nth argument to the user-defined task/function.
+					<p></p>
+				<dt>acc_next_driver ( netHandle, driverHandle )
+				<dd>Returns a handle to the next driver for this net. All the drivers of each net are ordered. The next driver is determined by the driver whose handle is given as the second argument.
+					<p></p>
+				<dt>acc_next_load ( netHandle, loadHandle )
+				<dd>Returns a handle to the next load on this net (the fan-out). All the loads on each net are ordered. The next load is determined by the load whose handle is given as the second argument.
+					<p></p>
+				<dt>acc_next_net ( moduleHandle, netHandle )
+				<dd>Returns a handle to the next net in the module instance. All the nets in a module instance are ordered. The next net is determined by the net whose handle is given as the second argument.
+					<p></p>
+				<dt>acc_set_value ( anIntHandle, &newValue, &delay )
+				<dd>Set the value of the object designated by the handle to the value contained in the given structure. The delay indicates a delay before the assignment is to take place.
+					<p></p>
+				<dt>acc_vcl_add ( handle, callbackFunc, ndata, vcl_flag )
+				<dd>Adds a callback to the indicated object (either a register or net). The callback function is called whenever the object's value changes. &quot;ndata&quot; is arbitrary user-defined data passed to the callback routine. &quot;vcl_flag&quot; is a flag which indicates which type of change to be called back on.
+			</dl>
+			<p>This is only a small sampling of the ACC routines, but it includes some of the most useful. Unfortunately, there is no substitute for consulting the reference manual for the definitions of the various ACC routines.</p>
+		</table>
+	</body>
+
+</html>

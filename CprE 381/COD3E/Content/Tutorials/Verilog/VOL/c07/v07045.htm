@@ -1,0 +1,33 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td width="600">In a Mealy machine, the output logic looks very similar to that of the Moore machine, but it has an additional term for the input. It is often the case that the output logic and the nextstate logic is combined into one case statement, as was done in the State Machine example in Chapter 5.
+				<p></p>
+				<pre>
+        case (state)
+    `A:     begin
+                dout = din;
+                nextstate = din ? `C : `B;
+            end
+    `B:     begin
+                dout = ~din;
+                nextstate = din ? `B : `C;
+            end
+    `C:     begin
+                dout = din;
+                nextstate = `A;
+            end
+        endcase
+</pre>
+				Note that in the above we did not use a nextdout variable, so <tt>dout</tt> would change anytime <tt>din</tt> changed.</td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

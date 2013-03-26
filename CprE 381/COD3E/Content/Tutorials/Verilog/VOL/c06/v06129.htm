@@ -1,0 +1,22 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">Module paths consist of two parts, the path definition, and delay values assigned to the path. Module paths can be simple paths, edge-sensitive paths, or <a href="javascript:parent.goGlossHash('#statedep')"><font color="#B22222">state-dependent paths</font></a></font>. The key constraint on module paths is that they must connect input ports to output ports.
+					<p>You can define many module paths within the module, but each one must begin at an input and end at an output. You can define paths from individual bits of an input port vector to individual bits of an output port vector as well. Paths can also be qualified by edge transitions or by the local state of the module (for example, if a local reg has a particular value).</p>
+					<p>Once a path has been identified, a set of delays can be assigned to it. Delays can be assigned for each of the different possible value transitions between 0, 1, x, and z (there are 12). The delays must be constant expressions, but may be of the min:typ:max type.</p>
+					<p></p>
+					<center>
+						<img src="images/v0643g1.gif" height="237" width="487"></center>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

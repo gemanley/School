@@ -1,0 +1,48 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<b>Given the following module:</b>
+			<pre>
+module run3 (out, in, clk);
+	output out;
+	input in, clk;
+	reg [1:0] count;
+
+	assign out = count == 3;
+
+	initial count = 0;
+
+	always @(posedge clk)
+		case (count)
+	0:		count &lt;= in;
+	1:		count &lt;= in ? 2 : 0;
+	2:		count &lt;= in ? 3 : 0;
+	3:		count &lt;= in ? 3 : 0;
+		endcase
+
+endmodule
+</pre>
+			<b>In the previous screen you wrote assertion checking code fragment which can be added to module run3 which stops the simulation if count takes an x value. Will the following code fragment also produce this result?</b>
+			<pre>
+	always @(count)
+		if (count === 'bx)
+			$stop;
+</pre>
+			<hr>
+			<form>
+				<input onclick="parent.setValue(0,0)" type="radio" name="A" value="-1">1. yes, it will produce the same result<br>
+				<input onclick="parent.setValue(0,1)" type="radio" name="A" value="-1">2. no, because count could be 0x or 1x, in which case the test would be false<br>
+			</form>
+			<center>
+				<a href="javascript:parent.checkAnswer(0,0)"><img src="images/vdone.gif" height="39" width="74" border="0"></a></center>
+			</TD>
+		</table>
+	</body>
+
+</html>

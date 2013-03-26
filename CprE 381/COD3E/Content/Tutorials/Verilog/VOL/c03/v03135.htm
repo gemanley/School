@@ -1,0 +1,47 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td>Given the following module:
+					<pre>
+   module M;
+	reg clock;
+	integer x, i;
+
+	initial begin
+		x = 1;			// 1
+	#1	x = 2;			// 2
+		for (i=1; i
+						
+						
+						<4; i="i+1)" // 2a @(posedge clock) // 2b if (x="=" 4) // 3 $finish; // 4 end always @(posedge clock) begin x="x" + 1; // 5 end initial clock="0;" // 6 always #2 clock="~clock;" // 7 endmodule </PRE> <hr> </table> <form> <table width="450"> <tr> <td width="250"> 1. What is the value of x at the end of execution?</td>
+						
+						
+					</pre>
+				</td>
+				<td width="100"><input type="TEXT" size="10" maxlength="10" onchange="parent.setValue(0,this.value)"></td>
+			</tr>
+			<tr>
+				<td width="250">2. Is the value of x determinate? (Yes/No)</td>
+				<td width="100"><input type="TEXT" size="10" maxlength="10" onchange="parent.setValue(1,this.value)"></td>
+			</tr>
+			<tr>
+				<td width="250">3. What is the time at the end of execution?</td>
+				<td width="100"><input type="TEXT" size="10" maxlength="10" onchange="parent.setValue(2,this.value)"></td>
+			</tr>
+			<tr>
+				<td width="250">4. Is the value of time determinate? (Yes/No)</td>
+				<td width="100"><input type="TEXT" size="10" maxlength="10" onchange="parent.setValue(3,this.value)"></td>
+			</tr>
+		</table>
+		<p><b>Click Done to check your answer.</b></p>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="javascript:parent.checkAnswerMT(4,'4,Yes,6:10:,No','#answer')"><img src="images/vdone.gif" height="39" width="74" border="0"></a></TD></FONT></p>
+	</body>
+
+</html>

@@ -1,0 +1,30 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<FONT FACE="TIMES" SIZE="3">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">Delays specified on primitives are <a href="javascript:parent.goGlossHash('#indelays')"><font color="#B22222"><b>inertial</b> delays</font></a></font>. That is, if a second input change occurs before the first delay has expired, then the output will change only once. In the &quot;standard&quot; inertial delay, the output would look like this:
+					<p></p>
+					<center>
+						<img src="images/v0419g1.gif" height="165" width="333">
+						<p></p>
+					</center>
+					However, Verilog-XL introduced the so-called &quot;<a href="javascript:parent.goGlossHash('#xlalgorithm')"><font color="#B22222">XL algorithm</font></a></font>&quot; which accelerated simulation of gate level models, at the expense of some accuracy in situations like this. The XL algorithm operates by noticing, when the second input event occurs, that an event for the output of the gate has already been scheduled to happen. It leaves the event time the same, but changes the new value. So, with the XL algorithm, the above case would look like this:
+					<p></p>
+					<center>
+						<img src="images/v0419g2.gif" height="175" width="331">
+						<p></p>
+					</center>
+					Though at first glance, this appears to be exceedingly inaccurate, in fact, it seldom causes problems. The XL algorithm is almost universally used, both with Verilog-XL and other Verilog simulators.</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

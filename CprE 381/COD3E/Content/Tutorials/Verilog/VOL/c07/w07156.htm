@@ -1,0 +1,44 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body onload=" parent.initBtn0()" bgcolor="white">
+		<table width="600" cellpadding="10">
+			<b>What is the value of z printed by this module?</b>
+			<p></p>
+			<pre>
+	module t;
+	reg x, y, z;
+	initial  begin 
+		x = 1; 
+		y = 0; 
+	#1 	$display(z);
+	end
+	always @(posedge x)
+		z = ~y;
+
+	endmodule
+</pre>
+		</table>
+		<hr>
+		<table width="600">
+			<form>
+				<input type="radio" name="A" value="-1">1. 0<br>
+				<input type="radio" name="A" value="-1">2. 1<br>
+				<input type="radio" name="A" value="-1">3. x<br>
+				<input type="radio" name="A" value="-1">4. z<br>
+				<input type="radio" name="A" value="-1"><font color="#4B0082">5. either 1 or x</font><br>
+				<input type="radio" name="A" value="-1">6. either 1 or z<br>
+				<input type="radio" name="A" value="-1">7. either 0 or x<br>
+				<input type="radio" name="A" value="-1">8. either 0 or z<br>
+			</form>
+			<a name="answer"><b>The correct answer is item 5. There is a race between the initial block and the always. If the initial block is executed first, the test for posedge x will wait for the next rising edge, not the one that happened at time 0.</b>
+				<p></p>
+			</a>
+		</table>
+	</body>
+
+</html>

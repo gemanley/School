@@ -1,0 +1,45 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>There are two types of simulation controls
+					<p><tt></tt></p>
+					<dl>
+						<dd>#delay - time control<br>
+						<dd>@event - event control
+							<p></TT></font><a href="javascript:parent.goGlossHash('#timecon')"><font color="#B22222">Time controls</font></a> are simply delays, in the same format as delays used on wire declarations, continuous assignments, and primitives:</p>
+							<p><tt></tt></p>
+							<dl>
+								<dd><b>#delay_expression</b>
+									<p></p>
+							</dl>
+							</TT>The <a href="javascript:parent.goGlossHash('#delayexp')"><font color="#B22222">delay expression</font></a> indicates the amount of simulation time which must elapse before the statement to which it is attached may execute. Thus, the delay is a relative time value.
+							<p>In contrast to delays used in declarative code, time controls allow the delay to be specified using an arbitrary expression as the <tt>delay_expression</tt>. (In declarative code, the <tt>delay_expression</tt> must be constant-valued.)</p>
+							<p>Examples:</p>
+							<p><tt></tt></p>
+							<dl>
+								<dd>#1 a = f(x);<br>
+								<dd>#delayparam vecGenTask(3);<br>
+								<dd>#f(x) x = x + 1;<br>
+								<dd>#(x+y+z/2) ;
+									<p></p>
+							</dl>
+							</TT>Exercise:<br>
+							Write a time control that will cause the controlled statement to execute at time 501234, assuming that the preceding statement executes sometime before that, but exactly when it executes is unknown. (hint: $time returns the current time)
+							<p></p>
+							<center>
+								<a href="JavaScript:parent.dispWindow('v05021r1.htm','Example')"><img src="images/vsolutio.gif" height="39" width="92" border="0"></a></center>
+					</dl>
+				</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

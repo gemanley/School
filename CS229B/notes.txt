@@ -1,0 +1,19 @@
+stringstream(string a) >> int b converts a string into an int.
+-- Classes --
+Class myClass {
+	private:
+		int blah;
+	public:
+		int blh2;
+}
+
+void myClass::setBlahs(int a, int b)
+{
+	blah = a;
+	blh2 = b;
+}
+
+dynamic_cast<NewType> (expression)
+	- Used only with pointers and references to objects
+	- Can convert child to parent, but only parent to child when parents is polymorphic
+

@@ -1,0 +1,32 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>If you look carefully at the execution paradigm for nba's, you can see some interesting cases. Non-blocking assignment events happen after all other events have happened. What if a non-blocking assignment propagates to a continuous assignment, or an input port of a module or primitive instantiation? Because of propagation and event controls, you could have regular events scheduling nba events, which then schedule regular events, etc., all without simulation time advancing.
+					<p>For example,</p>
+					<pre>
+    always @(posedge clk)
+        dff1 
+						
+						
+						<= f(x); assign fsm_in="f(dff1);" assign fsm_out="fsm_state;" always @(fsm_in) fsm_state <= g(fsm_in);
+</PRE> The answer is that yes, indeed, this situation can occur. However, it is handled by grouping all the nba events together. When all regular events have been executed, all the nba events are performed. If any new regular events have been scheduled as a result of the nba assignments, do them now and repeat. The scheduler alternates between regular events and nba events, until both sets of events are empty.<p>
+						
+						
+						
+
+In the above example, the continuous assignment to <tt>fsm_in</tt> is a regular event which is triggered by the nba assignment to <tt>dff1</tt>. The always <tt>@(fsm_in)</tt> event is a regular event triggered by the continuous assignment. The nba assignment to <tt>fsm_state</tt> triggers the assignment to <tt>fsm_out</tt>. 
+
+</pre>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

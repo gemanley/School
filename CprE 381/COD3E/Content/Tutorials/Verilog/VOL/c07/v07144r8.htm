@@ -1,0 +1,127 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			<pre>
+/* RegMX10
+    Copyright(c) 1990 NeXT, Inc.
+    Status: new
+    Revision History:
+    0.0
+        Date: 8/17/90
+        Engineer: Tim Bucher
+        Change: initial creation
+    0.1
+        Date: Mon Sep 17 16:59:34 PDT 1990
+        Engineer: Mark Ross
+        Change: fixed the scan behavior by ANDing scanShiftEnable with clock
+    0.2 
+        Date: Thu Oct  4 18:24:57 PDT 1990
+        Engineer: Dan Smith
+        Change: Changed the scan structure to speed up normal operation
+    0.3
+        Date: Mon Oct  8 14:04:14 PDT 1990
+        Engineer: Dan Smith
+        Change: Changed !scanShiftEnable to (scanShiftEnable !== 0)
+                to clock in data when scanShiftEnable may be undefined.     
+    0.4
+        Date: Mon Dec 17 13:02:51 PST 1990
+        Engineer: Dan Smith
+        Change: Added circuitry to test for race conditions upon initialization     
+    0.5
+        Date: Tue Mar  5 19:05:23 GMT-0800 1991
+        Engineer: Dan Smith
+        Change: Added circuitry to insure proper operation when data and clock 
+                are coincident
+
+
+    Description:
+    This register model provides an input 2:1 mux, 2 clock enables, and 
+    complete scan functions.  Both clock enables must be active to clock 
+    the flop.
+    */
+module RegMX10 (
+    regOut,
+    regInA,
+    regInB,
+    regInSelectB,
+    clkEnable1,
+    clkEnable2,
+    clock,
+    scanShiftOut,
+    scanShiftIn,
+    scanShiftEnable
+    );
+    /* Parameters: */
+    parameter       size = 10;
+    parameter       ckToQ = 1;
+    /* I/O Descriptions: */
+    output [size-1:0]   regOut;             /* register output */
+    input [size-1:0]    regInA;             /* A register input */
+    input [size-1:0]    regInB;             /* B register input */
+    input               regInSelectB;       /* mux selector */
+    input               clkEnable1;         /* clock enable signal */
+    input               clkEnable2;         /* clock enable signal */
+    input               clock;
+    output              scanShiftOut;       /* output of scan chain */
+    input               scanShiftIn;        /* serial scan input */
+    input               scanShiftEnable;    /* '1' = shift */
+    reg [size-1:0]      regOut;             /* temp variable */
+    reg                 shiftOut;           /* temp variable */
+    
+                /* Assignments: */
+    assign scanShiftOut = regOut[size-1];
+    
+    event anEvent;
+    initial @(posedge clock) begin
+        #1 -&gt; anEvent;
+    end
+
+         /* Cause an event in case the data in changed at the clock edge. */
+    always @(regInA
+        or regInB 
+        or regInSelectB 
+        or clkEnable1 
+        or clkEnable2 
+        or scanShiftEnable
+        ) 
+        begin
+        #1 -&gt; anEvent;
+        end
+    
+    always @ (
+            regInA 
+            or anEvent
+            or regInB 
+            or regInSelectB 
+            or clkEnable1 
+            or clkEnable2 
+            or scanShiftEnable
+            ) 
+        @ (posedge clock)
+        if ( (scanShiftEnable !== 1) &amp; clkEnable1 &amp; clkEnable2)
+            regOut = #ckToQ regInSelectB ? regInB : regInA;
+    
+    
+    always @(posedge scanShiftEnable)
+        while (scanShiftEnable === 1)
+            @(posedge clock)
+            if (scanShiftEnable)
+                {shiftOut, regOut} = #ckToQ {regOut, scanShiftIn};
+        
+        
+endmodule   /* RegMX10 */
+
+
+
+</pre>
+		</table>
+	</body>
+
+</html>

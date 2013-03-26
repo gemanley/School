@@ -1,0 +1,71 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+		<style type="text/css" media="screen"><!--
+#answer  { visibility: hidden; position: absolute }
+--></style>
+		<csactions>
+			<csaction name="189026920" class="ShowHide" type="onevent" val0="answer" val1="1"></csaction>
+		</csactions>
+		<csscriptdict import>
+			<script type="text/javascript" src="../../../../resources/CSScriptLib.js"></script>
+		</csscriptdict>
+		<csactiondict>
+			<script type="text/javascript"><!--
+CSAct[/*CMP*/ '189026920'] = new Array(CSShowHide,/*CMP*/ 'answer',1);
+
+// --></script>
+		</csactiondict>
+	</head>
+
+	<body bgcolor="white">
+			<table width="600" cellpadding="10">
+				<tr>
+					<td><b>Rewrite the following state machine so that it uses a single 2-bit state variable:</b>
+						<p></p>
+							<tt><textarea name="SCRIPT1" rows="17" cols="55">
+module fsm (out, in1, in2, clk);
+	output out;
+	input in1, in2, clk;
+	reg state1, state2;
+	wire next1, next2;
+
+	assign out = state1 &amp; state2;
+	assign next1 = f1(state1, in1);
+	assign next2 = f2(state2, in2);
+
+	always @(posedge clk) begin
+		state1 &lt;= next1; 
+		state2 &lt;= next2;
+	end
+
+endmodule
+
+</textarea></tt>
+					</td>
+				</tr>
+			</table>
+			<A HREF="javascript:parent.gotoScreen('07','061',0)"><img src="images/vreset.gif" border="0"></A>
+			<center>
+			<a onclick="CSAction(new Array(/*CMP*/'189026920'));return CSClickReturn()" href="#" csclick="189026920"><img src="images/vanswer.gif" width="87" height="39" border="0"></a></center>
+			<div id="answer">
+			<PRE>
+module fsm (out, in1, in2, clk); 
+	output out; 
+	input in1, in2, clk; 
+	reg [1:0] state; 
+	wire [1:0] next; 
+	assign out="state1" && state2; 
+	assign next="f1(state[0]," in1) &lt; 1 + f2(state[1], in2);
+
+	always @(posedge clk)
+		state &lt;= next;
+
+endmodule		
+			</PRE>
+			</div>
+	</body>
+
+</html>

@@ -1,0 +1,217 @@
+<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+<title>EDSAC</title>
+</HEAD>
+<link href="../../resources/base_style.css" rel="stylesheet" type="text/css" media="all">
+<style TEXT="TEXT/CSS">
+  body{margin-left: 5%; margin-right: 5%;color: black;}
+  hr{margin-left: -4%;}
+  hr{margin-right: -4%;}
+  em{color: green}
+  cite{color: brown}
+</style>
+
+<body>
+
+	<h1>EDSAC</h1>
+	<p></p>
+	<h3>Introduction</h3>
+	<p><cite>The <a href="http://www.cl.cam.ac.uk/UoCCL/misc/EDSAC99/">EDSAC</a> (electronic delay storage automatic calculator) performed its first calculation at Cambridge University, England, in May 1949. EDSAC contained 3,000 vacuum tubes and used mercury delay lines for memory. Programs were input using paper tape and output results were passed to a teleprinter. Additionally, EDSAC is credited as using one of the first assemblers called &quot;Initial Orders,&quot; which allowed it to be programmed symbolically instead of using machine code. </cite><br><a href="http://www.maxmon.com/1946ad.htm">[http://www.maxmon.com/1946ad.htm]</a></p>
+	<p><cite>The operating system or &quot;initial orders&quot; consisted of 31 instructions which were hard-wired on uniselectors, a mechanical read-only memory. These instructions assembled programs in symbolic form from paper tape into the main memory and set them running. The second release of the initial orders was installed in August 1949. This occupied the full 41 words of read-only memory and included facilities for relocation or &quot;coordination&quot; to facilitate the use of subroutines (an important invention by D.J. Wheeler). </cite><br><a href="http://www.cl.cam.ac.uk/UoCCL/misc/EDSAC99/statistics.html">[http://www.cl.cam.ac.uk/UoCCL/misc/EDSAC99/statistics.html]</a></p>
+	<p><cite>The EDSAC programming system was based on a set of &quot;initial orders&quot; and a subroutine library. The initial orders combined in a rudimentary fashion the functions performed by a bootstrap loader and an assembler in later computer systems. The initial orders existed in three versions. The first version, Initial Orders 1, was devised by David Wheeler, then a research student, in 1949. The initial orders resided in locations 0 to 30, and loaded a program tape into locations 31 upwards. The program was punched directly onto tape in a symbolic form using mnemonic operation codes and decimal addresses, foreshadowing in a remarkable way much later assembly systems. ... In September 1949 the first form of the initial orders was replaced by a new version. Again written by Wheeler, Initial Orders 2 was a tour de force of programming that combined a surprisingly sophisticated assembler and relocating loader in just 41 instructions. The initial orders read in a master routine (main program) in symbolic form, converted it to binary and placed it in the main memory; this could be followed by any number of subroutines, which would be relocated and packed end-to-end so that there were none of the memory allocation problems associated with less sophisticated early attempts to organise a subroutine library. </cite><br>	<a href="http://www.inf.fu-berlin.de/%7ewidiger/ICHC/papers/campbell.html">[http://www.inf.fu-berlin.de/~widiger/ICHC/papers/campbell.html]</a></p>
+	<p></p>
+	<h3>EDSAC Resources</h3>
+	<ul>
+		<li><a href="http://www.cl.cam.ac.uk/UoCCL/misc/EDSAC99/simulators/india/">EDSAC simulator (Java applet)</a>
+			
+		<li><a href="http://www.dcs.warwick.ac.uk/%7eedsac/Software/EdsacTG.pdf">EDSAC Tutorial Guide (pdf)</a>
+	</ul>
+	<p></p>
+	<h3>EDSAC Programming</h3>
+	<pre><font size=1>   An &quot;order&quot; was a 17-bit instruction that consisted of three fields:
+     5-bit opcode, 10-bit address, 1-bit length code
+
+   Orders were punched onto tape in symbolic form, e.g., A 80 F
+
+   opcodes (as used below):
+
+     A - add the operand from memory into the accumulator
+     E - branch on non-negative
+     G - branch on negative
+     H - copy the accumulator into the multiplier register
+     I - read a character from tape and store it in memory
+     L - left shift the accumulator according to rightmost one bit
+     R - right shift the accumulator according to rightmost one bit
+     S - subtract the operand from memory from the accumulator
+     T - store into memory and clear accumulator
+     V - multiply the operand from memory with the operand in the
+           multiplier register and add into the accumulator
+
+   The binary values of the opcodes matched the character codes for
+   the letters above.
+
+   A blank address field acted as a 0.
+
+   length codes:
+     K - set load address
+     F - half the accumulator (places 0 in lsb) - refers to location 41
+     @ - origin of current routine              - refers to location 42
+     D - full accumulator (places 1 in lsb)     - refers to location 43
+     others - refer to locations 44-55
+
+   Programs began with commands to start loading the program at a
+   given address, e.g.,
+
+
+     PK
+     T64K      - set load address to 64
+     GK        - set @-parameter to current load point
+     ...       - instructions of first routine
+
+
+     PZ        - start of next routine
+     GK        - set @-parameter to current load point
+     ...       - instructions of second routine
+
+
+     PZ        - start of next routine
+     GK        - set @-parameter to current load point
+     ...       - instructions of main program
+     EZPF      - enter program at location in @
+
+   an order coded as A 10 @ would have its address field relocated
+   according to the current routine address in location 42.
+</font></pre>
+	<p>Paper tape codes</p>
+	<pre><font size=1>  letter digit   decimal/binary values   opcode
+    P      0         0     00000
+    Q      1         1     00001
+    W      2         2     00010
+    E      3         3     00011         conditional branch
+    R      4         4     00100         shift
+    T      5         5     00101         store
+    Y      6         6     00110         round
+    U      7         7     00111         store
+    I      8         8     01000         read
+    O      9         9     01001         output (print)
+    J               10     01010
+    # (pi)          11     01011
+    S               12     01100         subtract
+    Z               13     01101         stop and ring bell
+    K               14     01110
+    * (erase)       15     01111
+    . (blank)       16     10000
+    F               17     10001         reread
+    @ (theta)       18     10010
+    D               19     10011
+    ! (phi)         20     10100
+    H               21     10101         copy
+    N               22     10110         multiply
+    M               23     10111
+    &amp; (delta)       24     11000
+    L               25     11001         shift
+    X               26     11010         nop
+    G               27     11011         conditional branch
+    A               28     11100         add
+    B               29     11101
+    C               30     11110         collate (and)
+    V               31     11111         multiply
+</font></pre>
+	<p></p>
+	<h3>EDSAC Initial Orders 2</h3>
+	<pre><font size=1>  - code section 0-1 initializes the accumulator and branches to 20,
+  - later these locations are overwritten and used as data
+
+    0  (T    F) overwritten - (clears accumulator) later used as address
+    1  (E 20 F) overwritten - ((always) branch to 20) later used for
+                              character input
+
+  - code section 2-3 are fixed constants
+
+    2   P  1 F  - constant 1 in address field
+    3   U  2 F  - constant for use in creating subroutine returns
+
+   - code section from 4-12 forms a loop that reads in digits from the
+   - tape and assembles them into an address
+
+    4   A 39 F              - add constant in 39 into accumulator
+    5   R  4 F              - shift accumulator right four places
+    6   V    F              - multiply and add into accumulator
+    7   L  8 F  - constant  - shift accumulator left five places
+    8   T    F              - store partial address in location 0
+    9   I  1 F              - input next character into location 1
+   10   A  1 F              - load character from location 1
+   11   S 39 F              - subtract constant in 39 from accumulator
+   12   G  4 F              - branch to 4 if character is a digit
+
+   - code section 13-18 tests a character and either places an A (24+x) F
+   - or an E (16+x) F order in location 20
+
+   13   L    D              - left shift accumulator one place
+   14   S 39 F              - subtract constant in 39 from accumulator
+   15   E 17 F              - conditional branch to 17
+   16   S  7 F              - subtract constant in 7 from accumulator
+   17   A 35 F              - add constant in 35 to accumulator
+   18   T 20 F              - store in location 20
+
+
+   19   A    F              - add address in 0 into accumulator
+   20  (H  8 F) overwritten - (place 10/32 in multiplier) will later be used
+                              to add to the accumulator or to branch
+   21   A 40 F              - add to accumulator
+   22  (T 43 F) overwritten - (store into location 43) will later be used
+                              to store assembled order into proper location
+   23   A 22 F              - load order in location 22
+   24   A  2 F              - add 1 to increment address of order
+
+   25   T 22 F              - store order back into location 22
+   26   E 34 F              - (always) branch to 34
+
+   27   A 43 F              - add one
+   28   E  8 F              - conditional branch to 8
+
+   29   A 42 F              - add address from location 42 to accumulator
+   30   A 40 F              - add opcode from location 40 to acumulator
+   31   E 25 F              - branch to 25 if opcode was T or E
+
+   32   A 22 F              - add address in location 22 to accumulator
+   33   T 42 F              - store into location 42
+   34   I 40 D              - input character into location 40
+   35   A 40 D  - constant  - load value in location 40
+   36   R 16 F              - shift accumulator right six places
+   37   T 40 D              - store in location 40
+   38   E  8 F              - (always) branch to 8
+
+   39   P  5 D  - constant
+   40  (P    D) - constant / overwritten
+   41           - reserved for constant zero
+   42           - reserved for origin of current routine
+   43           - reserved for constant one
+   44-55        - reserved for use by programmer (&quot;preset parameters&quot;)
+</font></pre>
+	<p></p>
+	<hr>
+	<h3><a name="interrupts"></a>&quot;Interrupts&quot; on EDSAC?</h3>
+	<p>For the EDSAC99 celebration, Donald Willis wrote: </p>
+	<cite><blockquote>
+			An experimental system was run on the EDSAC [ca. 1952-1955] and Stan Gill wrote the subroutines which interrupted the processor when data arrived from the [magnetic tape] reading head - a technique which was more widely used later. I left in 1955 to join Decca Radar to introduce digital computer technology into radar systems where we used the interrupt system extensively.</blockquote>
+	</cite><a href="http://www.cl.cam.ac.uk/UoCCL/misc/EDSAC99/reminiscences/index.html">(http://www.cl.cam.ac.uk/UoCCL/misc/EDSAC99/reminiscences/index.html)</a>
+	<cite><blockquote>
+			Magnetic tape backing store added in 1952 (but never worked really well).</blockquote>
+	</cite><a href="http://www.cl.cam.ac.uk/UoCCL/misc/EDSAC99/statistics.html">(http://www.cl.cam.ac.uk/UoCCL/misc/EDSAC99/statistics.html)</a>
+	<cite><blockquote>
+		[Time-sharing] was actually used with EDSAC 1 at the Cambridge University Mathematical Laboratory (Wilke and Willis, 1956). Special routines were written to count the passage of blocks on tape and to control its movement. One of these routines was included in every program which made use of the magnetic tape equipment. As every block passed the reading head, a special block marker caused a flip-flop inside the machine to be set. Each time this happened, control was transferred to the positioning routine. After this routine had taken account of the block, and performed any other necessary function, it returned control to the main program.<br>
+		In this case it was not necessary for the programmer to design his program so that it fitted into the gaps between the block counting operations. Instead, the machine proceeded at full speed, only switching to the positioning routine when necessary; in fact, it was not possible for the programmer to predict in advance the exact points at which his program would be interrupted by the positioning routine. The means adopted to bring this about were quite conventional. A conditional jump instruction was provided whose action depended on the setting of the flip-flop which recorded the passage of block markers. This instruction was used in such a way that the first time it was encountered after a block had passed, it caused control to be transferred to the positioning routine. The programmer was required to scatter copies of this instruction throughout his program in such a way that the interval of time between any two consecutive encounters with them would certainly be less than the time taken for one block to pass though the tape mechanism. This was, needless to say, a tiresome requirement. It did, however, enable fairly efficient use to be made of the computer while the tape was being positioned.
+	</blockquote></cite>
+		<p>AUTOMATIC INTERRUPTION</p>
+	<cite><blockquote>
+		There is no fundamental difficulty involved in designing a machine so that the execution of instructions can be interrupted automatically as a result of some external signal. When this is done, efficient time-sharing can be achieved without clumsy programming tricks. EDSAC 2 will in fact interrupt itself in order to count the passage of magnetic tape blocks
+	</blockquote></cite>
+	S. Gill, &quot;Parallel Programming,&quot; Computer Journal, Vol. 1, No. 1, April 1958, pp. 2-10.
+	<p>(cite is to M.V. Wilkes and D.W. Willis, &quot;A magnetic-tape auxiliary storage system for the EDSAC,&quot; Proc. IEE, Vol. 103, Part B, p. 337.)</p>
+	<p></p>
+	<hr>
+	<h3>EDSAC 2</h3>
+	<p>A microprogrammed, bit slice design with interchangeable plug-in units</p>
+	<p>The &quot;automatic interrupt&quot; on the EDSAC 2 is further explained in an appendix of D.W. Barron and H.P.F. Swinnerton-Dyer, <a href="http://www3.oup.co.uk/computer_journal/hdb/Volume_03/Issue_01/030028.sgm.abs.html">&quot;Solution of simultaneous linear equations using a magnetic-tape store,&quot;</a> Computer Journal, Vol. 3, No. 1, April 1960, pp. 28-33. In the EDSAC 2, reading or writing a magnetic tape block fully occupies the machine; overlapped operation is allowed only while the tape is being positioned. In this case, the sensing flip-flop described above is inspected by the microcode after each instruction execution. If the flip-flop is set, a block count maintained in a register is incremented and the flip-flop is reset. If the count is less than 2047, the tape continues its motion. Otherwise the tape is stopped and the microcode sets another field in the block count register to zero. The program can periodically inspect this completion field to synchronize with the tape.</p>
+	<p>also see M.V. Wilkes, <a href="http://cva.stanford.edu/cs99s/papers/wilkes-edsac2.pdf">&quot;EDSAC 2,&quot;</a> IEEE Annals of the History of Computing, vol. 14, no. 4.</p>
+</body>

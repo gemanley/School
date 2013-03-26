@@ -1,0 +1,31 @@
+Rules of references
+	References can't be null (They must always refer to a legit variable or object)
+	Once est., a reference can't be changed
+	A reference does not require any explicit dereferencing
+
+Not only can you have variables as references, you can also pass parameters to functions by reference
+
+Example:
+
+void passTest(int &i)
+{
+	i++;
+}
+
+int j = 5;
+passTest(j);
+count << j;  Output is 6
+
+A reference can be used as the target of an assignment statement.  These seem to be obvious and normal…
+
+Example:
+int values[100];
+int & index(int i)
+{
+	return values[i + 2];
+}
+
+main()
+{
+	index(27) = 12;
+} // Sets the value of values[29] to 12

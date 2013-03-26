@@ -1,0 +1,65 @@
+.menuitems {
+    list-style-type : none;
+    margin-left: -30;
+}
+
+#header {
+  position : fixed;
+  width : 100%;
+  height : 12%;
+  top : 0;
+  right : 0;
+  bottom : auto;
+  left : 0;
+  padding-left: 15px;
+  border-bottom : 2px solid #cccccc;
+}
+
+
+#leftnavigation {
+    position : fixed;
+    top : 12%;
+    bottom: 0px;
+    margin : 0px 0px 0px 10px;
+    width : 250px;
+    height : auto;
+    left : 0;
+    color : #000000;
+    padding : 3px;
+    overflow : auto;
+}
+
+#content {
+  position : fixed;
+  top : 12%;
+  bottom : 75px;
+  margin : 0px 0px 0px 205px;
+  width : auto;
+  height : auto;
+  padding-left : 15px;
+  padding-right : 12px;
+  padding-top: 15px;
+  color : #000000;
+  border-left : 2px solid #cccccc;
+  overflow : auto;
+}
+
+#footer {
+  position: fixed;
+  width: 100%;
+  height: 75px;
+  top: auto;
+  right: 0;
+  bottom: 0;
+  margin-left : 10px;
+  border-top : 2px solid #cccccc;
+  font-size: 12px;
+}
+
+/* START TREE MENU */
+#dmenu li {
+        border-left: 2px red;
+	padding:0 0 0px 25px;
+	color:black;
+}
+

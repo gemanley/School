@@ -1,0 +1,36 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td>Scalars are the fundamental type in Verilog. Ultimately, hardware is built up out of single-bit constructions.
+					<p>A scalar can have one of 0, 1, x, or z as its value. This is the familiar 4-value set. Scalars are not restricted to just these four values, however. A scalar value can be one of a range of 120 different possible values, which represent different strength levels of the signal.</p>
+					<p>The following are examples of scalar declarations:</p>
+					<p></p>
+				</td>
+			</tr>
+		</table>
+		<table width="400">
+			<tr>
+				<td>
+					<pre>
+wire a, b, c;	// three scalar nets
+reg ff1, ff2;	// two scalar registers
+wand control_sig;	// a wired-and net
+trireg stored_charge;	// a charge-storage scalar
+</pre>
+				</td>
+			</tr>
+		</table>
+		<p></p>
+		<table width="600">
+			You can assign a scalar value to a single bit of a vector, but they do not have the same representational ability. That is, if the scalar has a value other than 0, 1, x, or z, the value will be converted to one of the 4-value set before being stored to the bit of the vector.
+		</table>
+	</body>
+
+</html>

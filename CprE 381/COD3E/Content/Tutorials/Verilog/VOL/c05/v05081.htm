@@ -1,0 +1,29 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>A more interesting problem is what happens if you make multiple assignments to the same register using non-blocking assignments? Consider the following:
+					<p></p>
+					<pre>
+    for (i=0; i&lt;5; i=i+1)
+        x &lt;= i;
+</pre>
+					This will cause <tt>x</tt> to successively be assigned the values <tt>0</tt> through <tt>4</tt>. However, since all the non-blocking events are executed together, you can't see the values <tt>0..3</tt>, only the final value of <tt>4</tt>.
+					<p>Now consider this case:</p>
+					<p></p>
+					<pre>
+    for (i=0; i&lt;5; i=i+1)
+        x &lt;= #i i;
+</pre>
+					When this loop executes at time t, it will have scheduled 5 events to occur at time <tt>t, t+1, t+2, t+3</tt>, and <tt>t+4</tt>. Each will assign a different value to <tt>x</tt>. This is the only mechanism in Verilog to effect a transport delay.</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

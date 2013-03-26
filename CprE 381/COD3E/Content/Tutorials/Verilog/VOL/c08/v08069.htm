@@ -1,0 +1,65 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+		<style type="text/css" media="screen"><!--
+#answer  { visibility: hidden; position: absolute }
+--></style>
+		<csactions>
+			<csaction name="1C0F32730" class="ShowHide" type="onevent" val0="answer" val1="1"></csaction>
+		</csactions>
+		<csscriptdict import>
+			<script type="text/javascript" src="../../../../resources/CSScriptLib.js"></script>
+		</csscriptdict>
+		<csactiondict>
+			<script type="text/javascript"><!--
+CSAct[/*CMP*/ '1C0F32730'] = new Array(CSShowHide,/*CMP*/ 'answer',1);
+
+// --></script>
+		</csactiondict>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td><b>Given the following module: </b>
+					<pre>
+module run3 (out, in, clk);
+	output out;
+	input in, clk;
+	reg [1:0] count;
+
+	assign out = count == 3;
+
+	initial count = 0;
+
+	always @(posedge clk)
+		case (count)
+	0:		count &lt;= in; 
+	1:		count &lt;= in ? 2 : 0;
+	2:		count &lt;= in ? 3 : 0;
+	3:		count &lt;= in ? 3 : 0;
+		endcase
+endmodule
+</pre>
+				</td>
+			</tr>
+		</table>
+<hr>
+		<b>
+Write an assertion checking code fragment which can be added to module run3 which stops the simulation if count takes an x value.
+</b><tt><TEXTAREA NAME='SCRIPT1' ROWS='6' COLS='70'></textarea></tt>
+		<center>
+			<a onclick="CSAction(new Array(/*CMP*/'1C0F32730'));return CSClickReturn()" href="#" csclick="1C0F32730"><img src="images/vanswer.gif" width="87" height="39" border="0"></a></center>
+		<div id="answer">
+			<b>Answer:</b>
+			<PRE><tt>
+	always @(count)
+		if (count[0] === 1'bx || count[1] === 1'bx)
+			$stop;
+</tt></PRE>
+		</div>
+	</body>
+
+</html>

@@ -1,0 +1,28 @@
+Bash is scripting language (and shell)
+
+which bash
+	returns absolute path  .../bin/bash
+
+Bash Script:
+
+#!/bin/bash
+STRING = "Hello World"
+echo $STRING
+
+To run:
+
+bash hello.sh (or hello)
+
+chmod +x hello
+
+./hello (Makes hello an executable)
+
+foo:
+
+#!/bin/bash
+echo $1
+
+By typing foo hello, the output will be the output of hello.
+
+#!/bin/bash
+ls |sort >temp [or > "$1"]

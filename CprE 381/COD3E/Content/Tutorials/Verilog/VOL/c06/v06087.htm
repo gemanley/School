@@ -1,0 +1,30 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="396">This system task is used to suspend simulation and enter whatever interactive environment the simulator may provide. Note that it is not useful for other, non-simulation activities, like synthesis or timing analysis.
+					<p>Because each simulator provides a somewhat different interactive environment, what happens after $stop is executed is implementation-dependent. However, when the <tt>$stop</tt> task is executed, the simulation suspends at that point. It is not necessarily the case that simulation is at the end of a time step. It is the case that simulation is resumable as if the suspension had not happened.</p>
+					<p>Example:</p>
+					<p></p>
+					<pre>
+    initial begin
+        repeat (5)
+    #1000   $stop;
+        $finish;
+    end
+</pre>
+					<p>This example would allow the user to inspect the state of the simulation every 1000 time units 5 times before the simulation terminated.</p>
+				</td>
+				<td valign="top" width="204"><img src="images/v0629g1.gif" height="246" width="204"></td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

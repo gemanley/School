@@ -1,0 +1,65 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">This is the same as the tf_getp/tf_putp example, except that the system task will not take the register to be modified as a parameter, but it will always modify the register named &quot;anInt&quot;.
+					<p>New utility routines used:</p>
+					<p>acc_fetch_tfarg(narg)<br>
+						Function returns the value of the nth parameter to the user-defined task.</p>
+					<p>acc_handle_by_name(name, scope)<br>
+						Returns a handle (32-bit quantity) to the object whose name is &quot;name&quot;. The scope parameter is a handle to a scope (module instance, task, function, or named block). A null scope handle means the name is a fully-qualified hierarchical name.</p>
+					<p>acc_set_value (anIntHandle, &newValue, &delay)<br>
+						Set the value of the object designated by the handle to the value contained in the given structure. The delay indicates a delay before the assignment is to take place.</p>
+				</td>
+			</tr>
+		</table>
+		<table width="600">
+			<tr>
+				<td align="center" width="150"><a href="a09057.htm"><img src="images/vverilog.gif" height="39" width="139" border="0"></a></td>
+				<td align="center" width="150"><a href="b09057.htm"><img src="images/vpli.gif" height="39" width="136" border="0"></a></td>
+				<td align="center" width="190"><a href="c09057.htm"><img src="images/vuser.gif" height="39" width="177" border="0"></a></td>
+				<td align="center" width="110"><a href="d09057.htm"><img src="images/vresults.gif" height="39" width="87" border="0"></a></td>
+			</tr>
+		</table>
+		<p><br>
+		</p>
+		<table width="600">
+			<pre>
+/* ex4_acc.c */
+#include &quot;acc_user.h&quot;
+#include &quot;vcsuser.h&quot;
+ 
+int set_anInt ( )
+{
+    int         new;
+    handle      anIntHandle;
+    static s_setval_delay delay={accNoDelay};
+    s_setval_value newValue;
+ 
+    delay.model = accNoDelay;
+    newValue.format = accIntVal;
+    new = acc_fetch_tfarg ( 1 )
+    anIntHandle = acc_handle_by_name ( &quot;ex4_acc.anInt&quot;, 0 );
+ 
+    io_printf ( &quot;In my_acc: new=%d\n&quot;, new );
+ 
+    newValue.value.integer = new;
+    acc_set_value ( anIntHandle, &newValue, &delay );
+ 
+    return 0;
+}
+
+The routine acc_handle_by_name gets a &quot;handle&quot; to the register anInt which
+is in the top-level module ex4_acc. By using this handle, it can then set
+a new value to that register with acc_set_value.
+</pre>
+		</table>
+	</body>
+
+</html>

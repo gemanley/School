@@ -1,0 +1,35 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<script language="JavaScript">
+
+
+function dispWindow(url, windowName) {
+	var pghtm = document.location.href
+	if (pghtm.indexOf("\\c") > -1) {var i = pghtm.indexOf("\\c")}
+	else if (pghtm.indexOf("\/c") > -1) {var i = pghtm.lastIndexOf("\/c")}
+	else if (pghtm.indexOf("\/") > -1) {var i = pghtm.lastIndexOf("\/")}
+	else {var i = pghtm.lastIndexOf("\\")}
+	var newLocation = pghtm.substring(0,i+5) + url
+	window.open(newLocation,windowName,'width=640, height=240, scrollbars, resizable');
+}
+
+</script>
+
+	<body bgcolor="white">
+		<TARGET="v01165">
+		<table width="640" cellpadding="10">
+			Parameters are used wherever a constant expression is allowed. Common uses of parameters include vector range specifications, values, and case selector values.
+			<p><b>Click the Example button to see how the following parameters might be used.</b></p>
+			<p><font size="3" face="courier">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameter width = 8, msb = 7, lsb = 0;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameter delay = 100;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameter maxval = (1 &lt;&lt; width) - 1;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameter r = 5.7;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameter state1 = 4'b0001, state2 = 4'b0010,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state3 = 4'b0100, state4 = 4'b1000;</font></p>
+			<p></font></p>
+			<center>
+				<a href="JavaScript:parent.dispWindow('v01165r2.htm','Example')"><img src="images/vexample.gif" height="39" width="91" border="0"></a></center>
+		</table>
+	</body>
+
+</html>

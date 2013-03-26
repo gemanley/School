@@ -1,0 +1,43 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td valign="top" width="600">
+				<center>
+					<img src="images/v0731g1.gif" height="273" width="412">
+					<p></p>
+				</center>
+				There is no defined ordering between the first statements of different initial and always blocks. The simplest example of the potential for races is:
+				<p></p>
+				<pre>
+    initial y = 1;
+    
+    initial $display($time, &quot; y = %b&quot;, y);
+</pre>
+				This is a race because the result could be either:
+				<p></p>
+				<pre>
+    0 y = 1
+or  0 y = x
+</pre>
+				depending on which initial block was executed first by the simulator.
+				<p>A more common example of this type is:</p>
+				<p></p>
+				<pre>
+    initial clk = 1;
+    always #10 clk = ~clk;
+    
+    always @(posedge clk)
+        $display($time, &quot; posedge occurred&quot;);
+</pre>
+				The first edge detected could be at either 0 or 20, depending on the order of execution of the initial block and the always @(posedge clk) block.</td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

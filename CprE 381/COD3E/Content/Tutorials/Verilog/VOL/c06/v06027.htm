@@ -1,0 +1,96 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+		<style type="text/css" media="screen"><!--
+#answer  { visibility: hidden; position: absolute }
+--></style>
+		<csactions>
+			<csaction name="166C3EE15" class="ShowHide" type="onevent" val0="answer" val1="1"></csaction>
+		</csactions>
+		<csscriptdict import>
+			<script type="text/javascript" src="../../../../resources/CSScriptLib.js"></script>
+		</csscriptdict>
+		<csactiondict>
+			<script type="text/javascript"><!--
+CSAct[/*CMP*/ '166C3EE15'] = new Array(CSShowHide,/*CMP*/ 'answer',1);
+
+// --></script>
+		</csactiondict>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">The following hierarchy uses an upward XMR with instance names which can not be resolved. Can you modify it so that both instances of module moda will print out the value of z contained in their sibling? That is, one should print xx.z = 2 and the other should print xx.z = 4.
+					<p></p>
+						<tt><textarea name="SCRIPT1" rows="15" cols="75">
+module test;
+
+    moda #(1) a1();   
+    modb #(2) xx();
+
+endmodule
+
+
+module moda;
+    parameter zz = 0;
+    
+    initial   $display(&quot;from %m: xx.z = %h&quot;, xx.z);    
+endmodule
+
+
+module modb;
+    parameter z = 0;
+    
+    moda #(3) xx();
+    modc #(4) xc();
+        
+endmodule
+
+
+module modc;
+    parameter z = 0;        
+endmodule
+</textarea></tt>
+							<p><a href="javascript:parent.gotoScreen(06,27,0)"><img src="images/vreset.gif" border="0"></a></p>
+							<center>
+						<a onclick="CSAction(new Array(/*CMP*/'166C3EE15'));return CSClickReturn()" href="#" csclick="166C3EE15"><img src="images/vsolutio.gif" height="39" width="92" border="0"></a></center>
+						<div id="answer">
+						<tt><pre>
+module test;
+
+    moda #(1) a1();   
+    modb #(2) xx();
+
+endmodule
+
+
+module moda;
+    parameter zz = 0;
+    
+    initial   $display(&quot;from %m: xx.z = %d&quot;, xx.z);    
+endmodule
+
+
+module modb;
+    parameter z = 0;
+    
+    moda #(3) xa();   // &lt;&lt;&lt; change instance name
+    modc #(4) xx();   // &lt;&lt;&lt; change instance name
+        
+endmodule
+
+
+module modc;
+    parameter z = 0;        
+endmodule
+
+</pre></tt>
+					</div>
+				</td>
+			</tr>
+	</body>
+
+</html>

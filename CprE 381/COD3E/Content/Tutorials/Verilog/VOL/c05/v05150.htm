@@ -1,0 +1,77 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td><a name="diagram">This is an RTL model of a 4-bit adder. This is the same problem as the gate version 4-bit adder example in Chapter 4. It takes two 4-bit operands, inA and inB, and produces a 4-bit result, sum, and a 1-bit carry. Unlike the gate version of this, it just implements the 4-bit adder directly, rather than decompose it further.
+						<p></p>
+						<center>
+							<a href="#source"><img src="images/vverilog.gif" height="39" width="139" border="0"></a>
+							<p><img src="images/v0550g1.gif" height="381" width="459"></p>
+							<p><a href="JavaScript:parent.dispWindow('v05150r1.htm','Results')"><img src="images/vresults.gif" height="39" width="87" border="0"></a></p>
+						</center>
+						<p><br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<a name="source"><b>Example: 4-bit Adder</b></a></p>
+						<p></p>
+						<pre>
+module ex3_1;
+    /* Register-Transfer level model to implement an adder */
+    
+    wire [3:0] sum, inA, inB;
+    wire       carry;
+    
+    adder4 a4 (sum, carry, inA, inB);
+    adderTest at (inA, inB, sum, carry);
+endmodule
+
+
+module adder4 (sum, carry, inA, inB);
+    output [3:0] sum;
+    output carry;
+    input [3:0] inA, inB;
+    
+    assign {carry, sum} = inA + inB;
+endmodule
+
+
+module adderTest (A, B, sum, carry);
+    output [3:0] A, B;
+    input [3:0] sum;
+    input carry;
+    reg [3:0] A, B;
+    
+    integer i, j;
+    initial begin
+       $monitor (&quot;A: %d  B: %d sum: %d  carry: %d&quot;, A, B, sum, carry);
+       for (i=0; i
+							
+							
+							<16; i="i+3)" for (j="0;" j<16; j="j+5)" begin A="i;" B="j;" #1 ; end $finish; end endmodule </PRE> <p> <A HREF="#diagram"> Return to Diagram</a>
+							
+							
+							</b>&nbsp;&nbsp;&nbsp;<a href="#diagram"><img src="images/varrow.gif" with="38" height="39" border="0"></a>
+
+
+
+</pre>
+					</a></td>
+			</tr>
+		</table>
+		</center>
+	</body>
+
+</html>

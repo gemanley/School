@@ -1,0 +1,45 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">Verilog code can be divided into three general categories:
+					<p></p>
+					<dl>
+						<dd>1. Definitions<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nets, registers, tasks, and functions
+							<p></p>
+						<dd>2. Declarative Code<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continuous assignments<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;module (and primitive) instantiations
+							<p></p>
+						<dd>3. Procedural Code<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initial and always blocks
+							<p></p>
+					</dl>
+					As with everything else in Verilog, there is some fuzziness in this categorization, since you can combine a continuous assignment with a net definition. However, we can generally consider any continuous assignment or module instantiation as declarative, and initial and always blocks as procedural.
+					<p>In general, <b>declarative code</b> corresponds to <b>combinational logic</b>. Combinational logic is distinguished by its propagation properties (see Propogation under Continuous Assignments in Chapter 1). That is, whenever a net gets a new value, that value gets propagated to all of the other circuit elements which are connected to that net.</p>
+					<p>Procedural code, on the other hand, may correspond to either combinational or sequential logic. That is, using the proper <a href="javascript:parent.goGlossHash('#eventcon')"><font color="#B22222">event controls</font></a>, you can write procedural code which behaves identically with declarative code. The reverse is not true, however.</p>
+					<p>For example,</p>
+					<p></p>
+					<pre>
+        assign bus = bus_driver ? f(in) : 1'bz;
+</pre>
+					can be written as
+					<p></p>
+					<pre>
+        always @(bus_driver or in)
+                if (bus_driver)
+                        busReg = f(in);
+                else
+                        busReg = 1'bz;
+
+</pre>
+					These two pieces function identically. The only difference is that <tt>bus</tt> is a net in the continuous assignment, and <font size="3" face="courier">busReg</font> is a register in the procedural case.</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

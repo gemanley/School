@@ -1,0 +1,175 @@
+<html>
+
+
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Projects/03_XQuery/Project_XQuery.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:02:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Project 3</title>
+<style>
+<!--
+DIV.exampleInner {
+	PADDING-RIGHT: 4px; BORDER-TOP: #d3d3d3 4px double; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; MARGIN: 0em; PADDING-TOP: 4px; BORDER-BOTTOM: #d3d3d3 4px double; BACKGROUND-COLOR: #d5dee3
+}
+-->
+</style>
+<meta name="Microsoft Border" content="t, default">
+</head>
+
+<body><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td>
+
+<p><font face="AGaramond" size="3">Com S 363: Introduction to Database Systems</font><br>
+<font face="AGaramond" size="5">Introduction to Database Systems </font></p>
+<p>
+
+</p>
+<p>&nbsp; </p>
+
+</td></tr><!--msnavigation--></table><!--msnavigation--><table dir="ltr" border="0" cellpadding="0" cellspacing="0" width="100%"><tr><!--msnavigation--><td valign="top">
+
+    <p><i><font face="Arial" color="#000000" size="4">1. Before you proceed ...&nbsp;</font></i> </p>
+    <p>Be sure to run the demos: XQuery(Saxon) demo.
+	<font face="Times New Roman">&nbsp;</font></p>
+    <p><i><font face="Arial" size="4">1</font><font face="Arial" color="#000000" size="4">. 
+    Project goal&nbsp;</font></i> </p>
+    <p><font face="Times New Roman">This project is counterpart of Project 1 for 
+    XQuery language. Here, you will learn how to write 
+    XQuery queries to query XML documents. The documents will consist of six 
+    relational style xml documents as well as one composite object-oriented xml 
+    document. In a given query you will either query the relational style 
+    documents, or the object-oriented document, but not both at the same time. </font> </p>
+<p><i><font face="Arial" size="4">3</font></i><font FACE="Arial" SIZE="4"><i>. 
+Logistical issues related to this project </i></font></p>
+<p><font face="Times New Roman" color="#FF0000">Please create a directory P3 in 
+CyDIW_Root where you store all your data and project files.
+</font></p>
+    <ul>
+      <li>Copy all files from
+		<a href="../../Resources/UniversityDB_Datasets.zip">UniversityDB_Datasets.zip</a> 
+		into P3.&nbsp; </li>
+		<li>You will create <font SIZE="3">P3_Commands.txt for commands that you develop, 
+		and
+	P3_Output.html will consist of the output created by CyDIW.
+</font> </li>
+    </ul>
+    <p><i><font face="Arial" size="4">4. Project description&nbsp;&nbsp;</font> </i></p>
+    <p>The project consists of twelve XQuery queries described below. The queries 
+    should be developed as a batch of commands separated by semicolons and stored in 
+    P3Commands.txt file. Comments should clearly indicate the item numbers.</p>
+    <p class="MsoNormal"><b>A.</b> First write and execute the following 
+	relational style queries to be executed on relation style XML documents 
+	Person.xml, Instructor.xml, Student.xml, Course.xml, Offering.xml, and 
+	Enrollment.xml. For these refer to Chapter 12 in our textbook.&nbsp; </p>
+    <p class="MsoNormal"><b>Item 01.</b> List the Name and Date of birth of each 
+    person in Person.xml document. The output sho<span style="background-color: #FFFFFF">uld be 
+	in XML format. </span> </p>
+    <p class="MsoNormal"><b>Item 02.</b> Same as 1, but the output should all 
+    consist of plain text and should not contain any XML tags. Do not worry 
+    about document header, if any, that may be returned by Saxon.
+	<font color="#FF0000">&nbsp;</font></p>
+    <p class="MsoNormal"><b>Item 03.</b> List Name and date of birth of every 
+    instructor using the Instructor.xml and Person.xml documents. Your output 
+    should be a legal XML document. </p>
+    <p class="MsoNormal"><b>Item 04.</b> For each StudentID in Entollment.xml 
+    list the StudentID and CourseCode of every course that the student is 
+    enrolled in. Make sure that there is one element per student. Your output 
+    should be a legal XML document. </p>
+<p class="MsoNormal"><b>Item 05.</b> From Student.xml, for each classification 
+list the classification and the average GPA of students with that 
+classification. Your query should not use any constants, such as &quot;Freshman&quot;. 
+Your output should be a legal XML document. </p>
+<p class="MsoNormal"><b>Item 06.</b> From Enrollment.xml and Person.xml documents, 
+list names of students who have all As. Your output should be a legal XML 
+document. </p>
+    <p><b>B.</b> In this part of the project you express 
+    some object-oriented XQuery queries. For these refer to Chapter 13 in our 
+	textbook.&nbsp; </p>
+    <ul>
+      <li>You should begin by browsing the UniversityDB.xml 
+      document in order to familiarize yourself with it. The object-orientation 
+		in XQuery is also based on our own style. </li>
+      <li>In our notational conventions of Chapter 9, the scheme of this 
+		document is described in the following diagram that was included in one 
+		of your previous homeworks. In that homework you wrote various 
+		object-oriented SQL-like queries. Note that that SQL-like style was our 
+		own concoction. In this project you need to express the same queries in 
+		XQuery instead. </li>
+</ul>
+<blockquote>
+    <p>
+    <img border="0" src="../../Homeworks/03_OODB/OO_Figure.gif" width="360" height="255"></p>
+    </blockquote>
+<ul>
+  <li>For your information: The XML Scheme of University.xml is in UniversityDB.xsd. A 
+  documentation of the schema is in UniversityDB.xsd.Documentation.html. </li>
+</ul>
+    <p>Proceed to express the following queries. Please note 
+    that you should use object-oriented style constructs, avoid 
+    relational style joins; otherwise you could face severe penalty. </p>
+    <p class="MsoNormal"><b>Item 07.</b> List the FacultyID, Rank and Salary of 
+    the faculty who is a professor with a salary of 100K or higher.</p>
+    <p class="MsoNormal"><b>Item 08.</b> List the StudentIDs of students and the 
+    FacultyIDs of their Mentors for students who have got at least one A's in 
+    their grades.</p>
+    <p class="MsoNormal"><b>Item 09.</b> List the names of students and the 
+    FacultyIDs of their Mentors for students who have got all A's 
+    <font color="#FF0000">in all courses they are currently enrolled in</font>.</p>
+    <p class="MsoNormal"><b>Item 10.</b> List the course codes of those courses 
+    that are prerequisites of prerequisites for the course ‘CS511’. We only want 
+    second level prerequisites. You should ignore immediate prerequisites.</p>
+    <p class="MsoNormal"><b>Item 11. </b>For each classification, list the number 
+    of students and average GPA. Your query should not use constants, such as 
+    &quot;Freshman&quot;. In the output, each entry should contain three elements: 
+    Classification, NumOfStudents, and AvgGPA. The NumOfStudets should be an 
+    integer and AvgGPA should have a number format with a precision of 
+    two-decimal place. </p>
+    <p class="MsoNormal"><b>Item 12. </b>Reorganize Enrollment by StudentID. Each 
+    entry should be sorted by the StudentID in a descending order. The output 
+    format is as follows: </p>
+<font SIZE="2" face="Courier New">
+<DIV class=exampleInner>&lt;Enrollment&gt;<br>
+&nbsp;&nbsp; &lt;entry&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;StudentID&gt;s#######&lt;/StudentID&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Grade&gt; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;CourseCode&gt;AAAAA&lt;/CourseCode&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;LetterGrade&gt;A&lt;/LetterGrade&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/Grade&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ....<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Grade&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;CourseCode&gt;BBBBB&lt;/CourseCode&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;LetterGrade&gt;B&lt;/LetterGrade&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/Grade&gt;<br>
+&nbsp;&nbsp; &lt;/entry&gt;<br>
+&nbsp;&nbsp; ....<br>
+&nbsp;&nbsp; &lt;entry&gt;<br>
+&nbsp;&nbsp; ....<br>
+&nbsp;&nbsp; &lt;/entry&gt;<br>
+  &lt;/Enrollment&gt;</DIV>
+</font>
+    <p><i><font face="Arial" size="4">6. What to submit&nbsp;</font></i> </p>
+    <font SIZE="3">
+<p ALIGN="JUSTIFY"><b>Step 1. The electronic submission.</b> Submit the electronic versions of 
+<b>P3_Commands.txt</b> containing your commands and <b>P3_Output.html</b>, 
+containing the output of CyDIW before the deadline. 
+Make sure that we are able to run your entire code in a single batch by using 
+[Run All] button. 
+Make sure that you have provided a title for every item 
+in form of a comment. The items numbers must be consistent with the project 
+statement. </p>
+<p ALIGN="JUSTIFY"><b>Step 2. The hardcopy submission.</b> Submit
+<b>P3_Commands.txt</b> stapled together with the <b>cover sheet</b>, in the 
+first lecture following the deadline. </p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY"></p>
+</font>
+
+<!--msnavigation--></td></tr><!--msnavigation--></table></body>
+
+
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Projects/03_XQuery/Project_XQuery.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:02:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+</html>

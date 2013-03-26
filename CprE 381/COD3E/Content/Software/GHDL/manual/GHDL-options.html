@@ -1,0 +1,64 @@
+<html lang="en">
+
+	<head>
+		<title>GHDL guide</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+		<meta name="description" content="GHDL guide">
+		<meta name="generator" content="makeinfo 4.1">
+		<link href="http://texinfo.org/" rel="generator-home">
+		<link href="../../../resources/base_style.css" rel="stylesheet" type="text/css" media="all">
+	</head>
+
+	<body>
+		<p>Node:<a name="GHDL%20options">GHDL options</a>, Next:<a href="GHDL-modes.html#GHDL%20modes" rel="next">GHDL modes</a>, Previous:<a href="Invoking-GHDL.html#Invoking%20GHDL" rel="previous">Invoking GHDL</a>, Up:<a href="Invoking-GHDL.html#Invoking%20GHDL" rel="up">Invoking GHDL</a></p>
+		<hr>
+		<br>
+		<h3>GHDL options</h3>
+		<p>Besides the options described below, <code>GHDL</code> passes any unknown options to the <code>GCC</code> compiler. Thus you can set debugging or optimizations options decribed in the <code>GCC</code> manual.</p>
+		<dl>
+			<dt><code>--work=<var>NAME</var></code>
+			<dd>Specify the name of the <code>WORK</code> library. Analyzed units are always placed in the library logically named <code>WORK</code>. With this option, you can set its name. By default, the name is <var>work</var>.
+				<p><code>VHDL</code> rules forbides you to add units in the <code>std</code> library. Furthermode, you should not put units in the <code>ieee</code> library.<br>
+				</p>
+			<dt><code>--workdir=<var>PATH</var></code>
+			<dd>Specify the directory where the <code>WORK</code> library is. When this option is not present, the <code>WORK</code> library is in the current directory. The object files created by the compiler are always placed in the same directory as the <code>WORK</code> library.<br>
+			<dt><code>--std=<var>STD</var></code>
+			<dd>Specify the standard to use. By default, the standard is <code>93c</code>, which means VHDL-93 accepting VHDL-87 syntax. For details on <var>STD</var> values see <a href="VHDL-standards.html#VHDL%20standards">VHDL standards</a>.<br>
+			<dt><code>--ieee=<var>VER</var></code>
+			<dd>Select the <code>IEEE</code> library to use. <var>VER</var> must be one of:
+				<dl>
+					<dt><code>none</code>
+					<dd>Do not supply an <code>IEEE</code> library. Any library clause with the <code>IEEE</code> identifier will fail, unless you have created by your own a library with the <code>IEEE</code> name.<br>
+					<dt><code>standard</code>
+					<dd>Supply an <code>IEEE</code> library containing only packages defined by <small>IEEE</small> standards. Currently, there are the multivalue logic system packages <code>std_logic_1164</code> defined by IEEE 1164, the synthesis packages , <code>numeric_bit</code> and <code>numeric_std</code> defined by IEEE 1076.3, and the <small>VITAL</small> packages <code>vital_timing</code> and <code>vital_primitives</code>, defined by IEEE 1076.4. The version of these packages is defined by the VHDL standard used. See <a href="VITAL-packages.html#VITAL%20packages">VITAL packages</a>, for more details.<br>
+					<dt><code>synopsys</code>
+					<dd>Supply the former packages and the following additionnal packages: <code>std_logic_arith</code>, <code>std_logic_signed</code>, <code>std_logic_unsigned</code>, <code>std_logic_textio</code>. These packages were created by some companies, and are popular. However they are not standard packages, and have been placed in the <code>IEEE</code> library without the <small>IEEE</small> permission.<br>
+					<dt><code>mentor</code>
+					<dd>Supply the standardr packages and the following additionnal package: <code>std_logic_arith</code>. The package is a slight variation on a definitly not standard but widely mis-used package.
+				</dl>
+				<p>To avoid errors, you must use the same <code>IEEE</code> library for all units of your design, and during elaboration.<br>
+				</p>
+			<dt><code>-P<var>PATH</var></code>
+			<dd>Add <var>PATH</var> to the end of the list of directories to be searched for library files.
+				<p>The <code>WORK</code> library is always searched in the path specified by the <code>--workdir=</code> option, or in the current directory if the later option is not specified.<br>
+				</p>
+			<dt><code>--no-vital-checks</code><br>
+			<dt><code>--vital-checks</code>
+			<dd>Disable or enable checks of restriction on VITAL units. Checks are enabled by default.
+				<p>Checks are performed only when a design unit is decorated by a VITAL attribute. The VITAL attributes are <code>VITAL_Level0</code> and <code>VITAL_Level1</code>, both declared in the <code>ieee.VITAL_Timing</code> package.</p>
+				<p>Currently, VITAL checks are only partially implemented. See <a href="VHDL-restrictions-for-VITAL.html#VHDL%20restrictions%20for%20VITAL">VHDL restrictions for VITAL</a>, for more details.<br>
+				</p>
+			<dt><code>-Wc,<var>OPTION</var></code>
+			<dd>Pass <var>OPTION</var> as an option to the compiler.<br>
+			<dt><code>-Wa,<var>OPTION</var></code>
+			<dd>Pass <var>OPTION</var> as an option to the assembler.<br>
+			<dt><code>-Wl,<var>OPTION</var></code>
+			<dd>Pass <var>OPTION</var> as an option to the linker.<br>
+			<dt><code>--GHDL1=<var>COMMAND</var></code>
+			<dd>Use <var>COMMAND</var> as the command name for the compiler. If <var>COMMAND</var> is not a path, then it is search in the list of program directories.<br>
+			<dt><code>-v</code>
+			<dd>Be verbose. For example, for analysis, elaboration and make mode, GHDL displays the commands executed.
+		</dl>
+	</body>
+
+</html>

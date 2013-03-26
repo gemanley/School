@@ -1,0 +1,108 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600">
+			<tr>
+				<td>
+					<pre><code>module system;
+    /* This is a test fixture for testing a combination shift register 
+       and counter */
+    
+    wire data, clk;             // nets to connect up the pieces
+    wire delayedData;           // data out of the fifo
+    wire [31:0] nOnes;          // number of ones contained in fifo
+    
+    // Module instances
+    shiftAndCount SandC (delayedData, nOnes, data, clk);    // shift register
+    clkGen #(10) cg (clk);                                  // generate the clock       
+    testGenerator tg (data, delayedData, nOnes, clk);       // create data, check result
+    
+endmodule
+
+module shiftAndCount (bitOut, count, dataIn, clk);
+    parameter width = 8;
+    output bitOut;                      // data shifted out
+    output [31:0] count;                // count of ones
+    input dataIn, clk;                  // inputs
+    
+    integer count;                      // the counter
+    reg bitOut;                         // temporary
+    reg [width-1:0] lastBits;           // shift register
+    
+    initial begin count = 0; lastBits = 0; end
+
+    always @(posedge clk) begin
+        bitOut = lastBits[width-1];
+        lastBits = (lastBits&lt;&lt;1) | dataIn;
+        if (bitOut &gt dataIn)
+            count = count - 1;
+        else
+        if (bitOut &lt; dataIn)
+            count = count + 1;
+    end
+endmodule
+
+module clkGen (clk);
+    parameter period = 2;
+    output clk;
+    reg clk;
+    
+    initial clk = 0;                // start off with 0
+    always                          // clock loop
+        #(period/2) clk = ~clk;
+endmodule
+
+module testGenerator (dataBit, delayedBit, count, clk);
+    output dataBit;
+    input delayedBit;
+    input [31:0] count;
+    input clk;
+    reg dataBit;
+    
+    task emitBits;  // helper task to emit n bits
+        input [7:0] bits, n;    // task inputs
+        begin
+            repeat (n) begin    // assume clk is at negedge
+                dataBit = bits[0];  // take just the low order bit
+                bits = bits &gt&gt 1;
+            @(negedge clk) ;    
+            end                 // leave at negative edge
+        end
+    endtask
+    
+    task check;
+        input bit;
+        input [31:0] shouldBe;
+        begin
+            if (delayedBit != bit)
+                $display($time,&quot; delayed bit is %b but should be %b&quot;, 
+                                delayedBit, bit);
+            if (count != shouldBe) 
+                $display($time,&quot; Count is %d but should be %d&quot;, 
+                                count, shouldBe);
+        end
+    endtask
+            
+    initial begin               // produce test data, check results
+        $monitor($time,&quot; dataBit: %b delayedBit: %b&quot;, dataBit, delayedBit);
+        emitBits(0, 1);         // take care of first cycle
+        emitBits('b10010, 5);
+        check(0, 2);
+        emitBits('b101101, 6);
+        check(0, 5);
+        emitBits('b01, 2);
+        check(1, 5);
+        $stop;
+    end
+endmodule</code></pre>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

@@ -1,0 +1,32 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td valign="top" width="600">
+				<center>
+					<img src="images/v0732g1.gif" height="178" width="470">
+					<p></p>
+				</center>
+				As we saw in the discussion on <a href="javascript:parent.gotoScreen('07','066',1)">pipelines</a> earlier in this chapter, this is a common source of race conditions. Two different always blocks, triggered off the same event, move data from one register to another.
+				<p></p>
+				<pre>
+	always@(posedge clock)			always@(posedge clock)
+	   diff1 = in;				   out = diff1;
+</pre>
+				As we saw, the proper solution for this is to introduce a second event, either by means of an explicit delay or a non-blocking assign, so that the first event can be the sample event and the second event can be the update event.
+				<p>A common mistake when adding a second event is to add the second event, but simply move the race to the second event, like this:</p>
+				<pre>
+	always@(posedge clock)			always@(posedge clock)
+	   #1 diff1 = in;			   #1 out = diff1;
+</pre>
+				Now, the race occurs at (posedge clock)+1 instead of (posedge clock), but it is still a race.</td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

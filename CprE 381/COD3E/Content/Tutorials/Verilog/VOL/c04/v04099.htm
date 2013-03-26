@@ -1,0 +1,50 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td width="600"><a href="javascript:parent.goGlossHash('#comboudp')"><font color="#B22222">Combinational UDPs</font></a></font> are simply logic functions described by a table. There may be up to 10 inputs and one output. Each line in the table contains an entry for each input port, and the output port.
+					<p>For example, <b>the and primitive</b> could be described as follows:</p>
+					<p></p>
+					<pre>
+    primitive andudp( out, in1, in2 );
+        output out;             
+        input in1, in2;
+
+        table
+        //   in1  in2  :  out
+              0    0   :   0;
+              0    1   :   0;
+              1    0   :   0;
+              1    1   :   1;
+        endtable
+    endprimitive
+</pre>
+					This is not quite the same as the built-in and primitive, because this does not describe the behavior with x's. If a table does not have an entry for every combination of inputs, those for which there is no table entry will have a value of x as the output. Consequently, the above table would be expanded to this:
+					<p></p>
+					<pre>
+        table
+        //   in1  in2  :  out
+              0    0   :   0;
+              0    1   :   0;
+              1    0   :   0;
+              1    1   :   1;
+              0    x   :   x;
+              1    x   :   x;
+              x    0   :   x;
+              x    1   :   x;
+              x    x   :   x;
+        endtable
+</pre>
+					In this form, it is apparent that this is not the same as the built-in and primitive.</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

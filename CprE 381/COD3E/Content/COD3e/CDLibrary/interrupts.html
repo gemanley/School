@@ -1,0 +1,594 @@
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+	<title>History and Overview of Interrupts and Interrupt Systems -- Mark Smotherman</title>
+	<link href="../../resources/base_style.css" rel="stylesheet" type="text/css" media="all">
+
+    <style TEXT="TEXT/CSS">
+       body { color: black; margin-right: 5%; margin-left: 5% }
+       hr { margin-right: -4%; margin-left: -4% }
+       em { color: green }
+       cite{color: brown}
+ul { margin-top: 6px }
+li { margin-top: 4px }
+</style>
+</head>
+
+
+<body>
+	<p></p>
+	<h1>Interrupts<br>
+		<font size="-2">Mark Smotherman</font></h1>
+	<div align="center">
+		
+	</div>
+	<p><i>Summary: Interrupts are a vital part of sequencing a modern computer. They were developed for exception handling and were later applied to I/O events. Today, they also also play a role in protection and memory management. However, interrupts can be disruptive to both program design and to high performance.</i></p>
+	<hr>
+	<h3>Contents</h3>
+	<p><b>Machines discussed:</b><br>
+		<a href="#univac-i">Univac-I (1951)</a> - overflow trap<br>
+		<a href="#dyseac">NBS DYSEAC (1954)</a> - I/O interrupt<br>
+		<a href="#1103">Univac 1103/1103A (1955 innovation)</a> - wind tunnel interrupt<br>
+		<a href="#704">IBM 704 (1955)</a> - transfer trap (for debugging)<br>
+		<a href="#stretch">IBM Stretch (1957 paper)</a> - vectored interrupt system<br>
+		<a href="#tx-2">Lincoln Labs TX-2 (1957 paper)</a> - multiple-sequence system<br>
+		<a href="#x-1">Electrologica X-1 (1957-1958 innovation)</a> - vectored interrupt system<br>
+		<a href="#atlas">Manchester Atlas (1961)</a> - page fault</p>
+	<p><b>Comments on interrupts</b><br>
+		<a href="#denning">Denning</a><br>
+		<a href="#dijkstra">Dijkstra</a><br>
+		<a href="#hardy">Hardy</a></p>
+	<p><a href="#design"><b>Design tree</b></a></p>
+	<p><a href="#coalesce"><b>Performance techniques</b></a></p>
+	<p><a href="#dpc"><b>Deferred interrupt handler structure</b></a></p>
+	<p></p>
+	<h3>Note</h3>
+	<p>In my 1989 paper, &quot;A Sequencing-Based Taxonomy of I/O Systems and Review of Historical Machines,&quot; Computer Architecture News, vol. 17, no. 5, pp. 5-15, September 1989 (and reprinted as Paper 1 of Chapter 7, in M. Hill, N. Jouppi, and G. Sohi (eds.), Readings in Computer Architecture, Morgan Kaufmann, San Francisco, 2000),</p>
+	<ul>
+		<li>I assigned the innovation of interrupt vectors to the Lincoln Labs TX-2. A case can also be made for tracing this innovation to Fred Brooks' work (1957 paper and patent) on an interrupt system for the IBM Stretch.
+			
+		<li>I assigned the innovation of DMA to the IBM SAGE, but I am unable to date its use in SAGE to earlier than the publication of the concept in the 1954 DYSEAC papers. DYSEAC thus seems to be the first design to use DMA.
+	</ul>
+	<p></p>
+	<hr>
+	<h3><a name="1103"></a>Short Review of the History of Interrupts</h3>
+	<ul>
+		<li><a href="http://ed-thelen.org/comp-hist/BRL61-u.html#UNIVAC-1103-1103A">UNIVAC 1103 / 1103A</a> (1953 / 1956) - typically cited as first
+			<ul>
+				<li>The UNIVAC (or ERA for Engineering Research Associates) 1103/1103A is often cited as the first computer system to use interrupts.
+					<ul>
+						<li>E.g., Figure 2c of Chapter 3 (page 45) in Bell and Newell, Computer Structures: Readings and Examples, McGraw-Hill, 1971, dates the concept of an interrupt to a Univac 1103 in 1953. <a href="http://research.microsoft.com/users/GBell/Computer_Structures__Readings_and_Examples/00000065.htm">(It's hard to read in this on-line image, but it's the third dot on the line labeled &quot;Pc CONCURRENCY&quot;.)</a>
+					</ul>
+					<p>(1953 corresponds to both the <a href="http://www.cc.gatech.edu/gvu/people/randy.carpenter/folklore/v6n1.html">announcement</a> and <a href="http://www.cc.gatech.edu/gvu/people/randy.carpenter/folklore/v2n2.html">first delivery</a> of the 1103.)</p>
+					<p>Others give credit to the 1103A as the first to use interrupts.</p>
+					<ul>
+						<li>Gerrit Blaauw and Fred Brooks in Computer Architecture: Concepts and Evolution, Addison-Wesley, 1997.
+							
+						
+						<li>Saul Rosen in &quot;Electronic Computers: A Historical Survey,&quot; ACM Computing Surveys, Volume 1, Issue 1, March 1969, pp. 7-36.
+					</ul>
+				
+					
+				<li>The development of an interrupt system for the 1103 computer took place at the NACA Lewis Flight Propulsion Laboratory in Cleveland, Ohio. (The lab is now known as the NASA John Glenn Research Center at Lewis Field.) The 1103 was normally used for batch processing but was modified so that it could be interrupted to start collecting real-time wind tunnel data. There is some question as to the date of this modification.
+					<ul>
+						<li>Chapter 3 of <a href="http://history.nasa.gov/SP-4104/ch3.htm">&quot;SP-4104 NASA Engineers and the Age of Apollo&quot;</a> states that the 1103 arrived at the Lewis Lab in 1953.
+					</ul>
+					<p>However,</p>
+					<ul>
+						<li><a href="http://history.nasa.gov/SP-4306/ch10.htm">Chapter 10</a> of the same document and <a href="http://history.nasa.gov/SP-4306/app-b.htm">Appendix B</a> of &quot;SP-4306 Engines and Innovation: Lewis Laboratory and American Propulsion Technology&quot; indicate instead that the 1103 at Lewis started service in 1955.
+							
+						<li>Martin H. Weik, <a href="http://ed-thelen.org/comp-hist/BRL61-u.html">&quot;A Third Survey of Domestic Electronic Digital Computing Systems,&quot;</a> Report No. 1115, Ballistic Research Laboratories, March 1961, page 0915, states that the 1103 at Lewis &quot;Passed Customer Acceptance Test Sep 55&quot;.
+							
+						<li>The January 2002 <a href="http://www.cc.gatech.edu/gvu/people/randy.carpenter/folklore/v6n1.html">Unisys History Newsletter</a> lists the first five 1103 customers, and Lewis is not among them. (These first five machines had electrostatic memory, which proved unreliable.) Instead, Lewis appears to have been a customer for one of the later core-memory 1103s, which, according to the article, started delivery only in November 1954.
+					</ul>
+					<p>Thus, the 1955 date for the Lewis system seems more likely than the 1953 date. And, thus, the upshot of this analysis is that development of the interrupt system on the 1103 at Lewis must have occurred in mid-to-late 1955, rather than in 1953 as indicated in Bell and Newell.</p>
+				
+					
+				<li>By late 1955, Univac incorporated the interrupt idea into a revised core-memory production model (4,096 words) and marketed the system as the <a href="http://ed-thelen.org/comp-hist/BRL-t-z.html#UNIVAC-SCI%20(ERA-1103)(ERA-1103A)">1103A</a>. The 1103A had one program counter (PAK), and, upon an interrupt, the current value of the program counter was stored into a fixed memory location and the program counter was reloaded with a fixed address. (A similar approach, but one which included an interrupt enable flag, was used in the <a href="pdp8.html">PDP-8</a> minicomputer ten years later.) The first 1103A computers were delivered in late 1956.
+					
+				<li>The 1103A interrupt system is described in Jules Mersel, &quot;Program Interrupt on the Univac Scientific Computer,&quot; in Proc. WJCC, San Francisco, February 1956, pp. 52-53. [Mersel attributes the idea to Richard Turner, now the CIO at NSA, and formerly CIO at NASA and FTC]
+					
+				<li><a href="http://www.bitsavers.org/pdf/univac/1103/Univac1103AManual.pdf">1103A manual</a> from Al Kossow's on-line collection
+			</ul>
+	</ul>
+	<p><b>however ...</b><br>
+	</p>
+	<ul>
+		<li><a name="univac-i"></a><a href="http://www.bitsavers.org/pdf/univac/univac1/UNIVAC_Programming.pdf">UNIVAC I</a> (1951) - first exception handling
+			<ul>
+				<li>arithmetic overflow would either
+					
+					<ol>
+						<li>trigger the execution a two-instruction fix-up routine at address 0, or
+						<li>at the programmer's option, cause the computer to stop
+					</ol>
+				
+					
+				<li>from 1953 programming manual, p. 83 <cite>
+						
+							The computer reacts to an &quot;overflow&quot; situation automatically. The sequence of instructions is interrupted, and the pair of instructions in memory location 000 is inserted. This insertion is effected after both instructions of the original pair have been executed even though overflow may have been caused by the first instruction of the pair.<br>&nbsp;<br>
+							If memory location 000 contains an instruction which transfers control, a new sequence is initiated. It is important to note that, if no transfer of control is ordered, the original sequence of instructions is resumed after executing the pair contained in 000.
+					</cite>
+				<li>The inserted instructions were often used by programmers for looping.
+				
+					
+			</ul>
+			<p>(cf. SWAC with 4th address in inst. specifying branch address on overflow)</p>
+		
+		
+			
+		
+			
+		<li><a href="http://www.bitsavers.org/pdf/ibm/650/22-6060-2_650_OperMan.pdf">IBM 650</a> (1954) - first use of interrupt masking
+			
+			<ul>
+				<li>console option to automatically branch to a restart sequence upon a machine error
+					
+				<li>Blaauw and Brooks write:<br>
+					<cite>
+						
+								There is a rudimentary interrupt system for machine errors. When the stop condition of the Machine Error indicator in [sic] not enabled by its mask switch, it causes a trap. The next instruction is now taken from the console switches, word 8000, instead of from the specified location. There is no status preservation whatever; there is no way to know where the offending trap occurred. Moreover, the Distributor and Accumulator are reset; the main purpose is to get a fresh restart after an intermittent error.
+					</cite>
+            
+			</ul>
+
+
+		<li><a name="dyseac"></a><a href="http://ed-thelen.org/comp-hist/BRL61-d.html#DYSEAC">NBS DYSEAC</a> (1954) - first I/O interrupts
+			
+			<ul>
+				<li>DYSEAC was a mobile computer <a href="http://ed-thelen.org/comp-hist/BRL61-0234.jpg">(carried in two tractor trailers at 12 and 8 tons, respectively!)</a> built for the US Army Signal Corps.
+					
+				<li>DYSEAC had two program counters, and an I/O signal caused execution to switch from one PC to the other. A bit in each instruction indicates which PC to use for the next instruction.
+					
+				<li>The DYSEAC was delivered to the Army in 1954, and papers describing the DYSEAC were published that same year. Since this is a year before the likely time of development of the interrupt system on the Lewis Univac 1103 (see above), I would assign the distinction of being the first computer to use interrupts to the DYSEAC.
+					
+					<p>In the context of arithmetic overflow handling in the UNIVAC I, Codd states, <cite>&quot;in the NBS DYSEAC the very significant step was made of extending interruption to input-output operations.&quot; </cite>[E.F. Codd, &quot;Multiprogramming,&quot; pp. 77-153, in F.L. Alt and M. Rubinoff (eds.), Advances in Computers, Vol. 3. New York: Academic Press, 1962.]</p>
+				
+					
+				<li>The DYSEAC also appears to be the first computer to provide DMA, although IBM was granted a patent for DMA cycle-stealing on the SAGE system (US 3,319,230 Astrahan, et al., &quot;Data Processing Machine Including Program Interrupt Feature,&quot; filed Sept. 1956 and granted May 1967). (The SAGE project started in 1952, and I cannot yet determine the date of the first use of DMA in the design.)
+					<ul>
+						<li>Knuth states,<br>
+							<cite>&quot;The DYSEAC computer ... introduced the idea of input-output devices communicating directly with memory while a program is running, then interrupting the program upon completion.&quot; </cite>[D.E. Knuth. The Art of Computer Programming. Volume 1, Fundamental Algorithms. (2nd ed.) Reading, MA: Addison-Wesley, 1973. Section 1.4.5, pp. 225-227.]
+							
+							
+							<p>... versus ...</p>
+						
+							
+						
+						
+							
+						
+							
+						<li>Jacobs states &quot;the input/output (I/O) break, or memory cycle stealing,&quot; was introduced in SAGE [J.F. Jacobs, The SAGE Air Defense System - A Personal History. Bedford, MA: MITRE Corp., 1986.]
+							
+						<li>Serrell, et al., identify &quot;computation in parallel with I/O&quot; as a significant new feature of SAGE. [R. Serrell, M.M. Astrahan, G.W. Patterson, and I.B. Pyne, &quot;The Evolution of Computing Machines and Systems,&quot; Proc. IRE, vol. 50, no. 5, May 1962, pp. 1039-1058.]
+					</ul>
+				
+				
+					
+				<li>A.L. Leiner and S.N. Alexander, &quot;System Organization of DYSEAC,&quot; IRE Trans. on Elect. Computers, vol. EC-3, no. 1, March 1954, pp. 1-10.<br>
+					<cite>
+						
+								Each input-output instruction ... indicates whether or not a Program-Jump operation is desired after completion of the input-output operation. If a Program-Jump is desired, then a signal is produced after the input-output operation is completed which causes the program to jump, i.e., the counter-register being used as the source of the next instruction is temporarily abandoned, and the instruction word in the address specified by the other counter-register is executed in its stead. ... After effecting a program-jump, the new program that is initiated may, as soon as its final instruction is performed, cause the machine to resume the interrupted program where it left off, if the programmer so desires.<br>
+								...<br>
+								It might be noted again that any consecutive areas of the memory in DYSEAC, ranging in size from a single word to the entire memory, can be loaded or printed out even while a program of computation is proceeding. Automatic interlocks are provided to guard against inadvertent attempts to use a memory location for conflicting purposes. For example, if a print-out order is given, the machine is automatically prevented from writing into any memory location affected by the print-out order until the word in that location has been printed out.<br>
+								...<br>
+								The Concurrent Input-Output Control has the function of regulating the detailed progress of all input-output operations requested in the course of the internal program. It directs the flow of traffic between the memory and the Input-Output Buffer, .... It receives signals from the Input-Output Buffer as each complete word is transferred, and it not only keeps count of the total number of words handled, but also keeps track of which address in the high-speed memory contains the word currently to be transferred. This information is transmitted to the Memory Address Switches at the proper time.<br>
+								In the comparatively unlikely event that both the Input-Output Buffer and some internal unit should simultaneously demand access to the high-speed memory, the Concurrent Input-Output Control resolves the conflict by according temporary priority to the external operation. Likewise it referees conflicts or inconsistencies between the internal program and the progress of external operations. It also notifies the Program Control unit at the termination of an input-output operation so that the program-jump may take place.
+					</cite>
+
+					
+				<li>A.L. Leiner, &quot;System Specifications for the DYSEAC,&quot; JACM, vol. 1, no. 2, April 1954, pp. 57-81.<br>
+					[discussing interlocks] <cite>
+						
+							For example, if the programmer directs that a given section of the memory be loaded from an external input unit and then some time afterwards directs that the contents of a memory location in this section be used as the source of an instruction, the program will automatically be temporarily halted until the sought-for memory location has actually received the word intended for it from the input unit.
+					
+					</cite>
+					
+				
+					
+				
+				
+			</ul>
+		
+		
+		<li>Note a claim that the Cambridge University <a href="edsac.html#interrupts">EDSAC had interrupts</a> in the early 1950s; however, after investigating, it appears that they are using this term for periodic polling in which explicit conditional branches must be inserted into the program.
+		
+			
+		
+			
+			
+		<li><a name="704"></a>IBM 704 (1955) - debugging feature called &quot;transfer trapping&quot;
+			<ul>
+				<li>Branches/jumps were called &quot;transfers&quot; in the 704.
+				<li>In trapping mode, when the control decoded an unconditional transfer instruction or a conditional transfer instruction that would be taken, the target address of the transfer instruction would be placed instead in the address field bits of the instruction in location 0 and then the program counter would be set to the value 1.
+				<li>The instruction in location one would be ttr (trap transfer), which was the single unconditional transfer that was immune to the trapping mode. Thus the original program could be resumed by branching back to location 0 and then to the target address (by executing the ttr instruction in location 0).
+				<li>Trapping mode was entered by the etm (enter trapping mode) instruction; trapping mode was exited by the ltm (leave trapping mode) instruction or by manually pressing the clear or reset buttons on the console.
+			</ul>
+
+
+		<li><a name="stretch"></a><a href="http://ed-thelen.org/comp-hist/BRL61-ibm7070.html#IBM-STRETCH">IBM Stretch</a> (1957 paper)
+			<ul>
+				<li>Stretch had a combined approach to interrupts and conditional branching. There was a single indicator register containing 64 bits, the first 48 bits of which were monitored by the interrupt system. There was also a 28-bit mask register. Of the 64 bits:
+					<ul>
+						<li>20 bits were never masked (e.g., equipment check, timer, I/O signals, instruction exceptions)
+						<li>28 bits could be masked on or off using the mask register (e.g., result exceptions)
+						<li>16 bits were always masked off, and thus had to be tested by explicit conditional branches (e.g., index and arithmetic results)
+					</ul>
+				
+					
+				<li>Branch-disabled and branch-enabled instructions would disable or enable the entire interrupt system; these were used when entering and exiting interrupt handlers.
+					
+				<li>The interrupt vector was structured to hold one instruction for each interrupt cause. This instruction could be an immediate fix-up, such as clearing a register, or it could be a subroutine call to an appropriate interrupt handler. A leftmost-one circuit was used to choose the highest priority enabled interrupt condition in the indicator register.
+					
+				<li>Stretch was meant for multiprogramming and thus provided an interrupt address register, which held the base address of the interrupt vector for the current process. This approach was used instead of a single global vector since the contents of the vector might have to change as part of a process switch.
+					
+				<li>Stretch included a 19-bit interval timer and a 36-bit time clock; both had 1 msec resolution. The interval timer could be set to up to 8 minutes before causing an interrupt. Stretch also had a fixed interval watchdog timer (1 msec) to prevent infinite loops in indirect addressing and in execute instructions
+					
+				<li>Stretch provided two forms of execute instructions that would interrupt when the target instruction was a taken branch; this was useful for program monitoring. Stretch also provided up to three programmer-defined data flags (T,U,V) in the extended form of its &quot;sign byte&quot; for operands. Reading an operand with one of these bits set would cause an interrupt; this was another useful feature for program monitoring.
+					
+				<li>F.P. Brooks and D.W. Sweeney, &quot;Program Interrupt System,&quot; U.S. Patent 3,048,332 (filed December 1957 and granted August 1962)
+					
+				<li>F.P. Brooks, Jr., &quot;A Program-Controlled Program Interruption System,&quot; Proc. IRE-ACM-AIEE Eastern Joint Computing Conference, December 1957, pp. 128-132.
+					
+				<li>E.F. Codd, E.S. Lowry, E. McDonough, and C.A. Scalzi, &quot;Multiprogramming Stretch: Feasibility Considerations&quot;, Communications of the ACM, vol. 2, no. 11, November 1959, pp. 13-17.
+			</ul>
+		
+			
+		
+		
+		
+		<li><a href="http://ed-thelen.org/comp-hist/BRL61-l.html#LINCOLN-TX-2">Lincoln Labs TX-2</a> (1957 paper)
+			<ul>
+				<li>This &quot;multiple sequence&quot; computer contains 33 sequence counters (32 normal sequence counters, held in the upper 32 of 64 index registers, and one special sequence counter, held in index register 0); each operates at the fixed priority corresponding its index register number. J.W. Forgie, in &quot;The Lincoln TX-2 input-output system,&quot; in Proc. WJCC, 1957, pp. 156-160, lists 25 defined sequences:
+					<ul>
+						<li>restart - highest priority, special sequence used for starting other sequences (index register 0)
+						<li>I/O alarms
+						<li>arithmetic alarms (e.g., overflow)
+						<li>magnetic tapes (several sequences, also one sequence needed per transfer direction, that is, a read sequence for a given tape is separate from the write sequence for that tape)
+						<li>printer
+						<li>ADC
+						<li>paper tape readers (several sequences)
+						<li>light pen
+						<li>display (several sequences)
+						<li>MTC
+						<li>TX-0
+						<li>DAC
+						<li>paper tape punch
+						<li>flexowriters (several sequences)
+						<li>three main sequences
+					</ul>
+					<p>Thus the assigned priority levels are not under program control and cannot change during execution.</p>
+				
+					
+				<li>Each instruction has break and dismiss bits: break is used to indicate points at which a higher-priority sequence can take over, while dismiss is used to end the current sequence and allow lower-priority sequences to resume. Deferred breaks can thus be used to disable nested interrupts during a critical section (in which information used by the current sequence could be corrupted by a higher-priority sequence, should it be allowed to break in and execute).
+					
+				<li>One of the I/O instructions, ios, can be used by the restart sequence (or actually by any sequence) to send attention and dismiss bits to the sequence selection logic of any priority level.
+					
+				<li>Carl Ellison:<br>
+					<cite>&quot;If you asked for data in and there wasn't any, then your interrupt level was dismissed -- and when data arrived, you were resumed. Similarly, if you try to output when the output buffer was full, you dismiss before doing the output and resume at that level when the buffer empties.&quot; </cite>
+					
+				<li>Gill (of EDSAC fame) speaking in 1957:<br>
+					<cite>&quot;However, in the future one computer in particular will stand out as a classic example of the wholesale application of the time-sharing technique. This is the TX-2 computer ... now nearing completion at the Lincoln Laboratory of the Massachusetts Institute of Technology.&quot; </cite>[published in S. Gill, &quot;Parallel Programming,&quot; Computer Journal, Vol. 1, No. 1, April 1958, pp. 2-10.]
+			</ul>
+
+
+		<li><a name="x-1"></a>Electrologica X-1 (1957-1958) - Knuth credits E. W. Dijkstra with the independent development of an interrupt system in 1957 and 1958 [op cit.]. Dijkstra's dissertation was published in 1959.
+			
+			<ul>
+				<li>The X-1 included a seven-level interrupt vector, a six-bit interrupt mask, and a one-bit overall interrupt enable. Interrupts worked by inserting one of seven predefined subroutine calls into the instruction stream.
+				<li>The X-1 was a single-address instruction design with a 27-bit word. Addresses were 15 bits in size. The programming model included:
+					<ul>
+						<li>27-bit A and S registers
+						<li>16-bit B register (index register, 15 bits plus sign)
+						<li>other registers that would be saved in a subroutine &quot;link&quot; word:
+							<ul>
+								<li>one-bit trace bit (&quot;stop after subroutine call&quot;)
+								<li>six-bit interrupt mask (&quot;interruption permits&quot;)
+								<li>one-bit interrupt enable (&quot;interruption susceptibility&quot;)
+								<li>one-bit condition code C
+								<li>one-bit sign of last recorded result
+								<li>one-bit overflow
+								<li>15-bit program counter
+							</ul>
+					</ul>
+					<p>Memory included:</p>
+					<ul>
+						<li>16 reserved words for subroutine links (addresses 8-23, the first nine of which were allocated for user programs and the remaining seven for the interrupt system)
+						<li>seven words in read-only memory to hold subroutine call instructions to the interrupt handlers (addresses &quot;1-7 D16&quot;)
+					</ul>
+					<p>Also, the X-1 could provide:</p>
+					<ul>
+						<li>seven interrupt class words, each of which contained a bit vector representing the individual interrupt request signals assigned to that class
+					</ul>
+				<li>There were seven levels (or &quot;classes&quot;) of interrupts, 1-7. The first six could be individually masked on or off, while the seventh was unmaskable since it was used for signals from the operator console. Multiple interrupt sources could be assigned to a given level.
+				<li>An interrupt request would be accepted between normal instructions if (1) the machine was &quot;susceptible&quot; and (2) if the requesting interrupt class was less than seven, then the class permit bit had to allow it.
+					<p>At that point, the predefined subroutine call instruction corresponding to the interrupt class was inserted into the instruction register. Executing this instruction formed a link word (note the contents listed above), which was saved into the corresponding word in low memory, and control was transferred to the interrupt handler.</p>
+					<p>The interrupt handler began execution with interrupts disabled (&quot;not susceptible&quot;). The interrupt handler had the responsibility of saving the A, S, and B registers and then reading the class word. All bits (i.e., interrupt request signals) in the class word would be reset upon the read.</p>
+					<p>The enable bit and permit bits could be individually set and reset under program control to provide for disabling all or some of the interrupts. This allowed for a priority system among classes.</p>
+					<p>Returning from the interrupt handler was accomplished by use of a &quot;restoring jump&quot; which restored the information from the saved link word.</p>
+				
+					
+				<li>B.J. Loopstra, <a href="http://www3.oup.co.uk/computer_journal/hdb/Volume_02/Issue_01/020039.sgm.abs.html">&quot;The X-1 computer,&quot;</a> Computer Journal, Vol. 2, No. 1, April 1959, pp. 39-43.
+					
+				<li><a href="http://www.cs.utexas.edu/users/EWD/PhDthesis/PhDthesis.PDF">&quot;Communication with an Automatic Computer,&quot;</a> Dijkstra's PhD thesis, University of Amsterdam, 1959 (5.3 MB pdf) - describes the interrupt system in detail and gives example interrupt handlers
+			</ul>
+		
+			
+		
+			
+		
+			
+		
+		
+		<li>Manchester Atlas (1961) - page faults<br>
+			<cite>
+				
+					The clever feature was that rather than requiring the processor to use its precious time, swapping memory in and out of the drum storage space, the transfers would be automatically done on demand. This was implemented using another clever technique. If a request was made for data not currently in the core memory, an interrupt, (then called an extracode instruction), was called. This paused the execution of the program, and automatically loaded the page of memory which the data was in, (a page being a 512 word block of memory).<br>&nbsp;<br>
+					A further optimisation to this technique was also implemented. Rather than check for every instruction to ensure it is in core memory, which would largely waste time, as the sequential nature of instruction reads means they are more than likely to be in the current page, a different method was used. They eliminated the check for each instruction, and instead implemented an exception handler to deal with the error accesses.
+			</cite><a href="http://hoc.co.umist.ac.uk/storylines/compdev/commercialisation/atlas.html">(http://hoc.co.umist.ac.uk/storylines/compdev/commercialisation/atlas.html)</a>
+			<p><a href="http://www.computer50.org/mark1/interrupt.html">Brian Napper, &quot;The Atlas Interrupt Mechanism, Illustrated with Paper Tape Input&quot;</a></p>
+			Burroughs B5000 (1963)
+			<ul>
+				
+			</ul>
+		
+			
+		
+		
+		<li>
+			<ul>
+				<li>R.V. Bock, &quot;An interrupt control for the B5000 data processor system,&quot; Proc. AFIPS SJCC, Las Vegas, November 1963, pp. 229-241.
+			</ul>
+		
+	</ul>
+	<p></p>
+
+	<hr>
+	<h3><a name="denning"></a>Denning's comments on interrupts</h3>
+	<p><a href="http://cne.gmu.edu/pjd/PUBS/needham.pdf">Peter J. Denning, &quot;Principles for Reliable Operating Systems,&quot; January 28, 2003</a></p>
+	<p></p>
+	<hr>
+	<h3><a name="dijkstra"></a>Dijkstra's comments on interrupts</h3>
+	<ul>
+		<li>from <a href="http://www.cs.utexas.edu/users/EWD/transcriptions/EWD12xx/EWD1243a.html">&quot;The next fifty years&quot;</a><br>
+			<cite>
+				
+						In this connection the history of the real-time interrupt is illuminating. This was an invention from the second half of the 50s, which enabled the completion of a communication with the external world to interrupt the execution of one program in favour of another. It's advantage was that it enabled the implementation of rapid reaction to changed external circumstances without paying the price of a lot of processor time lost in unproductive waiting. The disadvantage was that the operating system had to ensure correct execution of the various computations despite the unpredictability of the moments at which the interrupts would take place and the central processor would be switched from one computation to another; the nondeterminism implied by this unpredictability has caused endless headaches for those operating system designers that did not know how to cope with it. We have seen two reactions to the challenge of this added complexity.<br>
+					&nbsp;<br>
+					The one reaction was to enhance the debugging facilities, as IBM did for the design of OS/360. (This was the operating system IBM tried to design for its 360-Series of machines, which were introduced in the first half of the 60s; IBM's problems with this design facilitated in 1968 the recognition of the world-wide phenomenon that became known as &quot;the software crisis&quot;.) IBM built, in fact, special-purpose monitors that exactly recorded when the central processor honoured which interrupt; when something had gone wrong, the monitor could be turned into a controller, thus forcing a replay of the suspect history and making the &quot;experiment&quot; repeatable.<br>
+					&nbsp;<br>
+						The other reaction could be observed at the THE (Technological University Eindhoven), viz. to determine the conditions under which one could feasibly and safely reason about such nondeterministic programs and subsequently to see to it that these conditions were met by hardware and software.<br>
+					&nbsp;<br>
+						The difference was striking, showing once more that debugging is no alternative for intellectual control. While OS/360 remained a mess forever after, the Multiprogramming System designed at the THE was so robust that no system malfunction ever gave rise to a spurious call for hardware maintenance. Needless to say, the whole episode has made a lasting impression on me.<br>
+					&nbsp;<br>
+						One moral is that the real-time interrupt was only the wave, whereas the tide was the introduction of nondeterminism and the development of the mathematical techniques to cope with it.
+			</cite>
+			
+		
+			
+		
+		
+			
+		<li>from <a href="http://www.cs.utexas.edu/users/EWD/transcriptions/EWD13xx/EWD1303.html">&quot;My recollections of operating system design&quot;<br>
+			</a><cite>
+				
+					The third arrangement, known as &quot;the interrupt&quot;, circumvents all these dilemmas. While the computer calculates at full speed, a piece of dedicated hardware monitors the outside world for completion signals from communication devices. When a completion is detected, the program under execution is interrupted after the current instruction and in such a fashion that it can be resumed at a later moment as if nothing had happened, thus instantaneously freeing the central processor for a suddenly more urgent task. After the interrupt the processor would execute a standard program establishing the source of the interruption and taking appropriate action.<br>
+					&nbsp;<br>
+						It was a great invention, but also a Box of Pandora. Because the exact moments of the interrupts were unpredictable and outside our control, the interrupt mechanism turned the computer into a nondeterministic machine with a nonreproducible behavior, and could we control such a beast?
+			</cite>
+		<li>from <a href="http://www.cs.utexas.edu/users/EWD/transcriptions/EWD13xx/EWD1308.html">&quot;What led to 'Notes on Structured Programming'&quot;<br>
+			</a><cite>
+				
+						In the mean time a pattern emerged for the cooperation between me and my hardware colleagues Bram J. Loopstra and Carel S Scholten. After the functional specification of the next machine had been written down (usually by me), that document served as a kind of contract between us: it told them what machine to design and construct, while I knew what I could count upon while writing all the basic software for the machine. The target of this division of labour was that my programs would be ready by the time the construction of the machine had been completed.<br>
+					&nbsp;<br>
+						Looking back I now observe that the above arrangement has had a profound influence on how I grew up as programmer: I found it perfectly normal to program for not yet existing machines. As a byproduct it became firmly ingrained in my mind that I programmed for the abstract machine as specified in the original document, and not for the actual piece of hardware: the original document was not a description but a prescription, and in the case of a discrepancy not the text but the actual hardware would be at fault.<br>
+						...<br>
+						Of course I could not exclude from my designs typographical errors and similar blemishes, but such shortcomings did not matter as long as the machine was not ready yet, and after the completion of the machine they could be readily identified as soon as they manifested themselves, but this last comforting thought was denied to me in 1957 with the introduction of the real-time interrupt. When Loopstra and Scholten suggested this feature for the X1, our next machine, I got visions of my program causing irreproducible errors and I panicked.<br>
+					&nbsp;<br>
+						Eventually, Loopstra and Scholten flattered me out of my resistance and I studied their proposal. The first thing I investigated was whether I could demonstrate that the machine state could be saved and restored in such a way that interrupted programs could be continued as if nothing had happened. I demonstrated instead that it could not be done and my friends had to change their proposal. Admittedly the scenarios under which the original proposal would fail were very unlikely, but this can have only strengthened my conviction that I had to rely an arguments rather than on experiments. At the time that conviction was apparently not so widespread, for up to seven years later I would find flaws in the interrupt hardware of new commercial machines.
+			</cite>
+	</ul>
+	<p></p>
+
+				<hr>
+	<h3><a name="hardy"></a>Hardy's comments on interrupts</h3>
+	<p><a href="http://www.cap-lore.com/Hardware/int.html">Norm Hardy's history of interrupts</a></p>
+	<p>[note that, contrary to Norm's description of the 709/7090 difference, M. Rubinstein indicated to me that he remembered the optional, extra-cost interrupt system on the IBM 709 (which became standard on the 7090) was ordered by almost all customers]</p>
+	<p></p>
+
+					<hr>
+	<h3><a name="design"></a>Design Tree</h3>
+	<p>(adapted from Blaauw and Brooks, section 7.4, on interrupts)</p>
+	<ol>
+		<li>terminology and connotations (there are no well-defined, widely-accepted distinctions among the various terms)
+			
+			<ol type="A">
+				<li>asynchronous, external
+					<ol type="1">
+						<li>interrupt
+											
+						<li>machine check - hardware error or failure
+										
+					</ol>
+				<li>synchronous, internal
+					<ol type="1">
+						<li>alarm - error or exceptional condition
+											
+						<li>exception - special or undefined case (e.g., divide by zero)
+											
+						<li>fault - missing information (e.g., page fault)
+											
+						<li>internal interrupt
+											
+						<li>program check
+											
+						<li>software interrupt - user request to OS (e.g., INT opcode in x86)
+											
+						<li>trap - user request (e.g., trace) or exceptional condition (sprung like a &quot;mousetrap&quot;)
+										
+					</ol>
+				
+			</ol>
+		
+			
+		<li>entry point (i.e., where CPU execution diverted)
+			
+			<ol type="A">
+				<li>fixed memory address (e.g., PDP-8)
+					<ol type="1">
+						<li>poll to find cause (e.g., PDP-8)
+											
+						<li>code indicating cause placed in register
+										
+					</ol>
+				<li>one of many memory locations (interrupt vector)
+					<ol type="1">
+						<li>number of vectors
+							<ol type="a">
+								<li>single, globally shared (e.g., Electrologica X-1, S/360, x86)
+													
+								<li>multiple, one per process (e.g., IBM Stretch)
+												
+							</ol>
+						<li>vector contents
+							<ol type="a">
+								<li>interrupt vector entry holds new PC (and maybe new PSW) (e.g., S/360, x86)
+													
+								<li>interrupt vector holds blocks of instructions (e.g., SPARC)
+												
+							</ol>
+						
+					</ol>
+				<li>different PC (e.g., DYSEAC, TX-2)
+								
+			</ol>
+		
+			
+		<li>return linkage
+			
+			<ol type="A">
+				<li>fixed memory location(s) (e.g., PDP-8, S/360)
+									
+				<li>memory stack (e.g., x86, M68K)
+									
+				<li>register (e.g., SPARC)
+								
+			</ol>
+		
+			
+		<li>permission
+			
+			<ol type="A">
+				<li>single interrupt enable bit (e.g., PDP-8, 8086 w/o PIC)
+					<ul>
+						<li>enable/disable interrupt instructions
+										
+					</ul>
+				<li>interrupt enable mask in PSW (e.g., S/360)
+									
+				<li>interrupt priority code in PSW (e.g., SPARC)
+									
+				<li>nonmaskable (cannot be ignored)
+									
+				<li>breakpoint bit in each instruction (e.g., DYSEAC)
+					<ul>
+						<li>device priority along with break and dismiss bit in each instructions (e.g., TX-2)
+										
+					</ul>
+				
+			</ol>
+		
+			
+		<li>techniques to accelerate interrupt handling
+			<ol type="A">
+				<li>cause determination (see cause register and interrupt vector)
+									
+				<li>additional register sets
+									
+				<li>interrupt poll to coalesce multiple interrupts (e.g., ITI on B5500 in 1960s, test pending interrupt on S/370 XA)
+								
+			</ol>
+		
+	</ol>
+	<p></p>
+	<hr>
+	<h3><a name="coalesce"></a>Performance techniques</h3>
+	<p>on another note, Rob Warnock writing in comp.arch on 16 Jul 2001:</p>
+	 <cite>
+		As far as the areas that I've been personally involved in -- mostly high-speed networking -- the best hardware/software tradeoffs have been mostly just judgment calls by very experienced folks. What I've noticed is that a *LOT* of &quot;lessons learned&quot; decades ago are still being re-learned by later generations, over and over again. We as an industry don't seem to have been doing a very good job of passing on the &quot;secret sauce&quot; to subsequent generations [in many cases, even *within* the same companies!].<br>
+		&nbsp;<br>
+		For example, way back in the early 1970's at Digital Communications Assoc. (in Atlanta, made communications front-ends for DEC PDP-10's and IBM 360's using DEC PDP-8e's, successfully sold in *competition* with DEC's own PDP-11-based front-ends!], we made simple interrupt-per- character PIO-based terminal controllers that were -- in terms of host CPU cycles -- *more* efficient (and a lot cheaper!) than DEC's complex DMA-based controllers, partly because we used three simple techniques, two programming and one hardware: (1) interrupt &quot;coalescing&quot;, (2) &quot;dallying&quot; before dismissing an interrupt, and (3) interrupt &quot;holdoff&quot;. That is, (1) during a single interrupt, process *all* of the data that's available or that *becomes* available (looping to repeat the availability test as needed) during a single interrupt; (2) spin-wait/test a certain amount (which may even be context/data-dependent!) before dismissing an interrupt, so as to catch new data and process it without having to dismiss/interrupt again; and (3) once you finally *do* dismiss an interrupt, arrange the hardware so that you won't get another one until a certain (sometimes dynamically) chosen time interval has expired (also known as &quot;interrupt rate-limiting&quot;, which, together with the other two, prevents &quot;thrashing&quot; in the interrupt service routine).<br>
+		&nbsp;<br>
+		[There's another variant of #2 that's worth mentioning: when doing PIO writes to a FIFO and hitting a FIFO-full condition, &quot;dallying&quot; (spin-waiting) a certain amount first rather than enabling a watermark interrupt and going away. If you pick the dally amount appropriately, by &quot;wasting&quot; a few cycles you actually can save *lots* of total CPU time, since you (hopefully) avoid a later heavy-weight interrupt/context-switch/dismiss.]<br>
+		&nbsp;<br>
+		These techniques were *NOT* unique to DCA!! In talking to other engineers at conferences &amp; trade shows, we learned that such things were generally widely known among workers in the field (especially embedded systems, datacomm, and real-time folks), but were not often discussed openly, being considered somewhat &quot;trade secrets&quot;. [That is, why tell your competitor why his performance sucks and yours doesn't?!?]<br>
+		&nbsp;<br>
+		In the 30+ years since then, I've been astounded how many times the techniques of coalescing/dallying/holdoff have been rediscovered, but I've been *more* astounded how many times they haven't been used *at all* in many places where they were definitely needed, or how they were reinvented badly. [E.g., if you're implementing hardware assistance for interrupt holdoff, it is *extremely* important that the holdoff period be effective only *after* the dismissing of an interrupt, and not delay the response to or processing of a &quot;new&quot; event that arrives when the system has been idle for longer than the holdoff.] &quot;Computer Science&quot; courses don't seem to ever discuss such practicalities, either.
+	 </cite>
+	<p></p>
+	
+							<hr>
+	<h3><a name="dpc"></a>Deferred interrupt handler structure</h3>
+	<p>In this section I want to trace the development of the idea of &quot;bottom half&quot; or &quot;deferred&quot; interrupt handlers (a.k.a. fork routines, interrupt queueing, interrupt stacking, as well as the term &quot;Cutler kernel&quot; structure).</p>
+	<p>The idea is that a &quot;first half&quot; interrupt handler dynamically creates a new thread or &quot;fork routine&quot; for later scheduling and execution, as opposed to an interrupt handler that runs to completion or a barebones interrupt handler that merely awakens a previously-created driver process. (For example, in RSX-11M, interrupt handlers fork a routine for later execution by adding a four-word fork block to a FIFO fork queue. The fork routines must be executed before any user processes are scheduled.)</p>
+	<p>Motivations:</p>
+	<ol>
+		<li>run the more-involved handling with interrupts re-enabled
+		<li>serialize handler access to kernel data structures in a uniprocessor (using a special queue of deferred handler tasks)
+		<li>allow the later invocation a non-resident system routine as part of the interrupt handling
+	</ol>
+	<p>The idea appears to date from at least the early 1960s with the soft-real-time monitor developed for the Project Mercury space program. [See the discussion of &quot;Cutler kernel&quot; in <a href="http://www.cse.ucsc.edu/research/embedded/pubs/tr96-29/html/tr96-29.html">Bruce R. Montague, &quot;JN: An Operating System for an Embedded Java Network Computer,&quot; UCSC-CRL-96-29, 1996.</a>]</p>
+	<p>Fred Brooks said that having to stack interrupts influenced Seymour Cray to design the CDC 6600 with polling rather than interrupts.</p>
+	<p>CDC 3600</p>
+	<ul>
+		<li>see the manuals at http://www.bitsavers.org/pdf/cdc/
+		<li>The 3600 hardware has a single enable/disable state and a cause register (main product register). An interrupt will set a given flag bit and, if interrupts are enabled, cause a branch to location 0 00001 and disable further interrupts. A bank jump that will be used to return from the interrupt handler is also constructed by the hardware and placed in location 0 00000. (See Figures 4-1 and 4-2 of the 3600 manual.) This jump will check the cause flags before actually returning to the interrupted address in order to coalesce any interrupts that happened during execution of the interrupt handler.
+		<li>The CDC 3600 SCOPE operating system allows calls to the OS during user-written interrupt handlers. These calls can request additional I/O and specify new interrupt handler addresses. If a channel is not available or if an interrupt is pending on the requested device, the request must be held and handled immediately after the current handler runs.
+	</ul>
+	<p>Two systems with deferred handling are cited by Richard Watson in Timesharing System Design Concepts, 1970, pp. 126,144:</p>
+	<ul>
+		<li>Multics
+		<li>XDS-940
+			<ul>
+				<li>Butler Lampson Proceedings of the IEEE paper 1966
+				<li>940 timesharing manual at http://www.bitsavers.org/pdf/sds/ (uses &quot;forks&quot; instead of &quot;processes&quot; or &quot;threads&quot;)
+			</ul>
+	</ul>
+    <p>Montague, op cit., also mentions the IBM TSS (mid-1960s) as using deferred handling.</p>
+	
+	<p>Genealogical tree involving Dave Cutler</p>
+	<ul>
+		<li>DEC RSX-11
+			<ul>
+				<li>RSX-15, designed by Dennis Brevik, did not have this kind of structure
+											
+				<li>the RSX-11 deferred handlers were called fork routines; see <a href="http://portal.acm.org/citation.cfm?id=805587">David N. Cutler, Richard H. Eckhouse, Jr., and Mario R. Pellegrini, &quot;The nucleus of a real-time operating system (A tutorial on the internals of RSX-11M),&quot; Proceedings of the ACM Annual Conference, Houston, 1976, pp. 241-246.</a>
+			</ul>
+		<li>DEC VMS - called fork processes
+									
+		<li>MS WNT - called deferred procedure calls (e.g., see <a href="http://www.winntmag.com/Windows/Articles/ArticleID/298/pg/1/1.html">Mark Russinovich, &quot;Inside NT's Interrupt Handling,&quot; Nov. 1997</a>)
+								
+	</ul>
+	<p>Linux deferred handlers</p>
+	<ul>
+		<li>bottom-half handlers (limit of 32, only one can be running at a time in an MP system, removed in 2.6.x) (see <a href="http://www.linuxjournal.com/article.php?sid=1222">Linux Journal Kernel Korner article on split-half interrupts</a>)
+									
+		<li>softirq (limit of 32, multiple instances of a given softirq can run concurrently on MP, introduced in 2.4.x)
+									
+		<li>tasklet (no limit, only one instance of a given tasklet can run at a time)
+								
+	</ul>
+	<p>Hardware support in x86</p>
+	<ul>
+		<li>int instruction (from original 8086)
+									
+		<li>interrupt gate
+									
+		<li>trap gate
+									
+		<li>task gate (task gate is for deferred handling)
+									
+		<li>sysenter instruction (new)
+								
+	</ul>
+</body>

@@ -1,0 +1,20 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td>In general, nets and registers must be declared before they can be used in a module. However, there is one important exception to this rule. A previously unused identifier may be used in a port list of a module or primitive instantiation, in which case it will be implicitly declared to be a net of the default type with zero delay.
+					<p>There is a compiler directive, <b>`default_nettype</b>, which can be used to specify what the default net type should be. If `default_nettype does not appear, then <b>wire</b> is the default.</p>
+					<p>The reason this exception was made was for the case of large netlist models which were created in schematic capture programs and translated to Verilog. Many such translations did not declare the nets that were used, so it was convenient to allow Verilog to default them.</p>
+				</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

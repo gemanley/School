@@ -1,0 +1,12 @@
+switch (state)
+{
+	case LOW:
+		rising_time = ICR1;
+		TCCRIB ^= _BV(ICE3);
+		state = HIGH;
+		break;
+	case HIGH:
+		falling_time = ICR1;
+		state = DONE;
+		break;
+}

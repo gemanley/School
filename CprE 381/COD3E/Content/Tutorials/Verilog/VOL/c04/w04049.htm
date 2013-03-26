@@ -1,0 +1,114 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body onload="parent.initBtnMT(5)" bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td>What are the outputs of the following module under the given inputs?
+					<p></p>
+					<pre>
+module abc (a, b, c, d, s1, s0);
+	input s1, s0;
+	output a, b, c,d;
+
+	not  (s1_, s1), (s0_, s0);
+
+	and (a, s1_, s0_);
+	and (b, s1_, s0);
+	and (c, s1, s0_);
+	and (d, s1, s0);
+endmodule
+						
+						
+						<p>
+</p>
+						
+						
+					</pre>
+					Inputs:
+					<p></p>
+				</td>
+			</tr>
+		</table>
+		<form>
+			<table width="370">
+				<tr>
+					<td width="150"></td>
+					<td width="100"><b>Outputs (abcd)</b></td>
+					<td width="120">
+						<center>
+							<b>Correct answer</b></center>
+					</td>
+				</tr>
+				<tr>
+					<td width="150">1. <font size="3" face="courier">s1=0, s0=1</font></td>
+					<td width="100">
+						<center>
+							<input type="TEXT" size="6" maxlength="4" onchange="parent.setValue(0,this.value)"></center>
+					</td>
+					<td width="120">
+						<center>
+							<font color="#4B0082"><tt><b>0100</b></tt></font></center>
+					</td>
+				</tr>
+				<tr>
+					<td width="150">2. <font size="3" face="courier">s1=1, s0=1</font></td>
+					<td width="100">
+						<center>
+							<input type="TEXT" size="6" maxlength="4" onchange="parent.setValue(1,this.value)"></center>
+					</td>
+					<td width="120">
+						<center>
+							<font color="#4B0082"><tt><b>0001</b></tt></font></center>
+					</td>
+				</tr>
+				<tr>
+					<td width="150">3. <font size="3" face="courier">s1=1, s0=0</font></td>
+					<td width="100">
+						<center>
+							<input type="TEXT" size="6" maxlength="4" onchange="parent.setValue(2,this.value)"></center>
+					</td>
+					<td width="120">
+						<center>
+							<font color="#4B0082"><tt><b>0010</b></tt></font></center>
+					</td>
+				</tr>
+				<tr>
+					<td width="150">4. <font size="3" face="courier">s1=x, s0=0</font></td>
+					<td width="100">
+						<center>
+							<input type="TEXT" size="6" maxlength="4" onchange="parent.setValue(3,this.value)"></center>
+					</td>
+					<td width="120">
+						<center>
+							<font color="#4B0082"><tt><b>x0x0</b></tt></font></center>
+					</td>
+				</tr>
+				<tr>
+					<td width="150">5. <font size="3" face="courier">s1=1, s0=z</font></td>
+					<td width="100">
+						<center>
+							<input type="TEXT" size="6" maxlength="4" onchange="parent.setValue(4,this.value)"></center>
+					</td>
+					<td width="120">
+						<center>
+							<font color="#4B0082"><tt><b>00xx</b></tt></font></center>
+					</td>
+				</tr>
+			</table>
+		</form>
+		<p><a name="answer"></a></p>
+		<table width="600" cellpadding="10">
+			<tr>
+				<td><b>These are the correct answers.</b>
+					<p></p>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

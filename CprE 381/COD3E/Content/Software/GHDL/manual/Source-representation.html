@@ -1,0 +1,25 @@
+<html lang="en">
+
+	<head>
+		<title>GHDL guide</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+		<meta name="description" content="GHDL guide">
+		<meta name="generator" content="makeinfo 4.1">
+		<link href="http://texinfo.org/" rel="generator-home">
+		<link href="../../../resources/base_style.css" rel="stylesheet" type="text/css" media="all">
+	</head>
+
+	<body>
+		<p>Node:<a name="Source%20representation">Source representation</a>, Next:<a href="Library-database.html#Library%20database" rel="next">Library database</a>, Previous:<a href="VHDL-standards.html#VHDL%20standards" rel="previous">VHDL standards</a>, Up:<a href="GHDL-implementation-of-VHDL.html#GHDL%20implementation%20of%20VHDL" rel="up">GHDL implementation of VHDL</a></p>
+		<hr>
+		<br>
+		<h3>Source representation</h3>
+		<p>According to the VHDL standard, design units (i.e. entities, architectures, packages, package bodies and configurations) may be independently analyzed.</p>
+		<p>Several design units may be grouped into a design file.</p>
+		<p>In GHDL, a system file represents a design file. That is, a file compiled by GHDL may contain one or more design units.</p>
+		<p>It is common to have several design units in a design file.</p>
+		<p>GHDL does not impose any restriction on the name of a design file (except that the file name may not contain any control character or spaces).</p>
+		<p>GHDL do not keep a binary representation of the design units analyzed like other VHDL analyzers. The sources of the design units are re-read when needed (for example, an entity is re-read when one of its architecture is analyzed). Therefore, if you delete or modify a source file of a unit analyzed, GHDL will refuse to use it.</p>
+	</body>
+
+</html>

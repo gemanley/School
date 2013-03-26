@@ -1,0 +1,36 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body onload="parent.initBtn0()" bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td><b>What does the following model do? Click Done to check your answer.</b>
+					<p></p>
+					<pre>
+module test;
+	reg clk;
+	always #10 clk =~clk;
+	initial begin
+		assign clk = 0;
+	#1	deassign clk ;
+	end
+endmodule
+</pre>
+					<hr>
+					<form>
+						<input onclick="parent.setValue(0,0)" type="radio" name="A" value="A">1. <font color="#4B0082"><b>clk changes from x to 0 at time 0, changes to 1 at time 10, 0 at time 20, 1 at time 30, ...</b></font></b><br>
+						<input onclick="parent.setValue(0,1)" type="radio" name="A" value="B">2. clk stays x forever<br>
+						<input onclick="parent.setValue(0,2)" type="radio" name="A" value="C">3. clk changes from x to 0 at time 0 and stays 0 thereafter<br>
+						<input onclick="parent.setValue(0,3)" type="radio" name="A" value="D">4. this will not compile
+						<p></p>
+					</form>
+					<b>The correct answer is 1.</b></td>
+			</tr>
+		</table>
+	</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<meta name="generator" content="Adobe GoLive 6">
+		<title>Navigation Bar</title>
+		<link href="resources/base_style.css" rel="stylesheet" media="screen">
+		<csscriptdict import>
+			<script type="text/javascript" src="resources/CSScriptLib.js"></script>
+		</csscriptdict>
+		<csactiondict>
+			<script type="text/javascript"><!--
+var preloadFlag = true;
+
+// --></script>
+		</csactiondict>
+		<script type="text/javascript">
+			var selected_item=0;
+			img_info = [
+/*0*/				['button_home_1','resources/buttons/home-3.gif','resources/buttons/home-1.gif'],
+/*1*/				['button_help_1','resources/buttons/usingthiscd-3.gif','resources/buttons/usingthiscd-1.gif'],
+
+/*2*/				['button_book_1','resources/buttons/chapterappendix-3.gif','resources/buttons/chapterappendix-1.gif'],
+/*3*/				['button_book_2','resources/buttons/cdsections-3.gif','resources/buttons/cdsections-1.gif'],
+/*4*/				['button_book_3','resources/buttons/cdlibrary-3.gif','resources/buttons/cdlibrary-1.gif'],
+/*5*/				['button_book_4','resources/buttons/inmoredepth-3.gif','resources/buttons/inmoredepth-1.gif'],
+/*6*/				['button_book_5','resources/buttons/formorepractice-3.gif','resources/buttons/formorepractice-1.gif'],
+/*7*/				['button_book_7','resources/buttons/glossary-3.gif','resources/buttons/glossary-1.gif'],
+/*8*/				['button_book_8','resources/buttons/index-3.gif','resources/buttons/index-1.gif'],
+/*9*/				['button_book_6','resources/buttons/furtherreading-3.gif','resources/buttons/furtherreading-1.gif'],
+
+/*10*/				['button_labs_1','resources/buttons/labs-3.gif','resources/buttons/labs-1.gif'],
+/*11 deprecated*/	['button_homeworks_1','resources/buttons/homeworks-3.gif','resources/buttons/homeworks-1.gif'],
+/*12*/				['button_models_1','resources/buttons/models-3.gif','resources/buttons/models-1.gif'],
+/*13*/				['button_tutorials_1','resources/buttons/tutorials-3.gif','resources/buttons/tutorials-1.gif'],
+/*14*/				['button_software_1','resources/buttons/software-3.gif','resources/buttons/software-1.gif'],
+					
+/*15*/				['button_search_1','resources/buttons/search-3.gif','resources/buttons/search-1.gif'],
+/*16 deprecated*/	['button_register_1','resources/buttons/register-3.gif','resources/buttons/register-1.gif'],
+/*17*/				['button_website_1','resources/buttons/companionsite-3.gif','resources/buttons/companionsite-1.gif']
+				];
+			function select_img(n) {
+				changeImages(img_info[selected_item][0],img_info[selected_item][2]);
+				selected_item = n;
+				changeImages(img_info[selected_item][0],img_info[selected_item][1]);
+				return true;
+			}
+		</script>
+	</head>
+
+	<body class="nomargins" onload="select_img(0); return true;">
+		<p class="sidebar">
+			<a onclick="return select_img(0)" onmouseover="if (selected_item!=0) changeImages('button_home_1','resources/buttons/home-2.gif');return true"        onmouseout="if (selected_item!=0) changeImages('button_home_1','resources/buttons/home-1.gif');return true"        href="home.html" target="Display"><img id="button_home_1" src="resources/buttons/home-1.gif" alt="" name="button_home_1" border="0" hspace="1" vspace="1"></a>
+		    <a onclick="return select_img(1)" onmouseover="if (selected_item!=1) changeImages('button_help_1','resources/buttons/usingthiscd-2.gif');return true" onmouseout="if (selected_item!=1) changeImages('button_help_1','resources/buttons/usingthiscd-1.gif');return true" href="introduction.html" target="Display"><img id="button_help_1" src="resources/buttons/usingthiscd-1.gif" alt="" name="button_help_1" border="0" hspace="1" vspace="1"></a>
+		</p>
+		<p class="sidebar">
+			<a onclick="return select_img(2)" onmouseover="if (selected_item!=2) changeImages('button_book_1','resources/buttons/chapterappendix-2.gif');return true" onmouseout="if (selected_item!=2) changeImages('button_book_1','resources/buttons/chapterappendix-1.gif');return true" href="COD3e/index-full.html" target="Display"><img id="button_book_1" src="resources/buttons/chapterappendix-1.gif" alt="" name="button_book_1" border="0" hspace="1" vspace="1"></a>
+			<a onclick="return select_img(3)" onmouseover="if (selected_item!=3) changeImages('button_book_2','resources/buttons/cdsections-2.gif');return true"      onmouseout="if (selected_item!=3) changeImages('button_book_2','resources/buttons/cdsections-1.gif');return true"      href="COD3e/CDSections/index.html"      target="Display"><img id="button_book_2" src="resources/buttons/cdsections-1.gif" alt="" name="button_book_2" border="0" hspace="1" vspace="1"></a>
+			<a onclick="return select_img(4)" onmouseover="if (selected_item!=4) changeImages('button_book_3','resources/buttons/cdlibrary-2.gif');return true"       onmouseout="if (selected_item!=4) changeImages('button_book_3','resources/buttons/cdlibrary-1.gif');return true"       href="COD3e/CDLibrary/index.html"       target="Display"><img id="button_book_3" src="resources/buttons/cdlibrary-1.gif" alt="" name="button_book_3" border="0" hspace="1" vspace="1"></a>
+			<a onclick="return select_img(5)" onmouseover="if (selected_item!=5) changeImages('button_book_4','resources/buttons/inmoredepth-2.gif');return true"     onmouseout="if (selected_item!=5) changeImages('button_book_4','resources/buttons/inmoredepth-1.gif');return true"     href="COD3e/InMoreDepth/index.html"     target="Display"><img id="button_book_4" src="resources/buttons/inmoredepth-1.gif" alt="" name="button_book_4" border="0" hspace="1" vspace="1"></a>
+			<a onclick="return select_img(6)" onmouseover="if (selected_item!=6) changeImages('button_book_5','resources/buttons/formorepractice-2.gif');return true" onmouseout="if (selected_item!=6) changeImages('button_book_5','resources/buttons/formorepractice-1.gif');return true" href="COD3e/ForMorePractice/index.html" target="Display"><img id="button_book_5" src="resources/buttons/formorepractice-1.gif" alt="" name="button_book_5" border="0" hspace="1" vspace="1"></a>
+			<a onclick="return select_img(7)" onmouseover="if (selected_item!=7) changeImages('button_book_7','resources/buttons/glossary-2.gif');return true"        onmouseout="if (selected_item!=7) changeImages('button_book_7','resources/buttons/glossary-1.gif');return true"        href="COD3e/Glossary/HPGlossary.pdf"        target="Display"><img id="button_book_7" src="resources/buttons/glossary-1.gif" alt="" name="button_book_7" border="0" hspace="1" vspace="1"></a>
+			<a onclick="return select_img(8)" onmouseover="if (selected_item!=8) changeImages('button_book_8','resources/buttons/index-2.gif');return true"           onmouseout="if (selected_item!=8) changeImages('button_book_8','resources/buttons/index-1.gif');return true"           href="COD3e/Index/11HP_Index.pdf"           target="Display"><img id="button_book_8" src="resources/buttons/index-1.gif" alt="" name="button_book_8" border="0" hspace="1" vspace="1"></a>
+			<a onclick="return select_img(9)" onmouseover="if (selected_item!=9) changeImages('button_book_6','resources/buttons/furtherreading-2.gif');return true"  onmouseout="if (selected_item!=9) changeImages('button_book_6','resources/buttons/furtherreading-1.gif');return true"  href="COD3e/FurtherReading/12HPFurther_Reading.pdf"  target="Display"><img id="button_book_6" src="resources/buttons/furtherreading-1.gif" alt="" name="button_book_6" border="0" hspace="1" vspace="1"></a>
+		</p>
+		<p class="sidebar">
+			<a onclick="return select_img(10)" onmouseover="if (selected_item!=10) changeImages('button_labs_1','resources/buttons/labs-2.gif');return true"           onmouseout="if (selected_item!=10) changeImages('button_labs_1','resources/buttons/labs-1.gif');return true"           href="Labs/index.html"            target="Display"><img id="button_labs_1" src="resources/buttons/labs-1.gif" alt="" name="button_labs_1" border="0" hspace="1" vspace="1"></a>
+			<a onclick="return select_img(12)" onmouseover="if (selected_item!=12) changeImages('button_models_1','resources/buttons/models-2.gif');return true"       onmouseout="if (selected_item!=12) changeImages('button_models_1','resources/buttons/models-1.gif');return true"       href="Models/index.html"          target="Display"><img id="button_models_1" src="resources/buttons/models-1.gif" alt="" name="button_models_1" border="0" hspace="1" vspace="1"></a>
+			<a onclick="return select_img(13)" onmouseover="if (selected_item!=13) changeImages('button_tutorials_1','resources/buttons/tutorials-2.gif');return true" onmouseout="if (selected_item!=13) changeImages('button_tutorials_1','resources/buttons/tutorials-1.gif');return true" href="Tutorials/index.html"       target="Display"><img id="button_tutorials_1" src="resources/buttons/tutorials-1.gif" alt="" name="button_tutorials_1" border="0" hspace="1" vspace="1"></a>
+			<a onclick="return select_img(14)" onmouseover="if (selected_item!=14) changeImages('button_software_1','resources/buttons/software-2.gif');return true"   onmouseout="if (selected_item!=14) changeImages('button_software_1','resources/buttons/software-1.gif');return true"   href="Software/index.html"        target="Display"><img id="button_software_1" src="resources/buttons/software-1.gif" alt="" name="button_software_1" border="0" hspace="1" vspace="1"></a>
+		</p>
+		<p class="sidebar">
+			<a onclick="return select_img(15)" onmouseover="if (selected_item!=15) changeImages('button_search_1','resources/buttons/search-2.gif');return true"          onmouseout="if (selected_item!=15) changeImages('button_search_1','resources/buttons/search-1.gif');return true"          href="search.html"                                     target="Display"><img id="button_search_1" src="resources/buttons/search-1.gif" alt="" name="button_search_1" border="0" hspace="1" vspace="1"></a>
+			<a onclick="return select_img(17)" onmouseover="if (selected_item!=17) changeImages('button_website_1','resources/buttons/companionsite-2.gif');return true" onmouseout="if (selected_item!=17) changeImages('button_website_1','resources/buttons/companionsite-1.gif');return true" href="http://www.mkp.com/companions/1558606041"        target="Display"><img id="button_website_1" src="resources/buttons/companionsite-1.gif" alt="" name="button_website_1" border="0" hspace="1" vspace="1"></a>
+		</p>
+	</body>
+
+</html>

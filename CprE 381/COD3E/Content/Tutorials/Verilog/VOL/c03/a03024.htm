@@ -1,0 +1,51 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body onload="parent.initBtnM(6)" bgcolor="white">
+				<form>
+			<b>Indicate which of the following are legal operands.</b>
+			<p></p>
+			<table width="600">
+				<tr>
+					<td width="140" HALIGN="LEFT"><input onclick="parent.setValue(0,0)" type="radio" name="LEGAL1" value="A"><font color="#4B0082"><b>Legal&nbsp;&nbsp;&nbsp;</b></font><input onclick="parent.setValue(0,1)" type="radio" name="LEGAL1" value="A">Illegal</td>
+					<td width="460" HALIGN="LEFT">abc</td>
+				</tr>
+				<tr>
+					<td width="140" HALIGN="LEFT"><input onclick="parent.setValue(1,0)" type="radio" name="LEGAL2" value="B"><font color="#4B0082"><b>Legal&nbsp;&nbsp;&nbsp;</b></font><input onclick="parent.setValue(1,1)" type="radio" name="LEGAL2" value="B">Illegal</td>
+					<td width="460" HALIGN="LEFT">$time</td>
+				</tr>
+				<tr>
+					<td width="140" HALIGN="LEFT"><input onclick="parent.setValue(2,0)" type="radio" name="LEGAL3" value="C">Legal&nbsp;&nbsp;&nbsp;<input onclick="parent.setValue(2,1)" type="radio" name="LEGAL3" value="C"><font color="#4B0082"><b>Illegal</b></font></td>
+					<td width="460" HALIGN="LEFT">$monitor</td>
+				</tr>
+				<tr>
+					<td width="140" HALIGN="LEFT"><input onclick="parent.setValue(3,0)" type="radio" name="LEGAL4" value="D">Legal&nbsp;&nbsp;&nbsp;<input onclick="parent.setValue(3,1)" type="radio" name="LEGAL4" value="D"><font color="#4B0082"><b>Illegal</b></font></td>
+					<td width="460" HALIGN="LEFT">#1</td>
+				</tr>
+				<tr>
+					<td width="140" HALIGN="LEFT"><input onclick="parent.setValue(4,0)" type="radio" name="LEGAL5" value="E"><font color="#4B0082"><b>Legal&nbsp;&nbsp;&nbsp;</b></font><input onclick="parent.setValue(4,1)" type="radio" name="LEGAL5" value="E">Illegal</td>
+					<td width="460" HALIGN="LEFT">123</td>
+				</tr>
+				<tr>
+					<td width="140" HALIGN="LEFT"><input onclick="parent.setValue(5,0)" type="radio" name="LEGAL6" value="F"><font color="#4B0082"><b>Legal&nbsp;&nbsp;&nbsp;</b></font><input onclick="parent.setValue(5,1)" type="radio" name="LEGAL6" value="F">Illegal</td>
+					<td width="460" HALIGN="LEFT">1'bx</td>
+				</tr>
+				<p><br>
+				</p>
+			</table>
+		</form>
+		</TABLE>
+		<p>&nbsp;</p>
+		<p></p>
+		<table width="600">
+			<tr>
+				<td><b>That's right. The statement &quot;$monitor&quot; is a task, not a function, so it can't be used in an expression. Also, &quot;#1&quot; is a delay expression, not an operand.</b></td>
+			</tr>
+		</table>
+	</body>
+
+</html>

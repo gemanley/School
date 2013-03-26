@@ -1,0 +1,38 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="#ffffff">
+		<table width="600" cellpadding="10">
+			<td width="600">The output of one state machine is usually the input to another (or some other synchronous circuit). The output of the state machine must be stable at the clock edge which it is to be sampled on. In real life, this means that it must obey a setup time constraint. In logic simulation, it means that it must not change on the clock edge which it is being sampled on.
+				<p>In the formulation we have used so far, it is assumed that the input changes sometime between clock edges, and the state will change on the clock edge. In essence, this means that the input is sampled at the clock edge.</p>
+				<p>However, when the state changes, so will the output (unless it is registered). Extra measures must be taken to delay the output change so that it does not occur on the clock edge. A common way to do this would be:</p>
+				<pre>
+    reg [msb:lsb] state; 
+    wire [msb:lsb] nextstate;
+    wire out;
+    
+    assign nextstate = next(state, in); // Next State Logic
+    assign out = outfunc(state, in);    // Output logic
+    
+    always @(posedge clock)             // State Memory
+        state 
+					
+					
+					<= nextstate; </PRE> By using the non-blocking assign, all evaluations will be done before the state variable changes. Thus, the output will only change after the clock edge, so long as the input only changes after the clock edge. If two state machines like this are put in series, the inputs are sampled on the clock edge and the outputs are changed after the inputs are sampled.<p>
+					
+					
+					 
+
+Another solution to this problem is to register the output. This can be done with a nextout register variable which is updated just like the nextstate variable. However, just like with the state variable above, the out register would have to get its new value after the clock edge. 
+
+</pre>
+			</td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

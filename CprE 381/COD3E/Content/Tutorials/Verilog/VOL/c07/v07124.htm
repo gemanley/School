@@ -1,0 +1,46 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<b>Which of the following is more efficient? Click Done to check your answer.</b>
+			<p></p>
+		</table>
+		<form>
+			<table width="600">
+				<td valign="top" width="300">
+					<center>
+						<b>a.</b><br>
+						<input onclick="parent.setValue(0,0)" type="radio" name="A" value="A"></center>
+					<pre>
+wire [4:0] w, x, y;
+assign w = x | y;
+</pre>
+					<p></p>
+				</td>
+				<td valign="top" width="300">
+					<center>
+						<b>b.</b><br>
+						<input onclick="parent.setValue(0,1)" type="radio" name="A" value="B"></center>
+					<pre>
+wire [4:0] w, x, y;
+or (w[4], x[4], y[4]);
+or (w[3], x[3], y[3]);
+or (w[2], x[2], y[2]);
+or (w[1], x[1], y[1]);
+or (w[0], x[0], y[0]);
+</pre>
+					<p></p>
+				</td>
+			</table>
+		</form>
+		<hr>
+		<b>Click Done to check your answer.</b>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:parent.checkAnswer(0,0)"><img src="images/vdone.gif" height="39" width="74" border="0"></a></TD></TABLE></p>
+	</body>
+
+</html>

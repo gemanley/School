@@ -1,0 +1,1157 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600">
+			<tr>
+				<td>
+					<pre>
+`timescale 1 ns / 100 ps
+module a2901_sim;
+        reg [8:0] I;
+        reg [3:0] Aadd, Badd;
+        reg [3:0] D;
+        wire [3:0] Y;
+        reg t_RAM0, t_RAM3, t_Q0, t_Q3;
+        reg CLK;
+        reg C0;
+        reg OEbar;
+        wire C4, Gbar, Pbar, OVR, F3, F30;
+
+        wor RAM0 = t_RAM0;
+        wor RAM3 = t_RAM3;
+        wor Q0 = t_Q0;
+        wor Q3 = t_Q3;
+
+
+        a2901 a2901_1 (I,Aadd,Badd,D,Y,RAM0,RAM3,Q0,Q3,CLK,
+                       C0,OEbar,C4,Gbar,Pbar,OVR,F3,F30);
+
+        integer errcnt; initial errcnt = 0;
+        task error;
+            input [32*8:1] string;
+            begin
+                $display($time,&quot;  %s&quot;, string);
+                errcnt = errcnt + 1;
+            end
+        endtask
+
+initial
+begin
+$monitor($stime,,&quot;Y=%h  C4=%h  Gbar=%h  Pbar=%h  OVR=%b  F3=%h  F30=%b&quot;,
+                Y,C4,Gbar,Pbar,OVR,F3,F30);
+repeat(1 /*10000*/)
+begin
+
+// ************************
+// *                      *
+// * TEST VECTORS FOR ALU *
+// *                      *
+// ************************
+// ******** ADDITION  R + S ********
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 0
+
+#1;
+
+I = 9'b000000111;
+D = 4'b0000;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+#1;
+
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 1
+
+#1;
+
+I = 9'b001000110;
+D = 4'b0000;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+if (Y !== 4'b0000) error(&quot;Y !== 4'b0000&quot;);
+
+if (C4 !== 1'b0) error(&quot;C4 !== 1'b0&quot;);
+
+if (Gbar !== 1'b1) error(&quot;Gbar !== 1'b1&quot;);
+
+if (Pbar !== 1'b1) error(&quot;Pbar !== 1'b1&quot;);
+
+if (OVR !== 1'b0) error(&quot;OVR !== 1'b0&quot;);
+
+if (F3 !== 1'b0) error(&quot;F3 !== 1'b0&quot;);
+
+if (F30 !== 1'b1) error(&quot;F30 !== 1'b1&quot;);
+
+#1;
+
+// ************************
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 2
+
+#1;
+
+I = 9'b000000111;
+D = 4'b0000;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+#1;
+
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 3
+
+#1;
+
+I = 9'b001000110;
+D = 4'b0000;
+C0 = 1'b1;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+if (Y !== 4'b0001) error(&quot;Y !== 4'b0001&quot;);
+
+if (C4 !== 1'b0) error(&quot;C4 !== 1'b0&quot;);
+
+if (Gbar !== 1'b1) error(&quot;Gbar !== 1'b1&quot;);
+
+if (Pbar !== 1'b1) error(&quot;Pbar !== 1'b1&quot;);
+
+if (OVR !== 1'b0) error(&quot;OVR !== 1'b0&quot;);
+
+if (F3 !== 1'b0) error(&quot;F3 !== 1'b0&quot;);
+
+if (F30 !== 1'b0) error(&quot;F30 !== 1'b0&quot;);
+
+#1;
+
+// ************************     
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 4
+
+#1;
+
+I = 9'b000000111;
+D = 4'b1111;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+#1;
+
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 5
+
+#1;
+
+I = 9'b001000110;
+D = 4'b0000;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+if (Y !== 4'b1111) error(&quot;Y !== 4'b1111&quot;);
+
+if (C4 !== 1'b0) error(&quot;C4 !== 1'b0&quot;);
+
+if (Gbar !== 1'b1) error(&quot;Gbar !== 1'b1&quot;);
+
+if (Pbar !== 1'b0) error(&quot;Pbar !== 1'b0&quot;);
+
+if (OVR !== 1'b0) error(&quot;OVR !== 1'b0&quot;);
+
+if (F3 !== 1'b1) error(&quot;F3 !== 1'b1&quot;);
+
+if (F30 !== 1'b0) error(&quot;F30 !== 1'b0&quot;);
+
+#1;
+
+// ************************     
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 6
+
+#1;
+
+I = 9'b000000111;
+D = 4'b1111;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+#1;
+
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 7
+
+#1;
+
+I = 9'b001000110;
+D = 4'b0000;
+C0 = 1'b1;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+if (Y !== 4'b0000) error(&quot;Y !== 4'b0000&quot;);
+
+if (C4 !== 1'b1) error(&quot;C4 !== 1'b1&quot;);
+
+if (Gbar !== 1'b1) error(&quot;Gbar !== 1'b1&quot;);
+
+if (Pbar !== 1'b0) error(&quot;Pbar !== 1'b0&quot;);
+
+if (OVR !== 1'b0) error(&quot;OVR !== 1'b0&quot;);
+
+if (F3 !== 1'b0) error(&quot;F3 !== 1'b0&quot;);
+
+if (F30 !== 1'b1) error(&quot;F30 !== 1'b1&quot;);
+
+#1;
+
+// ************************     
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 8
+
+#1;
+
+I = 9'b000000111;
+D = 4'b1111;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+#1;
+
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 9
+
+#1;
+
+I = 9'b001000110;
+D = 4'b1111;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+if (Y !== 4'b1110) error(&quot;Y !== 4'b1110&quot;);
+
+if (C4 !== 1'b1) error(&quot;C4 !== 1'b1&quot;);
+
+if (Gbar !== 1'b0) error(&quot;Gbar !== 1'b0&quot;);
+
+if (Pbar !== 1'b0) error(&quot;Pbar !== 1'b0&quot;);
+
+if (OVR !== 1'b0) error(&quot;OVR !== 1'b0&quot;);
+
+if (F3 !== 1'b1) error(&quot;F3 !== 1'b1&quot;);
+
+if (F30 !== 1'b0) error(&quot;F30 !== 1'b0&quot;);
+
+#1;
+
+// ************************     
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 10
+
+#1;
+
+I = 9'b000000111;
+D = 4'b1111;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+#1;
+
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 11
+
+#1;
+
+I = 9'b001000110;
+D = 4'b1111;
+C0 = 1'b1;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+if (Y !== 4'b1111) error(&quot;Y !== 4'b1111&quot;);
+
+if (C4 !== 1'b1) error(&quot;C4 !== 1'b1&quot;);
+
+if (Gbar !== 1'b0) error(&quot;Gbar !== 1'b0&quot;);
+
+if (Pbar !== 1'b0) error(&quot;Pbar !== 1'b0&quot;);
+
+if (OVR !== 1'b0) error(&quot;OVR !== 1'b0&quot;);
+
+if (F3 !== 1'b1) error(&quot;F3 !== 1'b1&quot;);
+
+if (F30 !== 1'b0) error(&quot;F30 !== 1'b0&quot;);
+
+#1;
+
+// ************************     
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 12
+
+#1;
+
+I = 9'b000000111;
+D = 4'b0000;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+#1;
+
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 13
+
+#1;
+
+I = 9'b001000110;
+D = 4'b1111;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+if (Y !== 4'b1111) error(&quot;Y !== 4'b1111&quot;);
+
+if (C4 !== 1'b0) error(&quot;C4 !== 1'b0&quot;);
+
+if (Gbar !== 1'b1) error(&quot;Gbar !== 1'b1&quot;);
+
+if (Pbar !== 1'b0) error(&quot;Pbar !== 1'b0&quot;);
+
+if (OVR !== 1'b0) error(&quot;OVR !== 1'b0&quot;);
+
+if (F3 !== 1'b1) error(&quot;F3 !== 1'b1&quot;);
+
+if (F30 !== 1'b0) error(&quot;F30 !== 1'b0&quot;);
+
+#1;
+
+// ************************     
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 14
+
+#1;
+
+I = 9'b000000111;
+D = 4'b0000;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+#1;
+
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 15
+
+#1;
+
+I = 9'b001000110;
+D = 4'b1111;
+C0 = 1'b1;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+if (Y !== 4'b0000) error(&quot;Y !== 4'b0000&quot;);
+
+if (C4 !== 1'b1) error(&quot;C4 !== 1'b1&quot;);
+
+if (Gbar !== 1'b1) error(&quot;Gbar !== 1'b1&quot;);
+
+if (Pbar !== 1'b0) error(&quot;Pbar !== 1'b0&quot;);
+
+if (OVR !== 1'b0) error(&quot;OVR !== 1'b0&quot;);
+
+if (F3 !== 1'b0) error(&quot;F3 !== 1'b0&quot;);
+
+if (F30 !== 1'b1) error(&quot;F30 !== 1'b1&quot;);
+
+#1;
+
+// ************************     
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 16
+
+#1;
+
+I = 9'b000000111;
+D = 4'b0001;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+#1;
+
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 17
+
+#1;
+
+I = 9'b000000110;
+D = 4'b0001;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+if (Y !== 4'b0010) error(&quot;Y !== 4'b0010&quot;);
+
+if (C4 !== 1'b0) error(&quot;C4 !== 1'b0&quot;);
+
+if (Gbar !== 1'b1) error(&quot;Gbar !== 1'b1&quot;);
+
+if (Pbar !== 1'b1) error(&quot;Pbar !== 1'b1&quot;);
+
+if (OVR !== 1'b0) error(&quot;OVR !== 1'b0&quot;);
+
+if (F3 !== 1'b0) error(&quot;F3 !== 1'b0&quot;);
+
+if (F30 !== 1'b0) error(&quot;F30 !== 1'b0&quot;);
+
+#1;
+
+// ************************     
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 18
+
+#1;
+
+I = 9'b000000111;
+D = 4'b0010;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+#1;
+
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 19
+
+#1;
+
+I = 9'b001000110;
+D = 4'b0010;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+if (Y !== 4'b0100) error(&quot;Y !== 4'b0100&quot;);
+
+if (C4 !== 1'b0) error(&quot;C4 !== 1'b0&quot;);
+
+if (Gbar !== 1'b1) error(&quot;Gbar !== 1'b1&quot;);
+
+if (Pbar !== 1'b1) error(&quot;Pbar !== 1'b1&quot;);
+
+if (OVR !== 1'b0) error(&quot;OVR !== 1'b0&quot;);
+
+if (F3 !== 1'b0) error(&quot;F3 !== 1'b0&quot;);
+
+if (F30 !== 1'b0) error(&quot;F30 !== 1'b0&quot;);
+
+#1;
+
+// ************************     
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 20
+
+#1;
+
+I = 9'b000000111;
+D = 4'b0100;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+#1;
+
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 21
+
+#1;
+
+I = 9'b001000110;
+D = 4'b0100;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+if (Y !== 4'b1000) error(&quot;Y !== 4'b1000&quot;);
+
+if (C4 !== 1'b0) error(&quot;C4 !== 1'b0&quot;);
+
+if (Gbar !== 1'b1) error(&quot;Gbar !== 1'b1&quot;);
+
+if (Pbar !== 1'b1) error(&quot;Pbar !== 1'b1&quot;);
+
+if (OVR !== 1'b1) error(&quot;OVR !== 1'b1&quot;);
+
+if (F3 !== 1'b1) error(&quot;F3 !== 1'b1&quot;);
+
+if (F30 !== 1'b0) error(&quot;F30 !== 1'b0&quot;);
+
+#1;
+
+// ************************     
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 22
+
+#1;
+
+I = 9'b000000111;
+D = 4'b1000;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+#1;
+
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 23
+
+#1;
+
+I = 9'b001000110;
+D = 4'b1000;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+if (Y !== 4'b0000) error(&quot;Y !== 4'b0000&quot;);
+
+if (C4 !== 1'b1) error(&quot;C4 !== 1'b1&quot;);
+
+if (Gbar !== 1'b0) error(&quot;Gbar !== 1'b0&quot;);
+
+if (Pbar !== 1'b1) error(&quot;Pbar !== 1'b1&quot;);
+
+if (OVR !== 1'b1) error(&quot;OVR !== 1'b1&quot;);
+
+if (F3 !== 1'b0) error(&quot;F3 !== 1'b0&quot;);
+
+if (F30 !== 1'b1) error(&quot;F30 !== 1'b1&quot;);
+
+#1;
+
+// ************************     
+// ******** SUBTRACTION S - R ********
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 24
+
+#1;
+
+I = 9'b000000111;
+D = 4'b0000;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+#1;
+
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 25
+
+#1;
+
+I = 9'b001001110;
+D = 4'b0000;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+if (Y !== 4'b1111) error(&quot;Y !== 4'b1111&quot;);
+
+if (C4 !== 1'b0) error(&quot;C4 !== 1'b0&quot;);
+
+if (Gbar !== 1'b1) error(&quot;Gbar !== 1'b1&quot;);
+
+if (Pbar !== 1'b0) error(&quot;Pbar !== 1'b0&quot;);
+
+if (OVR !== 1'b0) error(&quot;OVR !== 1'b0&quot;);
+
+if (F3 !== 1'b1) error(&quot;F3 !== 1'b1&quot;);
+
+if (F30 !== 1'b0) error(&quot;F30 !== 1'b0&quot;);
+
+#1;
+
+// ************************
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 26
+
+#1;
+
+I = 9'b000000111;
+D = 4'b0000;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+#1;
+
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 27
+
+#1;
+
+I = 9'b001001110;
+D = 4'b0000;
+C0 = 1'b1;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+if (Y !== 4'b0000) error(&quot;Y !== 4'b0000&quot;);
+
+if (C4 !== 1'b1) error(&quot;C4 !== 1'b1&quot;);
+
+if (Gbar !== 1'b1) error(&quot;Gbar !== 1'b1&quot;);
+
+if (Pbar !== 1'b0) error(&quot;Pbar !== 1'b0&quot;);
+
+if (OVR !== 1'b0) error(&quot;OVR !== 1'b0&quot;);
+
+if (F3 !== 1'b0) error(&quot;F3 !== 1'b0&quot;);
+
+if (F30 !== 1'b1) error(&quot;F30 !== 1'b1&quot;);
+
+#1;
+
+// ************************     
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 28
+
+#1;
+
+I = 9'b000000111;
+D = 4'b0000;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+#1;
+
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 29
+
+#1;
+
+I = 9'b001001110;
+D = 4'b1111;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+if (Y !== 4'b0000) error(&quot;Y !== 4'b0000&quot;);
+
+if (C4 !== 1'b0) error(&quot;C4 !== 1'b0&quot;);
+
+if (Gbar !== 1'b1) error(&quot;Gbar !== 1'b1&quot;);
+
+if (Pbar !== 1'b1) error(&quot;Pbar !== 1'b1&quot;);
+
+if (OVR !== 1'b0) error(&quot;OVR !== 1'b0&quot;);
+
+if (F3 !== 1'b0) error(&quot;F3 !== 1'b0&quot;);
+
+if (F30 !== 1'b1) error(&quot;F30 !== 1'b1&quot;);
+
+#1;
+
+// ************************     
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 30
+
+#1;
+
+I = 9'b000000111;
+D = 4'b0000;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+#1;
+
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 31
+
+#1;
+
+I = 9'b001001110;
+D = 4'b1111;
+C0 = 1'b1;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+if (Y !== 4'b0001) error(&quot;Y !== 4'b0001&quot;);
+
+if (C4 !== 1'b0) error(&quot;C4 !== 1'b0&quot;);
+
+if (Gbar !== 1'b1) error(&quot;Gbar !== 1'b1&quot;);
+
+if (Pbar !== 1'b1) error(&quot;Pbar !== 1'b1&quot;);
+
+if (OVR !== 1'b0) error(&quot;OVR !== 1'b0&quot;);
+
+if (F3 !== 1'b0) error(&quot;F3 !== 1'b0&quot;);
+
+if (F30 !== 1'b0) error(&quot;F30 !== 1'b0&quot;);
+
+#1;
+
+// ************************     
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 32
+
+#1;
+
+I = 9'b000000111;
+D = 4'b1111;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+#1;
+
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 33
+
+#1;
+
+I = 9'b001001110;
+D = 4'b1111;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+if (Y !== 4'b1111) error(&quot;Y !== 4'b1111&quot;);
+
+if (C4 !== 1'b0) error(&quot;C4 !== 1'b0&quot;);
+
+if (Gbar !== 1'b1) error(&quot;Gbar !== 1'b1&quot;);
+
+if (Pbar !== 1'b0) error(&quot;Pbar !== 1'b0&quot;);
+
+if (OVR !== 1'b0) error(&quot;OVR !== 1'b0&quot;);
+
+if (F3 !== 1'b1) error(&quot;F3 !== 1'b1&quot;);
+
+if (F30 !== 1'b0) error(&quot;F30 !== 1'b0&quot;);
+
+#1;
+
+// ************************     
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 34
+
+#1;
+
+I = 9'b000000111;
+D = 4'b1111;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+#1;
+
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 35
+
+#1;
+
+I = 9'b001001110;
+D = 4'b1111;
+C0 = 1'b1;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+if (Y !== 4'b0000) error(&quot;Y !== 4'b0000&quot;);
+
+if (C4 !== 1'b1) error(&quot;C4 !== 1'b1&quot;);
+
+if (Gbar !== 1'b1) error(&quot;Gbar !== 1'b1&quot;);
+
+if (Pbar !== 1'b0) error(&quot;Pbar !== 1'b0&quot;);
+
+if (OVR !== 1'b0) error(&quot;OVR !== 1'b0&quot;);
+
+if (F3 !== 1'b0) error(&quot;F3 !== 1'b0&quot;);
+
+if (F30 !== 1'b1) error(&quot;F30 !== 1'b1&quot;);
+
+#1;
+
+// ************************     
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 36
+
+#1;
+
+I = 9'b000000111;
+D = 4'b1111;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+#1;
+
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 37
+
+#1;
+
+I = 9'b001001110;
+D = 4'b0000;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+if (Y !== 4'b1110) error(&quot;Y !== 4'b1110&quot;);
+
+if (C4 !== 1'b1) error(&quot;C4 !== 1'b1&quot;);
+
+if (Gbar !== 1'b0) error(&quot;Gbar !== 1'b0&quot;);
+
+if (Pbar !== 1'b0) error(&quot;Pbar !== 1'b0&quot;);
+
+if (OVR !== 1'b0) error(&quot;OVR !== 1'b0&quot;);
+
+if (F3 !== 1'b1) error(&quot;F3 !== 1'b1&quot;);
+
+if (F30 !== 1'b0) error(&quot;F30 !== 1'b0&quot;);
+
+#1;
+
+// ************************     
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 38
+
+#1;
+
+I = 9'b000000111;
+D = 4'b1111;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+#1;
+
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 39
+
+#1;
+
+I = 9'b001001110;
+D = 4'b0000;
+C0 = 1'b1;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+if (Y !== 4'b1111) error(&quot;Y !== 4'b1111&quot;);
+
+if (C4 !== 1'b1) error(&quot;C4 !== 1'b1&quot;);
+
+if (Gbar !== 1'b0) error(&quot;Gbar !== 1'b0&quot;);
+
+if (Pbar !== 1'b0) error(&quot;Pbar !== 1'b0&quot;);
+
+if (OVR !== 1'b0) error(&quot;OVR !== 1'b0&quot;);
+
+if (F3 !== 1'b1) error(&quot;F3 !== 1'b1&quot;);
+
+if (F30 !== 1'b0) error(&quot;F30 !== 1'b0&quot;);
+
+#1;
+
+// ************************     
+//////////////////////////
+
+CLK = 1'b1; //   Cycle No: 40
+
+#1;
+
+I = 9'b000000111;
+D = 4'b0001;
+C0 = 1'b0;
+OEbar = 1'b0;
+
+#4;
+
+CLK = 1'b0;
+
+#4;
+
+#1;
+
+//////////////////////////
+
+CLK = 1'b1; 
+
+#1;
+
+
+end
+if (errcnt) 
+    $display(&quot;* * * test failed * * *&quot;);
+else
+    $display(&quot;* * * test passed * * *&quot;);
+$finish;
+end
+endmodule
+</pre>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

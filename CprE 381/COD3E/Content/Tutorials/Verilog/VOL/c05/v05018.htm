@@ -1,0 +1,68 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">Procedural code has a notion of sequentiality. A procedural block is defined as:
+					<p></p>
+					<pre>
+
+&nbsp;&nbsp;&nbsp;always &lt;statement&gt;<br>
+						
+						
+						
+or&nbsp;&nbsp;initial &lt;statement&gt;
+						
+						
+						<p>
+</p>
+						
+						
+					</pre>
+					where &lt;statement&gt; can be:<br>
+					<pre>
+&nbsp;&nbsp;&nbsp;a single statement<br>
+						
+						
+						
+&nbsp;&nbsp;&nbsp;a sequential block (begin &lt;statement&gt; ... ; &lt;statement&gt; end)<br>
+						
+						
+						
+&nbsp;&nbsp;&nbsp;a parallel block (fork &lt;statement&gt; ... ; &lt;statement&gt; join)
+						
+						
+						<p>
+
+</p>
+						
+						
+					</pre>
+					When a sequential block is executed, the statements are executed one after the other, beginning with the first one. Each sequential block has its own <b>program counter</b>, which indicates which statement is being executed. Note that simulation time may pass between sequential statements or during a single statement.
+					<p>Unlike traditional sequential programming languages, there may be many program counters in a Verilog model. In fact, there is one for each process in the model. For example, two processes might have program counters (pc) in the following configurations:</p>
+					<p></p>
+				</td>
+			</tr>
+		</table>
+		<pre>
+        always begin                always begin
+            a = f(x);                   b = f(x);
+   pc-&gt; #10 a = g(x);               #10 b = g(x);
+        #20 a = h(x);          pc-&gt; #10 b = h(x);
+        end                         end
+
+</pre>
+		<table width="600" cellpadding="10">
+			<tr>
+				<td>A <a href="javascript:parent.goGlossHash('#parablock')"><font color="#B22222">parallel block</font></a> is really no different, except that it has a program counter associated with each of its statements. In effect, it creates a new process for each of its parallel statements.</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

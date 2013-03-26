@@ -1,0 +1,33 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">Another example is the use of disable to implement a time out:
+					<p></p>
+					<pre>
+    fork
+        begin: op
+            @ev do_some_op;
+                disable timer;
+        end
+        
+        begin: timer
+            repeat (3) @(posedge clk) ;
+            disable op;
+        end
+    join
+</pre>
+					<p>In this example, the op block does the work, but it has to wait for some external event, ev. If the external event does not occur in 3 clock cycles, then the timeout stops the activity.</p>
+				</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

@@ -1,0 +1,30 @@
+<html lang="en">
+
+	<head>
+		<title>GHDL guide</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+		<meta name="description" content="GHDL guide">
+		<meta name="generator" content="makeinfo 4.1">
+		<link href="http://texinfo.org/" rel="generator-home">
+		<link href="../../../resources/base_style.css" rel="stylesheet" type="text/css" media="all">
+	</head>
+
+	<body>
+		<p>Node:<a name="Linking%20with%20Ada">Linking with Ada</a>, Previous:<a href="Starting-a-simulation-from-a-foreign-program.html#Starting%20a%20simulation%20from%20a%20foreign%20program" rel="previous">Starting a simulation from a foreign program</a>, Up:<a href="Interfacing-to-other-languages.html#Interfacing%20to%20other%20languages" rel="up">Interfacing to other languages</a></p>
+		<hr>
+		<br>
+		<h4>Linking with Ada</h4>
+		<p>As explained previously in <a href="Starting-a-simulation-from-a-foreign-program.html#Starting%20a%20simulation%20from%20a%20foreign%20program">Starting a simulation from a foreign program</a>, you can start a simulation from an <code>Ada</code> program. However the build process is not trivial: you have to elaborate your <code>Ada</code> program and your <code>VHDL</code> design.</p>
+		<p>First, you have to analyze all your design files. In this example, we suppose there is only one design file, <code>design.vhdl</code>.<br>
+		</p>
+		<pre>$ ghdl -a design.vhdl
+</pre>
+		Then, bind your design. In this example, we suppose the entity at the design apex is <code>design</code>.<br>
+		<pre>$ ghdl --bind design
+</pre>
+		Finally, compile, bind your <code>Ada</code> program at link it with your <code>VHDL</code> design:<br>
+		<pre>$ gnatmake my_prog -largs `ghdl --list-link design`
+</pre>
+	</body>
+
+</html>

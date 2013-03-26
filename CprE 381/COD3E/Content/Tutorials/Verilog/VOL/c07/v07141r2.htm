@@ -1,0 +1,65 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			<b>Op Pipe</b>
+			<p></p>
+			<pre>
+module opPipe (opcode, r1, r2, res, clock);
+    input [2:0] opcode;
+    input [3:0] r1, r2, res;
+    input       clock;
+    
+/*  3-stage pipeline 
+        R - register read
+        A - ALU op
+        W - register write 
+    Inputs: opcode, op1, op2, and res
+    Output: none
+*/  
+    // local variables
+    wire [3:0]  r_reg1, r_reg2;
+    wire        a_valid, write;
+    wire [31:0] a_opA, a_opB;
+    wire [31:0] a_wdata;
+    
+    // pipe stages
+    reg  [2:0] a_opcode, w_opcode;      // opcode
+    reg  [3:0] a_reg1,   w_reg1;        // reg (value) for Ldi
+    reg  [3:0] a_wreg,   w_wreg;        // result register
+    wire [31:0]          w_wdata;       // result value
+    
+    // module instances
+    RegFile rf(r_reg1, r_reg2, w_wreg, a_opA, a_opB, w_wdata, write, clock);
+    alu al(clock, a_opcode, a_opA, a_opB, a_wdata);
+    
+    // combinational logic
+    assign r_reg1 = r1,         // these are flow through
+           r_reg2 = r2;
+    assign write = 1'b1;        // write result every cycle
+    
+    
+    // pipeline
+    //
+    //     R stage is just the input ports
+    //
+    
+    //
+    //     A stage
+    //
+    always @(posedge clock) begin
+        a_opcode 
+				
+				
+				<= opcode; a_wreg <= res;          a_reg1 <= r_reg1;       // needed for Ldi        // a_opA and a_opB become valid here from R    end    //    //     W stage    //    assign w_wdata = (w_opcode == `Ldi) ? w_reg1 : a_wdata;    always @(posedge clock) begin        w_wreg <= a_wreg;        w_reg1 <= a_reg1;        w_opcode <= a_opcode;        // write becomes valid from A    end    always @(posedge clock)      // diagnostic code    if (test.debug)      $display($stime,,"opPipe\n",        "           R      - %s    reg1: %h          reg2: %h          res: %h\n",         opname(opcode), r_reg1, r_reg2, res,        "           A      - %s    opA: %h    opB: %h\n",        opname(a_opcode), a_opA, a_opB,        "           W      - %s    wreg: %h  wdata: %h  write: %b",        opname(w_opcode), w_wreg, w_wdata, write);            function [4*8:1] opname;        input [2:0] opcode;        case (opcode)        `Ldi:    opname = "Ldi ";        `Add:    opname = "Add ";        `Sub:    opname = "Sub ";        `Not:    opname = "Not ";        `Shfl:   opname = "Shfl";        `Shfr:   opname = "Shfr";        default: opname = "xxx ";        endcase    endfunctionendmodule</PRE></TABLE></BODY></HTML>>>			</pre>		</table>	</body></html>>> </pre> </table> </body> </html>>
+			</pre>
+		</table>
+	</body>
+
+</html>

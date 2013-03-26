@@ -1,0 +1,35 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td valign="top" width="235"><img src="images/v0744g1.gif" height="93" width="235">
+				<p></p>
+			</td>
+			<td valign="top" width="335">When the right-hand side of a continuous assignment is evaluated, all terms are evaluated. This simple rule causes a good deal of unnecessary computation in some cases.</td>
+		</table>
+		<table width="600">
+			For example, consider this assignment:
+			<pre>
+    assign n1 = w1 + f(w2) + g(w3);
+</pre>
+			If w1 changes, both f(w2) and f(w3) will be evaluated, even though their arguments, w2 and w3, have not changed. In the normal case, where there were no intended side effects of the functions f and g, and they did not depend on any global variables, this re-evaluation is not necessary.
+			<p>To avoid this, the code could be written as follows:</p>
+			<pre>
+    assign t2 = f(w2);
+    assign t3 = g(w3);
+    assign n1 = w1 + t2 + t3;
+</pre>
+			Now, when w1 changes, only 2 additions are done, and the re-evaluations of f(w2) and g(w3) are avoided.
+			<p></p>
+			<center>
+				<a href="JavaScript:parent.dispWindow('v07132r1.htm','Cascaded')"><img src="images/v0744b1.gif" height="39" width="117" border="0"></a></center>
+		</table>
+		</FONT>
+	</body>
+
+</html>

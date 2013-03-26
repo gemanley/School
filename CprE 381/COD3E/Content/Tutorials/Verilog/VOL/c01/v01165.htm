@@ -1,0 +1,57 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<b>Given these module definitions and instantiations:</b>
+		<p></p>
+		<pre>
+module modA;
+	...
+	modB #(4,5,6) mb1 (p1, p2, p3, p4);
+	modB #(7,8) mb2 (p4, p2, p3, q4);
+	...
+endmodule
+
+module modB (port1, port2, port3, port4);
+	input port1, port2;
+	inout port3;
+	output port4;
+	...
+	parameter par1 = 1,
+		  par2 = 2,
+		  par3 = par1+par2;
+	...
+endmodule
+</pre>
+		<p></p>
+		<hr>
+		<table width="600" cellpadding="3">
+			<tr>
+				<form>
+					<td width="160" HALIGN="LEFT">a. <input onclick="parent.setValue(0,0)" type="radio" name="TRUE1" value="A">True&nbsp;&nbsp;&nbsp;<input onclick="parent.setValue(0,1)" type="radio" name="TRUE1" value="A">False</td>
+					<td width="440" HALIGN="LEFT">In instance modA.mb2, par3 will have the value 3.</td>
+				</form>
+			</tr>
+			<tr>
+				<td width="160" HALIGN="LEFT">b. <input onclick="parent.setValue(1,0)" type="radio" name="TRUE2" value="B">True&nbsp;&nbsp;&nbsp;<input onclick="parent.setValue(1,1)" type="radio" name="TRUE2" value="B">False</td>
+				<td width="440" HALIGN="LEFT">In instance modA.mb2, par3 will have the value 6.</td>
+			</tr>
+			<tr>
+				<td width="160" HALIGN="LEFT">c. <input onclick="parent.setValue(2,0)" type="radio" name="TRUE3" value="C">True&nbsp;&nbsp;&nbsp;<input onclick="parent.setValue(2,1)" type="radio" name="TRUE3" value="C">False</td>
+				<td width="440" HALIGN="LEFT">In instance modA.mb2, par3 will have the value 15.</td>
+			</tr>
+			<tr>
+				<td width="160" HALIGN="LEFT">d. <input onclick="parent.setValue(3,0)" type="radio" name="TRUE4" value="D">True&nbsp;&nbsp;&nbsp;<input onclick="parent.setValue(3,1)" type="radio" name="TRUE4" value="D">False</td>
+				<td width="440" HALIGN="LEFT">In the definition of modB, port4 must be declared as a reg.</td>
+			</tr>
+			<tr></form></tr>
+		</table>
+		<b>Click Done to check your answer.</b>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:parent.checkAnswerM(4,1,1,0,1,-1,-1)"><img src="images/vdone.gif" height="39" width="74" border="0"></a></p>
+	</body>
+
+</html>

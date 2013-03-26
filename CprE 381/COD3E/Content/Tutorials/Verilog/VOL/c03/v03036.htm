@@ -1,0 +1,68 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td>For context-determined expressions, the context is the surrounding expression or the statement the expression is used in. The most common context for an expression is the left-hand side of an assignment statement. In the following expression,
+					<p></p>
+					<dl>
+						<dd><tt>sum = a + b;</tt></a>
+					</dl>
+					<p>the length of the expression is determined by the length of a, b, and sum.</p>
+					<p>That is,</p>
+					<p></p>
+					<center>
+						<table width="400" border="1">
+							<tr>
+								<td width="200">
+									<center>
+										<b>Expression</b></center>
+									</b></font></td>
+								<td width="200">
+									<center>
+										<b>Context</b></center>
+									</font></td>
+							</tr>
+							<tr>
+								<td width="200">
+									<center>
+										<TT>s16 = r16 + p16;
+										<p>s17 = r16 + p16;</TT></p>
+									</center>
+								</td>
+								<td width="200">
+									<center>
+										16
+										<p>17</p>
+									</center>
+								</td>
+							</tr>
+						</table>
+					</center>
+				</td>
+			</tr>
+		</table>
+		<p></p>
+		<table width="600">
+			<tr>
+				<td>Thus, when you use the above table to determine the length of a result, those entries which have
+					<p></p>
+					<dl>
+						<dd><tt>max(L(i),L(j))</tt>
+					</dl>
+					are replaced with
+					<p></p>
+					<dl>
+						<dd><tt>max(L(i),L(j),context)</tt>
+					</dl>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

@@ -1,0 +1,60 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td><b>Given the following module:</b>
+					<p></p>
+					<pre>
+
+module modB (port1, port2, port3, port4);
+	input port1, port2;
+	inout port3;
+	output port4;
+	...
+	parameter par1 = 1,
+		  par2 = 2,
+		  par3 = par1+par2;
+	...
+endmodule
+</pre>
+				</td>
+			</tr>
+		</table>
+		<hr>
+		<form>
+			<b>Indicate whether the following instances of modB above are legal or illegal.</b>
+			<p></p>
+			<table width="600">
+				<tr>
+					<td width="150" HALIGN="LEFT">a. <input onclick="parent.setValue(0,0)" type="radio" name="LEGAL1" value="A">Legal&nbsp;&nbsp;&nbsp;<input onclick="parent.setValue(0,1)" type="radio" name="LEGAL1" value="A">Illegal</td>
+					<td width="460" HALIGN="LEFT"><tt>modB mb2 (p1, , p3, p4);</tt></td>
+				</tr>
+				<tr>
+					<td width="140" HALIGN="LEFT">b. <input onclick="parent.setValue(1,0)" type="radio" name="LEGAL2" value="B">Legal&nbsp;&nbsp;&nbsp;<input onclick="parent.setValue(1,1)" type="radio" name="LEGAL2" value="B">Illegal</td>
+					<td width="450" HALIGN="LEFT"><tt>modB #(7,8,9,10) mb2 (p1, p2, p3, p4);</tt></td>
+				</tr>
+				<tr>
+					<td width="150" HALIGN="LEFT">c. <input onclick="parent.setValue(2,0)" type="radio" name="LEGAL3" value="C">Legal&nbsp;&nbsp;&nbsp;<input onclick="parent.setValue(2,1)" type="radio" name="LEGAL3" value="C">Illegal</td>
+					<td width="450" HALIGN="LEFT"><tt>modB mb2 (p1, p2, p3);</tt></td>
+				</tr>
+				<tr>
+					<td width="150" HALIGN="LEFT">d. <input onclick="parent.setValue(3,0)" type="radio" name="LEGAL4" value="D">Legal&nbsp;&nbsp;&nbsp;<input onclick="parent.setValue(3,1)" type="radio" name="LEGAL4" value="D">Illegal</td>
+					<td width="450" HALIGN="LEFT"><tt>modB mb2 (p1, p2, p3, );</tt></td>
+				</tr>
+				<tr>
+					<p><br>
+					</p>
+				</tr>
+			</table>
+		</form>
+		</TABLE><b>Click Done to check your answer.</b>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:parent.checkAnswerM(4,0,1,0,0,-1,-1,'#answer')"><img src="images/vdone.gif" height="39" width="74" border="0"></a></p>
+	</body>
+
+</html>

@@ -1,0 +1,23 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td width="600"><a href="javascript:parent.goGlossHash('#bitselect')"><font color="#B22222">Bit-select</font></a> is the Verilog term for accessing a single bit of a vector. You can use a vector bit-select on either the right-hand side or the left-hand side of an assignment.
+					<p>It is permissable for the bit-select index to be an expression in a right-hand side expression, or in the left-hand side bit-select in <a href="javascript:parent.goGlossHash('#pcode')"><font color="#B22222">procedural code</font></a>. However, if the bit-select appears on the left-hand side in <a href="javascript:parent.goGlossHash('#dcode')"><font color="#B22222">declarative code</font></a> (i.e. in a continuous assignment), the bit-select index must be a constant-valued expression.</p>
+					<p>If the bit-select index is out of range of the vector, then the result is x. The result is also x if the index itself is x. It is illegal to apply bit-select to a real register.</p>
+					<p></p>
+					<center>
+						<a href="JavaScript:parent.dispWindow('v02096r1.htm','Example')"><img src="images/vexample.gif" height="39" width="91" border="0"></a></center>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

@@ -1,0 +1,33 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body onload="parent.initBtn0()" bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td><b>What does the following model do? Click Done to check your answer.</b>
+					<p></p>
+					<pre>
+`timescale 100ns/10ns
+module dff (q, d, clk);
+	input d, clk;
+	output q; reg q;
+	parameter clktoq = 1.2;
+	always @(posedge clk)
+		q 
+						
+						
+						<= #clktoq d; endmodule `timescale 1us/10ns module test; reg clk, d; dff ff (q, d, clk); always #1 clk="~clk;" initial begin clk="0;" d="0;" #2 d="1;" #2 d="0;" #2 d="1;" #2 $finish; end endmodule </PRE> <HR> </table> <table width="600"> <tr> <FORM> <td width="50" valign="top"> <INPUT TYPE="radio" NAME="A" VALUE="A" onClick="parent.setValue(0,0)"> </td> <td width="550"> <font color="#4B0082"> <b> <PRE> a) time: 0 100 112 200 300 312 400 500 512 600 700 712 clk: 0 1 0 1 0 1 0 1 q: x 0 1 0 1 </PRE> </b> </font> <tr> <td width="50" valign="top"> <INPUT TYPE="radio" NAME="A" VALUE="B" onClick="parent.setValue(0,1)"> </td> <td width="550"> <PRE> b) time: 0 100 112 200 300 312 400 500 512 600 700 712 clk: 0 1 0 1 0 1 0 1 q: x 0 1 0 1 </PRE> <tr> <td width="50" valign="top"> <INPUT TYPE="radio" NAME="A" VALUE="C" onClick="parent.setValue(0,2)"> </td> <td width="550"> <PRE> c) time: 0 100 112 200 300 312 400 500 512 600 700 712 clk: 0 1 0 1 0 1 0 1 q: x 0 1 0 </PRE> <tr> <td width="50" valign="top"> <INPUT TYPE="radio" NAME="A" VALUE="D" onClick="parent.setValue(0,3)"> </td> <td width="550"> <PRE> d) time: 0 100 200 220 300 400 420 500 600 620 700 clk: 0 1 0 1 0 1 0 1 q: x 0 1 0 </PRE> <tr> <td width="50" valign="top"> <INPUT TYPE="radio" NAME="A" VALUE="E" onClick="parent.setValue(0,4)"> </td> <td width="550"> e) this will not compile </tr> </table> </FORM> <b> That's right.</b>
+						
+						
+						
+</pre>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

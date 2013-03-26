@@ -1,0 +1,43 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body onload=" parent.initBtn0()" bgcolor="white">
+				<table width="600" cellpadding="10">
+			<b>Given the following Verilog module and associated pli.tab:</b>
+			<p></p>
+		</table>
+		<pre>
+	module test;
+
+		reg [127:0] in1, in2;
+		reg clk;
+		wire [127:0] out1, out2;
+		BigChip bc1 (in1, in2, out1, out2, clk);
+
+		integer nets;
+		initial begin
+		nets = $countNets(bc1);
+		$display(&quot;BigChip has %d nets&quot;, nets);
+		end
+	endmodule
+
+<b>pli.tab</b>
+
+$countNets  call=CountEm  size=32
+</pre>
+		<hr>
+		<form>
+			<input onclick="parent.setValue(0,0)" type="radio" name="A" value="A">1. acc_handle_object, tf_putp, and acc_next_object<br>
+			<input onclick="parent.setValue(0,1)" type="radio" name="A" value="B">2. acc_next_net, tf_putp, and acc_fetch_value<br>
+			<input onclick="parent.setValue(0,2)" type="radio" name="A" value="A">3. tf_arg, tf_putp, and acc_next_net<br>
+			<input onclick="parent.setValue(0,3)" type="radio" name="A" value="A"><font color="#4B0082"><b>4. acc_handle_tfarg, tf_putp, and acc_next_net</b></font><br>
+			<input onclick="parent.setValue(0,4)" type="radio" name="A" value="A">5. all of the above
+		</form>
+		<b>Right.</b></TABLE>
+	</body>
+
+</html>

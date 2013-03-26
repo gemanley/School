@@ -1,0 +1,152 @@
+<html>
+
+
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Projects/02_JDBC/Top_Instructors.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:02:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Project 2</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta name="Microsoft Border" content="t, default">
+</head>
+
+<body><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td>
+
+<p><font face="AGaramond" size="3">Com S 363: Introduction to Database Systems</font><br>
+<font face="AGaramond" size="5">Introduction to Database Systems </font></p>
+<p>
+
+</p>
+<p>&nbsp; </p>
+
+</td></tr><!--msnavigation--></table><!--msnavigation--><table dir="ltr" border="0" cellpadding="0" cellspacing="0" width="100%"><tr><!--msnavigation--><td valign="top">
+<p><i><font size="4" face="Arial">1. Project goal&nbsp;</font></i></p>
+<p><font SIZE="3">In this project you implement a JDBC (Java Database 
+Connectivity) application for the University database of Project 1. &nbsp;</p>
+</font><font FACE="Arial" SIZE="4">
+<p><font size="3" face="Times New Roman">
+As you have run the JDBC demo, completed Project 1, and assuming you have 
+absorbed contents of the chapter on JDBC in the textbook, you are set to go. 
+Only initial part of Project 1 up to where you load the tables will be needed 
+here. </font> </p>
+</font>
+<p>In this project you will come across some additional files. These files are
+listed below and their role is discussed in the project description.&nbsp;</p>
+<ul>
+  <li><font SIZE="3">P2.java. This will contain your Java program.&nbsp;
+</font>
+  </li>
+  <li><font SIZE="3">P2Output.txt. This file will contain the output of your
+    java program.&nbsp;
+</font>
+  </li>
+</ul>
+<p><i><font face="Arial" size="4">2</font></i><font face="Arial" size="4"><i>. Project Description&nbsp;</i></p>
+</font>
+<p><font size="3">Write a JDBC program P2.java that provides a solution to the
+problem described in parts A-F below. &nbsp;</font></p>
+<font size="3">
+<p><b><i><font face="Arial">A</font></i></b><font size="3" face="Arial"><i><b>.</b> 
+Print current salaries of instructors&nbsp; </i></font></p>
+<p>From your JDBC program print names and salaries of all instructors. Also 
+report the total of all salaries. Direct your output to P2Output.txt file. Note 
+that in order to print the required information you will need to execute an SQL 
+query from JDBC and iterate over the result set returned by the query. </p>
+<p ALIGN="JUSTIFY"><b><i><font face="Arial">B</font></i></b><font size="3" face="Arial"><i><b>.</b> 
+Compute the MeritList </i></font></p>
+  <p ALIGN="JUSTIFY"> We need to create a table called MeritList that contains 
+	information about top 20 (or more) students. To determine the top 20 (or 
+	more) students, execute an SQL query from your JDBC program that selects IDs of 
+	students, their classification, MentorID, and GPA in descending order
+of GPA-values. Then write java code to go through the result set of the query
+and and insert the information for top 20 (or more) 
+  students into the MeritList table. Note that this list may contain less than 
+	20 distinct GPA-values and
+more than 20 students. This is because some students may have the same GPA.
+After having taken top 20 students into account, you should include those
+students who have the same GPA as the 20th student. </p>
+<p><b><i><font face="Arial">C</font></i></b><font size="3" face="Arial"><i><b>.</b> 
+Print the contents of the MeritList&nbsp; </i></font></p>
+<p>From your JDBC program print contents of the MeritList table. For this you 
+will need to execute the query &quot;select * from MeritList m order by m.GPA&quot; and 
+handle it as a result set. Direct your output to P2Output.txt file. </p>
+</font>
+<p><b><i><font face="Arial">D</font></i></b><font size="3" face="Arial"><i><b>.</b> Update 
+Instructor Salaries </i></font></p>
+<p>The mentors of the students in the MeritList computed in Part B need to be 
+given salary raises. The rules for raises are as follows: </p>
+<ul>
+	<li>Mentor of a senior gets 10% raise, mentor of a junior gets 8% raise, 
+	mentor of a sophomore gets 6% raise, and mentor of a freshman gets 4% raise. 
+	</li>
+	<li>If an instructor has several students in the Merit List, only one, the 
+	highest applicable raise is given. </li>
+</ul>
+<p>In order to make the raise effective, updates must be performed on the 
+instructor table. A given instructor's record must be updated only once even 
+though he/she may have several students in the Merit List. To streamline this, 
+retrieve the MeritList in sorted order of MentorID. Use a resultset to process 
+one tuple at a time, wisely making your decisions. </p>
+<font size="3">
+<p><b><i><font face="Arial">E</font></i></b><font size="3" face="Arial"><i><b>.</b> 
+Print revised salaries of instructors&nbsp; </i></font></p>
+<p>From your JDBC program print names and salaries of all instructors. Also 
+report the total of all salaries. Direct your output to P2Output.txt file. Note 
+that this step is identical to Part A. </p>
+<p><b><i><font face="Arial">F</font></i></b><font size="3" face="Arial"><i><b>.</b> 
+End your program and cleanup&nbsp;&nbsp; </i></font></p>
+<p>From your JDBC program drop the MeritList table. Then Commit and close all 
+statements and connections.&nbsp; </p>
+</font>
+<font FACE="Arial" SIZE="4">
+<p><i>3.
+Some tips </i>&nbsp;</p>
+<ul>
+</font>
+	<li>
+    <p ALIGN="JUSTIFY">Use our demo program for JDBC as a guide. In particular 
+	note that the try-and-catch block is required by JDBC. So be sure to 
+	incorporate that in your code. </li>
+	<li>
+    <p ALIGN="JUSTIFY"><font size="3">In order to round a variable to two decimal places you
+    can use an assignment statement of the form&nbsp;<br>
+    </font><font face="Courier New" size="2">x = Math.round(y*100)/100.0;</font><font size="3">&nbsp;</font></li>
+<li><font size="3">For comparing string literals use the equals() function of 
+String Object type, and not the &quot;= =&quot; operator.&nbsp;&nbsp;</font></li>
+<font size="3">
+<li>
+  <p ALIGN="JUSTIFY">If you make a mistake in updating the instructor salaries, 
+	you should reload the affected tables and run your program again.&nbsp;CyDIW 
+	should be quite helpful in accomplishing this. </li>
+	<li>
+  <p ALIGN="left">Note that inserting and updating tuples can be handled by 
+	using PreparedStatement mechanism described in lecture slides and demo. On 
+	the other hand for creating and dropping tables, first create appropriate 
+	Statement objects and then apply executeUpdate method. </li>
+<li>
+  <p ALIGN="left"><font color="#FF0000">When your program involves JDBC 
+	constructs it has to be able to &quot;throw&quot; exceptions. The simplest way of 
+	taking care of it is to include &quot;throws Exception&quot; at the end of heading of 
+	every function (including main function). This is shown in the JDBC demo 
+	program. </font> </li>
+</ul>
+</font>
+<font FACE="Arial" SIZE="4">
+<p><i>4.
+Submission</i> </p>
+</font><font SIZE="3">
+<p ALIGN="JUSTIFY">Submit the electronic versions of P2.java and P2Output.txt
+files before the deadline. It is highly recommended that for your final run, use
+a freshly reloaded tables. Follow this by a hardcopy submission of the same
+files, collated and stapled together with the cover sheet, in the first lecture
+following the deadline or use the drop-box near 105 Atanasoff Hall. </p>
+<p ALIGN="JUSTIFY"> </p>
+</font>
+
+<!--msnavigation--></td></tr><!--msnavigation--></table></body>
+
+
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Projects/02_JDBC/Top_Instructors.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:02:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+</html>

@@ -1,0 +1,24 @@
+<html lang="en">
+
+	<head>
+		<title>GHDL guide</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+		<meta name="description" content="GHDL guide">
+		<meta name="generator" content="makeinfo 4.1">
+		<link href="http://texinfo.org/" rel="generator-home">
+		<link href="../../../resources/base_style.css" rel="stylesheet" type="text/css" media="all">
+	</head>
+
+	<body>
+		<p>Node:<a name="Backannotation">Backannotation</a>, Next:<a href="Negative-constraint-calculation.html#Negative%20constraint%20calculation" rel="next">Negative constraint calculation</a>, Previous:<a href="VHDL-restrictions-for-VITAL.html#VHDL%20restrictions%20for%20VITAL" rel="previous">VHDL restrictions for VITAL</a>, Up:<a href="GHDL-implementation-of-VITAL.html#GHDL%20implementation%20of%20VITAL" rel="up">GHDL implementation of VITAL</a></p>
+		<hr>
+		<br>
+		<h3>Backannotation</h3>
+		<p><dfn>Backannotation</dfn> is the process of setting VITAL generics with timing information provided by an external files.</p>
+		<p>The external files must be SDF (Standard Delay Format) files. GHDL supports a tiny subset of SDF version 2.1, other version number can be used, provided no features added by the next version are used.</p>
+		<p>Hierarchical instance names are not supported. However you can use a list of instances. If there is no instance, the top entity will be annotated and the celltype must be the name of the top entity. If there is at least one instance, the last instance name must be a component instantiation labe, and the celltype must be the name of the component declaration instantiated.</p>
+		<p>Instances being annotated are not required to be VITAL compliant. However generics being annotated must follow rules of VITAL (eg, type must be a suitable vital delay type).</p>
+		<p>Currently, only timing constraints applying on a timing generic of type <code>VitalDelayType01</code> has been implemented. This SDF annotator is just a proof of concept. Features will be added with the following GHDL release.</p>
+	</body>
+
+</html>

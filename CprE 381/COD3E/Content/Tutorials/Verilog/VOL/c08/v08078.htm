@@ -1,0 +1,113 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+		<style type="text/css" media="screen"><!--
+#answer  { visibility: hidden; position: absolute }
+--></style>
+		<csactions>
+			<csaction name="1CAD57C32" class="ShowHide" type="onevent" val0="answer" val1="1"></csaction>
+		</csactions>
+		<csscriptdict import>
+			<script type="text/javascript" src="../../../../resources/CSScriptLib.js"></script>
+		</csscriptdict>
+		<csactiondict>
+			<script type="text/javascript"><!--
+CSAct[/*CMP*/ '1CAD57C32'] = new Array(CSShowHide,/*CMP*/ 'answer',1);
+
+// --></script>
+		</csactiondict>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td><b>Assume run3 is instantiated from the top-level module test. </b>
+					<pre>
+module run3 (out, in, clk);
+	output out;
+	input in, clk;
+	reg [1:0] count;
+
+	assign out = count == 3;
+	
+	initial count = 0;
+
+	always @(posedge clk)
+		case (count)
+	0:		count &lt;= in;
+	1:		count &lt;= in ? 2 : 0;
+	2:		count &lt;= in ? 3 : 0;
+	3:		count &lt;= in ? 3 : 0;
+		endcase
+
+endmodule
+</pre>
+				</td>
+			</tr>
+			<tr>
+				<td>
+<tt><textarea name="SCRIPT1" rows="6" cols="70">
+module test;
+	wire out;
+	reg in, clk;
+
+	run3 r3 (out, in, clk);
+
+	initial begin
+		in = 0;
+		clk = 0;
+		forever #5 clk = ~clk;
+	end
+
+	initial begin
+	#2	in = 1;
+		repeat (3) @(posedge clk);
+		in &lt;= 0; 
+		repeat (1) @(posedge clk); 
+		in &lt;= 1;
+		repeat (4) @(posedge clk) ;
+		in &lt;= 0;
+		repeat (2) @(posedge clk);
+	#1	$finish;
+	
+	end
+
+endmodule
+</textarea></TT>
+				</td>
+			</tr>
+		</table>
+<hr>
+<b>Replace the initial block in module test to produce the following sequence for in:</b>
+<pre>
+	0001011011101111000
+</pre>
+
+<A HREF="javascript:parent.gotoScreen('08','078',0)"><img src="images/vreset.gif" border="0"></A><p>
+<center>
+			<a onclick="CSAction(new Array(/*CMP*/'1CAD57C32'));return CSClickReturn()" href="#" csclick="1CAD57C32"><img src="images/vanswer.gif" width="87" height="39" border="0"></a></center>
+
+<div id="answer">
+<b>Answer:</b>
+<PRE>
+initial begin : t
+	integer i;
+	@(posedge clk);
+	for (i=0; i&lt;5; i=i+1) begin
+		in &lt;= 0;
+		@(posedge clk) ;
+		in &lt;= 1;
+		repeat (i) @(posedge clk) ;
+	end
+	in &lt;= 0;
+	repeat (3) @(posedge clk);
+#1	$finish;
+end
+</PRE>
+</DIV>
+
+	</body>
+
+</html>

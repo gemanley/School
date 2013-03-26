@@ -1,0 +1,48 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body onload=" parent.initBtn0()" bgcolor="white">
+		<table width="600" cellpadding="10">
+			<b>Given the following module:</b>
+			<pre>
+module run3 (out, in, clk);
+	output out;
+	input in, clk;
+	reg [1:0] count;
+
+	assign out = count == 3;
+
+	initial count = 0;
+
+	always @(posedge clk)
+		case (count)
+	0:		count &lt;= in;
+	1:		count &lt;= in ? 2 : 0;
+	2:		count &lt;= in ? 3 : 0;
+	3:		count &lt;= in ? 3 : 0;
+		endcase
+
+endmodule
+</pre>
+			<b>In the previous screen you wrote assertion checking code fragment which can be added to module run3 which stops the simulation if count takes an x value. Will the following code fragment also produce this result?</b>
+			<pre>
+	always @(count)
+		if (count === 'bx)
+			$stop;
+</pre>
+			<hr>
+			<form>
+				<input type="radio" name="A" value="-1"><font color="#4B0082"><b>1. yes, it will produce the same result</b></font><br>
+				<input type="radio" name="A" value="-1">2. no, because count could be 0x or 1x, in which case the test would be false
+				<p></p>
+			</form>
+			<b>Right. This is only true because the only way count could be x is if in was x, in which case count would be 2'bxx which matches 'bx.</b>
+			<p></p>
+		</table>
+	</body>
+
+</html>

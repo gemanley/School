@@ -1,0 +1,1584 @@
+#VRML V2.0 utf8
+
+############ Vista Switch Group
+
+
+
+DEF Chavin Switch {
+
+    whichChoice 7
+
+    choice [
+
+
+
+
+
+    DEF Chavin14 Vista {
+
+	filename "images/Chavin34.jpg"
+
+	vFov -0.785 0.785
+
+	pitchRange -0.785 0.785
+
+	zoomRange .25 1
+
+
+
+children [
+
+
+
+DEF ImobsChavin14 Switch {
+
+	choice [
+
+
+
+		DEF Chavin14-1 ScreenIMob {
+
+		filename "images/stills/Cha14-1.jpg"
+
+		},
+
+
+
+		DEF Chavin14-1 ScreenIMob {
+
+		filename "images/stills/Cha14-2.jpg"
+
+		}
+
+]
+
+}
+
+]
+
+},
+
+
+
+      DEF Chavin15 Vista {
+
+	filename "images/Chavin35.jpg"
+
+	vFov -0.785 0.785
+
+	pitchRange -0.785 0.785
+
+	zoomRange .25 1
+
+},
+
+
+
+      DEF Chavin16 Vista {
+
+	filename "images/Chavin38.jpg"
+
+	vFov -0.785 0.785
+
+	pitchRange -0.785 0.785
+
+	zoomRange .25 1
+
+},
+
+        
+
+    DEF Chavin17 Vista {
+
+	filename "images/Chavin39.jpg"
+
+	vFov -0.785 0.785
+
+	pitchRange -0.785 0.785
+
+	zoomRange .25 1
+
+        }
+
+
+
+
+
+
+
+######LANZON
+
+
+
+    DEF Chavin118 Vista {
+
+   	filename "images/Chavin118.jpg"
+
+	vFov -0.785 0.785
+
+	pitchRange -0.785 0.785
+
+	zoomRange .25 1
+
+
+
+children [
+
+
+
+DEF ImobsChavin118 Switch {
+
+	choice [
+
+
+
+		DEF Lan1-1 ScreenIMob {
+
+		filename "images/stills/lan1-1.jpg"
+
+		}
+
+
+
+]
+
+}
+
+]
+
+},
+
+
+
+      DEF Chavin119 Vista {
+
+	filename "images/Chavin119.jpg"
+
+	vFov -0.785 0.785
+
+	pitchRange -0.785 0.785
+
+	zoomRange .25 1
+
+        },
+
+
+
+
+
+      DEF Chavin121 Vista {
+
+	filename "images/Chavin121.jpg"
+
+	vFov -0.785 0.785
+
+	pitchRange -0.785 0.785
+
+	zoomRange .25 1
+
+        },
+
+
+
+      DEF Chavin122 Vista {
+
+	filename "images/Chavin122.jpg"
+
+	vFov -0.785 0.785
+
+	pitchRange -0.785 0.785
+
+	zoomRange .25 1
+
+        },
+
+
+
+      DEF Chavin123 Vista {
+
+	filename "images/Chavin123.jpg"
+
+	vFov -0.785 0.785
+
+	pitchRange -0.785 0.785
+
+	zoomRange .25 1
+
+        },
+
+
+
+
+
+]
+
+}
+
+############ END SWITCH GROUP
+
+
+
+
+
+############### DISAPPEAR AND REAPPEAR SCRIPTS
+
+
+
+DEF BlankReappear Script {
+
+	url "rst:link"
+
+	field SFInt32 outValue -1
+
+	eventIn SFVec2f clickPt
+
+	eventOut SFInt32 value_changed
+
+}
+
+
+
+
+
+ROUTE Chavin14.clickPt TO BlankReappear.clickPt
+
+ROUTE BlankReappear.value_changed TO ImobsChavin14.set_whichChoice
+
+
+
+ROUTE Chavin118.clickPt TO BlankReappear.clickPt
+
+ROUTE BlankReappear.value_changed TO ImobsChavin118.set_whichChoice
+
+
+
+
+
+
+
+############### END DISAPPEAR AND REAPPEAR SCRIPTS
+
+
+
+
+
+########################################
+
+############### IMOB LINK SCRIPTS
+
+
+
+#clear caption
+
+DEF Clear_IMobCaption Script {
+
+    url "Lingo:mClear_IMobCaption"
+
+    eventIn SFInt32 activated
+
+}
+
+ROUTE BlankReappear.value_changed TO Clear_IMobCaption.activated
+
+
+
+
+
+	DEF ShowChavin14-1 Script {
+
+	url "rst:link"
+
+	field SFInt32 outValue 0
+
+	field SFVec2f xBounds 0.91 0.93
+
+	field SFVec2f yBounds 0.55 0.65
+
+	field SFString cursor "ARROW"
+
+	eventIn SFVec2f overPt
+
+	eventIn SFVec2f clickPt
+
+	eventOut SFInt32 value_changed
+
+}
+
+	ROUTE Chavin14.clickPt TO ShowChavin14-1.clickPt
+
+	ROUTE Chavin14.overPt TO ShowChavin14-1.overPt
+
+	ROUTE ShowChavin14-1.value_changed TO ImobsChavin14.set_whichChoice
+
+
+
+###one for each caption
+
+DEF ShowIMob_Chavin14-1 Script {
+
+	url "Lingo:mShow_IMobCaption_Chavin14_1"
+
+    eventIn SFInt32 activated
+
+}
+
+ROUTE ShowChavin14-1.value_changed TO ShowIMob_Chavin14-1.activated
+
+
+
+
+
+	DEF ShowChavin14-2 Script {
+
+	url "rst:link"
+
+	field SFInt32 outValue 1
+
+	field SFVec2f xBounds 0.97 0.99
+
+	field SFVec2f yBounds 0.55 0.65
+
+	field SFString cursor "ARROW"
+
+	eventIn SFVec2f overPt
+
+	eventIn SFVec2f clickPt
+
+	eventOut SFInt32 value_changed
+
+}
+
+	ROUTE Chavin14.clickPt TO ShowChavin14-2.clickPt
+
+	ROUTE Chavin14.overPt TO ShowChavin14-2.overPt
+
+	ROUTE ShowChavin14-2.value_changed TO ImobsChavin14.set_whichChoice
+
+
+
+###one for each caption
+
+DEF ShowIMob_Chavin14-2 Script {
+
+	url "Lingo:mShow_IMobCaption_Chavin14_2"
+
+    eventIn SFInt32 activated
+
+}
+
+ROUTE ShowChavin14-2.value_changed TO ShowIMob_Chavin14-2.activated
+
+
+
+#################################
+
+##########   LANZON    ##############
+
+#################################
+
+
+
+
+
+DEF ShowLan1-1 Script {
+
+	url "rst:link"
+
+	field SFInt32 outValue 0
+
+	field SFVec2f xBounds 0.815 0.855
+
+	field SFVec2f yBounds 0.75 0.875
+
+	field SFString cursor "ARROW"
+
+	eventIn SFVec2f overPt
+
+	eventIn SFVec2f clickPt
+
+	eventOut SFInt32 value_changed
+
+}
+
+	ROUTE Chavin118.clickPt TO ShowLan1-1.clickPt
+
+	ROUTE Chavin118.overPt TO ShowLan1-1.overPt
+
+	ROUTE ShowLan1-1.value_changed TO ImobsChavin118.set_whichChoice
+
+
+
+###one for each caption
+
+DEF ShowIMob_Lan1-1 Script {
+
+	url "Lingo:mShow_IMobCaption_Lan1_1"
+
+    eventIn SFInt32 activated
+
+}
+
+ROUTE ShowLan1-1.value_changed TO ShowIMob_Lan1-1.activated
+
+
+
+
+
+############### END IMOB LINK SCRIPTS
+
+########################################
+
+
+
+
+
+
+
+############ VISTA LINK SCRIPTS
+
+
+
+
+
+
+
+DEF LinkChavin14to15 Script {
+
+	url "rst:link"
+
+
+
+	eventIn SFVec2f clickPt
+
+	eventIn SFVec2f overPt
+
+	eventOut SFInt32 switchIt
+
+
+
+	field SFInt32 switchTo 1
+
+	field SFVec2f xBounds 0.8 0.84
+
+      field SFVec2f yBounds 0.45 0.5
+
+	field SFString transition "ZOOM"
+
+	field SFVec3f viewDir 0 5.18 0
+
+	field SFFloat zoomAngle 0.2
+
+}
+
+
+
+ROUTE Chavin14.clickPt TO LinkChavin14to15.clickPt
+
+ROUTE Chavin14.overPt TO LinkChavin14to15.overPt
+
+ROUTE LinkChavin14to15.switchIt TO Chavin.set_whichChoice
+
+
+
+DEF LinkChavin14to15HTML Script {
+
+	url "rst:link"
+
+	field SFString toURL "lowerset2.html"
+
+	field SFString toFrame "lower"
+
+	field SFVec2f xBounds 0.8 0.84
+
+	field SFVec2f yBounds 0.45 0.5
+
+	field SFString cursor "ARROW"
+
+	eventIn SFVec2f overPt
+
+	eventIn SFVec2f clickPt
+
+	eventOut SFInt32 value_changed
+
+}	
+
+	ROUTE Chavin14.clickPt TO LinkChavin14to15HTML.clickPt
+
+	ROUTE Chavin14.overPt TO LinkChavin14to15HTML.overPt
+
+
+
+DEF LinkChavin15to16 Script {
+
+	url "rst:link"
+
+
+
+	eventIn SFVec2f clickPt
+
+	eventIn SFVec2f overPt
+
+	eventOut SFInt32 switchIt
+
+
+
+	field SFInt32 switchTo 2
+
+	field SFVec2f xBounds 0.8 0.84
+
+    field SFVec2f yBounds 0.45 0.5
+
+	field SFString transition "ZOOM"
+
+	field SFVec3f viewDir 0.2 5.18 0
+
+	field SFFloat zoomAngle 0.2
+
+}
+
+
+
+ROUTE Chavin15.clickPt TO LinkChavin15to16.clickPt
+
+ROUTE Chavin15.overPt TO LinkChavin15to16.overPt
+
+ROUTE LinkChavin15to16.switchIt TO Chavin.set_whichChoice
+
+
+
+DEF LinkChavin15to16HTML Script {
+
+	url "rst:link"
+
+	field SFString toURL "lowerset3.html"
+
+	field SFString toFrame "lower"
+
+	field SFVec2f xBounds 0.8 0.84
+
+	field SFVec2f yBounds 0.45 0.5
+
+	field SFString cursor "ARROW"
+
+	eventIn SFVec2f overPt
+
+	eventIn SFVec2f clickPt
+
+	eventOut SFInt32 value_changed
+
+}	
+
+	ROUTE Chavin15.clickPt TO LinkChavin15to16HTML.clickPt
+
+	ROUTE Chavin15.overPt TO LinkChavin15to16HTML.overPt
+
+
+
+DEF LinkChavin16to17 Script {
+
+	url "rst:link"
+
+
+
+	eventIn SFVec2f clickPt
+
+	eventIn SFVec2f overPt
+
+	eventOut SFInt32 switchIt
+
+
+
+	field SFInt32 switchTo 3
+
+	field SFVec2f xBounds 0.57 0.61
+
+      field SFVec2f yBounds 0.5 0.55
+
+	field SFString transition "ZOOM"
+
+	field SFVec3f viewDir 0 3.8 0
+
+	field SFFloat zoomAngle 0.2
+
+}
+
+
+
+ROUTE Chavin16.clickPt TO LinkChavin16to17.clickPt
+
+ROUTE Chavin16.overPt TO LinkChavin16to17.overPt
+
+ROUTE LinkChavin16to17.switchIt TO Chavin.set_whichChoice
+
+
+
+DEF LinkChavin16to17HTML Script {
+
+	url "rst:link"
+
+	field SFString toURL "lowerset4.html"
+
+	field SFString toFrame "lower"
+
+	field SFVec2f xBounds 0.57 0.61
+
+	field SFVec2f yBounds 0.5 0.55
+
+	field SFString cursor "ARROW"
+
+	eventIn SFVec2f overPt
+
+	eventIn SFVec2f clickPt
+
+	eventOut SFInt32 value_changed
+
+}	
+
+	ROUTE Chavin16.clickPt TO LinkChavin16to17HTML.clickPt
+
+	ROUTE Chavin16.overPt TO LinkChavin16to17HTML.overPt
+
+
+
+DEF LinkChavin17to18 Script {
+
+	url "rst:link"
+
+
+
+	eventIn SFVec2f clickPt
+
+	eventIn SFVec2f overPt
+
+	eventOut SFInt32 switchIt
+
+
+
+	field SFInt32 switchTo 4
+
+	field SFVec2f xBounds 0.90 0.95
+
+      field SFVec2f yBounds 0.5 0.6
+
+	field SFString transition "ZOOM"
+
+	field SFVec3f viewDir -0.15 5.5 0
+
+	field SFFloat zoomAngle 0.2
+
+}
+
+
+
+ROUTE Chavin17.clickPt TO LinkChavin17to18.clickPt
+
+ROUTE Chavin17.overPt TO LinkChavin17to18.overPt
+
+ROUTE LinkChavin17to18.switchIt TO Chavin.set_whichChoice
+
+
+
+DEF LinkChavin17to18HTML Script {
+
+	url "rst:link"
+
+	field SFString toURL "lowerset5.html"
+
+	field SFString toFrame "lower"
+
+	field SFVec2f xBounds 0.90 0.95
+
+	field SFVec2f yBounds 0.5 0.6
+
+	field SFString cursor "ARROW"
+
+	eventIn SFVec2f overPt
+
+	eventIn SFVec2f clickPt
+
+	eventOut SFInt32 value_changed
+
+}	
+
+	ROUTE Chavin17.clickPt TO LinkChavin17to18HTML.clickPt
+
+	ROUTE Chavin17.overPt TO LinkChavin17to18HTML.overPt
+
+
+
+
+
+
+
+DEF LinkChavin17to16 Script {
+
+	url "rst:link"
+
+
+
+	eventIn SFVec2f clickPt
+
+	eventIn SFVec2f overPt
+
+	eventOut SFInt32 switchIt
+
+
+
+	field SFInt32 switchTo 2
+
+	field SFVec2f xBounds 0.1 0.15
+
+      field SFVec2f yBounds 0.45 0.6
+
+	field SFString transition "ZOOM"
+
+	field SFVec3f viewDir 0 .8 0
+
+	field SFFloat zoomAngle 0.2
+
+}
+
+
+
+ROUTE Chavin17.clickPt TO LinkChavin17to16.clickPt
+
+ROUTE Chavin17.overPt TO LinkChavin17to16.overPt
+
+ROUTE LinkChavin17to16.switchIt TO Chavin.set_whichChoice
+
+
+
+DEF LinkChavin17to16HTML Script {
+
+	url "rst:link"
+
+	field SFString toURL "lowerset3.html"
+
+	field SFString toFrame "lower"
+
+	field SFVec2f xBounds 0.1 0.15
+
+	field SFVec2f yBounds 0.45 0.6
+
+	field SFString cursor "ARROW"
+
+	eventIn SFVec2f overPt
+
+	eventIn SFVec2f clickPt
+
+	eventOut SFInt32 value_changed
+
+}	
+
+	ROUTE Chavin17.clickPt TO LinkChavin17to16HTML.clickPt
+
+	ROUTE Chavin17.overPt TO LinkChavin17to16HTML.overPt
+
+
+
+
+
+DEF LinkChavin16to15 Script {
+
+	url "rst:link"
+
+
+
+	eventIn SFVec2f clickPt
+
+	eventIn SFVec2f overPt
+
+	eventOut SFInt32 switchIt
+
+
+
+	field SFInt32 switchTo 1
+
+	field SFVec2f xBounds 0.3 0.35
+
+      field SFVec2f yBounds 0.65 0.75
+
+	field SFString transition "ZOOM"
+
+	field SFVec3f viewDir -0.2 2.05 0
+
+	field SFFloat zoomAngle 0.2
+
+}
+
+
+
+ROUTE Chavin16.clickPt TO LinkChavin16to15.clickPt
+
+ROUTE Chavin16.overPt TO LinkChavin16to15.overPt
+
+ROUTE LinkChavin16to15.switchIt TO Chavin.set_whichChoice
+
+
+
+DEF LinkChavin16to15HTML Script {
+
+	url "rst:link"
+
+	field SFString toURL "lowerset2.html"
+
+	field SFString toFrame "lower"
+
+	field SFVec2f xBounds 0.3 0.35
+
+	field SFVec2f yBounds 0.65 0.75
+
+	field SFString cursor "ARROW"
+
+	eventIn SFVec2f overPt
+
+	eventIn SFVec2f clickPt
+
+	eventOut SFInt32 value_changed
+
+}	
+
+	ROUTE Chavin16.clickPt TO LinkChavin16to15HTML.clickPt
+
+	ROUTE Chavin16.overPt TO LinkChavin16to15HTML.overPt
+
+
+
+DEF LinkChavin15to14 Script {
+
+	url "rst:link"
+
+
+
+	eventIn SFVec2f clickPt
+
+	eventIn SFVec2f overPt
+
+	eventOut SFInt32 switchIt
+
+
+
+	field SFInt32 switchTo 0
+
+	field SFVec2f xBounds 0.3 0.35
+
+      field SFVec2f yBounds 0.65 0.75
+
+	field SFString transition "ZOOM"
+
+	field SFVec3f viewDir -0.2 2.05 0
+
+	field SFFloat zoomAngle 0.2
+
+}
+
+
+
+ROUTE Chavin15.clickPt TO LinkChavin15to14.clickPt
+
+ROUTE Chavin15.overPt TO LinkChavin15to14.overPt
+
+ROUTE LinkChavin15to14.switchIt TO Chavin.set_whichChoice
+
+
+
+DEF LinkChavin15to14HTML Script {
+
+	url "rst:link"
+
+	field SFString toURL "lowerset.html"
+
+	field SFString toFrame "lower"
+
+	field SFVec2f xBounds 0.3 0.35
+
+	field SFVec2f yBounds 0.65 0.75
+
+	field SFString cursor "ARROW"
+
+	eventIn SFVec2f overPt
+
+	eventIn SFVec2f clickPt
+
+	eventOut SFInt32 value_changed
+
+}	
+
+	ROUTE Chavin15.clickPt TO LinkChavin15to14HTML.clickPt
+
+	ROUTE Chavin15.overPt TO LinkChavin15to14HTML.overPt
+
+
+
+
+
+#################################
+
+##########   LANZON    ##############
+
+#################################
+
+
+
+
+
+DEF LinkChavin118to17 Script {
+
+    url "rst:link"
+
+
+
+    eventIn SFVec2f clickPt
+
+    eventIn SFVec2f overPt
+
+    eventOut SFInt32 switchIt
+
+
+
+    field SFInt32 switchTo 3
+
+    field SFVec2f xBounds 0.4 0.47
+
+    field SFVec2f yBounds 0.3 0.6
+
+    field SFString transition "ZOOM"
+
+    field SFVec3f viewDir 0.1 2.8 0
+
+    field SFFloat zoomAngle 0.2
+
+}
+
+
+
+ROUTE Chavin118.clickPt TO LinkChavin118to17.clickPt
+
+ROUTE Chavin118.overPt TO LinkChavin118to17.overPt
+
+ROUTE LinkChavin118to17.switchIt TO Chavin.set_whichChoice
+
+
+
+DEF LinkChavin118to17HTML Script {
+
+	url "rst:link"
+
+	field SFString toURL "lowerset4.html"
+
+	field SFString toFrame "lower"
+
+	field SFVec2f xBounds 0.4 0.47
+
+	field SFVec2f yBounds 0.3 0.6
+
+	field SFString cursor "ARROW"
+
+	eventIn SFVec2f overPt
+
+	eventIn SFVec2f clickPt
+
+	eventOut SFInt32 value_changed
+
+}	
+
+	ROUTE Chavin118.clickPt TO LinkChavin118to17HTML.clickPt
+
+	ROUTE Chavin118.overPt TO LinkChavin118to17HTML.overPt
+
+
+
+
+
+DEF LinkChavin118to119 Script {
+
+    url "rst:link"
+
+
+
+    eventIn SFVec2f clickPt
+
+    eventIn SFVec2f overPt
+
+    eventOut SFInt32 switchIt
+
+
+
+    field SFInt32 switchTo 5
+
+    field SFVec2f xBounds 0.04 0.11
+
+    field SFVec2f yBounds 0.5 0.7
+
+    field SFString transition "ZOOM"
+
+    field SFVec3f viewDir 0 .53 0
+
+    field SFFloat zoomAngle 0.2
+
+}
+
+
+
+ROUTE Chavin118.clickPt TO LinkChavin118to119.clickPt
+
+ROUTE Chavin118.overPt TO LinkChavin118to119.overPt
+
+ROUTE LinkChavin118to119.switchIt TO Chavin.set_whichChoice
+
+
+
+DEF LinkChavin118to119HTML Script {
+
+	url "rst:link"
+
+	field SFString toURL "lowerset6.html"
+
+	field SFString toFrame "lower"
+
+	field SFVec2f xBounds 0.04 0.11
+
+	field SFVec2f yBounds 0.5 0.7
+
+	field SFString cursor "ARROW"
+
+	eventIn SFVec2f overPt
+
+	eventIn SFVec2f clickPt
+
+	eventOut SFInt32 value_changed
+
+}	
+
+	ROUTE Chavin118.clickPt TO LinkChavin118to119HTML.clickPt
+
+	ROUTE Chavin118.overPt TO LinkChavin118to119HTML.overPt
+
+
+
+DEF LinkChavin119to121 Script {
+
+    url "rst:link"
+
+
+
+    eventIn SFVec2f clickPt
+
+    eventIn SFVec2f overPt
+
+    eventOut SFInt32 switchIt
+
+
+
+    field SFInt32 switchTo 6
+
+    field SFVec2f xBounds 0.815 0.865
+
+    field SFVec2f yBounds 0.5 0.7
+
+    field SFString transition "ZOOM"
+
+    field SFVec3f viewDir 0 5.25 0
+
+    field SFFloat zoomAngle 0.2
+
+}
+
+
+
+ROUTE Chavin119.clickPt TO LinkChavin119to121.clickPt
+
+ROUTE Chavin119.overPt TO LinkChavin119to121.overPt
+
+ROUTE LinkChavin119to121.switchIt TO Chavin.set_whichChoice
+
+
+
+DEF LinkChavin119to121HTML Script {
+
+	url "rst:link"
+
+	field SFString toURL "lowerset7.html"
+
+	field SFString toFrame "lower"
+
+	field SFVec2f xBounds 0.815 0.865
+
+	field SFVec2f yBounds 0.5 0.7
+
+	field SFString cursor "ARROW"
+
+	eventIn SFVec2f overPt
+
+	eventIn SFVec2f clickPt
+
+	eventOut SFInt32 value_changed
+
+}	
+
+	ROUTE Chavin119.clickPt TO LinkChavin119to121HTML.clickPt
+
+	ROUTE Chavin119.overPt TO LinkChavin119to121HTML.overPt
+
+
+
+DEF LinkChavin119to118 Script {
+
+    url "rst:link"
+
+
+
+    eventIn SFVec2f clickPt
+
+    eventIn SFVec2f overPt
+
+    eventOut SFInt32 switchIt
+
+
+
+    field SFInt32 switchTo 4
+
+    field SFVec2f xBounds 0.56 0.61
+
+    field SFVec2f yBounds 0.5 0.7
+
+    field SFString transition "ZOOM"
+
+    field SFVec3f viewDir 0 3.55 0
+
+    field SFFloat zoomAngle 0.2
+
+}
+
+
+
+ROUTE Chavin119.clickPt TO LinkChavin119to118.clickPt
+
+ROUTE Chavin119.overPt TO LinkChavin119to118.overPt
+
+ROUTE LinkChavin119to118.switchIt TO Chavin.set_whichChoice
+
+
+
+DEF LinkChavin119to118HTML Script {
+
+	url "rst:link"
+
+	field SFString toURL "lowerset5.html"
+
+	field SFString toFrame "lower"
+
+	field SFVec2f xBounds 0.56 0.61
+
+	field SFVec2f yBounds 0.5 0.7
+
+	field SFString cursor "ARROW"
+
+	eventIn SFVec2f overPt
+
+	eventIn SFVec2f clickPt
+
+	eventOut SFInt32 value_changed
+
+}	
+
+	ROUTE Chavin119.clickPt TO LinkChavin119to118HTML.clickPt
+
+	ROUTE Chavin119.overPt TO LinkChavin119to118HTML.overPt
+
+	
+
+
+
+DEF LinkChavin121to122 Script {
+
+	url "rst:link"
+
+
+
+	eventIn SFVec2f clickPt
+
+	eventIn SFVec2f overPt
+
+	eventOut SFInt32 switchIt
+
+
+
+	field SFInt32 switchTo 7
+
+      field SFVec2f xBounds 0.82 0.88
+
+      field SFVec2f yBounds 0.5 0.7
+
+      field SFString transition "ZOOM"
+
+      field SFVec3f viewDir 0 5.3 0
+
+	field SFFloat zoomAngle 0.2
+
+}
+
+
+
+
+
+ROUTE Chavin121.clickPt TO LinkChavin121to122.clickPt
+
+ROUTE Chavin121.overPt TO LinkChavin121to122.overPt
+
+ROUTE LinkChavin121to122.switchIt TO Chavin.set_whichChoice
+
+
+
+DEF LinkChavin121to122HTML Script {
+
+	url "rst:link"
+
+	field SFString toURL "lowerset8.html"
+
+	field SFString toFrame "lower"
+
+	field SFVec2f xBounds 0.82 0.88
+
+	field SFVec2f yBounds 0.5 0.7
+
+	field SFString cursor "ARROW"
+
+	eventIn SFVec2f overPt
+
+	eventIn SFVec2f clickPt
+
+	eventOut SFInt32 value_changed
+
+}	
+
+	ROUTE Chavin121.clickPt TO LinkChavin121to122HTML.clickPt
+
+	ROUTE Chavin121.overPt TO LinkChavin121to122HTML.overPt
+
+
+
+DEF LinkChavin121to119 Script {
+
+	url "rst:link"
+
+
+
+	eventIn SFVec2f clickPt
+
+	eventIn SFVec2f overPt
+
+	eventOut SFInt32 switchIt
+
+
+
+	field SFInt32 switchTo 5
+
+      field SFVec2f xBounds 0.3 0.35
+
+      field SFVec2f yBounds 0.5 0.7
+
+      field SFString transition "ZOOM"
+
+      field SFVec3f viewDir 0 2 0
+
+	field SFFloat zoomAngle 0.2
+
+}
+
+
+
+
+
+ROUTE Chavin121.clickPt TO LinkChavin121to119.clickPt
+
+ROUTE Chavin121.overPt TO LinkChavin121to119.overPt
+
+ROUTE LinkChavin121to119.switchIt TO Chavin.set_whichChoice
+
+
+
+DEF LinkChavin121to119HTML Script {
+
+	url "rst:link"
+
+	field SFString toURL "lowerset6.html"
+
+	field SFString toFrame "lower"
+
+	field SFVec2f xBounds 0.3 0.35
+
+	field SFVec2f yBounds 0.5 0.7
+
+	field SFString cursor "ARROW"
+
+	eventIn SFVec2f overPt
+
+	eventIn SFVec2f clickPt
+
+	eventOut SFInt32 value_changed
+
+}	
+
+	ROUTE Chavin121.clickPt TO LinkChavin121to119HTML.clickPt
+
+	ROUTE Chavin121.overPt TO LinkChavin121to119HTML.overPt
+
+
+
+DEF LinkChavin122to123 Script {
+
+	url "rst:link"
+
+
+
+	eventIn SFVec2f clickPt
+
+	eventIn SFVec2f overPt
+
+	eventOut SFInt32 switchIt
+
+
+
+	field SFInt32 switchTo 8
+
+	field SFVec2f xBounds 0.83 0.86
+
+      field SFVec2f yBounds 0.4 0.7
+
+	field SFString transition "ZOOM"
+
+	field SFVec3f viewDir 0 5.3 0
+
+	field SFFloat zoomAngle 0.2
+
+}
+
+
+
+
+
+ROUTE Chavin122.clickPt TO LinkChavin122to123.clickPt
+
+ROUTE Chavin122.overPt TO LinkChavin122to123.overPt
+
+ROUTE LinkChavin122to123.switchIt TO Chavin.set_whichChoice
+
+
+
+DEF LinkChavin122to123HTML Script {
+
+	url "rst:link"
+
+	field SFString toURL "lowerset9.html"
+
+	field SFString toFrame "lower"
+
+	field SFVec2f xBounds 0.83 0.86
+
+	field SFVec2f yBounds 0.4 0.7
+
+	field SFString cursor "ARROW"
+
+	eventIn SFVec2f overPt
+
+	eventIn SFVec2f clickPt
+
+	eventOut SFInt32 value_changed
+
+}	
+
+	ROUTE Chavin122.clickPt TO LinkChavin122to123HTML.clickPt
+
+	ROUTE Chavin122.overPt TO LinkChavin122to123HTML.overPt
+
+
+
+DEF LinkChavin122to121 Script {
+
+	url "rst:link"
+
+
+
+	eventIn SFVec2f clickPt
+
+	eventIn SFVec2f overPt
+
+	eventOut SFInt32 switchIt
+
+
+
+	field SFInt32 switchTo 6
+
+	field SFVec2f xBounds 0.3 0.35
+
+      field SFVec2f yBounds 0.4 0.7
+
+	field SFString transition "ZOOM"
+
+	field SFVec3f viewDir 0 2 0
+
+	field SFFloat zoomAngle 0.2
+
+}
+
+
+
+
+
+ROUTE Chavin122.clickPt TO LinkChavin122to121.clickPt
+
+ROUTE Chavin122.overPt TO LinkChavin122to121.overPt
+
+ROUTE LinkChavin122to121.switchIt TO Chavin.set_whichChoice
+
+
+
+DEF LinkChavin122to121HTML Script {
+
+	url "rst:link"
+
+	field SFString toURL "lowerset7.html"
+
+	field SFString toFrame "lower"
+
+	field SFVec2f xBounds 0.3 0.35
+
+	field SFVec2f yBounds 0.4 0.7
+
+	field SFString cursor "ARROW"
+
+	eventIn SFVec2f overPt
+
+	eventIn SFVec2f clickPt
+
+	eventOut SFInt32 value_changed
+
+}	
+
+	ROUTE Chavin122.clickPt TO LinkChavin122to121HTML.clickPt
+
+	ROUTE Chavin122.overPt TO LinkChavin122to121HTML.overPt
+
+
+
+
+
+DEF LinkChavin123to122 Script {
+
+	url "rst:link"
+
+
+
+	eventIn SFVec2f clickPt
+
+	eventIn SFVec2f overPt
+
+	eventOut SFInt32 switchIt
+
+
+
+	field SFInt32 switchTo 7
+
+	field SFVec2f xBounds 0.3 0.32
+
+      field SFVec2f yBounds 0.4 0.7
+
+	field SFString transition "ZOOM"
+
+	field SFVec3f viewDir 0 8.1 0
+
+	field SFFloat zoomAngle 0.2
+
+}
+
+
+
+
+
+ROUTE Chavin123.clickPt TO LinkChavin123to122.clickPt
+
+ROUTE Chavin123.overPt TO LinkChavin123to122.overPt
+
+ROUTE LinkChavin123to122.switchIt TO Chavin.set_whichChoice
+
+
+
+DEF LinkChavin123to122HTML Script {
+
+	url "rst:link"
+
+	field SFString toURL "lowerset8.html"
+
+	field SFString toFrame "lower"
+
+	field SFVec2f xBounds 0.3 0.32
+
+	field SFVec2f yBounds 0.4 0.7
+
+	field SFString cursor "ARROW"
+
+	eventIn SFVec2f overPt
+
+	eventIn SFVec2f clickPt
+
+	eventOut SFInt32 value_changed
+
+}	
+
+	ROUTE Chavin123.clickPt TO LinkChavin123to122HTML.clickPt
+
+	ROUTE Chavin123.overPt TO LinkChavin123to122HTML.overPt
+
+
+
+################ End Vista Link Scripts
+
+
+
+
+
+#############DEFAULT VIEW
+
+
+
+DEF StartupTrigger TimeSensor {
+
+	startTime 0
+
+	stopTime 100
+
+	loop TRUE
+
+	}
+
+ROUTE StartupTrigger.isActive TO StartView.on
+
+DEF StartView Script {
+
+	url "rst:setVal"
+
+	eventIn SFBool on
+
+	exposedField SFVec3f val -0.2 5.37 0
+
+	}
+
+DEF View Script {
+
+	url "rst:setCamera"
+
+	eventIn SFVec3f orientation
+
+	field SFBool relative FALSE
+
+}
+
+ROUTE StartView.val_changed TO View.orientation
+
+
+
+
+
+
+

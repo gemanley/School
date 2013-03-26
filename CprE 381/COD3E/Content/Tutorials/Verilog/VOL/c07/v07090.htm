@@ -1,0 +1,30 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td valign="top" width="600">
+				<center>
+					<img src="images/v0730g1.gif" height="221" width="437">
+					<p></p>
+				</center>
+				We have already defined a race condition to be a situation where the behavior of the model depends on the order of execution of events at the same simulated time. (See <a href="javascript:parent.gotoScreen('03','105',1)">Defined vs. Undefined Behavior (Races) in Chapter 3.</a>)
+				<p>In general, a race condition occurs when a data value is sampled in one process and changed in another at the same simulated time.</p>
+				<p>A simple race is:</p>
+				<p></p>
+				<pre>
+	initial				initial
+	   #100 a = 1;			   #100 if(a) $display(&quot;a is 1&quot;);
+</pre>
+				The $display statement may or may not be executed, depending on the order of execution of the two events at time 100.
+				<p>We will list a few common types of constructs which can cause races. This is by no means an exhaustive list.</p>
+			</td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

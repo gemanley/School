@@ -1,0 +1,78 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">The user-defined routine is $my_monitor. It takes an arbitrary number of arguments, and it monitors them for value changes, using acc_vcl_add. Each time one of the arguments changes value, the specified routine (callBackFunc) gets called.
+					<p>New utility routines used:</p>
+					<p>acc_vcl_add ( argHandle, callbackFunc, numSig, vcl_verilog_logic )<br>
+						Adds a callback to the object (either a register or net) indicated by &quot;argHandle&quot;. The callback function (callbackFunction) is called whenever the object's value changes. &quot;numSig&quot; is arbitrary user-defined data passed to the callback routine.</p>
+					<p>tf_gettime()<br>
+						Returns the simulation time as a 32-bit quantity.</p>
+					<p>acc_fetch_name(sigArray[(int)vc_record-&gt;user_data] )<br>
+						Returns the name of the given object.</p>
+				</td>
+			</tr>
+		</table>
+		<table width="600">
+			<tr>
+				<td align="center" width="150"><a href="a09069.htm"><img src="images/vverilog.gif" height="39" width="139" border="0"></a></td>
+				<td align="center" width="150"><a href="b09069.htm"><img src="images/vpli.gif" height="39" width="136" border="0"></a></td>
+				<td align="center" width="190"><a href="c09069.htm"><img src="images/vuser.gif" height="39" width="177" border="0"></a></td>
+				<td align="center" width="110"><a href="d09069.htm"><img src="images/vresults.gif" height="39" width="87" border="0"></a></td>
+			</tr>
+		</table>
+		<p><br>
+		</p>
+		<table width="600">
+			<tr>
+				<td>
+					<pre>
+/* ex7_vcl.c */
+#include &quot;acc_user.h&quot;
+#include &quot;vcsuser.h&quot;
+#include &lt;assert.h&gt;
+#include &lt;stdio.h&gt;
+ 
+
+#define MAX_SIG 10
+handle sigArray[MAX_SIG];       /* Space - a pretty small limit */
+int numSig=0;
+ 
+void callbackFunc ( p_vc_record, vc_record );
+ 
+void my_monitor ( )
+{
+    handle      argHandle = acc_handle_tfarg(1);
+    assert ( numSig &lt; MAX_SIG );
+ 
+    acc_vcl_add ( argHandle, callbackFunc, numSig, vcl_verilog_logic );
+ 
+    sigArray[numSig] = argHandle;
+    numSig++;
+}
+
+void callbackFunc ( p_vc_record, vc_record ) 
+{
+    int i;
+ 
+    io_printf ( 
+              &quot;Time is %d.  Signal #%d (%s) changed to value %s\n&quot;,
+              tf_gettime(),
+              vc_record-&gt;user_data, 
+              acc_fetch_name(sigArray[(int)vc_record-&gt;user_data] ),
+              acc_fetch_value ( sigArray[(int)vc_record-&gt;user_data],&quot;%d&quot;, null ) );
+}
+</pre>
+					<p>The my_monitor routine sets up the call-backs, and the callBackFunc routine fields them.</p>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

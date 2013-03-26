@@ -1,0 +1,86 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">The point of this example is to show how a user routine can inspect the structure of a model. This routine (power) gets called with a module instance name as the argument, and it uses that to find out how many drivers and how many loads each net in the module has.
+					<p>New utility routines used:</p>
+					<p>acc_next_net ( module, net )<br>
+						Returns a handle to the next net in the module instance. All the nets in the module are ordered (somewhat arbitrarily), so &quot;next&quot; means &quot;the one after this one&quot;, where &quot;this one&quot; is the one whose handle is the second parameter.</p>
+					<p>acc_next_driver ( net, driver )<br>
+						Returns a handle to the next driver for this net. Again, the drivers of each net are ordered.</p>
+					<p>acc_next_load ( net, load )<br>
+						Returns the next load on this net. This is the fan-out of the net.</p>
+					<p>acc_fetch_fullname ( net )<br>
+						Returns the full hierarchical name of the object.</p>
+				</td>
+			</tr>
+		</table>
+		<table width="600">
+			<tr>
+				<td align="center" width="150"><a href="a09072.htm"><img src="images/vverilog.gif" height="39" width="139" border="0"></a></td>
+				<td align="center" width="150"><a href="b09072.htm"><img src="images/vpli.gif" height="39" width="136" border="0"></a></td>
+				<td align="center" width="190"><a href="c09072.htm"><img src="images/vuser.gif" height="39" width="177" border="0"></a></td>
+				<td align="center" width="110"><a href="d09072.htm"><img src="images/vresults.gif" height="39" width="87" border="0"></a></td>
+			</tr>
+		</table>
+		<p><br>
+		</p>
+		<table width="600">
+			<tr>
+				<td>
+					<pre>
+/* ex8_next.v */
+module ex8_next;
+   reg [1:0] A;
+   reg [1:0] B;
+   wire [2:0] result;
+   
+   add2 a ( A[1], A[0], B[1], B[0], result[2], result[1], result[0] );
+   
+   initial begin
+      $power ( a );
+      $monitor (&quot;time=%0t,A=%b,B=%b,result=%b&quot;,$time,A,B,result);
+      #100 A=0; B=0;
+      #100 A=1; B=0;
+      #100 A=2; B=0;
+      #100 A=3; B=0;
+      #100 A=3; B=1;
+      #100 A=3; B=2;
+      #100 A=3; B=3;
+   end
+ 
+endmodule /* ex8_next */
+   
+module add2 ( A1, A0, B1, B0, C2, C1, C0 );
+   // a 2-bit adder
+   input A1, A0, B1, B0;
+   output C2, C1, C0;
+   
+   wire tmp1, tmp2;
+   wire tmp3, tmp4, tmp5, tmp6, tmp7;
+   
+   xor ( C0, A0, B0 );
+   and ( tmp1, A0, B0 );
+   xor ( tmp2, A1, B1 );
+   xor ( C1, tmp1, tmp2 );
+   and ( tmp3, A1, B1 ); 
+   and ( tmp4, A0, B0 ); 
+   and ( tmp5, tmp4, A1 ); 
+   and ( tmp6, tmp4, B1 ); 
+   or ( tmp7, tmp3, tmp5 );  
+   or ( C2, tmp7, tmp4 ); 
+   
+endmodule /* add2 */
+</pre>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

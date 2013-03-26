@@ -1,0 +1,24 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>Processes consist of a collection of events. In most cases, the events within a single process are <i>completely ordered</i> (this is not true when using the fork statement, however!). That is, each event can be said to be before or after every other event within that process.
+					<p>However, events in different processes are only <i>partially ordered</i>. That is, there may be some events for which you cannot say whether one precedes the other or not. Here is an example of two processes which are concurrent and have events which are only partially ordered:</p>
+				</td>
+			</tr>
+		</table>
+		<pre>
+always @(posedge clock) begin           always @(posedge clock) begin
+    state1 = newstate1;                     state2 = newstate2;
+#10 newstate1 = func(state1, in1);      #11 newstate2 = func(state2, in2);
+end                                     end
+</pre>
+	</body>
+
+</html>

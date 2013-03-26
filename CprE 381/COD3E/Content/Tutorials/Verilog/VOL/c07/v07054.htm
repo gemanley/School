@@ -1,0 +1,38 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td width="600">The following is an example of using an always block for next state logic. This style is probably more common, but it is really no different than the first version.
+				<pre>                                                         
+`define A 3'b001
+`define B 3'b010
+`define C 3'b100
+module stateMachine (dout, din, clock);
+    output dout;
+    input din, clock;
+
+    reg [2:0] state, nextstate;
+    initial state = `A;
+    
+    assign dout = state==`A ? 1 :       // Output Logic
+                  state==`B ? 0 :
+                  state==`C ? 1 : 1'bx;
+
+    always @(posedge clock)             // State Memory
+        state 
+					
+					
+					<= nextstate; always @(state or din) // Next State Logic case (state) `A: nextstate="din" ? `C : `B; `B: nextstate="din" ? `B : `C; `C: nextstate="`A;" endcase endmodule </PRE> </TABLE> </FONT> </BODY> </HTML>>
+					
+					
+				</pre>
+			</td>
+		</table>
+	</body>
+
+</html>

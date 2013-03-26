@@ -1,0 +1,45 @@
+<html lang="en">
+
+	<head>
+		<title>GHDL guide</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+		<meta name="description" content="GHDL guide">
+		<meta name="generator" content="makeinfo 4.1">
+		<link href="http://texinfo.org/" rel="generator-home">
+		<link href="../../../resources/base_style.css" rel="stylesheet" type="text/css" media="all">
+	</head>
+
+	<body>
+		<p>Node:<a name="Interfacing%20to%20other%20languages">Interfacing to other languages</a>, Previous:<a href="Top-entity.html#Top%20entity" rel="previous">Top entity</a>, Up:<a href="GHDL-implementation-of-VHDL.html#GHDL%20implementation%20of%20VHDL" rel="up">GHDL implementation of VHDL</a></p>
+		<hr>
+		<br>
+		<h3>Interfacing to other languages</h3>
+		<p>You can define a subprogram in a foreign language (such as <code>C</code> or <code>Ada</code>) and import it in a VHDL design.</p>
+		<h4>Foreign declarations</h4>
+		<p>Only subprograms (functions or procedures) can be imported, using the foreign attribute. In this example, the <code>sin</code> function is imported:<br>
+		</p>
+		<pre>package math is
+  function sin (v : real) return real;
+  attribute foreign of sin : function is &quot;VHPIDIRECT sin&quot;;
+end math;
+
+package body math is
+  function sin (v : real) return real is
+  begin
+    assert false severity failure;
+  end sin;
+end math;
+</pre>
+		<p>A subprogram is made foreign if the <var>foreign</var> attribute decorates it. This attribute is declared in the 1993 revision of the <code>std.standard</code> package. Therefore, you cannot use this feature in VHDL 1987.</p>
+		<p>The decoration is achived through an attribute specification. The attribute specification must be in the same declarative part as the subprogram and must be after it. This is a general rule for specifications. The value of the specification must be a locally static string.</p>
+		<p>Even when a subprogram is foreign, its body must be present. However, since it won't be called, you can made it empty or simply but an assertion.</p>
+		<p>The value of the attribute must start with <code>VHPIDIRECT </code>(an upper-case keyword followed by one or more blanks). The linkage name of the subprogram follows.</p>
+		<ul>
+			<li><a href="Restrictions-on-foreign-declarations.html#Restrictions%20on%20foreign%20declarations">Restrictions on foreign declarations</a>:
+			<li><a href="Linking-with-foreign-object-files.html#Linking%20with%20foreign%20object%20files">Linking with foreign object files</a>:
+			<li><a href="Starting-a-simulation-from-a-foreign-program.html#Starting%20a%20simulation%20from%20a%20foreign%20program">Starting a simulation from a foreign program</a>:
+			<li><a href="Linking-with-Ada.html#Linking%20with%20Ada">Linking with Ada</a>:
+		</ul>
+	</body>
+
+</html>

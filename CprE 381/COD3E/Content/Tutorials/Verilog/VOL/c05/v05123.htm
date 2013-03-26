@@ -1,0 +1,27 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>Loop control can also be complicated by unsigned arithmetic. Consider this code:
+					<p><tt></tt></p>
+					<dl>
+						<dd>reg [31:0] index;
+						<dd>...
+						<dd>for (index=500; index&gt;0; index=index-3) s3;
+					</dl>
+					</TT>
+					<p>Because index is unsigned, it can never have a value less than 0, so this loop will not terminate. If index was declared as an integer, the loop would work as intended, since integers are signed, and can have negative values.</p>
+					<p>It is possible to write infinite loops in other ways, including using a constant expression for the <tt>cond_expr</tt> (eg. 1). Such a loop may either never terminate, like the forever loop, or it may be terminated externally by a <a href="javascript:parent.goGlossHash('#disablesta')"><font color="#B22222">disable statement</font></a>.</p>
+					<p>Notice that Verilog does not have an increment operator like C does (++ or --), so the increment statement cannot be of the form &quot;<tt>i++</tt>&quot;.</p>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

@@ -1,0 +1,25 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td align="top" width="250"><img src="images/v0324g1.gif" height="278" width="247"></td>
+				<td width="350">Verilog falls in the class of discrete event simulation languages. Other languages in this class are GPSS, Simula, and Simscript, as well as VHDL and ISP'. All of these languages share a common simulation paradigm, which is based on instantaneous events with time elapsing between them.
+					<p>The fundamental data structure in simulators for these languages is the Future Event List, or just the event list. This is a list which contains pointers to events and associates a time with them. The time values in this list are absolute time values. I.e. in the list, an entry will indicate that event A should happen at time t. With an ordered list like this, the simulation operation is simply</p>
+					<p></p>
+					<ol type="1" start="1">
+						<li>Take the first event off the list
+						<li>If the event's time is greater than the current time, advance the current time to the event's time.
+						<li>Do the event.
+					</ol>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

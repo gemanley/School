@@ -1,0 +1,31 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			One-hot state encoding is a common way of assigning state constants to states. In this method, there is only one bit in the state vector on for each state. For example, the state encoding we have used in the example is one-hot:
+			<pre>
+    `define A 3'b001
+    `define B 3'b010
+    `define C 3'b100
+</pre>
+			However, up to now, we did not take advantage of this in the decoding. To do that, the case statement would look like this:
+			<pre>
+        parameter SA = 0, SB = 1, SC = 2;
+        case (1'b1)
+    state[SA]:     nextstate = din ? `C : `B;
+    state[SB]:     nextstate = din ? `B : `C;
+    state[SC]:     nextstate = `A;
+        endcase
+</pre>
+			While this looks a little odd, it is perfectly well-defined. The case comparisons are each a bit extract followed by acompare to 1.
+			<p>One-hot state encoding has a number of claimed advantages, which include less logic to decode the state, and less logic to drive outputs. In many cases, synthesizers can produce state machines with as good performance as one-hot when left to do their own optimization, but one-hot is often as good as it will get.</p>
+		</table>
+	</body>
+
+</html>

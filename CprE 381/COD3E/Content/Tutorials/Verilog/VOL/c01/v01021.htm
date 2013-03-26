@@ -1,0 +1,34 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td valign="TOP" width="500"><font size="3">Modules in a hierarchy have both a type and a name. <b>Module types are defined in Verilog</b>. There can be many module instances of the same type of module in a single hierarchy. To be unique, each different instance <i>at the same level</i> must have a unique name. </font></td>
+			</tr>
+			<tr>
+				<td valign="TOP" width="500">
+					<center>
+						<img src="images/v0107g1.gif" height="265" width="454"></center>
+				</td>
+			</tr>
+			<tr>
+				<td valign="TOP" width="500">In the example above, there are:
+					<p></p>
+					<ul>
+						<li>there is 1 top module named top (both module type and module name are the same)
+						<li>there are 2 <tt>type1</tt> modules named <tt>childA</tt> and <tt>node1</tt>
+						<li>there is 1 <tt>type2</tt> module named <tt>childB</tt>
+						<li>there are 5 <tt>type3</tt> modules named <tt>leaf1, leaf2, leaf3, leaf1, and leaf2</tt>
+							<p></p>
+					</ul>
+					The full hierarchical path name of each module specifies its location in the hierarchy. For example, the name of the module at the lower right corner of the diagram is <tt>top.childB.node1.leaf2.</tt></td>
+			</tr>
+		</table>
+	</body>
+
+</html>

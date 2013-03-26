@@ -1,0 +1,28 @@
+<html lang="en">
+
+	<head>
+		<title>GHDL guide</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+		<meta name="description" content="GHDL guide">
+		<meta name="generator" content="makeinfo 4.1">
+		<link href="http://texinfo.org/" rel="generator-home">
+		<link href="../../../resources/base_style.css" rel="stylesheet" type="text/css" media="all">
+	</head>
+
+	<body>
+		<p>Node:<a name="Chop%20mode">Chop mode</a>, Next:<a href="Help-mode.html#Help%20mode" rel="next">Help mode</a>, Previous:<a href="List-link-mode.html#List%20link%20mode" rel="previous">List link mode</a>, Up:<a href="GHDL-modes.html#GHDL%20modes" rel="up">GHDL modes</a></p>
+		<hr>
+		<br>
+		<h4>Chop mode</h4>
+		<p>Chop (or split) files at design unit.<br>
+		</p>
+		<pre>$ ghdl --chop <var>files</var>
+</pre>
+		<code>GHDL</code> read files, and write a file in the current directory for every design unit.
+		<p>The file name of a design unit is build according to the unit. For an entity declaration, a package declaration or a configuration the file name is <code>NAME.vhdl</code>, where <var>NAME</var> is the name of the design unit. For a package body, the file name is <code>NAME-body.vhdl</code>. Finally, for an architecture <var>ARCH</var> of an entity <var>ENTITY</var>, the file name is <code>ENTITY-ARCH.vhdl</code>.</p>
+		<p>Since the input files are parsed, the mode aborts in case of syntax error. The mode aborts too if a file to be written already exists.</p>
+		<p>Comments between design units are stored into the most adequate files.</p>
+		<p>This mode may be useful to split big files, if your computer has not enough memory to compile such files. The size of the executable is reduced too.</p>
+	</body>
+
+</html>

@@ -1,0 +1,35 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<td width="600">Click a title to go directly to that example or click the Next button to see the examples in the order presented.
+				<p><a href="javascript:parent.gotoScreen('09','054',1)">tf_getp/putp</a><br>
+					This is a user-defined task which takes two parameters, a register and a value. It changes the register value to the given value, using the tf_ routines tf_getp and tf_putp.</p>
+				<p><a href="javascript:parent.gotoScreen('09','057',1)">acc_fetch/set_value</a><br>
+					This is the same example but the user-defined task takes only one argument, the new value, and it modifies a fixed register in the Verilog model. It does this using the acc_ routines acc_fetch_value and acc_set_value, as well as acc_handle_by_name.</p>
+				<p><a href="javascript:parent.gotoScreen('09','060',1)">acc_fetch/set_value 4-value</a><br>
+					This again sets a fixed register to a value, but this time the register is 100 bits long, the value is 4-value, and only 32 bits of the register are set on each call to the user-defined task.</p>
+				<p><a href="javascript:parent.gotoScreen('09','063',1)">Check Routine</a><br>
+					Using the fetch/set 4-value example above, this adds a <a href="javascript:parent.goGlossHash('#checkrout')"><font color="#B22222">check routine</font></a> to it. The check routine can then screen out any erroneous calls before simulation starts.</p>
+				<p><a href="javascript:parent.gotoScreen('09','066',1)">Termination Miscs Routine</a><br>
+					This example is a user-defined routine which only gets called when simulation finishes. It then allows interaction with the user.</p>
+				<p><a href="javascript:parent.gotoScreen('09','069',1)">Custom Monitor</a><br>
+					This user-defined routine implements a customized monitor using a Value-Change-Link (VCL) routine which gets called when signals change. The arguments to $my_monitor are monitored, but only the ones that change are printed.</p>
+				<p><a href="javascript:parent.gotoScreen('09','072',1)">Count the Drivers and Loads</a><br>
+					This example counts the total number of drivers and loads in a module. It accomplishes this by using several &quot;acc_next_&quot; routines.</p>
+				<p><a href="javascript:parent.gotoScreen('09','075',1)">Change Delays</a><br>
+					This example changes the delays for particular gates in the Verilog model to the values contained in the C routine.</p>
+				<p><a href="javascript:parent.gotoScreen('09','078',1)">Sparse Memory Model</a><br>
+					Implement a sparse memory. There are two user-defined tasks, $set_memory and $get_memory. The memory is word addressable.</p>
+				<p><a href="javascript:parent.gotoScreen('09','081',1)">Test Language Driver</a><br>
+					This is a test language interpreter which allows the Verilog model to read in stimulus from a file. The stimulus is in the form of commands which cause the model to execute Verilog tasks which drive the simulation.</p>
+			</td>
+		</table>
+	</body>
+
+</html>

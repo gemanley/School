@@ -1,0 +1,45 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td valign="top" width="235"><img src="images/v0740g1.gif" height="93" width="235">
+				<p></p>
+			</td>
+			<td valign="top" width="335">The main objective of run-time optimization is to reduce the number of events which the simulator executes. This is almost always a good measure of the amount of work the simulator is doing, and most simulators will print out the number of events they executed at the end of a simulation run.
+				<p>A good example is the use of always blocks triggered on clock edges:</p>
+				<pre>
+    always @(posedge clk)
+        dff1 
+					
+					
+					<= f(in); </PRE> </table> <table width="600"> <td width="600"> A loop like this will execute every clock cycle, even though the input may seldom change. If the function f(in) is significant, this can be very wasteful.<p>
+					
+					
+					 
+
+We have seen a number of alternatives to this code, including these: 
+
+					
+					
+					<pre>
+   always @(posedge clk) begin          assign wdff1 = f(in);
+      dff1 
+						
+						
+						<= f(in); always @(wdff1) @(in); @(posedge clk) end dff1 <= wdff1;</PRE> Often it is the case that when rewriting some code to execute fewer events, new assumptions are made about when signals will or will not change. If the assumptions are valid, then the improvement can be realized. </TABLE> </FONT> </BODY> </HTML>>
+						
+						
+					</pre>
+					
+					
+				</pre>
+			</td>
+		</table>
+	</body>
+
+</html>

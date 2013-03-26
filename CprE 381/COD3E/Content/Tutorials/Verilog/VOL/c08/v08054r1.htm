@@ -1,0 +1,28 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			This system task is not part of the IEEE standard language but it is commonly implemented. It allows the model to check for the existence of a command line argument.
+			<p>Command line arguments which are model-visible start with a &quot;+&quot;. For example,</p>
+			<p></p>
+			<pre>
+    VERILOG file1.v file2.v -v libfile +fullvis
+</pre>
+			<p>The above command has a user-defined command line argument named fullvis. The model could find out if it was included on the command line by using $test$plusargs, as follows:</p>
+			<p></p>
+			<pre>
+    if ($test$plusargs(&quot;fullvis&quot;))      // if +fullvis
+         $dumpvars;                     //     dump everything
+    else                                // otherwise
+        $monitor($time,,r1,,r2,,r3);   //     just monitor a few signals 
+</pre>
+		</table>
+	</body>
+
+</html>

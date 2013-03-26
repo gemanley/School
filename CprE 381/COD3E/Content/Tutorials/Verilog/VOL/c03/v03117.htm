@@ -1,0 +1,323 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<a name="diagram" <table width="600"> <tr> <td> The following example has a simple hierarchy, with a top-level module and two sub-modules. The module being designed is a comparator, which takes three inputs and produces one output. There is a test module which produces test data and displays the result.<p>
+			<center>
+				<A HREF="#source">
+				<center>
+					<img src="images/vverilog.gif" height="39" width="139" border="0"></a></center>
+				<p><img src="images/v0337g1.gif" height="209" width="383"></p>
+				<p></p>
+			</center>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<a name="source">
+				<pre><code><a href="#ref">module system</a>;
+    <a href="#ref">/* This is a test fixture for testing a comparator */</a>
+    
+    <a href="#ref">wire</a> greaterNotLess;        <a href="#ref">// sense of comparison</a>
+    wire <a href="#ref">[15:0]</a> A, B;           // comparand values - 16 bit
+    wire result;                // comparison result
+        
+    // <a href="#ref">Module instances</a>
+    comparator <a href="#ref">#(16, 2)</a> comp <a href="#ref">(result, A, B, greaterNotLess)</a>;
+    testGenerator tg (A, B, greaterNotLess, result);        
+    
+endmodule
+
+module comparator <a href="#ref">(result, A, B, greaterNotLess)</a>;
+    <a href="#ref">parameter</a> width = 8;
+    parameter delay = 1;
+    <a href="#ref">input</a> [width-1:0] A, B;             // comparands
+    input greaterNotLess;               // 1 - greater, 0 - less than
+    <a href="#ref">output</a> result;                      // 1 if true, 0 if false
+    
+    <a href="#ref">assign #delay</a> result = greaterNotLess ? (A &gt; B) : (A &lt; B);
+    
+endmodule
+
+
+module testGenerator (A, B, greaterNotLess, result);
+    output [15:0] A, B;
+    output greaterNotLess;
+    input result;
+    parameter del = 5;
+    
+    reg [15:0] A, B;
+    reg greaterNotLess;
+    
+    <a href="#ref">initial</a> begin               // produce test data, check results
+        A = <a href="#ref">16'h1234;</a>
+        B = 16'b0001001000110100;
+        greaterNotLess = 0;
+    <a href="#ref">#del</a>
+        check(0);
+        B = 0;
+        greaterNotLess = 1;
+    #del
+        check(1);
+        A = 1;
+        greaterNotLess = 0;
+    #del
+        check(0);
+        $finish;
+    end
+    
+    <a href="#ref">task</a> check;
+        input shouldBe;
+        begin
+            if (result != shouldBe)
+                <a href="#ref">$display</a>(&quot;Error! %d %s %d, result = %b&quot;, A, greaterNotLess?&quot;&gt;&quot;:&quot;
+						
+						
+						<", B, result); end endtask endmodule </CODE> </PRE> <p> <br> <b> <A HREF="#diagram"> Return to Diagram</a>&nbsp;&nbsp;<a href="#diagram"><img src="images/varrow.gif" with="38" height="39" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#ref">More Information</a></b>
+&nbsp;&nbsp;<a href="#ref"><img src="images/varrow.gif" with="38" height="39" border="0"></a></b>
+
+
+<br>
+						
+						
+						<br>
+						
+						
+						<br>
+						
+						
+						<br>
+						
+						
+						<br>
+						
+						
+						<br>
+						
+						
+						<br>
+						
+						
+						<br>
+						
+						
+						<br>
+						
+						
+						<br>
+						
+						
+						<br>
+						
+						
+						<br>
+						
+						
+						<br>
+						
+						
+						<br>
+						
+						
+						<br>
+						
+						
+						
+
+
+						
+						
+						<table width="600">
+							
+							
+							
+							
+							<tr>
+								
+								
+								<td>
+<a name="ref">
+<b>For more information on the following topics see the list below.</b>
+										
+										
+										<p>
+ 
+<b>module system;</b>&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','033',1)">Modules, Top Level</a><br>
+											
+											
+											
+<b>/* This is a test fixture for testing a comparator */;</b>&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('02','015',1)">Lexical Conventions: Tokens: Comments</a><br>
+											
+											
+											
+<b>wire ;</b>&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','069',1)">Modelling Structures: Parameters: Redefinition</a><br>
+											
+											
+											
+<b>// sense of comparison;</b>&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('02','015',1)">Lexical Conventions: Tokens: Comments</a><br>
+											
+											
+											
+<b>[15:0]</b>&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('02','075',1)">Data Types: Scalar</a><br>
+											
+											
+											
+<b>Module instances;</b>&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','027',1)">Modules: Definition</a><br>
+											
+											
+											
+<b>(16, 2)</b>&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','069',1)">Modelling Structures: Parameters: Redefinition</a><br>
+											
+											
+											
+<b>(result, A, B, greaterNotLess); ;</b>&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','048',1)">Ports: Assignment: Positional</a><br>
+											
+											
+											
+<b>(result, A, B, greaterNotLess); ;</b>&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','036',1)">Ports</a><br>
+											
+											
+											
+<b>parameter;</b>&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','063',1)">Modelling: Structures: Parameters: Definition</a><br>
+											
+											
+											
+<b>input;</b>&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','036',1)">Ports</a><br>
+											
+											
+											
+<b>output;</b>&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','036',1)">Ports</a><br>
+											
+											
+											
+<b>assign #delay ;</b>&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('03','066',1)">Simulation: Delays</a><br>
+											
+											
+											
+<b>initial</b>&nbsp;&nbsp;&nbsp; See <a href="javascript:parent.gotoScreen('01','138',1)">Modelling Structures, Procedural Blocks, Initial</a><br>
+											
+											
+											
+<b>16'h1234;</b>&nbsp;&nbsp;&nbsp; See <a href="javascript:parent.gotoScreen('02','030',1)">Lexical Conventions, Tokens, Constants, Integer</a><br>
+											
+											
+											
+<b>#del</b>&nbsp;&nbsp;&nbsp; See <a href="javascript:parent.gotoScreen('03','066',1)">Simulation, Delays</a><br>
+											
+											
+											
+<b>task</b>&nbsp;&nbsp;&nbsp; See <a href="javascript:parent.gotoScreen('01','150',1)">Modelling Structures, Tasks and Functions</a><br>
+											
+											
+											
+<b>$display</b>&nbsp;&nbsp;&nbsp; See <a href="javascript:parent.gotoScreen('02','057',1)">Lexical Conventions, Tokens, System Tasks and Functions</a><br>
+											
+											
+											
+
+</p>
+										
+										
+									</a></td>
+								
+								
+							</tr>
+							
+							
+						
+						
+						</table>
+						
+						
+						
+
+						
+						
+						<p><br>
+							
+							
+							
+<b><a href="#source">Return to Source</a>&nbsp;&nbsp;&nbsp;<a href="#source"><img src="images/varrow.gif" with="38" height="39" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#diagram">Return to Diagram</a>&nbsp;&nbsp;&nbsp;<a href="#diagram"><img src="images/varrow.gif" with="38" height="39" border="0"></a></b>
+<br>
+							
+							
+							<br>
+							
+							
+							<br>
+							
+							
+							<br>
+							
+							
+							<br>
+							
+							
+							<br>
+							
+							
+							<br>
+							
+							
+							<br>
+							
+							
+							<br>
+							
+							
+							<br>
+							
+							
+							<br>
+							
+							
+							<br>
+							
+							
+							<br>
+							
+							
+							<br>
+							
+							
+							<br>
+							
+							
+							
+
+
+
+
+</table>
+
+
+
+</p>
+						
+						
+					</code></pre>
+			</a></a>
+	</body>
+
+</html>

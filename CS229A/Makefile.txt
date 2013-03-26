@@ -1,0 +1,24 @@
+jim.c requires util.h
+steve.c requires util.h and steve.h (has main function)
+boat.c requires foo.h
+wine.c requires steve.h and fruit.h (has main function)
+
+Makefile:
+
+executable called steve
+executable called wine
+
+makefile
+all : steve wine
+steve : steve.o
+[TAB]	gcc -o steve steve.o -lm [lm stands for library math if it is needed]
+steve.o : steve.c steve.h util.h
+[TAB]	gcc -c -g steve.c [-g for debug]
+
+Now say steve.c used functions from boat.c
+
+This changes:
+steve : steve.o boat.o
+[TAB]	gcc -o steve steve.o boat.o
+boat.o : boat.c foo.h
+[TAB]	gcc -o -g boat.c

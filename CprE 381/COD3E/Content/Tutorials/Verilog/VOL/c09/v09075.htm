@@ -1,0 +1,32 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">This example shows how to change the delays in the Verilog source. This is the way back-annotation usually works with Verilog. In this case, the new delays are simply compiled into the C routine. It would be more realistic to read them from a file (typically a file in SDF format).
+					<p>New utility routines used:</p>
+					<p>acc_configure ( accPathDelayCount, &quot;2&quot; )<br>
+						Sets configuration information for a variety of other acc routines. In this case, it sets those routines having to do with delays to use 2 delay values, as opposed to 1, 3, 6, or 12.</p>
+					<p>acc_fetch_delays ( objHandle, &rise, &fall )<br>
+						Gets the rise and fall delays for the specified object.</p>
+					<p>acc_replace_delays ( objHandle, d[i].rise, d[i].fall )<br>
+						Changes the rise and fall delays for the object.</p>
+				</td>
+			</tr>
+		</table>
+		<table width="600">
+			<tr>
+				<td align="center" width="150"><a href="a09075.htm"><img src="images/vverilog.gif" height="39" width="139" border="0"></a></td>
+				<td align="center" width="150"><a href="b09075.htm"><img src="images/vpli.gif" height="39" width="136" border="0"></a></td>
+				<td align="center" width="190"><a href="c09075.htm"><img src="images/vuser.gif" height="39" width="177" border="0"></a></td>
+				<td align="center" width="110"><a href="d09075.htm"><img src="images/vresults.gif" height="39" width="87" border="0"></a></td>
+			</tr>
+		</table>
+	</body>
+
+</html>

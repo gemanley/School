@@ -1,0 +1,33 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td>In contrast to tasks, functions must execute in a single instant of simulated time. That is, not time or delay controls are allowed in a function. Function arguments are also restricted to inputs only. Output and inout arguments are not allowed. The output of a function is indicated by an assignment to the function name. For example,
+					<p></p>
+					<pre>
+    function [15:0] relocate;
+      input [11:0] addr;
+      input [3:0] relocation_factor;
+
+       begin
+         relocate = addr + (relocation_factor&lt;&lt;12);
+         count = count + 1; // how many have we done
+       end
+    endfunction
+</pre>
+					The above function might be used like this:
+					<p><tt>&nbsp;&nbsp;&nbsp;assign absolute_address = relocate(relative_address, rf);</tt></p>
+					<p>&nbsp;&nbsp;&nbsp;initial begin<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rf = 0x2;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;relative_address = 0xffc;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$display(&quot;the relocated address is %0x&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;relocate(relative_address, rf));<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>&nbsp;&nbsp;&nbsp;end</p>
+					<p></TT>Functions may have zero or more arguments, but they may only be inputs.</p>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

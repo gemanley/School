@@ -1,0 +1,40 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td valign="top" width="600">In this example, we will take the <a href="javascript:parent.gotoScreen('06','156',1)">ALU example</a> from Chapter 6 and put it into a pipelined execution unit. The description is as follows.
+				<p>The design consists of three parts plus a test module:</p>
+				<p></p>
+			</td>
+		</table>
+		<table width="600" border="1" cellpadding="5">
+			<td valign="top" width="100"><a href="JavaScript:parent.dispWindow('v07141ra.htm','Reading')">Test</a></td>
+			<td valign="top" width="500">This is a module which supplies an instruction stream to the execution unit and, when it is finished, checks the contents of the register file.</td>
+			<tr>
+				<td valign="top" width="100"><a href="JavaScript:parent.dispWindow('v07141rb.htm','Reading')">Op Pipe</a></td>
+				<td valign="top" width="500">The Op Pipe is a 3-stage pipeline (opPipe). This consists of register read, ALU op, register write (stages R, A, and W). Each stage should be active on each cycle. Inputs to the opPipe are an opcode, op1, op2, and res, where opcode is the 3-bit ALU code, op1, op2, and res are 4-bit register numbers.</td>
+			</tr>
+			<tr>
+				<td valign="top" width="100"><a href="JavaScript:parent.dispWindow('v07141r3.htm','Reading')">ALU</a></td>
+				<td valign="top" width="500">The same as the ALU Example in Chapter 6, except the operands are 32 bits wide instead of 8 bits. The opcode is 3 bits wide.</td>
+			</tr>
+			<tr>
+				<td valign="top" width="100"><a href="JavaScript:parent.dispWindow('v07141r4.htm','Reading')">Register File</a></td>
+				<td valign="top" width="500">The register file is 16 32-bit registers. On any cycle, there can be 2 reads and 1 write. The register module takes 3 address-value pairs, along with a write-valid signal. There should be a bypass so that a write and read to the same register will return the new value for the read. Register 0 always has the value 0.
+					<p>The Op Pipe will use the nop opcode to mean load the immediate value (3-bit r1 field) into res. This is to be done completely outside of the ALU.</p>
+				</td>
+			</tr>
+			<tr>
+				<td valign="top" width="100"><a href="JavaScript:parent.dispWindow('v07141rc.htm','Reading')">Results</a></td>
+				<td valign="top" width="500">This is the result with the debugging output turned on.</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

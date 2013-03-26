@@ -1,0 +1,31 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<td width="600">The times at which a user-written routine may be called are identified by the table entries in <a href="javascript:parent.goGlossHash('#veriuse')"><font color="#B22222">veriusertfs</font></a> (for Verilog-XL) or in the .tab file (for VCS). The routine name is given for that type of call. For instance, a table entry might indicate that the user-defined system task had the following associated routines:
+				<p></p>
+				<center>
+					<img src="images/v0911g1.gif" height="70" width="352"></center>
+				<p>Click a button to see an example for each simulator.</p>
+				<p></p>
+			</td>
+		</table>
+		<center>
+			<table width="400">
+				<td align="center" width="200"><a href="JavaScript:parent.dispWindow('v09033r1.htm','Example')"><img src="images/vverilox.gif" height="39" width="103" border="0"></a></td>
+				<td align="center" width="200"><a href="JavaScript:parent.dispWindow('v09033r2.htm','Example')"><img src="images/vvcs.gif" height="39" width="73" border="0"></a></td>
+				</tr>
+			</table>
+		</center>
+		<p></p>
+		<table width="600">
+			<td width="600">Note that there is only one entry point, myTaskCleanup, for all of the different misc type of events. An argument to myTaskCleanup will be provided which identifies the reason for the call. So, if the <a href="javascript:parent.goGlossHash('#miscrout')"><font color="#B22222">misc routine</font></a> was supposed to be called for three different types of events, e.g. end of a time step, expiration of a delay, and end of simulation, then it must test the <a href="JavaScript:parent.dispWindow('v09033r3.htm','Example')">reason</a> argument each time it is called to determine which event caused the current call.</td>
+		</table>
+	</body>
+
+</html>

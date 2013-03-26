@@ -1,0 +1,51 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600">
+			<tr>
+				<td><b>1-Bit Adder UDPs</b>
+					<p></p>
+					<pre>
+primitive adder1s (s, a, b, cin);
+    output s;
+    input a, b, cin;
+    table
+    //  a  b  cin  s
+        0  0   0 : 0;
+        0  0   1 : 1;
+        0  1   0 : 1;
+        0  1   1 : 0;
+        1  0   0 : 1;
+        1  0   1 : 0;
+        1  1   0 : 0;
+        1  1   1 : 1;
+    endtable
+endprimitive
+
+primitive adder1c (c, a, b, cin);
+    output c;
+    input a, b, cin;
+    table
+    //  a  b  cin  c
+        0  0   0 : 0;
+        0  0   1 : 0;
+        0  1   0 : 0;
+        0  1   1 : 1;
+        1  0   0 : 0;
+        1  0   1 : 1;
+        1  1   0 : 1;
+        1  1   1 : 1;
+    endtable
+endprimitive
+</pre>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

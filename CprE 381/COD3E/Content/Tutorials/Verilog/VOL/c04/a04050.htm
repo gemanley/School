@@ -1,0 +1,47 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body onload="parent.initBtn0()" bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td>Click the schematic that correctly represents module abc.
+					<p><tt>module abc (a, b, c, d, s1, s0);<br>&nbsp;&nbsp;&nbsp;input s1, s0;<br>&nbsp;&nbsp;&nbsp;output a, b, c,d;</tt></p>
+					<p>&nbsp;&nbsp;&nbsp;not (s1_, s1), (s0_, s0);</p>
+					<p>&nbsp;&nbsp;&nbsp;and (a, s1_, s0_);<br>&nbsp;&nbsp;&nbsp;and (b, s1_, s0);<br>&nbsp;&nbsp;&nbsp;and (c, s1, s0_);<br>&nbsp;&nbsp;&nbsp;and (d, s1, s0);<br>
+						endmodule</TT></p>
+				</td>
+			</tr>
+		</table>
+		<form>
+			<table width="600" cellpadding="10">
+				<tr>
+					<td width="200"><img src="images/v0416bg1.gif" height="210" width="170"><br>
+						<center>
+							<input onclick="parent.setValue(0,0)" type="radio" name="A"></center>
+					</td>
+					<td width="200"><img src="images/v0416bg2.gif" height="210" width="170"><br>
+						<center>
+							<input onclick="parent.setValue(0,1)" type="radio" name="A"></center>
+					</td>
+					<td width="200"><img src="images/v0416bg3.gif" height="210" width="170"><br>
+						<center>
+							<input onclick="parent.setValue(0,2)" type="radio" name="A"></center>
+					</td>
+				</tr>
+			</table>
+		</form>
+		<table width="600">
+			<tr>
+				<td><b>Absolutely right.</b>
+					<p></p>
+				</td>
+			</tr>
+		</table>
+		</FORM>
+	</body>
+
+</html>

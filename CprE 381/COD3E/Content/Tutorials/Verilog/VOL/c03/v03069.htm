@@ -1,0 +1,26 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>Delays that are associated with nets in declarations or continuos assignments can have multiple values. There can be one, two, or three delay values specified:
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>#(rise_delay, fall_delay, turnoff_delay)</i></p>
+					<p>These are used when the value of the net makes the corresponding change:</p>
+					<p><tt></tt></p>
+					<dl>
+						<dd>rise_delay&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0, x, or z -&gt; 1
+						<dd>fall_delay&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1, x, or z -&gt; 0
+						<dd>turnoff_delay&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0, 1, or x -&gt; z
+							<p></p>
+					</dl>
+					</TT>The delay values are interpreted positionally. That is, the first one is the rise delay, the second is the fall delay, and the third is the turnoff delay. When the net value becomes x, then the smallest of the three delay values is used.</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

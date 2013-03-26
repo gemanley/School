@@ -1,0 +1,112 @@
+<html>
+
+
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Tests/02_Test/Sample_Test_02.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:31:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Tests</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta name="Microsoft Border" content="t, default">
+</head>
+
+<body><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td>
+
+<p><font face="AGaramond" size="3">Com S 363: Introduction to Database Systems</font><br>
+<font face="AGaramond" size="5">Introduction to Database Systems </font></p>
+<p>
+
+</p>
+<p>&nbsp; </p>
+
+</td></tr><!--msnavigation--></table><!--msnavigation--><table dir="ltr" border="0" cellpadding="0" cellspacing="0" width="100%"><tr><!--msnavigation--><td valign="top">
+<p><i><font size="5">Sample Test 2 </font></i></p>
+<p>Problems are not necessarily in increasing order of difficulty. Although 
+exact compliance with SQL, JDBC, Java, OQL, and XML standards is not required, 
+your answers should be thoughtful. For example, to register a JDBC-driver, a 
+statement such as “Register (MyDriver);” can be used. <br>
+<br>
+<font FACE="Times New Roman" SIZE="3"><b>1.</b> You are given the following 
+ODMG-like database. In this particular example you see reference attributes and 
+inheritance, but there are no relationships.</p>
+<p ALIGN="LEFT">Person(Name, DOB) {extent is persons}<br>
+Employee (Salary, WorksIn: Department) extends Person {extent is emps} <br>
+Department (Dname, ManagedBy: Manager) {extent is depts} <br>
+Manager (Budget()) extends Employee {extent is managers}; Assume that Budget( ) 
+is a function that returns a numeric value.</p>
+<p ALIGN="LEFT">Express &quot;List names of employees and names and date of birth of 
+their managers who have a budget above 1 million dollars&quot; as an OQL-like query. </p>
+</font>
+<p><b>2.</b> Assume that a mediator database consisting of the following 
+relations is given: </p>
+<p>PCMed (Model, ProcessorSpeed, DiskSize, MemorySize, ScreenSize, Price, 
+Dealer)<br>
+pMed (ProcessorSpeed, Dealer)<br>
+dMed (DiskSize, Dealer)<br>
+mMed (MemorySize, Dealer) <br>
+sMed (ScreenSize, Dealer)</p>
+<ul>
+  <li>Four templates are available to query PCMed by specific a value of 
+  processor speed, or by a specific value of disk size, or by specific value of 
+  memory size, or by specific value of screen size. </li>
+  <li>Four templates are available for querying the pMed, dMed, mMed, and sMed, 
+  relations by a specific Dealer-value. Assume that the number of choices of 
+  processor speeds is approximately 10, but it changes from time to time. Same 
+  remarks apply to memories, disks, and screens. </li>
+</ul>
+<p>With SQL and JDBC frameworks at your disposal, how would you retrieve 
+inventory of Dealer = “MaxPC” for models priced below $1,000? No code is 
+necessary, just describe your idea in plain English. Assume that the query is 
+asked frequently. </p>
+<p>
+<b>3.</b> Consider a summary relation Sales (Model, Color, Dealer, Value, 
+TheCount) to which data cube operator is applied. Assume that Sales (?,?,?,?,?) 
+can be used in the from clause of an SQL statement, where each “?” is a 
+variable, a constant, or *. <i>Express for the  Turbo model, list the count and 
+average value of all cars sold by each dealer for each color</i>. </p>
+<p>
+<b>4.</b> Contents of an XML file Catalog.xml, for information about books, is shown below. Assume all 
+books have one or more authors. Write a FLWR expression that would create a 
+single ‘authors’ element for each book where all “author” elements for the book 
+will be nested. <br>
+&lt;bib&gt;<br>
+&nbsp;&nbsp;
+&lt;book year = &quot;2000&quot;&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;title&gt;Data on the Web&lt;/title&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;author&gt;&lt;last&gt;Abiteboul&lt;/last&gt;&lt;first&gt;Serge&lt;/first&gt;&lt;/author&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;author&gt;&lt;last&gt;Buneman&lt;/last&gt;&lt;first&gt;Peter&lt;/first&gt;&lt;/author&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;author&gt;&lt;last&gt;Suciu&lt;/last&gt;&lt;first&gt;Dan&lt;/first&gt;&lt;/author&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;publisher&gt;Morgan Kaufmann Publishers&lt;/publisher&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;price&gt; 39.95&lt;/price&gt;<br>
+&nbsp;&nbsp;
+&lt;/book&gt;<br>
+...<br>
+&lt;/bib&gt; </p>
+<p><font FACE="Times New Roman" SIZE="3"><b>5.</b> Give concrete example of a 
+relation ABC such that its decomposition (AB, BC) is lossy. This happens when 
+you join the two relations AB and BC by matching their B-values, what you get is 
+not the same as the original relation ABC. </font>
+</p>
+<font FACE="Times New Roman" SIZE="3">
+<p ALIGN="LEFT"><b>6.</b> Can functional dependencies A </font>
+<font FACE="Symbol" SIZE="3">® </font><font FACE="Times New Roman" SIZE="3">B, B
+</font><font FACE="Symbol" SIZE="3">® </font>
+<font FACE="Times New Roman" SIZE="3">C, C </font><font FACE="Symbol" SIZE="3">®
+</font><font FACE="Times New Roman" SIZE="3">A be enforced in the database 
+consisting of relations AB and BC through individual relations? Justify your 
+answer.
+</font></p>
+
+<!--msnavigation--></td></tr><!--msnavigation--></table></body>
+
+
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Tests/02_Test/Sample_Test_02.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:31:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+</html>

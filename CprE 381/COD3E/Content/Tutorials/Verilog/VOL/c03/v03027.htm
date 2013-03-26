@@ -1,0 +1,331 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td><a name="TOP">Operators are single, double, or triple character combinations. There are unary and binary operators, as well as one ternary operator (?:). The +, -, &amp;, |, ^, and ~^ operators can be either unary or binary, depending on context.
+						<p>Click each button to learn more about that Verilog operator.</p>
+						<p></p>
+						<center>
+							<table width="480" cellpadding="3">
+								<tr>
+									<td width="120">
+										<center>
+											<a href="#arithmetic"><img src="images/v0308b1.gif" height="39" width="108" border="0"></a></center>
+									</td>
+									<td width="120">
+										<center>
+											<a href="#relational"><img src="images/v0308b2.gif" height="39" width="108" border="0"></a></center>
+									</td>
+									<td width="120">
+										<center>
+											<a href="#logical"><img src="images/v0308b3.gif" height="39" width="87" border="0"></a></center>
+									</td>
+									<td width="120">
+										<center>
+											<a href="#bitwise"><img src="images/v0308b4.gif" height="39" width="94" border="0"></a></center>
+									</td>
+								</tr>
+							</table>
+							<table width="480">
+								<tr>
+									<td width="160">
+										<center>
+											<a href="#reduction"><img src="images/v0308b5.gif" height="39" width="106" border="0"></a></center>
+									</td>
+									<td width="160">
+										<center>
+											<a href="#shift"><img src="images/v0308b6.gif" height="39" width="72" border="0"></a></center>
+									</td>
+									<td width="160">
+										<center>
+											<a href="#conditional"><img src="images/v0308b7.gif" height="39" width="118" border="0"></a></center>
+									</td>
+								</tr>
+							</table>
+						</center>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<a name="arithmetic"><b><u>Arithmetic</u></b>
+							<p></p>
+							<table width="400" border="1">
+								<tr>
+									<td width="150">+a</td>
+									<td width="250">unary plus: same as a</td>
+								</tr>
+								<tr>
+									<td width="150">-a</td>
+									<td width="250">unary minus a</td>
+								</tr>
+								<tr>
+									<td width="150">a + b</td>
+									<td width="250">a plus b</td>
+								</tr>
+								<tr>
+									<td width="150">a - b</td>
+									<td width="250">a minus b</td>
+								</tr>
+								<tr>
+									<td width="150">a * b</td>
+									<td width="250">a multiply by b</td>
+								</tr>
+								<tr>
+									<td width="150">a / b</td>
+									<td width="250">a divide by b</td>
+								</tr>
+								<tr>
+									<td width="150">a % b</td>
+									<td width="250">a modulo b</td>
+								</tr>
+							</table>
+							<p><a href="#top">Go back to top <img src="images/varrow.gif" height="39" width="38" border="0"></a><br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<a name="relational"><b><u>Relational</u></b></a></p>
+							<p></p>
+							<table width="400" border="1">
+								<tr>
+									<td width="150">a &lt; b</td>
+									<td width="250">a less than b</td>
+								</tr>
+								<tr>
+									<td width="150">a &gt; b</td>
+									<td width="250">a greater than b</td>
+								</tr>
+								<tr>
+									<td width="150">a &lt;= b</td>
+									<td width="250">a less than or equal to b</td>
+								</tr>
+								<tr>
+									<td width="150">a &gt;= b</td>
+									<td width="250">a greater than or equal to b</td>
+								</tr>
+								<tr>
+									<td width="150">a === b</td>
+									<td width="250">a equal to b, including x and z</td>
+								</tr>
+								<tr>
+									<td width="150">a !== b</td>
+									<td width="250">a not equal to b, including x and z</td>
+								</tr>
+								<tr>
+									<td width="150">a == b</td>
+									<td width="250">a equal to b, may be unknown</td>
+								</tr>
+								<tr>
+									<td width="150">a != b</td>
+									<td width="250">a not equal to b, may be unknown</td>
+								</tr>
+							</table>
+							<p></p>
+							<table width="600">
+								<tr>
+									<td>The === and !== are called <b>case equality</b> and <b>case inequality</b>, respectively. The normal equality and inequality operators will result in x if either of their operands have any bits whose value is x. However, case equality and case inequality never result in x, because they compare all bit values.</td>
+								</tr>
+							</table>
+							<p><a href="#top">Go back to top <img src="images/varrow.gif" height="39" width="38" border="0"></a><br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<a name="logical"><b><u>Logical</u></b></a></p>
+							<p></p>
+							<table width="400" border="1">
+								<tr>
+									<td width="150">!a</td>
+									<td width="250">not a</td>
+								</tr>
+								<tr>
+									<td width="150">a &amp;&amp; b</td>
+									<td width="250">a and b</td>
+								</tr>
+								<tr>
+									<td width="150">a || b</td>
+									<td width="250">a or b</td>
+								</tr>
+							</table>
+							<p></p>
+							<table width="600">
+								<tr>
+									<td>These operators are logical, as opposed to bit-wise. That is, their result is one bit wide: 0 - false 1 - true x - unknown. Logical not means &quot;equal to 0&quot;.
+										<p></p>
+										<dl>
+											<dd>!read
+										</dl>
+										<p>is the same as</p>
+										<p></p>
+										<dl>
+											<dd>read ==0
+										</dl>
+									</td>
+								</tr>
+							</table>
+							<p><a href="#top">Go back to top <img src="images/varrow.gif" height="39" width="38" border="0"></a><br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<a name="bitwise"><b><u>Bit-Wise</u></b></a></p>
+							<p></p>
+							<table width="400" border="1">
+								<tr>
+									<td width="150">~a</td>
+									<td width="250">not a</td>
+								</tr>
+								<tr>
+									<td width="150">a &amp; b</td>
+									<td width="250">a and b</td>
+								</tr>
+								<tr>
+									<td width="150">a | b</td>
+									<td width="250">a or b</td>
+								</tr>
+								<tr>
+									<td width="150">a ^ b</td>
+									<td width="250">a xor b</td>
+								</tr>
+								<tr>
+									<td width="150">a ~^ b<br>
+										a ^~ b</td>
+									<td valign="top" width="250">a xnor b</td>
+								</tr>
+							</table>
+							<p></p>
+							<table width="600">
+								<tr>
+									<td>The bit-wise operators always operate on bits. That is, ~ inverts each bit in the operand. The &amp; operator ands each bit in operand a with the corresponding bit in operand b, and the result is the same length as the longest of the two operands. The truth tables for these operands are identical to the corresponding primitives.</td>
+								</tr>
+							</table>
+							<p><a href="#top">Go back to top <img src="images/varrow.gif" height="39" width="38" border="0"></a><br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<a name="reduction"><b><u>Reduction</u></b></a></p>
+							<p></p>
+							<table width="400" border="1">
+								<tr>
+									<td width="150">&a</td>
+									<td width="250">and all bits of a</td>
+								</tr>
+								<tr>
+									<td width="150">|a</td>
+									<td width="250">or all bits of a</td>
+								</tr>
+								<tr>
+									<td width="150">^a</td>
+									<td width="250">xor all bits of a</td>
+								</tr>
+								<tr>
+									<td width="150">~&a</td>
+									<td width="250">~(and all bits of a)</td>
+								</tr>
+								<tr>
+									<td width="150">~|a</td>
+									<td width="250">~(or all bits of a)</td>
+								</tr>
+								<tr>
+									<td width="150">~^a</td>
+									<td width="250">~(xor all bits of a)</td>
+								</tr>
+							</table>
+							<p></p>
+							<table width="600">
+								<tr>
+									<td>The reduction operators produce a single bit result. The operand is usually a vector, since these operators applied to a scalar are degenerate. The operation proceeds by doing the operation on the first two bits, then successively performing the same operation on the resulting bit value and the next bit, until all bits of the operand have been operated on. Reduction xor is particularly useful for computing parity.</td>
+								</tr>
+							</table>
+							<p><a href="#top">Go back to top <img src="images/varrow.gif" height="39" width="38" border="0"></a><br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<a name="shift"><b><u>Shift</u></b></a></p>
+							<p></p>
+							<table width="400" border="1">
+								<tr>
+									<td width="150">a &lt;&lt; b</td>
+									<td width="250">a shift left by b</td>
+								</tr>
+								<tr>
+									<td width="150">a &gt;&gt; b</td>
+									<td width="250">a shift right b</td>
+								</tr>
+							</table>
+							<p></p>
+							<table width="600">
+								<tr>
+									<td>These shift operators are always logical shifts. Filled bit positions are always filled with 0. If the shift amount (b above) is unknown (x or z), then the result is unknown (x).</td>
+								</tr>
+							</table>
+							<p><a href="#top">Go back to top <img src="images/varrow.gif" height="39" width="38" border="0"></a><br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<a name="conditional"><b><u>Conditional</u></b></a></p>
+							<p></p>
+							<table width="600">
+								<tr>
+									<td>The conditional operator is ?:. It is a ternary operator, and is used like this:
+										<dd>&nbsp;
+											<dl>
+												condition ? expression1 : expression2
+											</dl>
+											<p>The condition is an expression which has a logical result. If it is true, then the value of the expression is expression1. If it is false, then the value is expression2.</p>
+											<p>If the condition is unknown (x), then the value is x unless both expression1 and expression2 have the same value, in which case the result will be that value. This ambiguity resolution is done bit-by-bit, so the result will be non-x for those bits in expression1 and expression2 which agree, and x for those which do not.</p>
+									</td>
+								</tr>
+							</table>
+							<p><a href="#top">Go back to top <img src="images/varrow.gif" height="39" width="38" border="0"></a><br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+							</p>
+						</a></a></td>
+			</tr>
+		</table>
+	</body>
+
+</html>

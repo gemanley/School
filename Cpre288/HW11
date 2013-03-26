@@ -1,0 +1,64 @@
+ch1 = ch2;
+
+load ch2
+store ch1
+
+LDS r24, ch2
+STS ch1, r24
+
+--
+
+int a = char ch1;
+
+load ch1
+store a<ch1
+store a+1<0
+
+LDS r24, ch1
+STS a, r24
+STS a+1, r1
+
+-_-
+
+load pch->ZV
+load ch1
+store *pchv
+
+LDS r30, pch
+LDS r31, pch+1
+LDS r24, ch1
+ST z, r24
+
+--
+
+load pInt
+load *pInt
+store a
+
+LDS r30, pInt
+LDS r31, pInt + 1
+LD r24, z
+LDD r25, z+1
+STS a, r24
+STS a+1, r25
+
+--
+
+load imm &b
+store pInt
+
+LDI r24, lo8(b)
+LDI r25, hi8(b)
+STS pInt, r24
+STS pInt+1, r28
+
+--
+
+load ch1
+load ch2
+mul-signed
+store ch1
+
+LDS r24, ch1
+LDS r25, ch2
+MULS r24, r25

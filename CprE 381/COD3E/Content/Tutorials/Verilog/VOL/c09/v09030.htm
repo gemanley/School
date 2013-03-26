@@ -1,0 +1,32 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<td valign="top" width="415">A user-written routine needs to be called at an appropriate time during the simulation. The PLI defines a set of times at which a user-written routine may be called.
+				<p></p>
+				<ol type="1" start="1">
+					<li>at compile time
+					<li>when the user-defined task/function is called in the Verilog source
+					<li>at miscellaneous times:
+						<dl>
+							<dt>end of simulation
+							<dt>change of value of an argument
+							<dt>end of a time step
+							<dt>simulation event scheduled by tf_setdelay
+							<dt>execution of $stop
+							<dt>execution of $save
+							<dt>execution of $restart
+						</dl>
+				</ol>
+			</td>
+			<td valign="top" width="185"><img src="images/v0910g1.gif" height="293" width="185"></td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

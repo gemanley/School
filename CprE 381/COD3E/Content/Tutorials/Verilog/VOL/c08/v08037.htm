@@ -1,0 +1,95 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+		<style type="text/css" media="screen"><!--
+#answer  { visibility: hidden; position: absolute }
+--></style>
+		<csactions>
+			<csaction name="1B6684C27" class="ShowHide" type="onevent" val0="answer" val1="1"></csaction>
+		</csactions>
+		<csscriptdict import>
+			<script type="text/javascript" src="../../../../resources/CSScriptLib.js"></script>
+		</csscriptdict>
+		<csactiondict>
+			<script type="text/javascript"><!--
+CSAct[/*CMP*/ '1B6684C27'] = new Array(CSShowHide,/*CMP*/ 'answer',1);
+
+// --></script>
+		</csactiondict>
+	</head>
+
+	<script language="JavaScript">
+function checkAnswer() {
+	parent.checkAnswerMT(2,'$monitor($stime, ": s2 = %h", s2);ô$monitor($stime,":s2=%h",s2);ô,$display($stime, ": s2 = %h", s2);ô$display($stime,":s2=%h",s2);ô','#answer')
+}
+</script>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td>Given the following module:
+					<pre>
+	module zero3 (out, in, clk);
+		output out;
+		input in, clk;
+		reg s1, s2, s3;
+
+		assign out = s1==0 &amp; s2==0 &amp; s3==0;
+
+		initial begin
+			s1 = 0;
+			s2 = 0;
+			s3 = 0;
+		end
+
+		always @(posedge clk) begin
+			s1 &lt;= in; 
+			s2 &lt;= s1;
+			s3 &lt;= s2;
+		end
+	endmodule
+</PRE>
+				</td>
+			</tr>
+		</table>
+<hr>
+<table width="550">
+	<tr>
+		<td width="350" valign="top">
+			1. Write a "$monitor" statement which prints out the value of "s2" every time it changes value, in the format "nnnn:  s2 = vvvv", 
+    	    where "nnnn" is the current time and "vvvv" is the value of "s2" in hexadecimal. 
+		</td>
+		<td width="200">
+			<TEXTAREA NAME="SCRIPT1" ROWS="2" COLS="34">
+			</textarea>
+	</tr>
+	<tr>
+		<td width="350">
+			2. Produce the same output using "$display" with an "always block." 
+		</td>
+		<td width="200">
+			<TEXTAREA NAME="SCRIPT2" ROWS="2" COLS="34">
+			</textarea>
+		</td>
+	</tr>
+</table>
+
+<b>Click Done to check your answers.</b>
+
+<center>
+			<a onclick="CSAction(new Array(/*CMP*/'1B6684C27'));return CSClickReturn()" href="#" csclick="1B6684C27"><img src="images/vdone.gif" width="74" height="39" border="0"></a></center>
+
+	<div id="answer">
+		<b>Answers:</b><pre>
+1. $monitor($stime, ": s2 = %h", s2);
+
+2. always @(s2)
+	$display($stime, ": s2 = %h", s2);
+</pre>
+	</div>
+
+	</body>
+
+</html>

@@ -1,0 +1,260 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			<pre>
+/*  LocalInterruptDataPath.v
+    Copyright (c) 1990 NeXT, Inc.
+    Originated:  Wed Oct 10 10:45:15 PDT 1990 by Mark Ross
+    Last Edited:  $Date$ by $Author$
+    
+Overview:
+    Implements the data path for the local interrupt controller.  Its primary
+    function is to turn the interrupt vector into a signal which indicates 
+    when there are new interrupts, to mask off interrupts which have already
+    been serviced, and to generate the proper address and data to send out
+    on the NextBus.  
+    
+IMPORTS:
+    LocalInterruptController.h  USING [sizes]
+    
+EXPORTS:
+    modules:  LocalInterruptDataPath
+    tasks:  none
+    
+Internal Tasks:
+    none
+Internal Functions:
+    none
+CHANGE LOG:
+    $Log$
+    
+*/
+/*  Included files  */
+// nolist
+    
+module  LocalInterruptDataPath(
+    /*  General signals  */
+    reset, 
+    clock,
+    /*  Data signal  */
+    localIODataBusOut,
+    /*  Interrupt signals  */
+    deviceInterruptVector,
+    nmiRequest,
+    resetRequest,
+    /*  Interrupt Number and valid bits  */
+    interruptValidVector,
+    interrruptNumberVector,
+    /*  Control inputs from the state machine  */
+    selectDeviceInterruptAddress,
+    selectNextBusNMIAddress,
+    selectNextBusResetAddress,
+    selectDeviceInterruptData,
+    maskDeviceInterrupts, 
+    maskNMI, 
+    maskReset, 
+    /*  Status signals from the data path  */
+    unmaskedDeviceInterruptPending,
+    unmaskedNMIPending,
+    unmaskedResetPending, 
+    /*  Scan signals  */
+    scanShiftIn,
+    scanShiftOut,
+    scanShiftEnable
+    );
+    /*  IO Declarations  */
+    /*  General signals  */
+        input                   reset;
+        input                   clock;
+    /*  Data bus signals  */
+        output [32-1:0]         localIODataBusOut;
+    /*  Interrupt signals  */
+        input [3-1:0]           deviceInterruptVector;
+        input                   nmiRequest;
+        input                   resetRequest;
+    /*  Interrupt Number and valid bits  */
+        input [3-1:0]           interruptValidVector;
+        input [(3*4)-1:0]       interrruptNumberVector;
+    /*  Control inputs from the state machine  */
+        input                   selectDeviceInterruptAddress;
+        input                   selectNextBusNMIAddress;
+        input                   selectNextBusResetAddress;
+        input                   selectDeviceInterruptData;
+        input                   maskDeviceInterrupts;
+        input                   maskNMI;
+        input                   maskReset;
+    /*  Status signals from the data path  */
+        output                  unmaskedDeviceInterruptPending;
+        output                  unmaskedNMIPending;
+        output                  unmaskedResetPending;
+    /*  Scan signals  */
+        input                   scanShiftIn;
+        output                  scanShiftOut;
+        input                   scanShiftEnable;
+        
+    /*  Internal wires  */
+    wire [3-1:0]            interruptPending;
+    wire [3-1:0]            setInterruptPendingReg;
+    wire [3-1:0]            clearInterruptPendingReg;
+    wire [3-1:0]            interruptMask;
+    wire [3-1:0]            setInterruptMaskReg;
+    wire [3-1:0]            clearInterruptMaskReg;
+    wire [3-1:0]            qualifiedDeviceInterruptVector;
+    
+    wire                    nmiPending;
+    wire                    setNMIPendingReg;
+    wire                    clearNMIPendingReg;
+    wire                    nmiMask;
+    wire                    setNMIMaskReg;
+    wire                    clearNMIMaskReg;
+    
+    wire                    resetPending;
+    wire                    setResetPendingReg;
+    wire                    clearResetPendingReg;
+    wire                    resetMask;
+    wire                    setResetMaskReg;
+    wire                    clearResetMaskReg;
+    wire [(2*3)+4-1:0]      globalRegisterIn;
+    wire [(2*3)+4-1:0]      globalRegisterOut;
+    
+    
+    wire [4-1:0]            device0InterruptNumber;
+    wire [15:0]             interruptRequestVector0;
+    wire [4-1:0]            device1InterruptNumber;
+    wire [15:0]             interruptRequestVector1;
+    wire [4-1:0]            device2InterruptNumber;
+    wire [15:0]             interruptRequestVector2;
+    
+    wire [15:0]             interruptRequest;
+    wire [3-1:0]            unmaskedDeviceInterruptPendingVector;
+    
+    
+    /*  Wire assignments  */
+        assign qualifiedDeviceInterruptVector = 
+            deviceInterruptVector &amp; interruptValidVector;
+        
+    /*  Data output assignment  */
+        //  The addresses are broken into a high and a low half to help
+        //  out Synopsys (since the top half is a don't care for the 
+        //  case of the interruptRequest).  
+        assign localIODataBusOut[31:16] = 16'hfffa;
+        assign localIODataBusOut[15:0] = 
+        (selectDeviceInterruptAddress)? 32'hfffac000 : 
+        (selectNextBusNMIAddress)?  32'hfffac800 : 
+        (selectNextBusResetAddress)?    32'hfffad000 : 
+        (selectDeviceInterruptData)?    interruptRequest : 
+        interruptRequest;
+            
+    /*  Unmasked interrupt generation  */
+        assign unmaskedDeviceInterruptPendingVector = 
+        interruptPending &amp; ~interruptMask;
+        
+        assign unmaskedDeviceInterruptPending = 
+        | unmaskedDeviceInterruptPendingVector;
+        
+        assign unmaskedNMIPending = nmiPending &amp; ~nmiMask;
+        assign unmaskedResetPending = resetPending &amp; ~resetMask;
+        
+    /*  Interrupt Number assignment  */
+        assign device0InterruptNumber = 
+        interrruptNumberVector[
+            (4*0)+3:
+            (4*0)
+            ];
+        assign interruptRequestVector0 = 
+        (unmaskedDeviceInterruptPendingVector[0] 
+            &lt;&lt; device0InterruptNumber);
+        
+        assign device1InterruptNumber = 
+        interrruptNumberVector[
+            (4*1)+3:
+            (4*1)
+            ];
+        assign interruptRequestVector1 = 
+        (unmaskedDeviceInterruptPendingVector[1] 
+            &lt;&lt; device1InterruptNumber);
+        
+        assign device2InterruptNumber = 
+        interrruptNumberVector[
+            (4*2)+3:
+            (4*2)
+            ];
+        assign interruptRequestVector2 = 
+        (unmaskedDeviceInterruptPendingVector[2] 
+            &lt;&lt; device2InterruptNumber);
+        
+        assign interruptRequest =   interruptRequestVector0 | 
+                                    interruptRequestVector1 | 
+                                    interruptRequestVector2;
+    
+    /*  Device Interrupt pending and mask assignments  */
+        assign setInterruptPendingReg = 
+                (~interruptPending) &amp; qualifiedDeviceInterruptVector;
+        assign clearInterruptPendingReg = 
+                interruptMask &amp; ~qualifiedDeviceInterruptVector;
+        
+        assign setInterruptMaskReg = 
+                {3{maskDeviceInterrupts}} &amp; interruptPending;
+        assign clearInterruptMaskReg = clearInterruptPendingReg;
+        
+    /*  NMI pending and mask assignments  */
+        assign setNMIPendingReg = (~nmiPending) &amp; nmiRequest;
+        assign clearNMIPendingReg = nmiMask &amp; ~nmiRequest;
+        
+        assign setNMIMaskReg = maskNMI &amp; nmiPending;
+        assign clearNMIMaskReg = clearNMIPendingReg;
+        
+    /*  Reset pending and mask assignments  */
+        assign setResetPendingReg = (~resetPending) &amp; resetRequest;
+        assign clearResetPendingReg = resetMask &amp; ~resetRequest;
+        
+        assign setResetMaskReg = maskReset &amp; resetPending;
+        assign clearResetMaskReg = clearResetPendingReg;
+        
+    /*  Registers  */
+    /*  Device Interrupt Registers  */
+    /*  NMI Registers  */
+    /*  Reset Registers  */
+        RegMX10 globalRegister(
+        .regOut(globalRegisterOut),
+        .regInA(globalRegisterIn),
+        .regInB( {(2*3+4){1'b0}} ),
+        .regInSelectB(reset),
+        .clkEnable1(1'b1),
+        .clkEnable2(1'b1),
+        .clock(clock),
+        .scanShiftOut(scanShiftOut),
+        .scanShiftIn(scanShiftIn),
+        .scanShiftEnable(scanShiftEnable)
+        );
+        
+        assign globalRegisterIn = (globalRegisterOut &amp; 
+        ~{clearResetPendingReg, clearResetMaskReg, clearNMIPendingReg, 
+            clearNMIMaskReg, clearInterruptPendingReg, 
+            clearInterruptMaskReg}) | 
+         {setResetPendingReg, setResetMaskReg, setNMIPendingReg, 
+            setNMIMaskReg, setInterruptPendingReg, 
+            setInterruptMaskReg} ;
+        assign {
+                resetPending,
+                resetMask,
+                nmiPending,
+                nmiMask,
+                interruptPending, 
+                interruptMask} = globalRegisterOut;
+        
+endmodule  /*  LocalInterruptDataPath  */
+
+
+</pre>
+		</table>
+	</body>
+
+</html>

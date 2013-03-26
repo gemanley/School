@@ -1,0 +1,69 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+		<style type="text/css" media="screen"><!--
+#answer  { visibility: hidden; position: absolute }
+--></style>
+		<csactions>
+			<csaction name="12307C82" class="ShowHide" type="onevent" val0="answer" val1="1"></csaction>
+		</csactions>
+		<csscriptdict import>
+			<script type="text/javascript" src="../../../../resources/CSScriptLib.js"></script>
+		</csscriptdict>
+		<csactiondict>
+			<script type="text/javascript"><!--
+CSAct[/*CMP*/ '12307C82'] = new Array(CSShowHide,/*CMP*/ 'answer',1);
+
+// --></script>
+		</csactiondict>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td><b>Modify module Q4 from the previous screen to use a continuous assign to drive the count output. Name your new module Q5. Hint: take advantage of the fact that the falling edge occurs 2 time units after the rising edge.</b>
+					<p></p>
+						<tt><textarea name="SCRIPT1" rows="12" cols="40">
+module Q4 (count, clock);
+   input clock;
+   output [3:0] count;
+   reg [3:0] count, count_reg;
+ 
+   initial count_reg = 0;
+ 
+   always @(posedge clock)
+      count_reg = count_reg + 1;
+ 
+   always @(negedge clock)
+      count = count_reg;
+endmodule
+
+</textarea></tt>
+						<p><a href="javascript:parent.gotoScreen(02,135,0)"><img src="images/vreset.gif" border="0"></a></p>
+						<center><p><a onclick="CSAction(new Array(/*CMP*/'12307C82'));return CSClickReturn()" href="#" csclick="12307C82"><img src="images/vdone.gif" height="39" width="74" border="0"></a></p>
+						</center>
+							<div id="answer">
+								<tt><pre>
+module Q5 (count, clock);
+   input clock;
+   output [3:0] count;
+   reg [3:0] count_reg;
+ 
+   initial count_reg = 0;
+ 
+   always @(posedge clock)
+      count_reg = count_reg + 1;
+ 
+   assign #2 count = count_reg;
+endmodule
+					 				
+								</pre></tt>
+							</div>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

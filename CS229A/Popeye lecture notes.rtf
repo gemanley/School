@@ -1,0 +1,47 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf360
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww9000\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f0\fs24 \cf0 Popeye editing\
+	man vi\
+	man emacs\
+	man -K editor\
+	man gcc\
+\
+I/O Unix\
+	> - redirects screen output to other file\
+	>> - appends screen output to file\
+	< - retrieves input from a file\
+	| - Can redirect output to other files.\
+\
+	e.g. ls | fgrep -i "pie" | more\
+		outputs all lines containing "pie" from ls and pages it with more.\
+	e.g.  ./myProgram < infile > outfile\
+\
+Other\
+	fgrep [-i] <string> - searches input for string.  [-i] is for ignoring case.\
+\
+\
+makefile\
+\
+weatherPrediction: snow.o wind.o rain.o ice.o\
+[TAB]gcc -o wind.o rain.o ice.o snow.o\
+\
+// Dependencies:\
+snow.o: snow.c constants.h util.h snow.h\
+[TAB]gcc -c snow.c\
+\
+wind.o:\
+[TAB] gcc -c wind.c\
+\
+rain.o:\
+[TAB] gcc -c rain.c\
+\
+make clean\
+\
+(Does this:)\
+\
+Clean:\
+[TAB]rm -rf *.o}

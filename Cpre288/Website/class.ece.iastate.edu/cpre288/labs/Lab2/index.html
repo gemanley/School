@@ -1,0 +1,306 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from class.ece.iastate.edu/cpre288/labs/Lab2/index.asp by HTTrack Website Copier/3.x [XR&CO'2010], Wed, 12 Dec 2012 08:16:46 GMT -->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<!-- INSERT TITLE -->
+	<title>CprE 288 Lab Manual</title>
+
+	<meta charset="utf-8"> 
+	<link rel="stylesheet" href="../../css/base4341.css?1.6" media="all"> 
+	<link rel="stylesheet" href="../../css/iastate4341.css?1.6" media="all"> 
+	<!--[if lt IE 9]>
+		<link rel="stylesheet" href="../../css/ie-fix.css">
+		<link rel="stylesheet" href="../../css/ie-fix-iastate.css">
+		<script>
+			(function()
+			{
+				var els = 'header,footer,section,aside,nav,article,hgroup,time'.split(',');
+				for (var i = 0; i < els.length; i++)
+					document.createElement(els[i]);
+			})()
+		</script>
+	<![endif]--> 
+
+	<link rel="stylesheet" href="../../css/content4341.css?1.6" media="all">
+
+	<!-- PAGE CONTENT -->
+	<meta name="title" content="CprE 288 - Embedded Systems Lab Manual">
+	<meta name="keywords" content="cpre 288, cpre288, lab manual, manual, iRobot, course, iastate, atmel, atmega128">
+</head>
+<body>
+
+<!-- HEADER -->
+	<header> 
+		<article id="ribbon"> 
+			<section class="grids-24"> 
+				<section class="grid-16"> 
+					<h1> 
+						<img src="../../css/isu-logo.png" alt="Iowa State University"/> 
+					</h1> 
+				</section> 
+				<section class="grid-8"> 
+					<form method="get" action="http://google.iastate.edu/search"> 
+						<input type="hidden" name="output" value="xml_no_dtd"/> 
+						<input type="hidden" name="client" value="default_frontend"/> 
+						<input type="hidden" name="site" value="class.ece.iastate.edu/cpre288"/> 
+						<input type="hidden" name="proxystylesheet" value="beta_frontend"/> 
+						<input type="text" name="q" tabindex="1" accesskey="s" placeholder="Search"/> 
+						<input type="submit" name="btnG" value="" title="Search"/> 
+					</form> 
+				</section> 
+			</section> 
+		</article> 
+	</header> 
+
+    
+   	<article>
+		<section id="container">
+			<section class="grids-24"> 
+                <article id="content" class="grid-24"> 
+                    <section class="gutter">
+<!-- BODY -->
+
+
+
+<h1>CPRE 288 Laboratory</h1>
+<hr>
+<h1>Lab 2: iRobot Open Interface and Movement</h1>
+
+
+
+<h2>Lecture - Lab Connection</h2>
+
+<p>In lecture, you have continued an overview of C programming and have started learning about 
+structures.  In this lab, we are using the Cerebot II microcontroller board to control the
+iRobot Create.   The ATmega128 processor has been wired so communication between the iRobot Create
+and the processor is streamlined.  The Open Interface files provided below hides the communication 
+over serial so that you can be a more productive programmer working with functions at a higher 
+level of abstraction.</p>
+
+<h2>Prelab</h2>
+
+<ul>
+    <li>Read through the lab description, including the linked documents.</li>
+    <li>Skim the reference documents below; in particular, you should read the <a href="../../resources/docs/Create%20Open%20Interface_v2.pdf">iRobot
+     Create - Open Interface</a> (pages 17-21) specification and gain a good basic understanding of the commands you are able to send the iRobot 
+     and the sensor packets it returns to the processor.</li>
+    <li>Print the <a href="lab_eval.doc">Lab Evaluation Form</a>.</li>
+</ul>
+
+<h2>Reference Documents</h2>
+
+<p>All reference documents are also available on the Resources page of the course website.</p>
+
+<ul>
+  <li><a href="../../resources/docs/Create%20Open%20Interface_v2.pdf">iRobot Create - Open Interface</a></li>
+  <li><a href="../../resources/docs/Create%20Manual_Final.pdf">iRobot Create - Manual</a></li>
+</ul>
+  
+<h2>Reference Files</h2>
+
+<p>Download the following files to a single folder your U: drive. (Right-click and select 'Save Target As')</p>
+
+<ul>
+ <li><a href="../programs/open_interface.c">open_interface.c</a>: The API functions for the most basic Open Interface functions</li>
+ <li><a href="../programs/open_interface.h">open_interface.h</a>: The header file for open_interface.c</li>
+ <li><a href="../programs/lcd.c">lcd.c</a>: A program file with a number of LCD functions</li>
+ <li><a href="../programs/lcd.h">lcd.h</a>: The header file for lcd.c</li>
+ <li><a href="../programs/lab1/util.c">util.c</a>: A program file that supports lcd.c</li>
+ <li><a href="../programs/lab1/util.h">util.h</a>: The header file for util.c</li>
+</ul>
+
+
+<hr>
+<h2>Part 1. Moving Forward</h2>
+
+<p><strong>Requirements</strong> - Write a program that makes the robot move forward 1 meter and then stops.</p>
+
+<p>In this lab, our attention will be focused on two components
+of the robot used in lab: the iRobot Create and the serial on the microcontroller. 
+We will issue commands over the ATmega 128's USART1 connection to the iRobot and use it to control movement.
+The iRobot Create has an "Open Interface", or a standard way of communicating, that allows us to send a range of
+instructions. The instructions we are primarily interested in are those
+related to movement and sensor values.  A simple API has been written for you
+that handles setting the wheel speed and retreiving sensor data.</p>
+
+<p>You will need to use the <strong>oi_set_wheels(...)</strong>
+function to tell the iRobot Create to move.  The <strong>oi_set_wheels(...)</strong> function calls the
+"Direct Drive" (opcode:145) operation listed on page 9 the Open Interface document. As you can see in the OI
+specification the motors can be set to run independently from each other.  The velocity ranges from -500 mm/s (backwards) and 500 mm/s (forwards).</p>
+
+
+<p>Beyond making the Create move, you will need to know how far it has moved. The same Open Interface API mentioned previously addresses fetching sensor data from the iRobot Create.
+The <strong>oi_update(oi_t *self)</strong> function should be passed a pointer to a oi_t structure.  The function
+will then update every member of the structure with the current sensor value.  You should attempt to gain an understanding of the oi_t structure described in open_interface.h and its
+relation with the sensor packets listed on pages 17-20 of the Open Interface document.</p>
+
+<h3>Notes</h3>
+
+<ul>
+    <li>Ensure the iRobot Create is turned on by making sure the Power LED is lit.</li>
+    <li>Make sure you initialize the serial connection with iRobot Create before sending it commands.  You can do this by calling:
+    <font face="courier">
+    <br />oi_t *sensor_data = oi_alloc();
+    <br />oi_init(sensor_data); // should turn the iRobot Create's power LED yellow
+    </font></li>
+    <li>Turn the iRobot Create off BEFORE loading your program so the robot does not run off the table.  After programming, disconnect the JTAG cable, turn the iRobot Create on and reset your program with the reset button.</li>
+</ul>
+
+<a href="images/iRobot_Create.jpg"><img src="images/iRobot_Create.jpg" width=200/></a>
+
+<p>
+In addition, you will want the iRobot to tell you how far it has travelled.  Every time you call oi_update(...), two members of the 
+struct will be updated: angle and distance.  These variables are explained in detail on pages 18-19 of the Open Interface document.  
+Read the following example code to gain further understanding:<br><br>
+
+<font face="courier">
+#include "open_interface.h" <br>
+   <br>
+void main() { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;oi_t *sensor_data = oi_alloc();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;oi_init(sensor_data);<br>
+   <br> 
+&nbsp;&nbsp;&nbsp;&nbsp;int sum = 0;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;oi_set_wheels(500, 500); // move forward; full speed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;while (sum < 1000) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;oi_update(sensor_data);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sum += sensor_data->distance;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;oi_set_wheels(0, 0); // stop<br>
+   <br>
+&nbsp;&nbsp;&nbsp;&nbsp;oi_free(sensor_data); <br>
+}<br><br>
+</font>
+</p>
+
+<p><strong>If you have completed this section of the lab within the first 30 minutes of lab, move on to Part 2.  The parts of the lab are cummulative, and demoing the last part to the TA is sufficient for receiving all points.  If you think you will fail to complete the entire lab within the lab period, you may demo this part to your TA for partial credit and demo the remaining parts at the beginning of your next lab session.</strong></p>
+
+
+
+<hr>
+<h2>Part 2. Moving in a Square</h2>
+
+<p><strong>Requirements</strong> - Write an API (create two new files: movement.c, movement.h) that contain new functions that help you (1) move the robot forward a 
+specific distance and (2) allow you to turn the robot left or right by a certain number of degrees.  Use these new files and functionality to 
+write a program the makes the robot move in a 50 centimeter square, then stop the robot (i.e. do the following four times: move forward 50 cm, turn 90 degrees).
+
+<h3>Notes</h3>
+
+<ul>
+	<li>Ensure the iRobot Create is turned on by making sure the Power LED is lit.</li>
+	<li>Use good method names, such as <strong>void move_forward(oi_t *sensor, int centimeters);</strong> and <strong>void turn_clockwise(oi_t *sensor, int degrees);</strong></li>
+	<li>Follow good coding practices; i.e. put your function signatures in the header file (.h), and put the implementation of the functions in the .c file.</li>
+	<li>You'll need to use the angle member of the oi_t struct.  Remember, positive angles are counter clockwise; negative angles are clockwise.</li>
+	<li>To save memory, call oi_alloc() and oi_init(...) only once at the beginning of the program.  You will need to pass the pointer (oi_t *) to your functions.</li>
+	<li>Turn the iRobot Create off BEFORE loading your program so the robot does not run off the table.  After programming, disconnect the JTAG cable, turn the iRobot Create on and reset your program with the reset button.</li>
+</ul>
+
+<p><strong>If you have completed this section of the lab within the first hour of lab, move on to Part 3.  The parts of the lab are cummulative, and demoing the last part to the TA is sufficient for receiving all points.  If you think you will fail to complete the entire lab within the lab period, you may demo this part to your TA for partial credit and demo the remaining parts at the beginning of your next lab session.</strong></p>
+
+
+
+<hr>
+<h2>Part 3. Collision Detection</h2>
+
+<p>The Create has many sensors. There are two bump sensors in the front of the device. In Part 3, you are to integrate the bump sensors with forward movement.</p>
+
+<p><strong>Requirements</strong> - Write a program that satisfies the following requirements; you should 
+reuse, alter, and expand the API (movement.c, movement.h) from part 2. The robot shall move forward 2 
+meters in total (imagine a finish line 2 meters away). If no obstacle is present in the path of travel, the
+robot should simply travel 2 meters forward. However if the robot comes in contact with an object, the
+robot should attempt to go around the object by issuing the following commands: backup 15 cm, turn 90 degrees,
+move laterally 25cm, then turn 90 degress back forward. If the collision occurs with the right bumper, the 
+robot should initially spin 90 degrees to the left. If the collision occurs with the left bumper, the platform 
+should spin 90 degrees to the right. If both sensors report a collision, then pick a direction and perform a 
+90 degree spin. After attempting to move laterally to step around the object, resume traveling forward the 
+original 2 meters and stop.</p>
+
+<a href="images/map.jpg"><img src="images/map.jpg" width=425/></a>
+
+<p>You may want to update your moveForward(...) function to stop if it runs into an object, and return the actual distance traveled.</p>
+
+<p>To get the status of the left and right bump sensors, use the <i>bumper_right</i> and <i>bumper_left</i> members of the oi_t structure.  These members are boolean values.  A nonzero value means that the bump sensor is colliding with an object.  For example: </p>
+
+<p>
+<font face="courier">
+oi_update(sensor_data); // get current state of all sensors<br>
+if (sensor_data->bumper_left) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp// Respond to left bumper being pressed<br>
+}
+</font>
+</p>
+
+<p><strong>Demo your program to your TA.</strong></p>
+
+
+<hr>
+<h2>Cautions</h2>
+                
+<p>Never leave a powered-down JTAGICE mkII connected to a powered robot - current may 
+leak from the unit and result in damage to the emulator.  Try to leave the blue JTAGICE 
+mkII box powered on at all times.</p>
+
+<p>Turn the power to the Cerebot board and iRobot off before charging.  The Cerebot 
+board consumes power and the battery will not charge if the robot is in full_mode (which 
+it enters after calling oi_init, turing the power LED yellow).  The robot is charging 
+when the robot's power LED is pulsing red and both green LEDS on the dock are lit.</p>
+
+
+<h2>Reference Files</h2>
+
+<table class="gray" cellpadding="0" cellspacing="0" width="700">
+  <thead>
+    <th>Files</th>
+    <th>Description</th>
+  </thead>
+  </tbody>
+    <tr>
+      <td><a href="../../resources/docs/Create%20Open%20Interface_v2.pdf">iRobot Create Open Interface</a></td>
+      <td>Information on the oi_update method and members of the oi_t structure are on pages 17-21</td>
+    </tr>
+    <tr>
+      <td><a href="lab_eval.doc">Lab Evaluation Form</a></td>
+      <td>Evaluation form for Lab</td>
+    </tr>
+    <tr> 
+      <td><a href="https://spreadsheets.google.com/viewform?hl=en&formkey=dDBwV3J1UkxJdnZfTEtZV2NKSzFwU1E6MQ#gid=0">Online Feedback Form</a></td>
+      <td>Tell us what you think of the lab (feedback forms)</td>
+    </tr>
+  </tbody>
+</table>
+
+                    </section>
+ 				</article> 
+			</section>
+		</section>
+	</article> 
+    
+<!-- FOOTER -->
+	<footer class="grids-24"> 
+		<section id="footer" class="grid-24"> 
+			<section class="grid-3 first"> 
+				<h1><img alt="Iowa State University" src="../../css/isu-footer-logo.png"></h1> 
+			</section> 
+			<section class="grid-17"> 
+				<p> 
+					Department of Electrical and Computer Engineering 
+				</p> 
+				<p> 
+					Copyright &copy; 2011, Iowa State University of Science and Technology.
+					All rights reserved. 
+                </p>
+                <p>
+                	Page last updated on 
+                    6/26/2012 11:07:27 AM
+				</p> 
+			</section>  
+		</section> 
+	</footer>
+ 
+</body>
+
+<!-- Mirrored from class.ece.iastate.edu/cpre288/labs/Lab2/index.asp by HTTrack Website Copier/3.x [XR&CO'2010], Wed, 12 Dec 2012 08:16:46 GMT -->
+</html>

@@ -1,0 +1,58 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			Some of the TF routines are:
+			<dl>
+				<dt>io_printf ( &lt;printf-type arguments&gt; )
+				<dd>A print routine which prints to both stdout and the log file (if any). This is one of a few utility routines that does not begin with tf_ or acc_. It is usually classified as a TF routine.
+					<p></p>
+				<dt>tf_dofinish()
+				<dd>Stop the simulation.
+					<p></p>
+				<dt>tf_error ( string )
+				<dd>Causes an error message to be printed. Does not stop the simulation.
+					<p></p>
+				<dt>tf_evaluatep ( narg )
+				<dd>Returns the value of the argument in a field of the s_tfexprinfo structure. This field allows 4-value results to be obtained. Used with tf_exprinfo.
+					<p></p>
+				<dt>tf_exprinfo ( narg, exprinfo_p )
+				<dd>Returns a pointer to a structure containing information about the argument to the user task/function. This structure contains information about type, length, and value.
+					<p></p>
+				<dt>tf_getp ( narg )
+				<dd>A function that returns the value of the nth parameter of the user-defined task. The value returned is 2-value (x and z values are returned as 0) and is 32 bits.
+					<p></p>
+				<dt>tf_getlongp ( narg, hival )
+				<dd>Returns two words, so it can retrieve the value of a vector up to 64 bits. The low-order word is the function value, and the high-order word is returned in hival. Like tf_getp, the value returned is 2-value.
+					<p></p>
+				<dt>tf_gettime()
+				<dd>Returns the simulation time as a 32-bit quantity.
+					<p></p>
+				<dt>tf_nodeinfo ( narg, nodeinfo_p )
+				<dd>Returns a pointer to a structure containing information about the argument to the user task/function. Like the structure for tf_exprinfo, this structure contains information about type, length, and value. This can only be used for arguments which are writable, that is, registers.
+					<p></p>
+				<dt>tf_nump ()
+				<dd>Return the number of parameters given to the user-defined task or function.
+					<p></p>
+				<dt>tf_propagatep ( narg )
+				<dd>This causes a value put into the value field of the structure returned by tf_exprinfo to be written back to the argument associated with it. All appropriate propagations are then performed. So, for example, if there was an @(sig) waiting for a change on sig, tf_propagate would change the value of sig and then cause the @ to be triggered.
+					<p></p>
+				<dt>tf_putp ( narg, new )
+				<dd>Change the nth parameter to the value given by new.
+					<p></p>
+				<dt>tf_putlongp ( narg, newlo, newhigh )
+				<dd>Change the nth parameter to the value given by {newhi,newlo}. The new value is 2-value (no x or z).
+					<p></p>
+				<dt>tf_warning ( string )
+				<dd>Print a warning message.
+			</dl>
+		</table>
+	</body>
+
+</html>

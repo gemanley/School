@@ -1,0 +1,37 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="429">There are a set of conversion functions for handling real values.
+					<p><tt><b>$rtoi</b></tt>(real_value)<br>
+					</p>
+					<blockquote>
+						Returns a signed integer, truncating the real value.</blockquote>
+					<p><tt><b>$itor</b></tt>(int_val)<br>
+					</p>
+					<blockquote>
+						Returns the integer converted to a real value.</blockquote>
+					<p><tt><b>$realtobits</b></tt>(real_value)<br>
+					</p>
+					<blockquote>
+						Returns a 64-bit vector with the bit representation of the real number. This follows the IEEE 754 64-bit representation for real numbers. <tt>$realtobits</tt> is used to pass real numbers across ports, since you cannot put a real number in a port list.</blockquote>
+					<p><tt><b>$bitstoreal</b></tt>(bit_value)<br>
+					</p>
+					<blockquote>
+						Returns a real value obtained by interpreting the bit_value argument as an IEEE 754 floating point number. This is the inverse of <tt>$realtobits</tt>.</blockquote>
+					<p></p>
+					<center>
+						<a href="JavaScript:parent.dispWindow('v06108r1.htm','Example')"><img src="images/vexample.gif" height="39" width="91" border="0"></a></center>
+				</td>
+				<td valign="top" width="171"><img src="images/v0636g1.gif" height="123" width="171"></td>
+			</tr>
+		</table>
+	</body>
+
+</html>

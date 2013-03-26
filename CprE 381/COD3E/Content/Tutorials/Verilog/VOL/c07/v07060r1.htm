@@ -1,0 +1,24 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			If you encode the states in a dense manner, then dealing with them in the Verilog source is quite natural. The case statements which decode the state vector are written as we have done up to now:
+			<pre>
+        case (state)
+    `A:     nextstate = din ? `C : `B;
+    `B:     nextstate = din ? `B : `C;
+    `C:     nextstate = `A;
+        endcase
+</pre>
+			This code will simply compare the state variable with each constant in turn. Note that the semantics of the case statement dictate that this is a priority decoding. That is, if there were two case items for state `A, the first one would be the one selected. This is usually not what you intend, but the synthesizer will generate logic which preserves this behavior unless you tell it not to (e.g. // <b>synopsys parallel_case</b>).
+			<p>We should also note that Synopsys allows you to tell the synthesizer to optimize the state assignment for you, as best it can. In order to do this, you must use parameters for the state constants, and you must use a synthesis directive to identify both the state constants and the state vector.</p>
+		</table>
+	</body>
+
+</html>

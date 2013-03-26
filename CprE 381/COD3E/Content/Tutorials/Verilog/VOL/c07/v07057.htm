@@ -1,0 +1,42 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td width="600">Typically, the state vector is a single register variable, though sometimes it is a small set of separate registers. When it is more than one, they can be concatenated together, and then treated as a group:
+				<p></p>
+				<pre>
+        reg stateBit1, stateBit2, stateBit3;
+</pre>
+				can be treated as:
+				<p></p>
+				<pre>
+        {stateBit1, stateBit2, stateBit3}
+</pre>
+				so, for the remainder, we will only concern ourselves with a single register variable as the state vector.
+				<p>The most common way to handle the state vector is with an always block:</p>
+				<p></p>
+				<pre>
+    always @(posedge clock)
+        state = nextstate;
+</pre>
+				However, there are several complications:
+				<p></p>
+				<ul>
+					<li>Timing
+					<li>Efficiency
+					<li>Initialization
+					<li>Register selection
+					<li>State encoding
+					<li><a href="javascript:parent.goGlossHash('#latchinf')"><font color="#B22222">Latch inferencing</font></a>
+				</ul>
+			</td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

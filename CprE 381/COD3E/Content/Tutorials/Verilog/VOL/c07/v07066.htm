@@ -1,0 +1,43 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td valign="top" width="390">It is more common for the different pipe stages to be in different processes, and often in different modules. The three stage pipe might look more like this:
+				<p></p>
+				<pre>
+module pipeline (out, in, clock);
+    output out;
+    input  in, clock;
+    reg    out, pipe1, pipe2;
+    
+    always @(posedge clock)
+        out = pipe2;
+        
+    always @(posedge clock)
+        pipe2 = pipe1;
+        
+    always @(posedge clock)
+        pipe1 = in;
+endmodule
+</pre>
+				This, however, doesn't work, and it is worth repeating that the source order of the different always blocks makes no difference. As we have pointed out before, both of the following alternatives will work.
+				<p></p>
+				<pre>
+   always@(posedge clock)		always@(posedge clock)
+      out 
+					
+					
+					<= pipe2; out="#d" pipe2; always@(posedge clock) always@(posedge clock) pipe2 <= pipe1;			   pipe2 = #d pipe1;   always@(posedge clock)		always@(posedge clock)      pipe1 <= in;			   pipe1 = #d in;</PRE>Many designers use an intra-assignment delay with a non-blocking assign in this case. While it works, there is no benefit to doing it, and it is somewhat less efficient than either of these two methods. <td width="210" valign="top"><img src="images/v0132g1.gif" width="208" height="86"></TABLE></FONT></BODY></HTML>>>
+					
+					
+				</pre>
+			</td>
+		</table>
+	</body>
+
+</html>

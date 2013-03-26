@@ -1,0 +1,158 @@
+<script language="VBScript" RUNAT="Server">
+</script>
+<script language="JavaScript">
+
+function gotoCOV(Ch) {
+        newLocation =  parent.appPath() + "c" + Ch + "\/v" + Ch + "cov" + ".htm"
+//alert (newLocation)
+        newLocationNB = "navbarCO.htm"
+        var imgName="images/m0hdco" + Ch + ".gif"
+        parent.writeHeader(imgName, -1, 0, 0)
+        parent.frames[2].location.href = newLocation
+        parent.frames[1].location.href = newLocationNB
+}
+
+</script>
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title>window.parent.frames property</title>
+	</head>
+
+		<script language="JavaScript">
+
+function mIcon(whichButton) {
+	var pghtm = parent.frames[2].location.href
+	//alert(pghtm)
+	var len = pghtm.length
+	if (pghtm.indexOf("#") != -1) { len = pghtm.indexOf("#") }
+	if (pghtm.indexOf("?") != -1) { len = pghtm.indexOf("?") }
+	var iv = pghtm.lastIndexOf("/")+2
+	var Ch = pghtm.substring(iv,iv+2)
+	var newLocation
+	var newLocationNB
+	if (whichButton == 0) {
+	    var Pg = pghtm.substring(len-7,len-4)
+		var retval = parent.gotoChPg(eval(Ch), Pg, whichButton)
+		if (retval.substring(4,7)=="998") {
+			var tCh = eval(Ch)+1
+			if (tCh != 10 && tCh != 100) { gotoCOV("0" + tCh) }
+			else { 
+				if (tCh == 10 ) { alert ("You have reached the end of the course. To take the Certification Test or to review course materials, Click Verilog TOC.") }
+				else { alert ("This is the end of the test. Click Verilog TOC to go back to the course.")}
+			}
+		}
+		else {
+			var ChPg = retval.substring(2,7)
+			var PgCnt = retval.substring(0,2)
+
+			newLocation=parent.appPath() + "c" + ChPg.substring(0,2) + "\/v" + ChPg + ".htm"
+			//alert (retval)
+			//alert (newLocation)
+			var imgName="images/v" + ChPg + "g0.gif"
+			var numOfPages = parent.getNumOfPages (ChPg.substring(0,2))
+			parent.writeHeader(imgName, ChPg.substring(0,2), PgCnt, numOfPages)
+
+			//increment page history counter
+			parent.pageHistIncrement(ChPg.substring(0,2), retval.substring(0,2), newLocation)	
+			//parent.frames[2].location.href = newLocation
+		}
+	}
+
+	if (whichButton == 1) {
+	    var Pg = pghtm.substring(len-7,len-4)
+		var retval = parent.gotoChPg(eval(Ch), Pg, whichButton)
+		if (retval=="") {
+			if (eval(Ch)>0) { var tCh = eval(Ch); gotoCOV("0" + tCh); }
+			else { gotoCOV("00"); }
+		}
+		else {
+			var ChPg = retval.substring(2,7)
+			var PgCnt = retval.substring(0,2)
+
+			newLocation=parent.appPath() + "c" + ChPg.substring(0,2) + "\/v" + ChPg + ".htm"
+			//alert (newLocation)
+
+			var imgName="images/v" + ChPg + "g0.gif"
+			var numOfPages = parent.getNumOfPages (ChPg.substring(0,2))
+			parent.writeHeader(imgName, ChPg.substring(0,2), PgCnt, numOfPages)
+		
+			//increment page history counter
+			parent.pageHistIncrement(ChPg.substring(0,2), retval.substring(0,2), newLocation)
+			//parent.frames[2].location.href = newLocation
+		}
+	}
+
+
+	if (whichButton == 3) {
+		newLocation = parent.appPath() + "toc.htm"
+		newLocationNB = "navbarT.htm"
+		var imgName="images/m0hdtoc.gif"
+		parent.writeHeader(imgName, -1, 0, 0)
+		parent.frames[2].location.href = newLocation
+		parent.frames[1].location.href = newLocationNB
+	}
+	if (whichButton == 4) {
+		newLocation =  parent.appPath() + "c" + Ch + "\/v" + Ch + "cov" + ".htm"
+		newLocationNB = "navbarCO.htm"
+		var imgName="images/m0hdco" + Ch + ".gif"
+		parent.writeHeader(imgName, -1, 0, 0)
+		parent.frames[2].location.href = newLocation
+		parent.frames[1].location.href = newLocationNB
+	}
+	if (whichButton == 5) {
+		parent.goGlossHash('#')
+	}
+	if (whichButton == 6) {
+		document.cookie="PreSearchPghtm=" + parent.frames[2].location.href
+		newLocation = parent.appPath() + "index.htm"
+		newLocationNB = "navbarin.htm"
+		parent.frames[2].location.href = newLocation
+		parent.frames[1].location.href = newLocationNB
+		var imgName="images/m0hdin.gif"
+		parent.writeHeader(imgName, -1, 0, 0)
+	}
+
+	if (whichButton == 10) {
+		var cp = parent.getCookieData("BackPghtm")
+		if (cp.length > 1) {
+			parent.gotoScreen (cp.substring(1,3), cp.substring(3,6), 0)
+		}
+		document.cookie="BackPghtm="
+	}
+}
+</script>
+
+	<body bgcolor="#FFFFFF">
+		<table width="85" border="0" cellspacing="0" cellpadding="0" align="center" height="308">
+			<tr align="center" valign="middle" height="50">
+				<td width="85" height="50"><a href="JavaScript:mIcon(3)"><img src="images/toc.gif" alt="" height="33" width="64" border="0"></a></td>
+			</tr>
+			<tr align="center" valign="middle" height="50">
+				<td width="85" height="50"><a href="JavaScript:mIcon(4)"><img src="images/chapteroverview.gif" alt="" height="33" width="64" border="0"></a></td>
+			</tr>
+			<tr align="center" valign="middle" height="50">
+				<td width="85" height="50"><a href="JavaScript:mIcon(5)"><img src="images/glossary.gif" alt="" height="33" width="64" border="0"></a></td>
+			</tr>
+			<tr align="center" valign="middle" height="50">
+				<td width="85" height="50"><a href="JavaScript:mIcon(6)"><img src="images/index.gif" alt="" height="33" width="64" border="0"></a></td>
+			</tr>
+			<tr align="center" valign="middle" height="50">
+				<td width="85" height="50">
+					<script language="JavaScript">
+							if (parent.getCookieData("BackPghtm").length>1)
+								document.write('<a href="JavaScript:mIcon(10)"><img src="images/back.gif" alt="" height="33" width="64" border="0"></a>');
+							else
+								document.write('<img src="images/back-fade.gif" alt="" height="33" width="64" border="0">');
+						</script>
+				</td>
+			</tr>
+			<tr align="center" valign="middle" height="50">
+				<td width="85" height="50"><a href="javascript:mIcon(1)"><img src="images/prev.gif" alt="" height="30" width="40" border="0"></a><a href="javascript:mIcon(0)"><img src="images/next.gif" alt="" height="30" width="41" border="0"></a></td>
+			</tr>
+		</table>
+	</body>
+
+</html>

@@ -1,0 +1,34 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td valign="top" width="600">
+				<center>
+					<img src="images/v0736g1.gif" height="201" width="363">
+					<p></p>
+				</center>
+				Another type of race occurs when the model behavior depends on the number of events which occur at a given simulation time. Consider this example:
+				<pre>
+    always @(ris1 or rp2)
+        evcount = evcount + 1;
+        
+    assign ris1 = r == 1;
+    assign rp2 = r + 2;
+    
+    initial begin
+        evcount = 0;
+    #10 r = 1;
+    #1  $display(evcount);
+    end
+</pre>
+				In this code, when r changes at 10, the always @(ris1 or rp2) will be triggered either one or two times, depending on the order of evaluation and propagation of the two continuous assignments. When this code executes, evcount will have a value of either 1 or 2.</td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

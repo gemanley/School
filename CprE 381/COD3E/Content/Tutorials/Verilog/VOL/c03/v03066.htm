@@ -1,0 +1,39 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="450">Delays are specified in several ways in Verilog. Delays are introduced with the &quot;#&quot; character. A delay can be assigned to a net driver (either a gate, primitive, or continuous assignment), or it can be assigned to the net directly.
+					<p>For example, the following are all legal delay specifications:</p>
+					<p></p>
+					<pre>
+	assign #10 net1 = ra + rb;
+	xor #3 xo1(a, b, c);
+	wire #(4,2) control_line;
+</pre>
+					<p>A delay can also be specified in procedural statements, causing time to pass before the execution of the next statement.</p>
+					<p></p>
+					<pre>
+	always
+		begin
+#period/2      clk = ~clk;
+		end
+</pre>
+					In a procedural delay, the delay value may be an arbitrary expression. By contrast, a delay in a declarative statement must be able to be evaluated at compile time, which is another way of saying it must be a constant or constant-valued expression.</td>
+				<td width="150" halign="top"></td>
+			</tr>
+			<tr>
+				<td>
+					<center>
+						<img src="images/v0320g1.gif" height="260" width="148"></center>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

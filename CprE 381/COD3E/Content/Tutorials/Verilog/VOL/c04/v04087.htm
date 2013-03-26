@@ -1,0 +1,44 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<FONT FACE="TIMES" SIZE="3">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">Here's a switch-level model of a static RAM.
+					<p></p>
+					<center>
+						<img src="images/v0426g1.gif" height="214" width="419"></center>
+					<p></p>
+					<pre>
+module sram (dout, addr, din, write);
+    output dout;
+    input addr, din, write;
+    
+    wire dio, ds, dv;
+    
+    bufif1 wctl(dio, din, write);   // write control
+    tranif1  ag(dv, dio, addr);     // addr == 1 selects cell
+    not (pull0, pull1)
+            s1(ds, dv), s2(dv, ds); // feedback loop
+    buf b1(dout, dio);              // output
+endmodule
+</pre>
+					<p>This model uses pull drive strength for the feedback loop between the two not gates. To access the cell, the tranif1 gate is turned on, and the saved value becomes available on wire dio. If the write control gate (wctl) is turned on, the new value will be driven onto dio (its strength will override the pull strength), and it will be forced back through the tranif1 gate into the feedback loop. If the write control is turned off, then wctl drives a z, in which case dio remains unchanged from the feedback loop. The two features which makes this work are</p>
+					<p></p>
+					<ul>
+						<li>tranif1 is bidirectional
+						<li>strong drive strength on dio overrides the pull drive strength on dv
+					</ul>
+					<p>In general, switch-level modelling uses <a href="javascript:parent.goGlossHash('#biprimitives')"><font color="#B22222">bi-directional primitives</font></a></font> and differing drive strengths.</p>
+				</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

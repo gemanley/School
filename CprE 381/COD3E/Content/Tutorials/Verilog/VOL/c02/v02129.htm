@@ -1,0 +1,90 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td><b>Which of the following models generates a clock waveform that has the clock high 2 time units and low 2 time units, starting at 0 with the first rising edge at time 10?</b>
+					<p></p>
+				</td>
+			</tr>
+		</table>
+		<form>
+			<table width="600" cellpadding="10">
+				<tr>
+					<td width="200">
+						<center>
+							A</center>
+						<p></p>
+						<pre>
+module q2;
+   reg clock;
+   initial begin
+ 	clock = 0;
+   #8	forever begin
+ 	#1   clock = 0;
+ 	#2   clock = 1;
+ 	end
+   end
+endmodule
+</pre>
+						<center>
+							<input onclick="parent.setValue(0,0)" type="radio" name="A" value="-1"></center>
+					</td>
+					<td width="200">
+						<center>
+							B</center>
+						<pre>
+module q2;
+   reg clock;
+   initial begin
+ 	clock = 0;
+   #8	forever begin
+ 	#2   clock = 1;
+ 	#2   clock = 0;
+ 	end
+   end
+endmodule
+</pre>
+						<center>
+							<input onclick="parent.setValue(0,1)" type="radio" name="A" value="-1"></center>
+					</td>
+					<td width="200">
+						<center>
+							C</center>
+						<pre>
+module q2;
+   reg clock;
+   initial begin
+ 	clock = 0;
+   #8	forever begin
+ 	#1   clock = 1;
+ 	#2   clock = 0;
+ 	end
+   end
+endmodule
+</pre>
+						<center>
+							<input onclick="parent.setValue(0,2)" type="radio" name="A" value="-1"></center>
+					</td>
+				</tr>
+			</table>
+		</form>
+		<table width="600">
+			<center>
+				<tr>
+					<td><b>Click Done to check your answer.</b>
+						<p><a href="javascript:parent.checkAnswer(0,1)"><img src="images/vdone.gif" height="39" width="74" border="0"></a></p>
+					</td>
+				</tr>
+			</center>
+			</TD>
+		</table>
+		</FORM>
+	</body>
+
+</html>

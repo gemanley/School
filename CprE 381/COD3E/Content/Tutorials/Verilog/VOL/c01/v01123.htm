@@ -1,0 +1,21 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>Continuous assignments are very similar to port connections between parent and child modules. An input port is essentially a continuous assignment with the instance port expression being the right hand side and the module definition port name being the left-hand side. Likewise, an output port has the same properties as a continuous assignment between the output port expression in the module definition and the port assignment in the module instantiation. For example,
+					<p><tt>&nbsp;...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;module foo (in, out);<br>&nbsp;foo f1 (source1a+source1b, sink);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;input in; output out;<br>&nbsp;...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...</tt></p>
+					<p></TT>is the same as:</p>
+					<p><tt>&nbsp;...<br>&nbsp;assign in = source1a+source1b;<br>&nbsp;assign sink = out;<br>&nbsp;...<br>
+						</tt></p>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

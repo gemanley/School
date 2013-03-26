@@ -1,0 +1,65 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>Given the following module:
+					<pre>
+
+   module M;
+	reg clock;
+	integer x, i;
+
+	initial begin
+		x = 1;			// 1
+	#1	x = 2;			// 2
+		for (i=1; i
+						
+						
+						<4; i="i+1)" // 2a @(posedge clock) // 2b if (x="=" 4) // 3 $finish; // 4 end always @(posedge clock) begin x="x" + 1; // 5 end initial clock="0;" // 6 always #2 clock="~clock;" // 7 endmodule </PRE> <p> Which of the following diagrams correctly indicates the order of statement execution. Note that, in some places, statement execution order is indeterminate and can proceed down alternative paths. Click Done to check your answer. <p> <HR> </table> <table width="600"> <tr> <td> <FORM> <INPUT TYPE="radio" NAME="A" VALUE="A" onClick="parent.setValue(0,0)"> <b> a.</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/v03q3g1.gif" height="73" width="507" border="0">
+						
+						
+						<p><br>
+							
+							
+							
+<input onclick="parent.setValue(0,1)" type="radio" name="A" value="B"><b>b.</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/v03q3g2.gif" height="73" width="507" border="0"></p>
+						
+						
+						
+						
+						<p><br>
+							
+							
+							
+<input onclick="parent.setValue(0,2)" type="radio" name="A" value="C"><b>c.</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/v03q3g3.gif" height="73" width="466"></p>
+						
+						
+						
+						
+						<p>
+</FORM>
+
+<b>Click Done to check your answer.</b></p>
+						
+						
+						
+						
+						<p>
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:parent.checkAnswer(0,1)"><img src="images/vdone.gif" height="39" width="74" border="0"></a></p>
+						
+						
+					</pre>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

@@ -1,0 +1,137 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<a name="diagram">
+			<table width="600">
+				<tr>
+					<td>This example has a top-level module and three sub-modules.
+						<p>This design is supposed to be a divide-by-3 clock reducer. The input to the module is a reference clock, and the output is a clock signal which has a pulse every three cycles of the reference clock. The pulse width should be the same for both clocks.</p>
+						<p></p>
+						<center>
+							<a href="#source"><img src="images/vverilog.gif" height="39" width="139" border="0"></a>
+							<p><img src="images/v0338g1.gif" height="285" width="370"></p>
+							<p></p>
+						</center>
+						<center>
+							<a href="JavaScript:parent.dispWindow('v03120r3.htm','')"><img src="images/voutputd.gif" height="39" width="144" border="0"></a> <a href="JavaScript:parent.dispWindow('v03120r2.htm','')"><img src="images/voutputt.gif" height="39" width="116" border="0"></a></center>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<a name="source">
+							<pre><code> <a href="#ref">module system</a>;
+    <a href="#ref">/* This is a test fixture for testing a divide-by-3 circuit */</a>
+
+    <a href="#ref">wire</a> slowClk, clk;      <a href="#ref">// two clocks</a>
+    
+    // <a href="#ref">Module instances</a>
+    divideBy3 d3 (.outClk(slowClk), .inClk(clk));   // clock divider
+    clkGen <a href="#ref">#(10)</a> cg (clk);                          // clock generator
+    
+    initial begin
+         <a href="#ref">$monitor</a> ($stime, &quot; clk: %b  slowClk: %b&quot;, clk, slowClk);
+    #150 <a href="#ref">$finish</a>;
+    end
+    
+endmodule
+
+module divideBy3 (outClk, inClk);
+    <a href="#ref">parameter</a> delay = 1;
+    <a href="#ref">input</a> inClk;                // reference clock
+    <a href="#ref">output</a> outClk;              // stepped down clock
+    
+    <a href="#ref">reg</a> ff1, ff2, temp;         // local storage
+    <a href="#ref">initial</a> begin ff1 = 0; ff2 = 1; end
+    
+    <a href="#ref">assign</a> outClk = ff2 &amp; inClk; // output assignment
+    
+    <a href="#ref">always</a> <a href="#ref">@(posedge inClk)</a>
+        begin
+            temp = ff1;
+            ff1 = ff2;
+            ff2 = ~(temp | ff2);
+        end
+    
+endmodule
+
+
+module clkGen (clk);
+    parameter period = 2;
+    output clk;
+    reg clk;
+    
+    initial clk = 0;              // start off with 0, so first edge is rising
+    always                        // clock loop
+        <a href="#ref">#(period/2)</a> clk = ~clk;
+endmodule</code></pre>
+							<p><b><a href="#diagram">Return to Diagram</a>&nbsp;&nbsp;&nbsp;<a href="#diagram"><img src="images/varrow.gif" with="38" height="39" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#ref">More Information</a></b>&nbsp;&nbsp;&nbsp;<a href="#ref"><img src="images/varrow.gif" with="38" height="39" border="0"></a></p>
+						</a></td>
+				</tr>
+			</table>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<a name="ref"><b>For more information on the following topics see the list below.</b>
+				<p><b>module system;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','033',1)">Modules, Top Level</a><br>
+					<b>/* This is a test fixture for testing a divide-by-3 circuit */;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('02','015',1)">Lexical Conventions, Tokens, Comments</a><br>
+					<b>wire;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','078',1)">Modelling Structures, Nets</a><br>
+					<b>// two clocks;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('02','015',1)">Lexical Conventions, Tokens, Comments</a><br>
+					<b>Module instances;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','027',1)">Modules, Definition</a><br>
+					<b>#(10) ;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','069',1)">Modelling Structures, Parameters, Redefinition</a><br>
+					<b>$monitor ;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('02','057',1)">Lexical Conventions, Tokens, System Tasks and Functions</a><br>
+					<b>$finish;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('02','057',1)">Lexical Conventions, Tokens, System Tasks and Functions</a><br>
+					<b>parameter</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','063',1)">Modelling Structures, Parameters, Definition</a><br>
+					<b>input</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','036',1)">Ports</a><br>
+					<b>output</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','036',1)">Ports</a><br>
+					<b>reg</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','090',1)">Modelling Structures, Registers</a><br>
+					<b>initial</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','138',1)">Modelling Structures, Procedural Blocks, Initial</a><br>
+					<b>assign</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','114',1)">Modelling Structures, Continuous Assignments</a><br>
+					<b>always</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('01','141',1)">Modelling Structures, Procedural Blocks, Always</a><br>
+					<b>@(posedge inClk)</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('03','084',1)">Simulation, Events, Action Occurs at Time Instants</a><br>
+					<b>#(period/2)</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <a href="javascript:parent.gotoScreen('03','066',1)">Simulation, Delays</a><br>
+				</p>
+				<p><b><a href="#source">Return to Source</a>&nbsp;&nbsp;&nbsp;<a href="#source"><img src="images/varrow.gif" with="38" height="39" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#diagram">Return to Diagram</a></b>&nbsp;&nbsp;&nbsp;<a href="#diagram"><img src="images/varrow.gif" with="38" height="39" border="0"></a><br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+				</p>
+			</a></a>
+	</body>
+
+</html>

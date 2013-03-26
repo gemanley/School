@@ -1,0 +1,53 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			<tr>
+				<td><b>Re-entrant Task Example</b>
+					<p>Consider the following example:</p>
+					<p></p>
+					<pre>
+        task mul_div;
+            input [31:0] opA, opB;
+            input opcode;
+            output [31:0] res;
+            reg [31:0] temp;
+            
+            begin
+                if (opcode) begin
+                    temp = opA * opB;
+                    repeat (2) @(posedge clk) ;
+                end else begin
+                    temp = opA / opB;
+                    repeat (4) @(posedge clk) ;
+                end
+                res = temp;
+            end
+        endtask
+        
+        always @(posedge clk)       // unit 1
+            if (opvalid) begin
+                opvalid = 0;
+                mul_div(opA, opB, opcode, result1);
+            end
+        
+        always @(posedge clk)       // unit 2
+            if (opvalid) begin
+                opvalid = 0;
+                mul_div(opA, opB, opcode, result2);
+            end
+</pre>
+					<p>In this example, there are two multiply/divide units that can be started independently on consecutive cycles. Notice that each invoking loop will take as many cycles as the operation that it initiates. (Notice that by turning opvalid off, both units will not start the same operation.)</p>
+					<p>The problem with this code is the static storage in the task. The task can be enabled from both places at the same time, but there is only one memory location named temp. Consequently, it will get overwritten by the later invocation, and will thus return the wrong result. Note that the same problem would occur if res was used in place of temp.</p>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

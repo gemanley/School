@@ -1,0 +1,32 @@
+<html>
+
+	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+
+	<body bgcolor="#FFFFFF">
+				<p>The following are examples of memory declarations.</p>
+		<center>
+			<table width="500">
+				<tr>
+					<td width="250"><tt>reg [7:0] memdata[0:255];</tt></td>
+					<td width="250"><tt>// 256 8-bit registers</font></tt></td>
+				</tr>
+				<tr>
+					<td width="250"><tt>reg [8*6:1] strings[1:10];</tt></td>
+					<td width="250"><tt>// 10 6-byte strings</font></tt></td>
+				</tr>
+				<tr>
+					<td width="250"><tt>reg membits [1023:0];</tt></td>
+					<td width="250"><tt>// 1024 1-bit registers</font></tt></td>
+				</tr>
+				<tr></tr>
+			</table>
+		</center>
+		<p></p>
+		<table width="600">
+			<tr>
+				<td>The maximum size of a memory is implementation-dependent, but is at least 2^24 (16,777,216) elements.</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

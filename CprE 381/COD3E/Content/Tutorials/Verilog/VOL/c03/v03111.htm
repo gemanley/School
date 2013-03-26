@@ -1,0 +1,39 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600">
+			<tr>
+				<td>While we normally think of a net as having a value, the value is derived from the values of whatever drivers there are on that net. For initialization, this actually makes a difference, since the drivers are the things which have x as their initial values, and the net resolution function works normally. So, at initialization, if a net has any drivers attached to it, the net will take on the value of the driver (<tt>x</tt>), unless there is a resolution function which overrides it.
+					<p>Possible initial values for a net:</p>
+				</td>
+			</tr>
+		</table>
+		<p></p>
+		<table width="400">
+			<tr>
+				<td align="right" width="100"><tt>x</tt></td>
+				<td width="300">&nbsp;&nbsp;&nbsp;the net has 1 or more drivers</td>
+			</tr>
+			<tr>
+				<td align="right" width="100"><tt>z</tt></td>
+				<td width="300">&nbsp;&nbsp;&nbsp;the net has no drivers</td>
+			</tr>
+			<tr>
+				<td align="right" width="100"><tt>0 or 1</tt></td>
+				<td width="300">&nbsp;&nbsp;&nbsp;the net is supply0 or supply1</td>
+			</tr>
+		</table>
+		<p></p>
+		<table width="600">
+			<tr>
+				<td>Registers are simpler than nets. They always start out <tt>x</tt> and will keep that value until the first procedural assignment yields a non-x value.</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

@@ -1,0 +1,27 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>Intra-assignment event control
+					<p><tt>&nbsp;&nbsp;&nbsp;x 
+							<= @(posedge clk) y + z;<p>
+						</tt>This statement is executed similarly to the intra-assignment delay, except that the event control is used:</p>
+					<p></p>
+					<dl>
+						<dd>1. evaluate the right-hand side expression and save the result
+						<dd>2. put the assignment on a list of nba's to be performed when the specified event occurs (in this example, the rising edge of <tt>clk</tt>)
+						<dd>3. at the designated time, finish executing all other events except for other non-blocking assignments (nba's)
+						<dd>4. perform the assignment
+					</dl>
+					As before, the next downstream statement will execute at the current simulation time.</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

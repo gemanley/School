@@ -1,0 +1,47 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body onload=" parent.initBtnMchMA(3);" bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600" cellpadding="10">
+			<b>Which of the statements about the following code fragment are true? Click Done to check your answer.</b>
+			<p></p>
+			<pre>
+	always @(posedge clk) begin
+	x 
+				
+				
+				<= f(y); @(y) ; end </pre> <HR> <FORM> <INPUT TYPE="checkbox" NAME="A"> 1. This code will work under all conditions.<br>
+				
+				
+				
+<input type="checkbox" name="B"><font color="#4B0082">2. This code is efficient. It reduces the simulation activity if &quot;y&quot; does not change on every &quot;clk.&quot;</font><br>
+				
+				
+				
+<input type="checkbox" name="C"><font color="#4B0082">3. This code is only guaranteed to work if &quot;y&quot; does not change on the positive clock edge.</font>
+				
+				
+				<p>
+</FORM>
+
+<a name="answer">
+<b>Items 2 and 3 are true. Item 1 is false because, although the &quot;@(y)&quot; is not blocked by the assignment, this code won't work if &quot;y&quot; changes on the positive clock edge. Item 2 is true because the &quot;@(y)&quot; causes the &quot;always&quot; block to suspend until &quot;y&quot; changes.</b></a></p>
+				
+				
+				
+				
+				<p>
+
+</p>
+				
+				
+			</pre>
+		</table>
+	</body>
+
+</html>

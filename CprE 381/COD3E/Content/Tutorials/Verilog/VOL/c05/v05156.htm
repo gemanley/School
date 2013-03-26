@@ -1,0 +1,115 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td><a name="diagram">This is an example of a register with reset and scan chain.
+						<p>This design satisfies the following requirements:</p>
+						<p></p>
+						<ul>
+							<li>The register samples data on the rising edge of the clock.
+							<li>The register width is 8 bits, parameterized.
+							<li>The register has a clock enable that must be high for the register to clock data in.
+							<li>It has an asynchronous reset input that, if low, causes the register to reset to 0.
+							<li>It has a scan function, with 1 bit input, output, and enable.
+							<li>The module ports are: data output (n bits), data input (n bits), clock (1 bit), clock enable (1 bit), scan shift out (1 bit), scan shift in (1 bit), and scan shift enable (1 bit).
+						</ul>
+						<p></p>
+						<center>
+							<a href="#source"><img src="images/vverilog.gif" height="39" width="139" border="0"></a>
+							<p><img src="images/v0552g1.gif" width="429" heigth="320"></p>
+						</center>
+						<p><br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<a name="source"><b>Example: Register with Scan Function</b></a></p>
+						<pre>
+module test;
+    /* This is a test module for testing a register */
+    
+    wire       clk;             // output and clock
+    wire [7:0] Q;
+    wire       scanOut;         // scan data out
+    reg [7:0] dataIn;
+    reg       notReset, scanIn, scanEn;
+    
+    // Module instances
+    Reg8x r1 (Q, dataIn, notReset, clk, scanOut, scanIn, scanEn);   
+    clkGen #(10) cg (clk);      // generate the clock       
+    
+    integer i, scantest;
+    initial begin               // produce test data, check results
+        $monitor($time,&quot; dataIn: %b Q: %b&quot;, dataIn, Q);
+        notReset = 0;           // reset at 0
+        scanEn = 0;
+    #15 notReset = 1;           // register some data
+        dataIn = 1;
+        repeat (4)
+    #10     dataIn = dataIn &lt;&lt; 1;
+    #5  notReset = 0;           // reset again
+    #10 notReset = 1;           // try again on the clock edge
+        repeat (4)
+    #10     dataIn = dataIn &lt;&lt; 1;
+    
+    #10 scanEn = 1;             // test scan
+        $monitor($time,&quot; dataIn: %b Q: %b  scanIn: %b  scanOut: %b&quot;, 
+                 dataIn, Q, scanIn, scanOut);
+        scanIn = 0;
+        scantest = 12'b100110001110;
+        for (i=0; i
+							
+							
+							<12; i="i+1)" #10 scanIn="scantest[i];" #10 $finish; end endmodule module Reg8x (regOut, regIn, notReset, clock, scanShiftOut, scanShiftIn, scanShiftEnable); /* Parameters: */ parameter size="8;" parameter ckToQ="1;" parameter resetToQ="1;" /* I/O Descriptions: */ output [size-1:0] regOut; /* register output */ input [size-1:0] regIn; /* register input */ input notReset; /* async reset */ input clock; output scanShiftOut; /* output of scan chain */ input scanShiftIn; /* serial scan input */ input scanShiftEnable; /* '1'="shift" */ reg [size-1:0] regOut; /* temp variable */ reg shiftOut; /* temp variable */ /* Assignments: */ assign scanShiftOut="regOut[size-1];" /* Register Functionality */ <A HREF="JavaScript:parent.dispWindow('v05156r1.htm','window1')"> always @(posedge clock)</a>
+							
+							
+							
+        if (notReset &amp;&amp; (scanShiftEnable !== 1))
+             regOut = #ckToQ regIn;
+    
+    /* Scan Operation */
+    always @(posedge scanShiftEnable)
+        while (scanShiftEnable === 1)
+            @(posedge clock)
+            if (scanShiftEnable &amp;&amp; notReset)
+                {<a href="JavaScript:parent.dispWindow('v05156r2.htm','window2')">shiftOut, regOut} = #ckToQ {regOut, scanShiftIn};</a>
+    
+    /* Reset Operation */
+    <a href="JavaScript:parent.dispWindow('v05156r3.htm','window3')">initial begin</a>
+        if (!notReset) 
+            regOut = #resetToQ {size{1'b0}};  // avoid start-up race
+        forever @(negedge notReset)
+            regOut = #resetToQ <a href="JavaScript:parent.dispWindow('v05156r4.htm','window4')">{size{1'b0}};</a>
+    end
+endmodule   /* Reg8x */
+    
+    
+module clkGen (clk);
+    parameter period = 2;
+    output clk;
+    reg clk;
+    
+    initial clk = 0;                // start off with 0
+    always                          // clock loop
+        #(period/2) clk = ~clk;
+endmodule
+
+</pre>
+						<p><a href="#diagram">Return to Diagram</a></b>&nbsp;&nbsp;&nbsp;<a href="#diagram"><img src="images/varrow.gif" with="38" height="39" border="0"></a></p>
+					</a></td>
+			</tr>
+		</table>
+	</body>
+
+</html>

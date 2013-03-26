@@ -1,0 +1,40 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			<tr>
+				<td>The race can also be solved with an intra-assignment event control:
+					<p></p>
+					<pre>
+    always @(posedge clock)             always @(posedge clock)
+        dff1 = @(negedge clock) f(x);       dff2 = @(negedge clock) dff1;
+</pre>
+				</td>
+			</tr>
+		</table>
+		<p></p>
+		<table width="600">
+			<tr>
+				<td>The execution sequence of events is:
+					<p></p>
+					<dl>
+						<dd>1. wait until the rising edge of clock
+						<dd>2&3. evaluate <tt>f(x)</tt> and save<br>
+							evaluate <tt>dff1</tt> and save
+						<dd>4. wait until the falling edge of clock
+						<dd>5&6. assign saved <tt>f(x)</tt> to <tt>dff1</tt><br>
+							assign saved <tt>dff1</tt> to <tt>dff2</tt>
+					</dl>
+					<p>Again, <tt>dff2</tt> will get the value of <tt>dff1</tt> which it has at the posedge of clock.</p>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

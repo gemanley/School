@@ -1,0 +1,75 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body onload=" parent.initBtnMT(6);" bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>Given
+					<pre>
+	parameter p1 = 4;
+	reg [4:0] x;
+	wire [3:2] y;
+	reg z;
+</pre>
+					<hr>
+					<b>Classify these expressions as &quot;constant&quot;, &quot;scalar&quot;, &quot;delay&quot;, &quot;fixed-size&quot;, or &quot;non-fixed-size&quot;:</b>
+					<p></p>
+				</td>
+			</tr>
+		</table>
+		<!-- 
+<table width="260"><tr>
+<FORM>
+<td width="160">1. p1-1</td><td width="100"><INPUT TYPE="TEXT" SIZE="15" MAXLENGTH="15" onChange="parent.setValue(0,this.value)"></td>
+<tr>
+<td width="160">2. #x</td><td width="100"><INPUT TYPE="TEXT" SIZE="15" MAXLENGTH="15" onChange="parent.setValue(1,this.value)"></td>
+<tr>
+<td width="160">3. x != p1</td><td width="100"><INPUT TYPE="TEXT" SIZE="15" MAXLENGTH="15" onChange="parent.setValue(2,this.value)"></td>
+<tr>
+<td width="160">4. z</td><td width="100"><INPUT TYPE="TEXT" SIZE="15" MAXLENGTH="15" onChange="parent.setValue(3,this.value)"></td>
+<tr>
+<td width="160">5. x*y</td><td width="100"><INPUT TYPE="TEXT" SIZE="15" MAXLENGTH="15" onChange="parent.setValue(4,this.value)"></td>
+<tr>
+<td width="160">6. x & y</td><td width="100"><INPUT TYPE="TEXT" SIZE="15" MAXLENGTH="15" onChange="parent.setValue(5,this.value)"></td>
+</tr>
+</FORM>
+</table>
+<p>
+--><a answer><b>These are the correct answers:</b>
+			<p></p>
+			<table width="260">
+				<tr>
+					<td width="160">1. p1-1</td>
+					<td width="100"><b>constant</b></td>
+				</tr>
+				<tr>
+					<td width="160">2. #x</td>
+					<td width="100"><b>delay</b></td>
+				</tr>
+				<tr>
+					<td width="160">3. x != p1</td>
+					<td width="100"><b>scalar</b></td>
+				</tr>
+				<tr>
+					<td width="160">4. z</td>
+					<td width="100"><b>scalar</b></td>
+				</tr>
+				<tr>
+					<td width="160">5. x*y</td>
+					<td width="100"><b>non-fixed-size</b></td>
+				</tr>
+				<tr>
+					<td width="160">6. x &amp; y</td>
+					<td width="100"><b>fixed-size</b></td>
+				</tr>
+			</table>
+			<p>To review content related to this question see <a href="javascript:parent.gotoScreen('03','006',1)">Expressions</a>.</p>
+			<p></p>
+		</a>
+	</body>
+
+</html>

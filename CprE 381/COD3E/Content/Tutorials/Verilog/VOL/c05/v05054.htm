@@ -1,0 +1,32 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>We saw an example of a race condition before where a two-stage pipeline was coded as:
+					<p>
+						<left>
+					</p>
+					<pre>
+always @(posedge clock)         always @(posedge clock)
+    dff1 = f(x);                    dff2 = dff1;
+
+
+</pre>
+					</CENTER>
+					<p>As noted before, this doesn't work because <font size="3" face="courier">dff1</font> is being both sampled and changed at the same instant of simulated time in different processes. Think about how you would solve this problem. Then, click each Solution button to see sample solutions.</p>
+					<p></p>
+					<center>
+						<a href="JavaScript:parent.dispWindow('v05054r1.htm','Solution')"><img src="images/v0518b1.gif" height="39" width="106" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="JavaScript:parent.dispWindow('v05054r2.htm','Solution')"><img src="images/v0518b2.gif" height="39" width="106" border="0"></a></center>
+				</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

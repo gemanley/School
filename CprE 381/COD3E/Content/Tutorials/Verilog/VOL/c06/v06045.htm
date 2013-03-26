@@ -1,0 +1,44 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">Just as tasks can be enabled, they can be disabled, by the disable statement:
+					<p></p>
+					<pre>
+        disable task_or_block_name;
+</pre>
+					<p>The disable statement will terminate the activity of the block which is named in it. The disabled block can be a:</p>
+					<p></p>
+					<ul>
+						<li>Task
+						<li>Named block
+					</ul>
+					<p>When disable is applied to a block or task, all activity in that block or task is terminated, and all events which have been scheduled but not yet executed are also cancelled.</p>
+					<p>In other words, all activity which has been initiated by the block or task but not yet completed is terminated. That means that any task which was enabled by this block or task is also disabled.</p>
+					<p>If a task is disabled, then the results of the following activities within that task are undefined (that is, they are implementation-dependent):</p>
+					<p></p>
+					<ul>
+						<li>Results of output and inout arguments
+						<li>Non-blocking assignments which have been executed in the disabled task, but the assignment has not yet been made
+						<li>Procedural continuous assignments made in the task
+					</ul>
+					<p>When a task is named in a disable statement, there is no way to distinguish between different enables of the same task. That is, the given task could be enabled more than once concurrently. In this case, all enabled instances of the task are disabled.</p>
+					<p>There are two cases which can occur with a disable statement:</p>
+					<p></p>
+					<ul>
+						<li>The block or task being disabled contains the disable
+						<li>The block or task being disabled does not contain the disable
+					</ul>
+				</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

@@ -1,0 +1,23 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			<tr>
+				<td>
+					<pre>
+        (posedge clock =&gt; (out +: in)) = 10;
+        (negedge clock[0] =&gt; (out -: in)) = 10;
+        (clock =&gt; (out : in)) = 10;
+</pre>
+					In these examples, + and - are polarity operators, and they indicate that data flows from in to out and is either inverted (-) or not inverted (+). In the absence of the polarity operator, there is no information about how out logically depends on in.</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

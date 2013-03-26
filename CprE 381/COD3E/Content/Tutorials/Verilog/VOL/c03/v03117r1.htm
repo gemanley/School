@@ -1,0 +1,77 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600">
+			<tr>
+				<td>
+					<pre><code>module system;
+    /* This is a test fixture for testing a comparator */
+    
+    wire greaterNotLess;        // sense of comparison
+    wire A, B;           // comparand values - 16 bit
+    wire result;                // comparison result
+        
+    // Module instances
+    comparator #(16, 2) comp (result, A, B, greaterNotLess);
+    testGenerator tg (A, B, greaterNotLess, result);        
+    
+endmodule
+
+module comparator (result, A, B, greaterNotLess);
+    parameter width = 8;
+    parameter delay = 1;
+    input [width-1:0] A, B;             // comparands
+    input greaterNotLess;               // 1 - greater, 0 - less than
+    output result;                      // 1 if true, 0 if false
+    
+    assign #delay result = greaterNotLess ? (A &gt; B) : (A &lt; B);
+    
+endmodule
+
+
+module testGenerator (A, B, greaterNotLess, result);
+    output [15:0] A, B;
+    output greaterNotLess;
+    input result;
+    parameter del = 5;
+    
+    reg [15:0] A, B;
+    reg greaterNotLess;
+    
+    initial begin               // produce test data, check results
+        A = 16'h1234;
+        B = 16'b0001001000110100;
+        greaterNotLess = 0;
+    #del
+        check(0);
+        B = 0;
+        greaterNotLess = 1;
+    #del
+        check(1);
+        A = 1;
+        greaterNotLess = 0;
+    #del
+        check(0);
+        $finish;
+    end
+    
+    task check;
+        input shouldBe;
+        begin
+            if (result != shouldBe)
+                $display(&quot;Error! %d %s %d, result = %b&quot;, A, greaterNotLess?&quot;&gt;&quot;:&quot;&lt;&quot;,
+                          B, result);
+        end
+    endtask
+endmodule</code></pre>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

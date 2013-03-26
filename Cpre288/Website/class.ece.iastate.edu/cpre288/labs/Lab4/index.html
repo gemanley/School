@@ -1,0 +1,315 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from class.ece.iastate.edu/cpre288/labs/Lab4/index.asp by HTTrack Website Copier/3.x [XR&CO'2010], Wed, 12 Dec 2012 08:16:46 GMT -->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<!-- INSERT TITLE -->
+	<title>CprE 288 Lab Manual</title>
+
+	<meta charset="utf-8"> 
+	<link rel="stylesheet" href="../../css/base4341.css?1.6" media="all"> 
+	<link rel="stylesheet" href="../../css/iastate4341.css?1.6" media="all"> 
+	<!--[if lt IE 9]>
+		<link rel="stylesheet" href="../../css/ie-fix.css">
+		<link rel="stylesheet" href="../../css/ie-fix-iastate.css">
+		<script>
+			(function()
+			{
+				var els = 'header,footer,section,aside,nav,article,hgroup,time'.split(',');
+				for (var i = 0; i < els.length; i++)
+					document.createElement(els[i]);
+			})()
+		</script>
+	<![endif]--> 
+
+	<link rel="stylesheet" href="../../css/content4341.css?1.6" media="all">
+
+	<!-- PAGE CONTENT -->
+	<meta name="title" content="CprE 288 - Embedded Systems Lab Manual">
+	<meta name="keywords" content="cpre 288, cpre288, lab manual, manual, iRobot, course, iastate, atmel, atmega128">
+</head>
+<body>
+
+<!-- HEADER -->
+	<header> 
+		<article id="ribbon"> 
+			<section class="grids-24"> 
+				<section class="grid-16"> 
+					<h1> 
+						<img src="../../css/isu-logo.png" alt="Iowa State University"/> 
+					</h1> 
+				</section> 
+				<section class="grid-8"> 
+					<form method="get" action="http://google.iastate.edu/search"> 
+						<input type="hidden" name="output" value="xml_no_dtd"/> 
+						<input type="hidden" name="client" value="default_frontend"/> 
+						<input type="hidden" name="site" value="class.ece.iastate.edu/cpre288"/> 
+						<input type="hidden" name="proxystylesheet" value="beta_frontend"/> 
+						<input type="text" name="q" tabindex="1" accesskey="s" placeholder="Search"/> 
+						<input type="submit" name="btnG" value="" title="Search"/> 
+					</form> 
+				</section> 
+			</section> 
+		</article> 
+	</header> 
+
+    
+   	<article>
+		<section id="container">
+			<section class="grids-24"> 
+                <article id="content" class="grid-24"> 
+                    <section class="gutter">
+<!-- BODY -->
+
+<h1>CPRE 288 Laboratory</h1>
+<hr>
+<h1>Lab 4: Digital Wall Clock & Exploring On-Chip Debugging</h1>
+
+
+<h2>Lecture - Lab Connection</h2>
+
+<p>In lecture, you have studied the use of timers and interrupts. In this lab, you will use these hardware features to build a digital wall clock.</p>
+
+<h2>Prelab</h2>
+
+<ul>
+    <li>Read through the lab description</li>
+	<li>Read the description of CTC mode (Clear Timer on Compare Match) of the timer/counter on page 123-124 of the <a href="../../resources/docs/doc2467.pdf">ATmega128 Datasheet</a>.</li>
+    <li>Read the register description section of the <a href="../../resources/docs/doc2467.pdf">ATmega128 Datasheet</a> (Pages 132-136).  Try to understand the settings used in the timer_init() function in clock_intr.c, and answer the following questions.</li>
+	<ul>
+		<li>What is the frequency of the ATmega128 processor?</li>
+	    <li>What prescalor is being used?</li>
+		<li>How many times will the timer increment in 1 second with that prescalor?</li>
+		<li>How many times will the timer increment in 200 milliseconds with that prescalor?</li>
+	</ul>
+    <li>Print the <a href="lab_eval.doc">Lab Evaluation Form</a>.</li>
+</ul>
+
+<h2>Reference Documents</h2>
+
+<p>All reference documents are also available on the Resources page of the course website.</p>
+
+<ul>
+  <li>(doc2467) <a href="../../resources/docs/doc2467.pdf">ATmega128 Datasheet</a></li>
+  <li><a href="http://www.cplusplus.com/reference/clibrary/cstdio/printf/">printf documentation</a></li>
+  
+</ul>
+  
+<h2>Reference Files</h2>
+
+<p>Download the following files to a single folder your U: drive. (Right-click and select 'Save Target As')</p>
+
+<ul>
+ <li><a href="../programs/clock_intr.c">clock_intr.c</a>: The skeleton code that user timers and interrupts to implement the clock program.</li>
+ <li><a href="../programs/lcd.c">lcd.c</a>: A program file with a number of LCD functions</li>
+ <li><a href="../programs/lcd.h">lcd.h</a>: The header file for lcd.c</li>
+ <li><a href="../programs/lab4/util.c">util.c</a>: A program file that supports lcd.c</li>
+ <li><a href="../programs/lab4/util.h">util.h</a>: The header file for util.c</li>
+</ul>
+
+<h3>Notes</h3>
+
+<p>During this lab, you will implement either a 24-hour or 12-hour clock.</p>
+
+<p>Beyond keeping time, the user must be able to adjust the time using the push buttons: </p>
+<ul>
+  <li>SW6 to increment hours</li>
+  <li>SW5 to decrement hours</li>
+  <li>SW4 to increment minutes</li>
+  <li>SW3 to decrement minutes</li>
+  <li>SW2 to increment seconds</li>
+  <li>SW1 to decrement seconds</li>
+</ul>
+
+<p>The response time of the push button should be 200ms; this means that if the user holds
+SW2 down for a long period of time, they should see the clock's seconds continually increment higher 5 times every second. </p>
+
+<p>With such a flexible user interface to adjust the time, there should be no coupling between adjusting hours and minutes or minutes and seconds.  For example, when seconds are adjusted by the user and the value passes 59 when incrementing or 00 when decrementing, the value of minutes should not be adjusted.
+
+<p>The actual clock should function like a standard clock.  I.E., if the currently displayed
+time is 04:59:59, the next second should display a time of 05:00:00.</p>
+
+
+
+
+<hr>
+<h2>Part 1. Busy Waiting Clock Program</h2>
+
+<p><strong>Requirements</strong> - Implement the clock program using the wait_ms() function; do not use the interrupts or write any code in the ISRs (interrupt service routines). </p>
+
+<h3>Hints</h3>
+
+<p>You should define some variables that keep track of time as global variables.  This will allow all of your functions to use these variables.  With large applications, it is usually considered bad coding practice to use global variables due to the possibility of naming conflicts and lack of encapsulation, but it should simplify your small project.</p>
+
+<p>The lprintf(...) function is quite powerful.  You may want to review how it works (<a href="http://www.cplusplus.com/reference/clibrary/cstdio/printf/">printf documentation</a>).  Review the following example program to understand how you can use the lprintf function in this lab:</p>
+
+<p>
+<font face="courier">
+#include "lcd.h" <br>
+   <br>
+int hours = 5;<br>
+int mins = 30;<br>
+int secs = 0;<br>
+   <br>
+void main() { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;lcd_init();<br>
+   <br> 
+&nbsp;&nbsp;&nbsp;&nbsp;// Display the time as: 05:30:00<br>
+&nbsp;&nbsp;&nbsp;&nbsp;lprintf("%02d:%02d:%02d", hours, mins, secs);<br>
+   <br>
+}<br><br>
+</font>
+</p>
+
+
+</p>
+
+<p><strong>If you have completed this section of the lab within the first 30 minutes of lab, move on to Part 2.  The parts of the lab are cummulative, and demoing the last part to the TA is sufficient for receiving all points.  If you think you will fail to complete the entire lab within the lab period, you may demo this part to your TA for partial credit and demo the remaining parts at the beginning of your next lab session.</strong></p>
+
+
+
+
+<hr>
+<h2>Part 2. Timer and Interrupt based Clock Program</h2>
+
+<p><strong>Requirements</strong> - Refactor your code from Part 1 so that it does not use the wait_ms() function, but instead uses the interrupts.</p>
+
+
+<p>There are two C macros named CLOCK_COUNT and CHECK_COUNT that you should also define, based on your understanding of the prelab. They determine the interrupt periods in timer increments for updating the clock and checking push buttons, respectively.</p>
+
+<p>As a reminder from lecture, each timer has its own prescalor.  A prescalor of 1024 means that the timer increments every 1024 system clock cycles; The timer is pre-scaled (slowed down) by a factor of 1024. The AVR Atmega128 microcontroller runs at a frequency of 16 MHz (16,000,000 Hz). You are to use the timer's interrupts to provide the trigger for your clock incrementing logic as well as for checking on push button status.</p>
+
+<p><strong>If you have completed this section of the lab within the first hour of lab, move on to Part 3.  The parts of the lab are cummulative, and demoing the last part to the TA is sufficient for receiving all points.  If you think you will fail to complete the entire lab within the lab period, you may demo this part to your TA for partial credit and demo the remaining parts at the beginning of your next lab session.</strong></p>
+
+
+<hr>
+<h2>Part 3. Debugging the Clock Program</h2>
+
+<p><strong>Requirements</strong> - Learn how to debug your program.  This includes: creating watches, looking of the value of a variable, setting breakpoint, and stepping over lines of code.  Additionally, you'll want to familiarize yourself with other features of AVR Studio, such as the IO View, Memory and Register windows, and Disassembly window.
+
+<p><strong>Background Information</strong> - ATMEL has integrated logic that complies with IEEE 1149.1 "Standard Test Access Port and Boundary-Scan Architecture", which is commonly referred to as JTAG (Joint Action Test Group). This interface provides access to the on-chip debugging (OCD) circuitry of the ATMega128.  More details on the ATMega128 support for JTAG can be found on page 252 of the <a href="../../resources/docs/doc2467.pdf">ATmega128 Datasheet</a>.  Useful information regarding the JTAGICE mkII and the difference between on-chip debugging (OCD) and emulation are in this <a href="http://support.atmel.no/knowledgebase/avrstudiohelp/mergedProjects/JTAGICEmkII/mkII/Html/JTAGICE_mkII_Introduction.htm">JTAGICE mkII Introduction</a>.  OCD is a powerful tool, and it allows you to view the contents of all memory, even alter memory, debug the processor, and many other useful tasks.
+
+<h3>Debugging: The Guided Tour</h3>
+
+<p>On-chip debugging requires a constant connect between your computer and the processor via the JTAGICE mkII (blue box).  To start debugging your program, go to the Debug menu and select "Start Debugging and Break" (Alt+F5).  If prompted, make sure to selected the JTAGICE mkII as the debugger (not the simulator).</p>
+
+<p><strong>Common Mistakes</strong> - AVR Studio detects the JTAGICE mkII when the program launches; You will need to restart AVR Studio if you forgot to connect the JTAGICE mkII, switched JTAGICE mkIIs, or forgot to turn the power on to the JTAGICE mkII. Additionally, if debugging very feels slow, you can increase the communication speed between the processor and the JTAGICE mkII in your projects settings as shown below:</p>
+
+<p><a href="images/jtag_clock.png"><img src="images/jtag_clock.png" width=300/></a></p>
+
+<p>After starting a debug session, there will be an short delay as the
+software and hardware are prepared for the debugging session.  A yellow arrow will appear at the start of your main method and more toolbar buttons will become available.</p>
+
+<h3>Adding break points, Step Into, Step Out, Step Over</h3>
+
+<p>Start by stepping through your program one instruction at a time using the Step Over button (F10).  When you come to a function call, you can enter the function by using the Step Into button.  Stepping out of a function returns to the calling function and breaks.  Experiment with these buttons to increase your understanding</p>
+
+<p><a href="images/step_toolbar.png"><img src="images/step_toolbar.png" width=800/></a></p>
+
+<p>Break points are useful if you know the specific section of code that needs to be debugged.  To add a break point to your program, simply click on the grey margin to the left of your source code.  A red circle will appear indicating a break point has been added.  You can toggle the break point by clicking on it again.</p>
+
+<p><a href="images/breakpoint.png"><img src="images/breakpoint.png" width=300/></a></p>
+
+<p>Place a break point somewhere in your program, then click the Continue button (the green arrow).  The processor will run your program until it encounters your break point</p>
+
+<h3>Inspecting Variables and the Watch Window</h3>
+
+<p>While the program execution is paused (the yellow arrow is to the left of your code), you can inspect the current state of all variables.  Simply hover your mouse over a variable name to show its value.</p>
+
+<p>Watches are used to monitor the value of variables in your code.  AVR Studio also allows you to create custom quick watches, which allow you to evaluate any expression.</p>
+
+<p>To add a watch, simply right click on a variable name and select "Add Watch".  The variable and its value will appear in the watch window.  You can even edit the value of the variable in the watch window.  Experiment with adding watches, quick watches, and peaking at variable values while you step through your code to increase your understanding.</p>
+
+<p><a href="images/watch.png"><img src="images/watch.png" width=300/></a></p>
+
+<h3>IO View, Processor View, Memory and Register windows, and Disassembly window</h3>
+
+<p>Take time to familiarize yourself with the other debugging features of AVR Studio by exploring the following toolbar icons:</p>
+
+<p><img src="images/toolbar.png" width=459/></p>
+
+<ul>
+  <li>I/O View - The IO View organizes all of the IO and Extended IO registers and allows you to view their current state.</li> 
+  <li>Memory Window - There are four memory windows, allowing you to explore four locations in memory at the same time.  The memory window lists the address on the left column.  The middle column shows the memory in hexidecimal.  The column on the right shows the contents of the memory as ASCII characters.  Try to find one of your integer variables in the memory to notice the byte ordering of the system.  Does the system implement big-endian or little-endian byte ordering?</li>
+  <li>Disassembly Window - Shows the assembly code of your program.  Assembly instructions have a one-to-one correspondence with machine code.  The address of the assembly instruction in Program Memory is listed on the left, followed by a description of the assembly instruction.  This window will become important for your understanding when we begin studying the AVR assembly language.</li>
+  <li>Processor View - Shows information about the processor, such as the current stack pointer, current program counter, a cycle counter, and the value of all 32 registers.</li>  
+</ul>
+
+<hr>
+<p><strong>Demo your interrupt based clock program to your TA.  Prove to the TA that you have mastered basic debugging skills.</strong></p>
+
+
+<hr>
+<h2>Cautions</h2>
+                
+<p>Never leave a powered-down JTAGICE mkII connected to a powered robot - current may 
+leak from the unit and result in damage to the emulator.  Try to leave the blue JTAGICE 
+mkII box powered on at all times.</p>
+
+<p>Turn the power to the Cerebot board and iRobot off before charging.  The Cerebot 
+board consumes power and the battery will not charge if the robot is in full_mode (which 
+it enters after calling oi_init, turing the power LED yellow).  The robot is charging 
+when the robot's power LED is pulsing red and both green LEDS on the dock are lit.</p>
+
+
+<h2>Reference Files</h2>
+
+<table class="gray" cellpadding="0" cellspacing="0" width="500">
+  <thead>
+    <th>Files</th>
+    <th>Description</th>
+  </thead>
+  </tbody>
+	<tr>
+	  <td>(doc2467) <a href="../../resources/docs/doc2467.pdf">ATmega128 Datasheet</a></td>
+	  <td>Information about the ATmega128 Processor</td>
+	</tr>
+    <tr>
+      <td><a href="http://www.cplusplus.com/reference/clibrary/cstdio/printf/">Documentation on printf</a></td>
+      <td>Documentation for the lprintf and printf function.</td>
+    </tr>
+    <tr>
+      <td><a href="lab_eval.doc">Lab Evaluation Form</a></td>
+      <td>Evaluation form for Lab</td>
+    </tr>
+    <tr> 
+      <td><a href="https://spreadsheets.google.com/viewform?hl=en&formkey=dDBwV3J1UkxJdnZfTEtZV2NKSzFwU1E6MQ#gid=0">Online Feedback Form</a></td>
+      <td>Tell us what you think of the lab (feedback forms)</td>
+    </tr>
+  </tbody>
+</table>
+
+                    </section>
+ 				</article> 
+			</section>
+		</section>
+	</article> 
+    
+<!-- FOOTER -->
+	<footer class="grids-24"> 
+		<section id="footer" class="grid-24"> 
+			<section class="grid-3 first"> 
+				<h1><img alt="Iowa State University" src="../../css/isu-footer-logo.png"></h1> 
+			</section> 
+			<section class="grid-17"> 
+				<p> 
+					Department of Electrical and Computer Engineering 
+				</p> 
+				<p> 
+					Copyright &copy; 2011, Iowa State University of Science and Technology.
+					All rights reserved. 
+                </p>
+                <p>
+                	Page last updated on 
+                    7/3/2012 10:51:46 AM
+				</p> 
+			</section>  
+		</section> 
+	</footer>
+ 
+</body>
+
+<!-- Mirrored from class.ece.iastate.edu/cpre288/labs/Lab4/index.asp by HTTrack Website Copier/3.x [XR&CO'2010], Wed, 12 Dec 2012 08:16:46 GMT -->
+</html>

@@ -1,0 +1,39 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td width="600">The next state computation can be accomplished a number of ways, but the most common way is with a case statement. The only real requirement is that you specify a nextstate for each possible combination of current state and input.
+				<p>For example, using the <a href="javascript:parent.gotoScreen('05','159',1)">FSM example</a> from Chapter 5, here is the state transition table,</p>
+				<p></p>
+				<center>
+					<img src="images/v0713g1.gif" height="153" width="190"></center>
+				<p>and here is a case statement which would implement it:</p>
+				<p></p>
+				<pre>
+            case (state)
+        `A:     next = din ? `C : `B;
+        `B:     next = din ? `B : `C;
+        `C:     next = `A;
+            endcase
+</pre>
+				In this example, we have used 3 states but we have not indicated what the state encoding is. It requires at least 2 bits to encode 3 states, so we have at least one bit combination unused. It would be safest to code this using a default in the case statement:
+				<p></p>
+				<pre>
+            case (state)
+        `A:      next = din ? `C : `B;
+        `B:      next = din ? `B : `C;
+        `C:      next = `A;
+        default: next = 1'bx;
+            endcase
+</pre>
+				Note that by assigning an x value to the nextstate, logic synthesis (i.e. Synopsys) will treat that as a real don't care, and will not synthesize logic for that case.</td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

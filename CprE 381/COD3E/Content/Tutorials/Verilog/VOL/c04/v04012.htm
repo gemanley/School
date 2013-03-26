@@ -1,0 +1,45 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td width="600"><a href="javascript:parent.goGlossHash('#netlist')"><font color="#B22222">Netlists</font></a></font> are just Verilog models which do not have any continuous assignments or procedural blocks in them. For example, the following is a netlist:</FONT>
+					<p></p>
+					<pre>
+module DEC1OF8 (X0B, X1B, X2B, X3B, X4B, X5B, X6B, X7B, SL0, SL1, SL2, ENB);
+
+    output X0B, X1B, X2B, X3B, X4B, X5B, X6B, X7B;
+    input  SL0, SL1, SL2,                            // select signals
+           ENB;                                      // enable (low active)
+
+//Module Description
+    not                                              // invert SL0-SL2,
+        N1 (sl0b, SL0),                              //     &amp; ENB
+        N2 (sl1b, SL1),
+        N3 (sl2b, SL2),
+        N4 (enbb, ENB);
+    nand                                             // select outputs
+        NA1 (X0B, sl2b, sl1b, sl0b, enbb),           //     (low active)
+        NA2 (X1B, sl2b, sl1b, SL0, enbb),
+        NA3 (X2B, sl2b, SL1, sl0b, enbb),
+        NA4 (X3B, sl2b, SL1, SL0, enbb),
+        NA5 (X4B, SL2, sl1b, sl0b, enbb),
+        NA6 (X5B, SL2, sl1b, SL0, enbb),
+        NA7 (X6B, SL2, SL1, sl0b, enbb),
+        NA8 (X7B, SL2, SL1, SL0, enbb);
+endmodule
+</pre>
+					The above netlist has only primitives in it, but it is quite common for a netlist to have a combintation of primitive and other module instantiations.
+					<p>Netlists are most often used in Verilog when simulating the output of logic synthesis. They are also used for timing simulation, and there are additional Verilog features which allow you to specify the timing delays in great detail. See the specify block discussion in Chapter 6.</p>
+				</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

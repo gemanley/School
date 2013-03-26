@@ -1,0 +1,30 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body onload=" parent.initBtnMchMA(6);" bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td><b>Which of the following statements are legal?</b>
+					<p></p>
+					<form>
+						<input type="checkbox" name="A" value="A"> <font color="#4B0082"><b>1. wire aBc;</b></font><br>
+						<input type="checkbox" name="B" value="B"> 2. wire \reg\;<br>
+						<input type="checkbox" name="C" value="C"> <font color="#4B0082"><b>3. wire ABC;</b></font><br>
+						<input type="checkbox" name="D" value="D"> <font color="#4B0082"><b>4. wire abc1;</b></font><br>
+						<input type="checkbox" name="E" value="E"> 5. wire 1abc;<br>
+						<input type="checkbox" name="F" value="F"> 6. wire $abc1;
+						<p></p>
+					</form>
+					<p><b>Statements 2, 5, and 6 are illegal. Statement 2 is illegal because an escaped identifier must end with space. So the &quot;;&quot; is part of the identifier. Statements 5 and 6 are illegal because the first character of an identifier can't be numeric or a &quot;$&quot;.</b></p>
+					<p>To review content related to this question see <a href="javascript:parent.gotoScreen('02','042',1)">Lexical Conventions: Tokens: Identifiers</a>.</B></p>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

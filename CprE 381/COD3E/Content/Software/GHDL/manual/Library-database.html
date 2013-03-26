@@ -1,0 +1,23 @@
+<html lang="en">
+
+	<head>
+		<title>GHDL guide</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+		<meta name="description" content="GHDL guide">
+		<meta name="generator" content="makeinfo 4.1">
+		<link href="http://texinfo.org/" rel="generator-home">
+		<link href="../../../resources/base_style.css" rel="stylesheet" type="text/css" media="all">
+	</head>
+
+	<body>
+		<p>Node:<a name="Library%20database">Library database</a>, Next:<a href="VHDL-files-format.html#VHDL%20files%20format" rel="next">VHDL files format</a>, Previous:<a href="Source-representation.html#Source%20representation" rel="previous">Source representation</a>, Up:<a href="GHDL-implementation-of-VHDL.html#GHDL%20implementation%20of%20VHDL" rel="up">GHDL implementation of VHDL</a></p>
+		<hr>
+		<br>
+		<h3>Library database</h3>
+		<p>Each design unit analyzed is placed into a design library. By default, the name of this design library is <code>work</code>; however, this can be changed with the <code>--work=NAME</code> option of GHDL.</p>
+		<p>To keep the list of design units in a design library, GHDL creates library files. The name of these files is <code>NAME-objVER.cf</code>, where <var>NAME</var> is the name of the library, and <var>VER</var> the VHDL version (87 or 93) used to analyze the design units.</p>
+		<p>You don't have to know how to read a library file. You can display it using the <code>-d</code> of <code>ghdl</code>. The file contains the name of the design units, as well as the location and the dependences.</p>
+		<p>The format may change with the next version of GHDL.</p>
+	</body>
+
+</html>

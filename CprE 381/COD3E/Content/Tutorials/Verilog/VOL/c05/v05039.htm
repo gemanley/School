@@ -1,0 +1,36 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>There is a <a href="javascript:parent.goGlossHash('#levelsen')"><font color="#B22222">level-sensitive event control</font></a> called <b>wait</b>. This is written as <tt>
+						<dl>
+							<dd>wait (expression) 
+								<statement>
+						</dl>
+					</tt>When the <a href="javascript:parent.goGlossHash('#procounter')"><font color="#B22222">program counter</font></a> reaches this event control, the expression is evaluated, and, if false, then execution is suspended until the expression becomes true. If the expression is true when the statement is reached, then the wait has no effect, and execution proceeds to the controlled statement.
+					<p>This event control is a convenience, since you can achieve the same effect using a combination of the other controls. For example,</p>
+					<p><tt></tt></p>
+					<dl>
+						<dd>wait (f(x, y, z)) s1;
+							<p></p>
+					</dl>
+					</TT>is equivalent to
+					<p><tt></tt></p>
+					<dl>
+						<dd>while (!f(x, y, z)) @(x or y or z) ;<br>
+						<dd>s1;
+							<p></p>
+					</dl>
+					</TT>Again, the &quot;<u>while</u>&quot; statement is explained under Loops later in this chapter.</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

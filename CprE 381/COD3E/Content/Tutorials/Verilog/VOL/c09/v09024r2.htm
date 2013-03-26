@@ -1,0 +1,53 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			Because VCS is a compiler, the compile phase is distinct from the simulation phase. The same information about the user-defined system tasks and functions that is put into veriusertfs for Verilog-XL is simply read from a file. The file, called a <b>.tab</b> file, is just a table, with one entry per line.
+			<pre>
+<b>hello.tab</b>
+
+$hello   call=helloWorldFunction
+
+In general, the table entries look like this: 
+
+$
+				
+				
+				<name>
+				
+				
+				 [call=
+				
+				
+				<f>
+				
+				
+				] [check=
+				
+				
+				<f>
+				
+				
+				] [data=n] [misc=
+				
+				
+				<f>
+				
+				
+				] [size=n]
+</pre>
+			The fields are the same as described for the veriusertfs table, except that the size entry is a number, not a routine to return the number. Note that none of these routines get called at compile time, so they do not have to be linked with the compiler. The check routine is called before simulation begins at time 0, but this is at simulation time, not compile time.
+			<p>When the compiler is run, the table file is provided as a command-line argument.</p>
+			<pre>
+VCS ex_hello.v -P hello.tab
+</pre>
+		</table>
+	</body>
+
+</html>

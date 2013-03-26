@@ -1,0 +1,28 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td valign="top" width="600">
+				<center>
+					<img src="images/v0733g1.gif" height="221" width="440">
+					<p></p>
+				</center>
+				Another class of race condition occurs when a data value is changed in one process and a change on that data value is waited on in another process. For example, the following code has a race between the change of dff1 in one process and the wait for its change in the other:
+				<p></p>
+				<pre>
+    always@(posedge clock)          always@(posedge clock) begin
+       diff1 = #1 in;                  out = #1 diff1;
+                                       @(diff1);
+                                    end
+</pre>
+				This is a problem because event controls are part of executable statements, and events are temporal. If the event occurs before a process starts waiting for it, the event will be missed, and the waiting process will be stalled until the next such event occurs.</td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

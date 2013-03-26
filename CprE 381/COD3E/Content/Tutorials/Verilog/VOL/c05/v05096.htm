@@ -1,0 +1,75 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>If either part of the <a href="javascript:parent.goGlossHash('#ifstate')"><font color="#B22222">if statement</font></a> is intended to be null, a semi-colon is used to indicate that there is a null statement, like this:
+					<p></p>
+				</td>
+			</tr>
+		</table>
+		<table width="600">
+			<tr>
+				<td valign="top" width="300">
+					<pre>
+     if (control)
+         ;
+     else
+         x = f(y);
+</pre>
+				</td>
+				<td valign="top" width="300">
+					<pre>
+     if (control)
+         x = g(y);
+     else
+         ;
+</pre>
+				</td>
+			</tr>
+		</table>
+		<table width="600">
+			<tr>
+				<td>While a null statement in the else part is silly, since you would just leave out the else entirely, a null if part can be useful. Consider
+					<p></p>
+				</td>
+			</tr>
+		</table>
+		<table width="600">
+			<tr>
+				<td valign="top" width="300">
+					<pre>
+     if (control != 1)
+         $display(&quot;screwed up here&quot;);
+</pre>
+				</td>
+				<td valign="top" width="300">
+					<pre>
+     if (control == 1)
+        ;
+     else
+        $display(&quot;screwed up here&quot;);
+</pre>
+				</td>
+			</tr>
+		</table>
+		<table width="600">
+			<tr>
+				<td>In the first case, if control is <tt>x</tt> or <tt>z</tt>, the error message will not be printed, because the expression evaluates to <tt>x</tt>, (<tt>x != 1 is x</tt>). In the second case, the error message will be printed in all cases except if control is 1.
+					<p>Note that the <tt>===</tt> and <tt>!==</tt> operators are provided as another means of solving the same problem. The <tt>!==</tt> operator could be used to make this code more natural:</p>
+					<p></p>
+					<pre>
+    if (control !== 1)
+        $display(&quot;screwed up here&quot;);
+</pre>
+					This will do what you want.</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

@@ -1,0 +1,43 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>Here is an example of two processes which are concurrent and independent.
+					<p></p>
+				</td>
+			</tr>
+		</table>
+		<pre><code>initial begin                            initial begin
+    r1 = f(x);                              s1 = f(a);
+#d1 r2 = f(y);                           #d2 s2 = f(b);
+end                                      end
+</code></pre>
+		<p></p>
+		<table width="600">
+			<tr>
+				<td>These two processes both begin at time 0, but because the delays d1 and d2 may be variable, you cannot tell which one will finish first without knowing the values of d1 and d2 at the time of execution. They are independent because neither one affects the execution of the other.
+					<p>We could decouple these two processes even more strongly by using a wait event control, as follows.</p>
+					<p></p>
+				</td>
+			</tr>
+		</table>
+		<pre><code>initial begin                            initial begin
+    r1 = f(x);                              s1 = f(a);
+wait(x!=y);                              #d2 ;
+    r2 = f(y);                              s2 = f(b);
+end                                      end</code></pre>
+		<p></p>
+		<table width="600">
+			<tr>
+				<td>Here, you cannot determine when the r2 assignment will happen without determining when x and y will have different values.</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

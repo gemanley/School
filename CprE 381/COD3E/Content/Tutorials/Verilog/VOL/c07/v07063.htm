@@ -1,0 +1,44 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td width="600">Pipelines, queues, and FIFOs are common logic structures which are all related, in the sense that data moves from one storage location to another synchronously, based on a strobe signal, usually a clock.
+				<p>For this discussion, we will talk about a simple pipeline, but the issues covered apply equally to the other types of structures.</p>
+				<p></p>
+				<center>
+					<img src="images/v0721g1.gif" height="105" width="433"></center>
+				<p></p>
+				<pre>
+module pipeline (out, in, clock);
+    output out;
+    input  in, clock;
+    reg    out, pipe[1:2];
+    
+    always @(posedge clock) begin
+        out = pipe[2];
+        pipe[2] = pipe[1];
+        pipe[1] = in;
+    end
+endmodule
+</pre>
+				This code works fine. The only potential problem is that out changes value on the clock edge, so whatever takes it as an input may get the wrong value.
+				<p>A better version would be to use a non-blocking assign:</p>
+				<pre>
+    always @(posedge clock) begin
+        out 
+					
+					
+					<= pipe[2]; pipe[2] <= pipe[1];        pipe[1] <= in;    end</PRE>Note that with the non-blocking assign, the order of the assignment statements is irrelevent. <p><center><A HREF="JavaScript:parent.dispWindow('v07063r1.htm','Variation')"><img src="images/vvariat.gif" width="91" height="39" border="0"></a></center></TABLE></FONT></BODY></HTML>>>
+					
+					
+				</pre>
+			</td>
+		</table>
+	</body>
+
+</html>

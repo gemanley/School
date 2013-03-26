@@ -1,0 +1,800 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title>Verilog - Chapter 1</title>
+	</head>
+	<script language="JavaScript">
+function getCookieData(label) {
+	var labelLen = label.length
+	var cLen = document.cookie.length
+	var i = 0
+	while (i < cLen) {
+		var j = i + labelLen
+		if (document.cookie.substring(i,j) == label) {
+			var cEnd = document.cookie.indexOf(";",j)
+			if (cEnd == -1) { cEnd = document.cookie.length }
+			return unescape(document.cookie.substring(j+1,cEnd))
+		}
+		i++
+	}
+	return "#";
+}
+	</script>
+
+	<body bgcolor="white"
+	      onload="var x=(getCookieData('glossHash')); location.hash=x">
+				<font size="6" color="#4B0082">
+			<center>
+				<b>GLOSSARY</b></center>
+		</font>
+		<p></p>
+		<dl>
+			<a name="a"></a><u><b>A</b></u>
+				<p><a name="accroutines"></a>
+					<dt>ACC routines
+					<dd>utility routines provided to access simulation data within a model from a user-provided C routine.
+				</p>
+				<p><a name="always"></a>
+					<dt>always block
+					<dd>a procedural block which loops continuously.
+				</p>
+				<p>
+					<dt>ambiguous signal strength
+					<dd>a signal with multiple strength levels.
+				</p>
+				<p>
+					<dt>assertion check
+					<dd>a bit of Verilog code which checks for a logical condition which should always be true (or false).
+				</p>
+				<p><a name="astrength"></a>
+					<dt>ambiguous signal strength
+					<dd>a signal with multiple strength levels.
+				</p>
+				<p><a name="asynch"></a>
+					<dt>asynchronous
+					<dd>events or processes which are not ordered with respect to each other.
+				</p>
+
+				<a name="b"></a><u><b>B</b></u>
+				<p><a name="biprimitives"></a>
+					<dt>bi-directional primitive
+					<dd>one of tran, rtran, tranif, and rtranif.
+				</p>
+				<p><a name="bitselect"></a>
+					<dt>bit-select
+					<dd>an operator which produces a single bit from a vector.
+				</p>
+				<p><a name="blockas"></a>
+					<dt>blocking assignment
+					<dd>a procedural assignment. This is the normal assignment statement with no special timing characteristics.
+				</p>
+				<p>
+					<dt>breakpoint
+					<dd>a specified point in model execution at which execution should stop. Breakpoints may be specified by time, event, or execution of a particular statement.
+				</p>
+
+				<a name="c"></a><u><b>C</b></u>
+				<p><a name="callrout"></a>
+					<dt>call routine
+					<dd>a user-provided routine which is called when the user-defined system task or function is executed.
+				</p>
+				<p>
+					<dt>calling reason
+					<dd>a parameter given to a user-provided routine at the time of call to indicate why it is being called.
+				</p>
+				<p><a name="casestate"></a>
+					<dt>case statement
+					<dd>a selection statement which executes one of a set of statements, based on the value of a case selector.
+				</p>
+				<p>
+					<dt>casex statement
+					<dd>a variation of case which allows x or z bits in the selector or the case expression to be ignored.
+				</p>
+				<p>
+					<dt>casez statement
+					<dd>a variation of case which allows z bits in the selector or the case expression to be ignored.
+				</p>
+				<p><a name="checkrout"></a>
+					<dt>check routine
+					<dd>a user-provided routine which is called when the user-defined system task or function is compiled.
+				</p>
+				<p><a name="checkpoint"></a>
+					<dt>checkpoint
+					<dd>a snap-shot of the execution image of a model at a given point in time. Checkpoints are done so that simulation may be resumed from the checkpoint at a later time.
+				</p>
+				<p><a name="child"></a>
+					<dt>child module
+					<dd>a module which is instantiated by another (parent) module.
+				</p>
+				<p><a name="cli"></a>
+					<dt>CLI
+					<dd>command line interface. Each simulator has its own CLI, often with different command languages.
+				</p>
+				<p><a name="clock"></a>
+					<dt>clock
+					<dd>a periodic signal used to synchronize logic. Clocks are not special signals in Verilog models, but are just ordinary nets or registers whose values change regularly.
+				</p>
+				<p><a name="comboudp"></a>
+					<dt>combinational UDP
+					<dd>a user-defined primitive whose output is a state-less function of its input ports.
+				</p>
+				<p><a name="compilation"></a>
+					<dt>compilation
+					<dd>the process of tranforming the Verilog source statements of a model into an executable (or interpretable) image.
+				</p>
+				<p><a name="compiler"></a>
+					<dt>compiler
+					<dd>the program which transforms the model's Verilog source into an executable image, usually an object file.
+				</p>
+				<p><a name="concaten"></a>
+					<dt>concatenation
+					<dd>an operation which creates a vector whose width is the sum of its operands' widths.
+				</p>
+				<p><a name="concur"></a>
+					<dt>concurrent
+					<dd>events or processes which may occur or progress at the same time.
+				</p>
+				<p>
+					<dt>consistency check
+					<dd>see assertion check.
+				</p>
+				<p><a name="continuous"></a>
+					<dt>continuous assignment
+					<dd>an assignment in declarative code. Continuous assignments are introduced by the assign keyword. The right-hand side expression of the continuous assignment is evaluated as a result of propagation of its operands.
+				</p>
+				<p><a name="crossmod"></a>
+					<dt>cross-module reference
+					<dd>a reference to a net, register, task or function in another module instance. This is also known as a hierarchical reference. Abbreviated XMR.
+				</p>
+
+				<a name="d"></a><u><b>D</b></u>
+				<p><a name="dataevent"></a>
+					<dt>data event
+					<dd>the event which denotes one end-point of a timing check interval. The other event is the reference event.
+				</p>
+				<p><a name="deassign"></a>
+					<dt>deassign
+					<dd>the statement which disables, or releases, a procedural continuous assignment.
+				</p>
+				<p><a name="dcode"></a>
+					<dt>declarative code
+					<dd>Verilog statements which are executed as a result of signal propagation. Continuous assignments, primitive, and module instances are declarative.
+				</p>
+				<p><a name="declaredev"></a>
+					<dt>declared event
+					<dd>an event variable which can be set under program control.
+				</p>
+				<p>
+					<dt>default nettype
+					<dd>the net type used for implicitly defined nets. This is set with the `default_nettype compiler directive.
+				</p>
+				<p><a name="defparam"></a>
+					<dt>defparam
+					<dd>a statement that assigns a non-default value to a parameter for a given module instance.
+				</p>
+				<p><a name="delay"></a>
+					<dt>delay
+					<dd>a construct which indicates the passage of simulation time between two events. Delays may occur in procedural code or declarative code.
+				</p>
+				<p><a name="delayexp"></a>
+					<dt>delay expression
+					<dd>an expression whose value is used for a time delay.
+				</p>
+				<p>
+					<dt>design entry
+					<dd>the process of creating the Verilog source representation of a model. Design entry can be accomplished by either writing source statements using a text editor, or by using a special-purpose program which converts drawn symbols into Verilog source.
+				</p>
+				<p><a name="disablesta"></a>
+					<dt>disable statement
+					<dd>statement used to stop execution of a task or named block.
+				</p>
+				<p><a name="didelay"></a>
+					<dt>distributed delay
+					<dd>a delay attached to a primitive, continuous assignment, or procedural code. Distributed delays are so-called because a path from an input to an output may contain many such delays, the sum of which make up the overall delay.
+				</p>
+				<p><a name="driver"></a>
+					<dt>driver
+					<dd>a model component which can cause a new value to be put onto a net. Drivers can be output ports of module and primitive instances, or continuous assignments.
+				</p>
+
+				<a name="e"></a><u><b>E</b></u>
+				<p><a name="edgeeve"></a>
+					<dt>edge event
+					<dd>event which occurs on the rising or falling edge of a signal. There are two edge events: posedge and negedge.
+				</p>
+				<p>
+					<dt>edge-sensitive module path
+					<dd>a module path which begins with an edge transition (posedge or negedge).
+				</p>
+				<p>
+					<dt>edge-sensitive sequential UDP
+					<dd>a sequential user-defined primitive which changes state (and output value) based on input port transitions.
+				</p>
+				<p>
+					<dt>emacs-mode
+					<dd>an addition to the Emacs editor which enables context-sensitive text entry.
+				</p>
+				<p><a name="errorlimit"></a>
+					<dt>error limit
+					<dd>a time value which delimits an error interval for timing checks. If the data event occurs before (or after) the error limit (depending on the particular timing check), then an error is signaled.
+				</p>
+				<p><a name="eidentif"></a>
+					<dt>escaped identifier
+					<dd>an identifier which is preceded by a \ (backslash). Such an identifier may contain any character in its name,which is terminated only by the next white space.
+				</p>
+				<p><a name="event"></a>
+					<dt>event
+					<dd>an action or set of actions which take place at a single point in simulated time.
+				</p>
+				<p><a name="eventcon"></a>
+					<dt>event control
+					<dd>an event which must occur before execution can proceed to the next statement. The statement which follows the event control is the &quot;controlled&quot; statement.
+				</p>
+				<p><a name="eventexp"></a>
+					<dt>event expression
+					<dd>an expression which may be in an event control. The only operator allowed in an event expression is event or.
+				</p>
+				<p><a name="eventop"></a>
+					<dt>event or operator
+					<dd>the operator used in event expressions to make a compound event.
+				</p>
+				<p>
+					<dt>explicit finite-state machine
+					<dd>code which implements a finite-state machine using a separate state transition function and state variable. Explicit state machine code is usually implemented using a case statement.
+				</p>
+
+				<a name="f"></a><u><b>F</b></u>
+				<p>
+					<dt>finite-state machine
+					<dd>sequential logic, usually implemented with a case construct.
+				</p>
+				<p><a name="forsta"></a>
+					<dt>for statement
+					<dd>a general looping statement, similar to the for statement in C.
+				</p>
+				<p>
+					<dt>force statement
+					<dd>the strongest procedural continuous assign. Deactivated by a corresponding release statement.
+				</p>
+				<p><a name="foreversta"></a>
+					<dt>forever statement
+					<dd>a special case of a looping statement which does not terminate.
+				</p>
+				<p><a name="formatstring"></a>
+					<dt>format string
+					<dd>a specification of how output should be printed.
+				</p>
+				<p><a name="function"></a>
+					<dt>function
+					<dd>a set of procedural statements whose execution results in a single value. Functions may be used as operands in any expression.
+				</p>
+
+				<a name="g"></a><u><b>G</b></u>
+				<p></p>
+
+				<a name="h"></a><u><b>H</b></u>
+				<p>
+					<dt>hierarchical reference
+					<dd>a fully-qualified name which uniquely identifies an entity in a model. This is another name for a cross-module reference.
+				</p>
+				<p><a name="hierarchy"></a>
+					<dt>hierarchy
+					<dd>a tree structure of module instances which starts at a top-level module and proceeds to leaf modules.
+				</p>
+
+				<a name="i"></a><u><b>I</b></u>
+				<p><a name="ifstate"></a>
+					<dt>if statement
+					<dd>the standard conditional statement.
+				</p>
+				<p>
+					<dt>implicit finite-state machine
+					<dd>code which implements a finite-state machine using a sequence of procedural statements with time or event controls to manage the timing.
+				</p>
+				<p>
+					<dt>implicit net
+					<dd>a net which is used in a port expression in a module instance without a previous declaration. It will be defined using the default nettype.
+				</p>
+				<p><a name="incremental"></a>
+					<dt>incremental compilation
+					<dd>the process of compiling a model in which only the parts of the model which have been changed are transformed, being merged with the already transformed parts which did not change. This is a problematic capability in Verilog.
+				</p>
+				<p>
+					<dt>implicit net
+					<dd>a net which is used in a port expression in a module instance without a previous declaration. It will be defined using the default nettype.
+				</p>
+				<p><a name="indelays"></a>
+					<dt>inertial delay
+					<dd>a model of signal propagation through devices which have delays in which a pulse shorter than the delay does not appear on the output. This is the delay model used in Verilog, and it applies to all declarative code delays, including continuous assignments.
+				</p>
+				<p><a name="initial"></a>
+					<dt>initial block
+					<dd>a procedural block which executes only once.
+				</p>
+				<p><a name="inout"></a>
+					<dt>inout port
+					<dd>a bi-directional port.
+				</p>
+				<p><a name="inport"></a>
+					<dt>input port
+					<dd>a port where signal values go from parent to child module.
+				</p>
+				<p><a name="instance"></a>
+					<dt>instance
+					<dd>an embodiment of a module in the overall Verilog model.
+				</p>
+				<p><a name="instantiation"></a>
+					<dt>instantiation
+					<dd>the statement which creates a module instance.
+				</p>
+				<p><a name="integer"></a>
+					<dt>integer
+					<dd>a type of register. Integers are signed, 32-bit quantities.
+				</p>
+				<p>
+					<dt>interpreter
+					<dd>a program which simulates a Verilog model by re-analyzing each statement or operation as it is executed. Many Verilog simulators are interpreters.
+				</p>
+				<p><a name="intraassign"></a>
+					<dt>intra-assignment delay
+					<dd>a time delay placed in the middle of an assignment. This causes the right-hand side to be evaluated immediately, but the assignment is not done until after the delay has expired.
+				</p>
+				<p><a name="intraeve"></a>
+					<dt>intra-assignment event control
+					<dd>an event delay placed in the middle of an assignment. This causes the right-hand side to be evaluated immediately, but the assignment is not done until after the event has occured.
+				</p>
+
+				<a name="j"></a><u><b>J</b></u>
+				<p></p>
+
+				<a name="k"></a><u><b>K</b></u>
+				<p></p>
+
+				<a name="l"></a><u><b>L</b></u>
+				<p><a name="latchinf"></a>
+					<dt>latch inferencing
+					<dd>the process of inserting a latch (or register) into a synthesized netlist to realize the logic described by RTL (or behavioral) code.
+				</p>
+				<p><a name="levelsen"></a>
+					<dt>level-sensitive event control
+					<dd>an event control which is satisfied when the argument expression becomes true. The expression is re-evaluated whenever any of its operands changes.
+				</p>
+				<p><a name="libdir"></a>
+					<dt>library directory
+					<dd>a directory which contains modules for use in Verilog models. Each file in a library directory contains just one module, and the file name indicates the module name contained in it.
+				</p>
+				<p><a name="libfile"></a>
+					<dt>library file
+					<dd>a file which contains modules for use in Verilog models. A model which references a library file will have only those modules it references included in the model's execution.
+				</p>
+				<p>
+					<dt>linking
+					<dd>the process of producing an executable image for simulation, including user-provided routines along with the standard simulation library and support routines.
+				</p>
+
+				<a name="m"></a><u><b>M</b></u>
+				<p><a name="macro"></a>
+					<dt>macro
+					<dd>an identifier which has its definition substituted for it textually during compilation. Also called a &quot;source macro&quot;. Macros are created by the `define statement, and their use is always preceded by ` (back-quote).
+				</p>
+				<p><a name="mealymach"></a>
+					<dt>Mealy machine
+					<dd>a finite-state machine which produces outputs as a function of both the current state and the input.
+				</p>
+				<p><a name="memory"></a>
+					<dt>memory
+					<dd>an array of registers. The registers may be scalars or vectors. Memories are singly-dimensioned.
+				</p>
+				<p><a name="miscrout"></a>
+					<dt>misc routine
+					<dd>a user-provided routine which is called when some event occurs which has been enabled by that routine or some other user-provided routine.
+				</p>
+				<p><a name="model"></a>
+					<dt>model
+					<dd>the logic design that a set of Verilog source files describes. This is a generic term which comes from &quot;simulation model&quot;. System and design are often used as synonyms.
+				</p>
+				<p><a name="module"></a>
+					<dt>module
+					<dd>a logical component of a model. Modules have definitions and instances. The definition contains declarative and procedural code sections, net and register declarations, task and function definitions, module instantiations, and port definitions for connecting to other parts of the hierarchy.
+				</p>
+				<p><a name="modulepath"></a>
+					<dt>module path
+					<dd>a relationship between a change on an input port and the corresponding change on an output port. The input port-output port pair is considered the path. The path may be further qualified by particular values on the input or output.
+				</p>
+				<p><a name="modpathdel"></a>
+					<dt>module path delay
+					<dd>the delay associated with a module path. A module path delay is a lumped delay (all of the delay is represented in a single &quot;lump&quot; value), as opposed to distributed delays.
+				</p>
+				<p><a name="mooremach"></a>
+					<dt>Moore machine
+					<dd>a finite-state machine which produces outputs as a function of only the current state.
+				</p>
+				<p>
+					<dt>MOS primitive
+					<dd>one of cmos, rcmos, pmos, rpmos, nmos, or rnmos.
+				</p>
+				<p><a name="multichannel"></a>
+					<dt>multi-channel descriptor
+					<dd>an integer which is a bit-map to the set of open files for output.
+				</p>
+
+				<a name="n"></a><u><b>N</b></u>
+				<p><a name="namedblo"></a>
+					<dt>named block
+					<dd>a sequential or parallel compound statement which has a label attached. Named blocks may have local variables (registers) declared within them, and may be disabled.
+				</p>
+				<p><a name="negedge"></a>
+					<dt>negedge
+					<dd>an edge event which occurs when a transition is made from 1, x, or z to 0.
+				</p>
+				<p><a name="net"></a>
+					<dt>net
+					<dd>an identifier which has a value determined by its drivers. A net may have more than one driver, and zero or more drivers may be active at any given time.
+				</p>
+				<p><a name="netd"></a>
+					<dt>net driver
+					<dd>a declarative construct (continuous assignment, primitive output port, or module instance output port) which causes a value to be placed onto a net.
+				</p>
+				<p><a name="netlist"></a>
+					<dt>netlist
+					<dd>a model which contains only module or primitive instantiations.
+				</p>
+				<p><a name="nonblock"></a>
+					<dt>non-blocking assignment
+					<dd>an assignment which occurs in two parts, the evaluation part and the update part. The evaluation takes place immediately, but the update is deferred until the end of the time step after all other types of events have occured.
+				</p>
+				<p>
+					<dt>notifier
+					<dd>a register which is toggled in the event of a timing check error.
+				</p>
+
+				<a name="o"></a><u><b>O</b></u>
+				<p>
+					<dt>one-hot state encoding
+					<dd>a method of assigning state variable values to states in which only one bit in the state variable is on in any state. For example, three states would have the state values 3'b001, 3'b010, and 3'b100.
+				</p>
+				<p><a name="outport"></a>
+					<dt>output port
+					<dd>a port where signal values go from child module to parent.
+				</p>
+
+				<a name="p"></a><u><b>P</b></u>
+				<p><a name="parablock"></a>
+					<dt>parallel block
+					<dd>a compound statement in which each statement is executed at the same time (in parallel). Parallel blocks are enclosed by fork...join.
+				</p>
+				<p><a name="parameter"></a>
+					<dt>parameter
+					<dd>a run-time constant whose value is determined at compile time. Parameters are useful to change the behavior or structure of different instances of a module.
+				</p>
+				<p><a name="parent"></a>
+					<dt>parent module
+					<dd>a module which instantiates other modules. The instantiated modules are children of this parent.
+				</p>
+				<p><a name="pselect"></a>
+					<dt>part-select
+					<dd>an operator which produces a set of contiguous bits from a vector.
+				</p>
+				<p>
+					<dt>path pulse specparam
+					<dd>a parameter which is used to regulate the propagation of pulses through modules with delays. In general, by using a path pulse parameter, you can prevent short pulses from causing further activity on the output of a module path.
+				</p>
+				<p><a name="pipeline"></a>
+					<dt>pipeline
+					<dd>a set of storage elements (stages) in which the value from each stage is stored in the next stage. Pipelines are usually synchronous, and there may be transformations on the data values between stages (corresponding to combinational logic).
+				</p>
+				<p><a name="pli"></a>
+					<dt>PLI
+					<dd>Programming Language Interface.
+				</p>
+				<p><a name="plitab"></a>
+					<dt>pli.tab
+					<dd>a table used by VCS to indicate to the compiler information about user-provided routines, user-provided system tasks and functions, and how they should be related.
+				</p>
+				<p><a name="port"></a>
+					<dt>port
+					<dd>a connection from the outside into a module (an <dfn>input port</dfn>) or a connection from a module to the outside (an <dfn>output port</dfn>) or a bi-directional connection (an <dfn>inout port</dfn>).
+				</p>
+				<p><a name="pexpression"></a>
+					<dt>port expression
+					<dd>an expression which appears in a port list, either in an instance (the common case) or a definition (the rare case).
+				</p>
+				<p><a name="porttype"></a>
+					<dt>port type
+					<dd>the direction of the port (input, output, or inout).
+				</p>
+				<p><a name="posedge"></a>
+					<dt>posedge
+					<dd>an edge event which occurs when a transition is made from 0, x, or z to 1.
+				</p>
+				<p><a name="primitive"></a>
+					<dt>primitive
+					<dd>a built-in module type. A primitives may be instantiated like any other module, but its definition is pre-determined.
+				</p>
+				<p><a name="procedural"></a>
+					<dt>procedural block
+					<dd>a (compound) statement which makes up a process. The initial and always keywords introduce procedural blocks.
+				</p>
+				<p><a name="pcode"></a>
+					<dt>procedural code
+					<dd>statements which appear inside initial or always blocks, or inside tasks or functions.
+				</p>
+				<p><a name="proconas"></a>
+					<dt>procedural continuous assign
+					<dd>a continuous assignment which can be activated in procedural code. Deactivated with a deassign statement. Also known as a quasi-continuous assign (QCA).
+				</p>
+				<p><a name="process"></a>
+					<dt>process
+					<dd>a set of events which are sequential with respect to each other. Typically, an initial or always block is a process.
+				</p>
+				<p><a name="procounter"></a>
+					<dt>program counter
+					<dd>a &quot;pointer&quot; to the next statement to be executed in a sequential block. There is one program counter for each process in the simulation model.
+				</p>
+				<p><a name="propagation"></a>
+					<dt>propagation
+					<dd>the action of causing declarative code to be executed as the result of a signal (register or net) changing value.
+				</p>
+
+				<a name="q"></a><u><b>Q</b></u>
+				<p><a name="qca"></a>
+					<dt>QCA
+					<dd>abbreviation for quasi-continuous assign.
+				</p>
+				<p><a name="quasiconas"></a>
+					<dt>quasi-continuous assign
+					<dd>see procedural continuous assign.
+				</p>
+
+				<a name="r"></a><u><b>R</b></u>
+				<p><a name="racecond"></a>
+					<dt>race condition
+					<dd>two or more processes which are unordered with respect to each other (or partially ordered) and whose results differ depending on execution order. Race conditions are usually present when a single signal (register or net) is modified in one process and sampled from a different process at the same time.
+				</p>
+				<p><a name="range"></a>
+					<dt>range
+					<dd>the width specification of a vector. The range is in the form of [high-order-bit:low-order-bit].
+				</p>
+				<p><a name="real"></a>
+					<dt>real
+					<dd>a floating-point quantity, 64-bit IEEE format.
+				</p>
+				<p><a name="refevent"></a>
+					<dt>reference event
+					<dd>the event which denotes one end-point of a timing check interval. The other event is the data event.
+				</p>
+				<p><a name="register"></a>
+					<dt>register
+					<dd>an identifier which holds a value. Registers are assigned their values in procedural code.
+				</p>
+				<p><a name="rejlimit"></a>
+					<dt>reject limit
+					<dd>time value which sets a minimum length for a pulse. Any pulse less than this limit will not propagate to the output, but will be ignored.
+				</p>
+				<p><a name="relstate"></a>
+					<dt>release statement
+					<dd>the statement which deactivates a force.
+				</p>
+				<p><a name="rconcat"></a>
+					<dt>repeat concatenate
+					<dd>an operation which creates a vector by repeating its operands multiple times.
+				</p>
+				<p><a name="repeatsta"></a>
+					<dt>repeat statement
+					<dd>a specialized looping statement which causes the loop body to be executed a given number of times.
+				</p>
+				
+				<a name="s"></a><u><b>S</b></u>
+				<p><a name="scalar"></a>
+					<dt>scalar
+					<dd>a single-bit quantity. Both nets and registers may be scalars.
+				</p>
+				<p><a name="seqblock"></a>
+					<dt>sequential block
+					<dd>a compound statement in which each statement is executed in order. Sequential blocks are enclosed by begin...end.
+				</p>
+				<p><a name="sequdp"></a>
+					<dt>sequential UDP
+					<dd>a user-defined primitive whose output is a function of both its input ports and its previous output, or state.
+				</p>
+				<p>
+					<dt>simple module path
+					<dd>a module path whose source is an input port, or bit- or part-select of an input port, or a list of input ports, or bit- or part-selects. The destination is an output port or bit- or part-select of an output port, or a list of them.
+				</p>
+				<p><a name="simulation"></a>
+					<dt>simulation
+					<dd>the execution of a model to reveal its behavior.
+				</p>
+				<p>
+					<dt>simulation history
+					<dd>a trace of the simulation behavior. A simulation history is usually contained in a dumpfile, and produced by the $dumpvars system task or a varient of it.
+				</p>
+				<p><a name="simtime"></a>
+					<dt>simulation time
+					<dd>the value of the central clock in the simulation.
+				</p>
+				<p>
+					<dt>single-input primitive
+					<dd>a primitive which has only one input port and (potentially) more than one output port. The input port is the last in the list. The single-input primitives are not and buf.
+				</p>
+				<p>
+					<dt>single-output primitive
+					<dd>a primitive which has only one output port and (potentially) more than one input port. The output port is the first in the list. The single-output primitives are and, or, xor, nand, nor, and xnor.
+				</p>
+				<p><a name="sconstant"></a>
+					<dt>sized constant
+					<dd>a constant whose width is explicitly specified.
+				</p>
+				<p><a name="sparsemem"></a>
+					<dt>sparse memory
+					<dd>a particular application of the PLI.
+				</p>
+				<p>
+					<dt>specify block
+					<dd>section of a module which supplies detailed timing information about the module.
+				</p>
+				<p><a name="specparam"></a>
+					<dt>specparam
+					<dd>a specparam is a parameter used in specify blocks. Specparams can be modified through the PLI for back-annotation.
+				</p>
+				<p><a name="stateenc"></a>
+					<dt>state encoding
+					<dd>the mapping of state variable values to states. For example, if the state variable is 3 bits wide, and there are 4 states (A, B, C, D), a state encoding would be A - 3'b001, B - 3'b010, C - 3'b011, D - 3'b100.
+				</p>
+				<p><a name="statedep"></a>
+					<dt>state-dependent path
+					<dd>a module path that is qualified by the value of one or more signals. Thus different paths can have the source and sink by being qualified by different states.
+				</p>
+				<p><a name="statemem"></a>
+					<dt>state memory
+					<dd>the location used to hold the state variable.
+				</p>
+				<p><a name="statevar"></a>
+					<dt>state variable
+					<dd>the value which indicates the current state of the state machine. This is also sometimes called the state vector.
+				</p>
+				<p>
+					<dt>strength scalar
+					<dd>a scalar whose value may be one of 120 different values. Strengths are mapped into 0, 1, x, or z, and may be combined to form other strength values. For example, a strong 1 combined with a weak 0 will produce a 1 as a result.
+				</p>
+				<p><a name="sprimitives"></a>
+					<dt>switch primitive
+					<dd>a primitive which is intended to model transistor-level structures. The switch primitives are nmos, pmos, cmos, rnmos, rpmos, and rcmos.
+				</p>
+				<p><a name="sfunction"></a>
+					<dt>system function
+					<dd>a function whose definition is built-in. System functions all begin with &quot;$&quot;.
+				</p>
+				<p><a name="stask"></a>
+					<dt>system task
+					<dd>a task whose definition is built-in. System tasks all begin with &quot;$&quot;.
+				</p>
+
+				<a name="t"></a><u><b>T</b></u>
+				<p><a name="task"></a>
+					<dt>task
+					<dd>a set of procedural statements which are treated as a sub-unit. Tasks may be invoked from other procedural blocks, including other tasks.
+				</p>
+				<p><a name="taskenable"></a>
+					<dt>task enable
+					<dd>the act of invoking a task.
+				</p>
+				<p><a name="tfrout"></a>
+					<dt>TF routines
+					<dd>utility routines provided to access simulation data within a model from a user-provided C routine. These routines primarily deal with nets and registers which appear as arguments to the user-defined system task or function.
+				</p>
+				<p><a name="time"></a>
+					<dt>time
+					<dd>a 64-bit unsigned register. Time registers are used to hold the simulation time, which is a 64-bit positive number.
+				</p>
+				<p><a name="timecon"></a>
+					<dt>time control
+					<dd>a time delay which must occur before execution can proceed to the next statement. The statement which follows the time control is the &quot;controlled&quot; statement.
+				</p>
+				<p><a name="timescale"></a>
+					<dt>time scale
+					<dd>the time unit and precision to be applied to delays. This is a means of providing a physical meaning to the otherwise dimensionless time units of simulation.
+				</p>
+				<p><a name="timeunit"></a>
+					<dt>time unit
+					<dd>the unit for all delays which appear after the `timescale directive.
+				</p>
+				<p><a name="timcheck"></a>
+					<dt>timing check task
+					<dd>a system task which appears in a specify block. Timing check tasks enforce timing constraints on signal change events.
+				</p>
+				<p>
+					<dt>time precision
+					<dd>the minimum unit of accuracy is for delays in the model.
+				</p>
+				<p><a name="transdelay"></a>
+					<dt>transport delay
+					<dd>a model of signal propagation through devices which have delays in which a pulse shorter than the delay appears faithfully on the output. This is not the delay model used in Verilog, though it can be realized using the PLI.
+				</p>
+				<p>
+					<dt>transition event
+					<dd>event which occurs on the change of a signal. Edge events are special cases of transition events.
+				</p>
+				<p>
+					<dt>tri-state primitive
+					<dd>a primitive which can produce a z value on its output. The tri-state primitives are bufif1, bufif0, notif1, and notif0.
+				</p>
+				<p>
+					<dt>two-phase clock
+					<dd>a clock made of two signals. The two signals are usually inverses of each other, with an offset so that consecutive latches triggered with different clock phases will have a margin of safety to prevent unwanted flow-through.
+				</p>
+				
+				<a name="u"></a><u><b>U</b></u>
+				<p><a name="upref"></a>
+					<dt>upward reference
+					<dd>a cross-module reference which is resolved by looking up in the heirarchy to the parent module for resolution. The actual reference target may be found anywhere in the hierarchy except in a descendant of the referencing module instance.
+				</p>
+				<p>
+					<dt>unambiguous signal strength
+					<dd>a signal with a single strength level.
+				</p>
+				<p>
+					<dt>unit-delay model
+					<dd>a model in which all delays have the value 1. Unit delay models are sometimes more efficient to simulate because there are fewer distinct times in which events occur. Their disadvantage is that they do not capture the timing behavior of the design being modelled.
+				</p>
+				<p><a name="userdprim"></a>
+					<dt>user-defined primitive
+					<dd>a primitive defined by means of a truth table.
+				</p>
+
+				<a name="v"></a><u><b>V</b></u>
+				<p><a name="vector"></a>
+					<dt>vector
+					<dd>a multiple-bit quantity. Nets and registers may be vectors. Vectors have only one dimension.
+				</p>
+				<p><a name="veric"></a>
+					<dt>veriuser.c
+					<dd>a C file which contains the veriusertfs table for Verilog-XL.
+				</p>
+				<p><a name="verih"></a>
+					<dt>veriuser.h
+					<dd>a C header file which defines many constants used by PLI routines.
+				</p>
+				<p><a name="veriuse"></a>
+					<dt>veriusertfs
+					<dd>the table used by Verilog-XL to communicate information about user-provided routines, user-provided system tasks and functions, and how they should be related.
+				</p>
+				
+				<a name="w"></a><u><b>W</b></u>
+				<p>
+					<dt>wait event control
+					<dd>wait is the keyword which specifies a level-sensitive event control.
+				</p>
+				<p><a name="waveform"></a>
+					<dt>waveform
+					<dd>a picture of a signal (net or register) value over time. Waveforms can be produced from simulation history files, or directly from the simulation.
+				</p>
+				<p><a name="whilestate"></a>
+					<dt>while statement
+					<dd>a looping statement similar to the while statement in C.
+				</p>
+				
+				<a name="x"></a><u><b>X</b></u>
+				<p><a name="xlalgorithm"></a>
+					<dt>XL algorithm
+					<dd>a method of handling signal changes which occur before a delay has expired. The XL algorithm is faster to simulate, but less accurate than a strict inertial delay.
+				</p>
+				<p><a name="xmr"></a>
+					<dt>XMR
+					<dd>abbrevation for cross-module reference.
+				</p>
+				
+				<a name="y"></a><u><b>Y</b></u>
+				<p></p>
+				
+				<a name="z"></a><u><b>Z</b></u>
+				<p><a name="zerodelay"></a>
+					<dt>zero-delay model
+					<dd>a model in which there are no time delays other than the delays which govern the behavior of the clock. All other delays are derived from clock events.
+				</p>
+
+		</dl>
+	</body>
+
+</html>

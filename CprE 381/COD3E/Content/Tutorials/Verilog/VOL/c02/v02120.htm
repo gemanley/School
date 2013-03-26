@@ -1,0 +1,28 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td>Another limitation on memory access is that you can't take a bit-select or part-select of a memory element. Thus, if you want to get the 3rd bit out of the 10th element of a memory, you need to do it in two steps:
+					<p><tt></tt></p>
+					<dl>
+						<dd>reg [0:31] temp, mem[1:1024];<br>
+						<dd>...<br>
+						<dd>temp = mem[10];<br>
+						<dd>bit = temp[3];
+							<p></p>
+					</dl>
+					</TT>Note that while you can use a memory index operand on the right-hand side of a continuous assignment, this is not very good practice. The reason is that some implementations of Verilog treat a change in value to any element in the memory as indistinguishable from any other, so the right-hand side expression in a continuous assignment would get re-evaluated whenever any element of the memory changed, not just when the desired element changed.
+					<p>Just like bit-selects, if the memory index is x or z, then the result of a memory access with that index is x.</p>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

@@ -1,0 +1,54 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td width="600">Click each of the complications to learn more about it.
+				<p><a href="a07060.htm">Timing</a><br>
+					<a href="b07060.htm">Efficiency</a><br>
+					<a href="c07060.htm">Initialization</a><br>
+					<a href="d07060.htm">Register Selection</a><br>
+					<a href="e07060.htm">State Encoding</a><br>
+					<a href="f07060.htm">Latch Inferencing</a></p>
+				<p>As was discussed in the section on output logic, the cardinal rule with synchronous designs is that a signal cannot both change and be sampled at the same point in simulated time. If it is, that is a race condition, and the results will be unpredictable.</p>
+				<p>With state machines, the output is dependent on the state, so when the state changes, the output will potentially change as well. If this happens at the same time as the input is sampled (the clock edge), then any subsequent logic which uses the state machine's output as an input will violate the sample/change rule.</p>
+				<p>The usual way to avoid this situation is to make the state change occur after inputs have been sampled. This can be done in lots of ways, but the most common are:</p>
+				<p></p>
+				<pre>
+    always @(posedge clock)
+        state 
+					
+					
+					<= nextstate; // non-blocking assign </PRE> and <PRE> always @(posedge clock) state="#del" nextstate; // intra-assignment delay </PRE> The use of the non-blocking assign does just what you want. All signals which are sampled at the (posedge clock) will be sampled before the state variable gets its new value.<P>
+					
+					
+					 
+
+The use of an intra-assignment delay also does what you want, in that the nextstate value is sampled at the (posedge clock) but the state variable will not get its new value until (posedge clock)+1.
+					
+					
+					<p> 
+
+Some people find the use of an arbitrary delay of 1 aesthetically displeasing. If you are among them, use the non-blocking assign. However, some people find it hard to think about the distinction between normal events and non-blocking assignments at the same simulation time. This often becomes a problem during monitoring signal values. If you are in that group, use the intra-assignment delay. In most implementations, the intra-assignment delay is somewhat more efficient, but the choice should be made based on personal taste and a consistent style.</p>
+					
+					
+					
+					
+					<p> 
+
+Regardless of which style you use, it is very important to be consistent.
+
+</p>
+					
+					
+				</pre>
+			</td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

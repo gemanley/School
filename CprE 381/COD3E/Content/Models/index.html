@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<meta name="description" content="Index to sample models included on this CD.">
+		<title>Processor Models Index</title>
+		<link href="../resources/base_style.css" rel="stylesheet" media="screen">
+	</head>
+
+	<body bgcolor="#ffffff" onload="parent.frames[0].select_img(12); return true;">
+		<h1>Processor Models</h1>
+		<p>This page contains information and links to the processor models included on this CD.</p>
+		<p>Contents:</p>
+		<ul>
+			<li><a href="#picoProcessor">picoProcessor model</a> (VHDL)
+			<li><a href="#TinyMIPS">TinyMIPS model</a> (GateSim)
+		</ul>
+		<hr noshade width="80%">
+		<h2><a name="picoProcessor"></a>picoProcessor</h2>
+		<p>The picoProcessor (pP) is an 8-bit processor intended for education purposes. It is similar to typical 8-bit microprocessors for small embedded applications, but has an instruction set architecture more similar to RISC processors. The VHDL model suite includes a behavioral model, a model of an unpipelined implementation that performs each instruction in a single clock cycle, and an unpipelined implementation that performs each instruction in several clock cycles.</p>
+		<h3>Documentation</h3>
+		<ul>
+			<li><a href="picoProcessor/pP-ISA.pdf">Instruction Set Architecture</a>
+			<li><a href="picoProcessor/pP-notes.pdf">Implementation Notes</a>
+			<li><a href="picoProcessor/pP-testing.pdf">Test Suite Notes</a>
+		</ul>
+		<h3>Source Files</h3>
+		<ul>
+			<li><a href="picoProcessor/vhdl/">VHDL source and test files</a>
+		</ul>
+		<h3>Exercises</h3>
+		<ul>
+			<li>The implementation notes and test suite notes include suggestions for exercises to extend and improve the picoProcessor model.
+		</ul>
+		<p>The picoProcessor model and associated documentation were written by Peter J. Ashenden. The test suite and associated notes were written by Matt Lowry.</p>
+		<hr noshade width="80%">
+		<h2><a name="TinyMIPS"></a>TinyMIPS</h2>
+		<p>TinyMIPS is an implementation of a small subset of the MIPS instruction set, using the GateSim simulator. GateSim is included on this CD; <a href="../Software/index.html#GateSim" target="Display">click here</a> for more information and installation instructions.</p>
+		<p>TinyMIPS is more or less compatible with the <a onclick="parent.frames[0].select_img(14); return true;" href="../Software/index.html#Spim">Spim simulator</a> (also included on this CD). MIPS assembly language programs can be assembled in Spim, then the result saved as a log file that TinyMIPS can read and decode.</p>
+		<h3>Documentation</h3>
+		<ul>
+			<li><a href="TinyMIPS/TinyMIPS.pdf">TinyMIPS in GateSim</a>
+		</ul>
+		<h3>Source File</h3>
+		<ul>
+			<li><a href="TinyMIPS/TinyMIPS.txt" target="Display">TinyMIPS.txt</a>
+		</ul>
+		<h3>Exercises</h3>
+		<ul>
+			<li><a onclick="parent.frames[0].select_img(10); return true;" href="../Labs/TinyMIPS/TinyMIPS_labs.pdf">Click here</a> for exercises to extend and improve the TinyMIPS model.
+		</ul>
+		<p>The TinyMIPS model and associated documentation were written by Tom Pittman.</p>
+		<p></p>
+	</body>
+
+</html>

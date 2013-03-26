@@ -1,0 +1,353 @@
+
+@import url(../../../resources/base_style.css);
+<style type="text/css">
+	
+	BODY {
+	background-color : #ffffff;
+	border : 0;
+	margin : 0px;
+	font-family : Arial, Helvetica, sans-serif;
+	color : #000000;
+	}
+	
+	.dummy {
+	padding:3px 5px;
+	margin:1px 3px;
+	font-size : 10px;
+	font-weight : 400;
+	font-family : Geneva, Verdana, Arial, Helvetica, sans-serif;
+	color : #FFFFFF;
+	}
+
+	.headingFixed {
+	font-size : 14px;
+	font-family : Times, serif;
+	color : #000000;
+	}
+	
+	.leftnav {
+	font-size : 12px;
+	font-weight : 400;
+	font-family : Geneva, Verdana, Arial, Helvetica, sans-serif;
+	color : #FFFFFF;
+	}
+
+	.topnav {
+	font-size : 10px;
+	font-weight : 400;
+	font-family : Arial, Helvetica, sans-serif, Geneva, Verdana;
+	color : #FFFFFF;
+	}
+	
+	.topnavdate {
+	padding:1px 1px;
+	margin:3px 3px;
+	font-size : 10px;
+	font-weight : 400;
+	font-family : Arial, Geneva, Verdana, Helvetica, sans-serif;
+	color : #FFFFFF;
+	}
+    
+    .whitead {
+	padding:3px 5px;
+	margin:1px 3px;
+	font-size : 8px;
+	font-weight : 400;
+	font-family : Arial, Geneva, Verdana, Helvetica, sans-serif;
+	color : #FFFFFF;
+	}
+    
+	.regularWhite {
+	font-size : 12px;
+	font-family : Arial, Geneva, Verdana, Helvetica, sans-serif;
+	color : #ffffff;
+	}
+	
+    .homeFixed {
+	font-size : 12px;
+	font-family : Arial, Geneva, Verdana, Helvetica, sans-serif;
+	color : #000000;
+	}
+	
+
+	.home {  
+	font-size : 80%;
+	font-family : Arial, Geneva, Verdana, Helvetica, sans-serif;
+	color : #000000;
+	}
+	
+	.articleSubTopic {  
+	font-size : 80%;
+	font-family : Arial, Geneva, Verdana, Helvetica, sans-serif;
+	color : #666666;
+	}
+
+	.smallbold {
+	font-size : 70%;
+	font-weight : bold;
+	font-family : Arial, Geneva, Verdana, Helvetica, sans-serif;
+	color : #000000;	
+	}
+	
+	.bigblue {
+	font-size : 16px;
+	font-family : Arial, Geneva, Verdana, Helvetica, sans-serif;
+	color : #006699;
+	}
+	
+	.orange {
+	font-size : 12px;
+	font-weight : 400;
+	font-family : Arial, Geneva, Verdana, Helvetica, sans-serif;
+	color : #ff6600;
+	}
+	
+	.small {
+	font-size : 60%;
+	font-family : Arial, Geneva, Verdana, Helvetica, sans-serif;
+	color : #000000;
+	}
+	
+    .smallFixed {
+	font-size : 11px;
+	font-family : Arial, Geneva, Verdana, Helvetica, sans-serif;
+	color : #000000;
+	}
+
+    .tiny {
+	font-size : 45%;
+	font-family : Arial, Geneva, Verdana, Helvetica, sans-serif;
+	color : #000000;
+	}
+	
+	.blue {
+	font-size : 12px;
+	font-family : Arial, Geneva, Verdana, Helvetica, sans-serif;
+	color : #3366cc;
+	text-decoration : none;
+	}
+	
+	.gray 
+	{
+	font-size: 80%; 
+	font-family: "Arial","Verdana","Helvetica","sans-serif";
+	color: #666666;
+	text-decoration: none;
+	}
+	
+	.biggray 
+	{
+	font-size: 16px; 
+	font-family: "Arial","Verdana","Helvetica","sans-serif";
+	color: #666666;
+	text-decoration: none;
+	}
+	
+	.red
+	{
+	font-size: 100%; 
+	font-family: "Arial","Verdana","Helvetica","sans-serif";
+	color: #990000;
+	text-decoration: none;
+	}
+	
+	.articleSubTopic {
+	font-family : Arial, Geneva, Verdana, Helvetica, sans-serif;
+	font-size : 80%;
+	color : #666666;	
+	}
+	
+	.titleArticle {
+	font-size : 130%;
+	font-family : Times, sans-serif, Arial, Geneva, Verdana, Helvetica;
+	text-align:left;
+	color : #000000;
+	}
+	
+	.imageCredit {
+	margin:0px 0px 5px 0px;
+	font-size : 9px;
+	font-family : Arial, Geneva, Verdana, Helvetica, sans-serif;
+	}
+	
+	.captionText {
+	padding: 0px 0px 0px 0px;
+	font-size : 11px;
+	font-family : Arial, Geneva, Verdana, Helvetica, sans-serif;
+	line-height: 95%;
+	}
+	
+	.regTextGrey {
+	margin: 0px 10px;
+	font-family: Arial, Geneva, Verdana, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #666666;
+	}
+	
+	A, A:link, A:ACTIVE, A:VISITED {
+	color : #3366cc;
+	text-decoration : none;
+	}
+	
+	A:hover{
+	text-decoration: underline;
+	}
+	
+	A.dropdown {
+	padding: 0px 0px 0px 0px;
+	margin:0px 0px 0px 0px;
+	font-weight : 0;
+	font-size : 11px;
+	font-family : Arial, Helvetica, sans-serif, Geneva, Verdana;
+	color : #3366cc;
+	}
+	
+	
+	A.dropdownRed {
+	padding: 0px 0px 0px 0px;
+	margin:0px 0px 0px 0px;
+	font-weight : 0;
+	font-size : 11px;
+	font-family : Arial, Helvetica, sans-serif, Geneva, Verdana;
+	color : #990000;
+	}
+	
+	A.dropdownRed:visited {
+	padding: 0px 0px 0px 0px;
+	margin:0px 0px 0px 0px;
+	font-weight : 0;
+	font-size : 11px;
+	font-family : Arial, Helvetica, sans-serif, Geneva, Verdana;
+	color : #990000;
+	}
+	
+	
+	A.topnav {
+	padding: 0px 0px 0px 0px;
+	margin:0px 0px;
+	font-size : 10px;
+	font-weight : 400;
+	font-family : Arial, Helvetica, sans-serif, Geneva, Verdana;
+	text-decoration: none;
+	color : #FFFFFF;
+	}
+	
+	A.topnav:hover {
+	text-decoration: underline;
+	}
+	
+	A.black {
+	font-size : 100%;
+	color : #000000;
+	text-decoration : none;
+	}
+	
+	A.black:visited {
+	font-size : 100%;
+	color : #000000;
+	text-decoration : none;
+	}
+	
+	A.black:hover {
+	text-decoration: underline;
+	}
+	
+	
+	A.blackFixed {
+	font-size: 12px;
+	color : #000000;
+	text-decoration : none;
+	}
+	
+	A.blackFixed:visited {
+	color: #000000;
+	text-decoration : none;
+	}
+	
+	A.blackFixed:hover {
+	text-decoration: underline;
+	}
+	
+	
+	A.TitleBlackFixed {
+	font-size : 14px;
+	font-family : Times, serif;
+	color : #000000;
+	text-decoration : none;
+	}
+	
+	A.TitleBlackFixed:visited {
+	font-size : 14px;
+	font-family : Times, serif;
+	color : #000000;
+	text-decoration : none;
+	}
+	
+	A.TitleBlackFixed:hover {
+	text-decoration: underline;
+	}
+	
+	A.home {
+	font-size : 100%;
+	color : #3366cc;
+	text-decoration : none;
+	font-weight : bold;
+	}
+		
+	A.home:hover {
+	text-decoration: underline;
+	}
+		
+	A.red
+	{
+	font-size: 100%; 
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	color: #990000;
+	text-decoration: none;
+	}
+	
+	A.red:hover {
+	text-decoration: underline;
+	}
+	
+	A.red:visited {
+	color: #990000;
+	text-decoration : none;
+	}
+	
+	A.redFixed
+	{
+	font-size: 12px; 
+	font-family: "Arial","Verdana","Helvetica","sans-serif";
+	color: #990000;
+	text-decoration: none;
+	}
+	
+	A.redFixed:hover {
+	text-decoration: underline;
+	}
+	
+	A.redFixed:visited {
+	color: #990000;
+	text-decoration : none;
+	}
+	
+	input.stylish {
+	background: #003366;
+	color: #ffffff;
+	}
+	
+	.wrap1{
+	position:absolute;
+	}
+	
+	.wrap2{
+	position:absolute;
+	}
+	
+	#dropmenu0{
+	z-index:0;
+	}
+	
+	
+</style>

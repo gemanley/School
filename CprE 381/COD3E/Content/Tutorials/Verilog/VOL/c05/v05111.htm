@@ -1,0 +1,55 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>Casex and casez are variations of case which allow for &quot;don't care&quot; bits in the comparison operations. Depending on the keyword, if a bit is <tt>z</tt> (<tt>casez</tt>) or <tt>x</tt> or <tt>z</tt> (<tt>casex</tt>) in either the selector or the item expression, then that bit does not participate in the comparison. Since the expression values are determined at simulation time, the don't care bits can be dynamic.
+					<p>As a convenience for specifying constants used in item expressions, the ? character can be used in constants to indicate a <tt>z</tt> value (not x!).</p>
+					<p>Example</p>
+					<p></p>
+					<pre>
+     casez (sel)
+             4'b0000:        case0;  // task named case0
+             4'b0001:        case1;
+             4'b?1??:        case2;
+             4'b10??:        case3;
+     endcase
+</pre>
+					In the above example, execution would yield the following, depending on <tt>sel</tt>
+					<p></p>
+				</td>
+			</tr>
+		</table>
+		<center>
+			<table width="500">
+				<tr>
+					<td width="250"><tt><b>sel<br>&nbsp;</b></tt></td>
+					<td width="250"><tt><b>task<br>
+								executed</b></tt></td>
+				</tr>
+				<tr>
+					<td width="250"><tt>0000<br>
+							0001<br>
+							0100, 0101, 0110, etc.<br>
+							1000, 1001, 1010, etc.</tt></td>
+					<td width="250"><tt>case0<br>
+							case1<br>
+							case2<br>
+							case3</tt></td>
+				</tr>
+			</table>
+		</center>
+		<p></p>
+		<table width="600">
+			<tr>
+				<td>In the above example, the same result would be achieved with <tt>casex</tt>. However, <tt>casex</tt> can be used for dynamic masking in ways that <tt>casez</tt> cannot, since operations with <tt>z</tt> bits in operands generally turn into <tt>x</tt> bits in the results.</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

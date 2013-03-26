@@ -1,0 +1,43 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">This task causes every value change of its arguments to be logged into a Value-Change-Dump file. Each entry includes the time of the value change and the new value. From this data, a complete history of the simulation can be obtained for the arguments dumped.
+					<p>The general format is:</p>
+					<p></p>
+					<pre>
+        $dumpvars(levels, arg1, arg2, ...);
+</pre>
+					where:
+					<pre>
+        levels is
+                a number
+        argi is
+                a module instance identifier
+                a net or register identifier
+</pre>
+					<p>If the arguments are omitted, then all nets and registers in the model are dumped. Otherwise, the levels argument indicates how many levels of the hierarchy are to be dumped.</p>
+					<p></p>
+					<dl>
+						<dd>0 - dump all levels below any given module instance
+						<dd>1 - dump just the nets and registers in the given module instance
+						<dd>2 - dump nets and registers in the module instance and in the modules it instantiates
+						<dd>...
+					</dl>
+					<p></p>
+					<center>
+						<a href="a08030.htm"><img src="images/vexample.gif" height="39" width="91" border="0"></a></center>
+					<p></p>
+				</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

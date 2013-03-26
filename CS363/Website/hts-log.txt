@@ -1,0 +1,16 @@
+HTTrack3.45-3-nossl launched on Mon, 10 Dec 2012 23:00:04 at coms363:goto363@www.cs.iastate.edu/~cs363/index.html
+(httrack coms363:goto363@www.cs.iastate.edu/~cs363/index.html )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+23:00:04	Warning: 	Cache: damaged cache, trying to repair
+23:00:04	Warning: 	Cache: 0 bytes successfully recovered in 0 entries
+23:00:04	Warning: 	Cache: error trying to open the cache
+23:01:39	Error: 	"Not Found" (404) at link coms363:goto363@www.cs.iastate.edu/~cs363/Resources/XML-Introduction.pdf (from coms363:goto363@www.cs.iastate.edu/~cs363/CourseInfo/CourseInfo.htm)
+No files purged
+
+HTTrack Website Copier/3.45-3 mirror complete in 32 minutes 15 seconds : 62 links scanned, 60 files written (47923348 bytes overall) [47941821 bytes received at 24776 bytes/sec]
+(1 errors, 3 warnings, 0 messages)

@@ -1,0 +1,30 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td>Signals are combined on a net by having two (or more) primitives with the same net as output. For example,
+					<p></p>
+					<dl>
+						<tt>
+						<dd>buf (strong1,pull0) b1(Result, A);
+						<dd>buf (strong1,pull0) b2(Result, B);</tt>
+					</dl>
+					</TT>When unambiguous signals are combined on a net, the result is either unambiguous 0, unambiguous 1, or ambiguous x. If two drivers drive different strength levels, the stronger one wins, and the result is unambiguous. If they drive the same strength level, but different values, then the result is x:
+					<p></p>
+					<center>
+						<img src="images/v0423g1.gif" height="125" width="137">
+						<p></p>
+					</center>
+					The last entry in this table has an ambiguous result, having all values from <tt>St0</tt> to <tt>St1</tt>.</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

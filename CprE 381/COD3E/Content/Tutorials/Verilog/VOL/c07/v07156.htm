@@ -1,0 +1,43 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<b>What is the value of z printed by this module? Click Done to check your answer.</b>
+			<p></p>
+			<pre>
+	module t;
+	reg x, y, z;
+	initial  begin 
+		x = 1; 
+		y = 0; 
+	#1 	$display(z);
+	end
+	always @(posedge x)
+		z = ~y;
+
+	endmodule
+</pre>
+		</table>
+		<hr>
+		<table width="600">
+			<form>
+				<input onclick="parent.setValue(0,0)" type="radio" name="A" value="-1">1. 0<br>
+				<input onclick="parent.setValue(0,1)" type="radio" name="A" value="-1">2. 1<br>
+				<input onclick="parent.setValue(0,2)" type="radio" name="A" value="-1">3. x<br>
+				<input onclick="parent.setValue(0,3)" type="radio" name="A" value="-1">4. z<br>
+				<input onclick="parent.setValue(0,4)" type="radio" name="A" value="-1">5. either 1 or x<br>
+				<input onclick="parent.setValue(0,5)" type="radio" name="A" value="-1">6. either 1 or z<br>
+				<input onclick="parent.setValue(0,6)" type="radio" name="A" value="-1">7. either 0 or x<br>
+				<input onclick="parent.setValue(0,7)" type="radio" name="A" value="-1">8. either 0 or z<br>
+			</form>
+			<b></b>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:parent.checkAnswer(0,4)"><img src="images/vdone.gif" height="39" width="74" border="0"></a></center></TD></p>
+		</table>
+	</body>
+
+</html>

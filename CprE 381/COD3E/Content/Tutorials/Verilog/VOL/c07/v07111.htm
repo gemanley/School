@@ -1,0 +1,19 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td valign="top" width="300">When writing a Verilog model, efficiency should be a consideration. However, there are other considerations as well, particularly the characteristics of the synthesized logic when the model has been implemented. There are lots of coding styles that are synthesizable and produce good logic from a synthesizer, but are less efficient than non-synthesizable alternatives.
+				<p>In general, simulation efficiency is not a primary concern for synthesizable code. But, a great deal of code in most models is devoted to the test environment and to the library elements. Library elements in particular are important, because they are used so much, and their implementation is not a concern to the logic being designed. That is, a fast behavioral implementation of a library element is identical, for simulation purposes, to a slow gate level implementation.</p>
+				<p>That said, simulation time is important. Many design projects require simulating a set of tests repetitively until the design passes all tests. This regression testing can often consume months of simulation time, so a saving of a few percent can be measured in days, while savings of 50% can mean months off the time to market.</p>
+			</td>
+			<td valign="top" width="300"><img src="images/v0103g1.gif" height="222" width="296"></td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

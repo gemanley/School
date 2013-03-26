@@ -1,0 +1,37 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td valign="top" width="235"><img src="images/v0745g1.gif" height="94" width="235">
+				<p></p>
+			</td>
+			<td valign="top" width="335">State machines are often coded like this:
+				<pre>
+  always @(A or B or C or D or state)
+    nextstate = f(A, B, C, D, state);
+</pre>
+				(Usually the function is just inlined into the always block. We have abbreviated it here.)</td>
+		</table>
+		<table width="600">
+			This works fine, and it is what you want to be synthesized. However, if A, B, C, and D all change in a cycle, the function could end up being evaluated up to four times. It would be better if the function were only executed once with all the new values. By adding a delay, this can be assured:
+			<pre>
+    always @(A or B or C or D or state)
+        @(negedge clock)
+            nextstate = f(A, B, C, D, state);
+</pre>
+			Of course, this only works if it is known that all of the changes to A, B, C, and D will occur before the negative clock edge. Because synthesis will ignore the @(negedge clock) event control, this does not change the synthesized logic.
+			<p>Notice that if this was written as a continuous assignment,</p>
+			<pre>
+    assign nextstate = f(A, B, C, D, state);
+</pre>
+			there would be no opportunity to make this optimization.
+		</table>
+		</FONT>
+	</body>
+
+</html>

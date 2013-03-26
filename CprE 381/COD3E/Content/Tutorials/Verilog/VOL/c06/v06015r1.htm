@@ -1,0 +1,34 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			<tr>
+				<td>
+					<pre>
+    module top;
+        wire x = 0;
+        wire y = top.childB.b;
+        type1 childA();
+        type2 childB();
+    endmodule
+    
+    module type1;
+        wire a = top.x;
+    endmodule
+    
+    module type2;
+        wire b = top.childA.a;
+    endmodule 
+</pre>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

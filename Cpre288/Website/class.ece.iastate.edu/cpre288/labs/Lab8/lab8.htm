@@ -1,0 +1,999 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+
+<!-- Mirrored from class.ece.iastate.edu/cpre288/labs/Lab8/lab8.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 07:13:39 GMT -->
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 12">
+<meta name=Originator content="Microsoft Word 12">
+<link rel=File-List href="lab8_files/filelist.xml">
+<link rel=Edit-Time-Data href="lab8_files/editdata.html">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>CPRE 288 Laboratory 8</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Zhao Zhang</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Zhao Zhang</o:LastAuthor>
+  <o:Revision>42</o:Revision>
+  <o:TotalTime>615</o:TotalTime>
+  <o:Created>2007-09-11T15:52:00Z</o:Created>
+  <o:LastSaved>2010-10-26T16:36:00Z</o:LastSaved>
+  <o:Pages>3</o:Pages>
+  <o:Words>1781</o:Words>
+  <o:Characters>10158</o:Characters>
+  <o:Company> </o:Company>
+  <o:Lines>84</o:Lines>
+  <o:Paragraphs>23</o:Paragraphs>
+  <o:CharactersWithSpaces>11916</o:CharactersWithSpaces>
+  <o:Version>12.00</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]-->
+<link rel=themeData href="lab8_files/themedata.thmx">
+<link rel=colorSchemeMapping href="lab8_files/colorschememapping.xml">
+<!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>BestFit</w:Zoom>
+  <w:TrackMoves>false</w:TrackMoves>
+  <w:TrackFormatting/>
+  <w:PunctuationKerning/>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:DoNotPromoteQF/>
+  <w:LidThemeOther>EN-US</w:LidThemeOther>
+  <w:LidThemeAsian>ZH-CN</w:LidThemeAsian>
+  <w:LidThemeComplexScript>X-NONE</w:LidThemeComplexScript>
+  <w:Compatibility>
+   <w:BreakWrappedTables/>
+   <w:SnapToGridInCell/>
+   <w:WrapTextWithPunct/>
+   <w:UseAsianBreakRules/>
+   <w:DontGrowAutofit/>
+   <w:SplitPgBreakAndParaMark/>
+   <w:DontVertAlignCellWithSp/>
+   <w:DontBreakConstrainedForcedTables/>
+   <w:DontVertAlignInTxbx/>
+   <w:Word11KerningPairs/>
+   <w:CachedColBalance/>
+  </w:Compatibility>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+  <m:mathPr>
+   <m:mathFont m:val="Cambria Math"/>
+   <m:brkBin m:val="before"/>
+   <m:brkBinSub m:val="&#45;-"/>
+   <m:smallFrac m:val="off"/>
+   <m:dispDef/>
+   <m:lMargin m:val="0"/>
+   <m:rMargin m:val="0"/>
+   <m:defJc m:val="centerGroup"/>
+   <m:wrapIndent m:val="1440"/>
+   <m:intLim m:val="subSup"/>
+   <m:naryLim m:val="undOvr"/>
+  </m:mathPr></w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" DefUnhideWhenUsed="false"
+  DefSemiHidden="false" DefQFormat="false" LatentStyleCount="267">
+  <w:LsdException Locked="false" QFormat="true" Name="Normal"/>
+  <w:LsdException Locked="false" QFormat="true" Name="heading 1"/>
+  <w:LsdException Locked="false" QFormat="true" Name="heading 2"/>
+  <w:LsdException Locked="false" QFormat="true" Name="heading 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   QFormat="true" Name="heading 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   QFormat="true" Name="heading 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   QFormat="true" Name="heading 6"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   QFormat="true" Name="heading 7"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   QFormat="true" Name="heading 8"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   QFormat="true" Name="heading 9"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   QFormat="true" Name="caption"/>
+  <w:LsdException Locked="false" QFormat="true" Name="Title"/>
+  <w:LsdException Locked="false" Priority="1" Name="Default Paragraph Font"/>
+  <w:LsdException Locked="false" QFormat="true" Name="Subtitle"/>
+  <w:LsdException Locked="false" QFormat="true" Name="Strong"/>
+  <w:LsdException Locked="false" QFormat="true" Name="Emphasis"/>
+  <w:LsdException Locked="false" Priority="99" Name="No List"/>
+  <w:LsdException Locked="false" Priority="99" SemiHidden="true"
+   Name="Placeholder Text"/>
+  <w:LsdException Locked="false" Priority="1" QFormat="true" Name="No Spacing"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 1"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 1"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 1"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 1"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 1"/>
+  <w:LsdException Locked="false" Priority="99" SemiHidden="true" Name="Revision"/>
+  <w:LsdException Locked="false" Priority="34" QFormat="true"
+   Name="List Paragraph"/>
+  <w:LsdException Locked="false" Priority="29" QFormat="true" Name="Quote"/>
+  <w:LsdException Locked="false" Priority="30" QFormat="true"
+   Name="Intense Quote"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 1"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 1"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 1"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 1"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 1"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 1"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 2"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 2"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 2"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 2"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 2"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 2"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 2"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 2"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 3"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 3"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 3"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 3"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 3"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 3"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 3"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 3"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 4"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 4"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 4"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 4"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 4"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 4"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 4"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 4"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 5"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 5"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 5"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 5"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 5"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 5"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 5"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 5"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 6"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 6"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 6"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 6"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 6"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 6"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 6"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 6"/>
+  <w:LsdException Locked="false" Priority="19" QFormat="true"
+   Name="Subtle Emphasis"/>
+  <w:LsdException Locked="false" Priority="21" QFormat="true"
+   Name="Intense Emphasis"/>
+  <w:LsdException Locked="false" Priority="31" QFormat="true"
+   Name="Subtle Reference"/>
+  <w:LsdException Locked="false" Priority="32" QFormat="true"
+   Name="Intense Reference"/>
+  <w:LsdException Locked="false" Priority="33" QFormat="true" Name="Book Title"/>
+  <w:LsdException Locked="false" Priority="37" SemiHidden="true"
+   UnhideWhenUsed="true" Name="Bibliography"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="TOC Heading"/>
+ </w:LatentStyles>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:SimSun;
+	panose-1:2 1 6 0 3 1 1 1 1 1;
+	mso-font-alt:SimSun;
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:3 680460288 22 0 262145 0;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;
+	mso-font-charset:1;
+	mso-generic-font-family:roman;
+	mso-font-format:other;
+	mso-font-pitch:variable;
+	mso-font-signature:0 0 0 0 0 0;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:-520081665 -1073717157 41 0 66047 0;}
+@font-face
+	{font-family:SimSun;
+	panose-1:2 1 6 0 3 1 1 1 1 1;
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:3 680460288 22 0 262145 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:SimSun;}
+h1
+	{mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-link:"Heading 1 Char";
+	mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	font-size:16.0pt;
+	font-family:"Arial","sans-serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-font-kerning:16.0pt;
+	font-weight:bold;}
+h2
+	{mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-link:"Heading 2 Char";
+	mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	font-size:14.0pt;
+	font-family:"Arial","sans-serif";
+	mso-fareast-font-family:"Times New Roman";
+	font-weight:bold;
+	font-style:italic;}
+h3
+	{mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-link:"Heading 3 Char";
+	mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:3;
+	font-size:13.0pt;
+	font-family:"Arial","sans-serif";
+	mso-fareast-font-family:"Times New Roman";
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{mso-style-unhide:no;
+	color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-unhide:no;
+	color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{mso-style-unhide:no;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:SimSun;}
+p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
+	{mso-style-unhide:no;
+	mso-style-link:"Balloon Text Char";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:8.0pt;
+	font-family:"Tahoma","sans-serif";
+	mso-fareast-font-family:SimSun;}
+span.Heading1Char
+	{mso-style-name:"Heading 1 Char";
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Heading 1";
+	mso-ansi-font-size:14.0pt;
+	mso-bidi-font-size:14.0pt;
+	font-family:"Cambria","serif";
+	mso-ascii-font-family:Cambria;
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:Cambria;
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:#365F91;
+	mso-themecolor:accent1;
+	mso-themeshade:191;
+	font-weight:bold;}
+span.Heading2Char
+	{mso-style-name:"Heading 2 Char";
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Heading 2";
+	mso-ansi-font-size:13.0pt;
+	mso-bidi-font-size:13.0pt;
+	font-family:"Cambria","serif";
+	mso-ascii-font-family:Cambria;
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:Cambria;
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:#4F81BD;
+	mso-themecolor:accent1;
+	font-weight:bold;}
+span.Heading3Char
+	{mso-style-name:"Heading 3 Char";
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Heading 3";
+	mso-ansi-font-size:12.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Cambria","serif";
+	mso-ascii-font-family:Cambria;
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:Cambria;
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:#4F81BD;
+	mso-themecolor:accent1;
+	font-weight:bold;}
+span.BalloonTextChar
+	{mso-style-name:"Balloon Text Char";
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Balloon Text";
+	mso-ansi-font-size:8.0pt;
+	mso-bidi-font-size:8.0pt;
+	font-family:"Tahoma","sans-serif";
+	mso-ascii-font-family:Tahoma;
+	mso-fareast-font-family:SimSun;
+	mso-hansi-font-family:Tahoma;
+	mso-bidi-font-family:Tahoma;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	mso-default-props:yes;
+	font-size:10.0pt;
+	mso-ansi-font-size:10.0pt;
+	mso-bidi-font-size:10.0pt;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.WordSection1
+	{page:WordSection1;}
+ /* List Definitions */
+ @list l0
+	{mso-list-id:27485693;
+	mso-list-template-ids:-185973208;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l0:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1
+	{mso-list-id:447049134;
+	mso-list-template-ids:907676252;}
+@list l1:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l2
+	{mso-list-id:951278980;
+	mso-list-template-ids:-1409665650;}
+@list l3
+	{mso-list-id:973289809;
+	mso-list-template-ids:610718140;}
+@list l3:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l3:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4
+	{mso-list-id:1310788298;
+	mso-list-template-ids:1346283700;}
+@list l4:level1
+	{mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l5
+	{mso-list-id:1956015107;
+	mso-list-template-ids:-261439500;}
+@list l5:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-priority:99;
+	mso-style-qformat:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman","serif";}
+table.MsoTableGrid
+	{mso-style-name:"Table Grid";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-unhide:no;
+	border:solid windowtext 1.0pt;
+	mso-border-alt:solid windowtext .5pt;
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-border-insideh:.5pt solid windowtext;
+	mso-border-insidev:.5pt solid windowtext;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman","serif";}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="3074"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang=EN-US link=blue vlink=purple style='tab-interval:.5in'>
+
+<div class=WordSection1>
+
+<h1 align=center style='text-align:center'>CPRE 288 Laboratory</h1>
+
+<h1 align=center style='text-align:center'>Lab 8: Servo Position Control with
+PWM</h1>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<h2>Lecture – Lab Connection</h2>
+
+<p>In lecture, you have studied pulse width modulation (PWM).&nbsp; This lab
+will explore the use of PWM to control the position of a servo attached to the
+VORTEX platform. </p>
+
+
+<h2>Prelab&nbsp;</h2>
+
+<ul style='margin-top:0in' type=disc>
+ <li class=MsoNormal style='mso-list:l3 level1 lfo3;tab-stops:list .5in'>Read
+     the lab description as well as the data sheet for the ATmega 128 User
+     Guide related to PWM on Timer1/3 as well as the servo description in servo
+     <a href="stdservo.pdf">data sheet</a> and usage information provided in a vendor
+     supplied application <a href="roboticsservomod.pdf">document</a>.</li>
+ <li class=MsoNormal style='mso-list:l3 level1 lfo3;tab-stops:list .5in'>Draft
+     an initial sketch of a program that addresses this lab. The code needs to
+     be complete, but you don’t have to compile or execute it before coming to
+     the lab. Attempt to draft some code to show your TA.<b><o:p></o:p></b></li>
+ <li class=MsoNormal style='mso-list:l3 level1 lfo3;tab-stops:list .5in'>Print
+     the Lab Evaluation Form, so that your TA can check off work performed
+     during this lab session.</li>
+</ul>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>Submit answers to the following questions (see pgs 133-138 for register details <a href="../AtmelMega128UG.html">User Guide</a>, pg 22 (pg 28 of the actual pdf) of <a href="roboticsservomod.pdf">Servo Application Document</a>)</p>
+
+<ol style='margin-top:0in' start=1 type=1>
+ <li>How does the servo work?  I.E., according
+     to the application document, what are the pulse widths necessary for: full
+     clockwise, center and full counter-clockwise?</li>
+ <li class=MsoNormal style='mso-list:l4 level1 lfo6;tab-stops:list .5in'>What
+     are the Timer3 registers relevant to this lab?</li>
+ <li class=MsoNormal style='mso-list:l4 level1 lfo6;tab-stops:list .5in'></li>
+ <li class=MsoNormal style='mso-list:l4 level1 lfo6;tab-stops:list .5in'>Assuming
+     we want to generate a Fast PWM signal that is 46.51Hz and we want the
+     finest level of control resolution available at 46.51 Hz, what should the
+     pre-scaler and the TOP value be? (Use the WGMn3:0 bit setting of 1111 or
+     0xF.)</li>
+  <li class=MsoNormal style='mso-list:l4 level1 lfo6;tab-stops:list .5in'>Read page 124 
+     of the ATmega 128 data sheet, starting with the description of Fast PWM.  Describe
+     how Fast PWM works when used in non-inverting compare output mode.  I.E. When is the output
+     pin cleared?  When is the output pin set?</li>
+</ol>
+
+<p>&nbsp;</p>
+
+
+<h2>Reference Files</h2>
+
+<p class=MsoNormal>Download the following files to a single folder on your U:
+drive (right-click and select ‘Save Target As’. Alternatively, download the
+zipped folder at the bottom of the page).</p>
+
+<ul type=disc>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l0 level1 lfo9;tab-stops:list .5in'><span style='mso-fareast-font-family:
+     "Times New Roman"'><a href="programs/util.c">util.c</a>/<a
+     href="programs/util.h">util.h</a>: The file that contains the utility
+     functions for the VORTEX platform.<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l0 level1 lfo9;tab-stops:list .5in'><span style='mso-fareast-font-family:
+     "Times New Roman"'><a href="programs/lcd.c">lcd.c</a>/<a
+     href="programs/lcd.h">lcd.h</a>: The program file with a number of LCD
+     functions.<o:p></o:p></span></li>
+</ul>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<h3>Servo Background</h3>
+
+<p>&nbsp;</p>
+
+<p class=MsoNormal><span style='mso-fareast-font-family:"Times New Roman";
+mso-no-proof:yes'><img border=0 width=461 height=344 id="_x0000_i1028"
+src="Servo_Breakdown.jpg"></span><span style='mso-fareast-font-family:"Times New Roman";
+mso-no-proof:yes'><img border=0 width=474 height=343 id="_x0000_i1027"
+src="servodiagram1_src.jpg"></span><span style='mso-fareast-font-family:"Times New Roman"'><o:p></o:p></span></p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>In a previous lab, you worked on controlling the motion of a stepper
+motor.&nbsp; In this lab, you will be exploring the control of a servo
+motor.&nbsp; This device is very common in remote control devices and
+robotics.&nbsp; The servo comes in two configurations.&nbsp; One configuration
+has a mechanical stop that restricts the servo to 180 degrees of motion. The
+second configuration allows 360 degrees of rotation. The servo used in lab only
+has 180 degrees of rotation.</p>
+
+<p>One of the features of a servo is the ability to position the servo to an
+absolute position by signaling the control circuit with a pulse train
+consisting of a positive pulse having a specific width.&nbsp; Another feature
+is the feedback circuitry that keeps the servo in a specified position. This
+feedback is established by a pulse train with a constant pulse width.&nbsp; In
+our circumstances the turret mounted on the servo will experience minimal
+forces that would move the turret out of position, so the feedback feature is
+not necessary.&nbsp; However, if the servo was used to control rudder or wing
+flap position, forces would push the controlled surface out of position without
+feedback compensating for these forces.</p>
+
+<p>In the documents provided in the pre-lab section you will find a discussion
+on the operational aspects of servo.&nbsp; One important idea that needs to be
+mentioned is the specification of the pulse trains supported by the
+servo.&nbsp; The servo supports a range of pulse train frequencies.&nbsp; The
+applications document suggests the low time of the pulse train can safely range
+from 10ms to 40ms.&nbsp; So combining this fact and the widths of the positive
+pulse ranging from 0.5ms to 2.0ms approximately, we can determine that a valid
+range of periods is 10.5 ms to 40.5ms.&nbsp; In other words, the frequency of
+the pulse train can range from 24.7 Hz to 95.23 Hz.&nbsp; Any pulse train
+frequency in the center of this range is fine.&nbsp; A frequency of 46.51 Hz
+has been chosen for this lab to be consistent with the applications document.</p>
+
+<p>&nbsp;</p>
+
+<p><span style='mso-no-proof:yes'><img border=0 width=637 height=451
+id="_x0000_i1026" src="servo_positioning_reference.gif"></span></p>
+
+<p>The ATmega128 microcontroller supports a variety of PWM resolution options.
+One set of options fix the TOP value to a predefined value that is at a 2^n-1
+boundary where n is either 8, 9 or 10 bits. There would be no way of producing
+a 46.51Hz with these predefined TOP values. Another more flexible option is to
+specify the TOP value. There are two ways to load a TOP value. One way is to
+load the OCR3A register with an arbitrary TOP value or load the TOP value in
+ICR3. These two options have tradeoffs. Using the first option results in
+losing channel A as a viable PWM signal source, but the buffering circuitry
+supports adjustment of the TOP value while PWM is active. The second option
+does not support dynamic TOP values and effectively disables the input capture
+unit, but all three output compare channels are available for PWM signal
+generation. In this lab, OCR3A will be used to hold the arbitrary TOP value you
+have calculated in the pre-lab.</p>
+
+<p>On page 125 of the ATmega 128 user guide, we see that resolution is directly
+proportional to the size of the TOP value.&nbsp; In order to get the highest
+possible resolution, we will want a large value in OCR3A for this lab.
+Resolution translates to how precisely we can control the position of the
+servo.&nbsp; The counter values between 0 and TOP produce a range of pulse
+widths that is beyond what is supported by the servo, but as more values are
+possible between 0 and TOP the granularity in the supported range of pulse widths
+also increases.&nbsp; This granularity in turn translates to how granular the
+servo movements can be controlled.&nbsp; The precision of the waveform
+generation circuitry and the precision of the electromechanical components of
+the servo will ultimately determine if increasing resolution in the counter
+will translate to increased precision in servo movement control .</p>
+
+<p>Frequency in Fast PWM mode is governed by the system clock (fixed at 16
+MHz), prescaler, and the TOP value.&nbsp; We want to maximize control
+resolution, so we need to pick a prescaler out of the available list
+(1,8,64,256,1024) that will result in the generation of pulse train with
+frequency of 46.51 Hz.&nbsp; On page 127 of the ATmega 128 user guide we see
+that TOP values and the prescaler reduce the possible pulse train
+frequency.&nbsp; So for a fixed frequency to be generated, the prescaler value
+must decline as the TOP value increases.&nbsp; Picking a TOP value and
+prescaler is a challenge of finding two unknowns with one equation.&nbsp;
+Although we do not know the exact value of TOP yet, we do know we want
+resolution maximized.&nbsp; This means TOP will be large, which means the
+prescaler will be in the lower end of the range.&nbsp; By fixing the prescaler
+to a low value and solving for TOP in the equation on page 127, we can iteratively
+determine what TOP and the prescaler should be for our desired pulse train.<span
+style='mso-fareast-font-family:"Times New Roman"'><br>
+<br>
+</span><b style='mso-bidi-font-weight:normal'><span style='mso-fareast-font-family:
+"Times New Roman";mso-no-proof:yes'><img border=0 width=295 height=357
+id="_x0000_i1025" src="position_reference.gif"></span></b><b><span
+style='mso-fareast-font-family:"Times New Roman"'><br>
+<strong>Quick Tips</strong></span></b><span style='mso-fareast-font-family:
+"Times New Roman"'><br>
+- In order to ensure there is a common understanding of what the position 0 and
+180 degrees are relative to the VORTEX platform, this diagram puts these
+designations in perspective of the VORTEX.<br>
+<br>
+- For this lab, the control signal for the servo will be Timer 3 channel B,
+which is mapped to pin PE4 and the SERV3B header on the based board of the
+VORTEX.<br>
+<br>
+- Timer 1 is not being used in this lab, because we have the Ping))) sensor
+attached to it.&nbsp; There is the&nbsp; potential that&nbsp; the&nbsp;
+prescaler choices made for the two device applications conflict.</span></p>
+
+<p>- Testing will show that pulse widths translate to different absolute
+positions for each servo.&nbsp; It is suggested that you document what VORTEX
+platform you are using and develop a method to compensate if a different device
+needs to be used.</p>
+
+<p>- Most of the servos available in lab have a linear relationship between
+timer count value and servo position in units of degree.&nbsp; By determining
+the count value for&nbsp; degree 0 and degree 180 a conversion factor (ratio of
+the difference in counts over the range of motion in degrees) can be used to
+convert a desired degree position into its corresponding counter value.</p>
+
+<p>- Since timer 3 is a 16 bit timer, OCR3A is really composed of 2 8-bit
+registers.&nbsp; The compiler provides OCR3A as convenient handle to allow you
+to ignore the register management details necessary to load and retrieve 16 bit
+values across two 8-bit registers.</p>
+
+<p>- Make sure you understand how Fast PWM (Pulse width modulation) works in either
+ inverted or non-inverted mode.  Read paragraph on the bottom pg 124 of the User Guide.</p>
+
+<p>- See pgs 133-138 for register details <a href="../AtmelMega128UG.html">User Guide</a>.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<h2>Part I. Move the Servo with PWM</h2>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>Develop a servo positioning API that accepts a counter value
+and positions the servo.&nbsp; For the purposes of demonstration, please use a
+counter value that will turn the servo close to zero degrees.&nbsp; The
+position may not be true 0 degrees, but that is okay for this part of the
+lab.&nbsp; </p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>There is no way to know programmatically whether the servo
+is in position.&nbsp; Positioning the servo 120 degrees away from its current
+position will take longer than positioning 10 degrees away.&nbsp; So, your
+function is responsible for returning a value indicating the servo has reached
+position.&nbsp; This will require you to judge how long to safely wait prior to
+returning from this function.&nbsp; Keep in mind being overly conservative will
+slow down servo movement sequences&nbsp;and the speed at which you can ping in
+new directions. However, being overly optimistic will result in ping
+measurement errors, since you will be pinging before the sensor has reached
+position.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p><b>Demo the program execution on the board to your TA.</b></p>
+
+<h2>Part II. Calibrate Position Control</h2>
+
+<p class=MsoNormal>Develop a program that will increment the output compare
+comparison value and position the servo relative to that count value.&nbsp;
+Display the counter value on the LCD.&nbsp; Using pushbutton SW1 to alter the
+count value by so as to move the servo 1 degree.&nbsp; Using pushbutton SW2 to
+alter the count value so as to move the servo 2.5 degrees.&nbsp; Using
+pushbutton SW3 to alter the count value so as to move the servo 5
+degrees.&nbsp; Using SW4 to switch between incrementing and decrementing.&nbsp;
+Set your initial adjustment direction to incrementing.&nbsp; Set you initial
+counter value to 800.&nbsp; Indicate on the LCD whether the program is in
+incrementing or decrementing mode.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>Having completed the calibration program, identify the count
+value necessary for 0, 45, 90, 135 and 180 degrees.&nbsp; Use the protractor
+and &quot;calibration pointer&quot; provided.&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><strong>Note: </strong>This will not be the last time you
+perform calibration.&nbsp;&nbsp; Every servo is slightly different, so you may
+need to re-calibrate if you can not use the VORTEX you were using before.&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><b>Demo the program execution on the board and calibration
+methodology to your TA.</b></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p>
+<strong>Suggestion:&nbsp; </strong>All these multi-digit values need to be 
+translated into strings before displaying them.&nbsp; You might find the 
+<strong> lprintf </strong> useful<strong>.&nbsp; </strong>This function works in much the same way 
+as <a href="http://www.cplusplus.com/reference/clibrary/cstdio/printf/">printf</a>, except that is will 
+clear and then print to the LCD screen.</p>
+
+
+<h2>Part III. Feedback</h2>
+
+<p>Fill out a lab feedback form: <a href="https://spreadsheets.google.com/viewform?hl=en&formkey=dDBwV3J1UkxJdnZfTEtZV2NKSzFwU1E6MQ#gid=0">Online Form</a></p>
+
+
+<h2>Reference Files</h2>
+
+<table class=MsoNormalTable border=1 cellpadding=0 width="100%"
+ style='width:100.0%;mso-cellspacing:1.5pt;mso-yfti-tbllook:1184;mso-padding-alt:
+ 0in 5.4pt 0in 5.4pt'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b>Files</b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b>Description</b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a href="programs/lab8.html">Lab8.zip</a></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>&nbsp;Files required for lab 8</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a href="lab8_eval.doc">Lab Evaluation Form</a></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>&nbsp;Evaluation form for Lab 8</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3;mso-yfti-lastrow:yes'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a href="../Lab_Feedback.html">Lab Feedback Form</a></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>&nbsp;Tell us what you think of the lab (feedback forms)</p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal>&nbsp;</p>
+
+</div>
+
+</body>
+
+
+<!-- Mirrored from class.ece.iastate.edu/cpre288/labs/Lab8/lab8.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 07:19:56 GMT -->
+</html>

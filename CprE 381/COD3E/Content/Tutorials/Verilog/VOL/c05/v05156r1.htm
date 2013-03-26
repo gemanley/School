@@ -1,0 +1,36 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			<tr>
+				<td><b>Efficiency</b>
+					<p>The main register loop is</p>
+					<p></p>
+					<pre>
+    always @(posedge clock)
+        if (notReset &amp;&amp; (scanShiftEnable !== 1))
+             regOut = #ckToQ regIn;
+</pre>
+					<p>This occurs on every positive clock edge. If regIn changes infrequently with respect to the clock, this can be very inefficient. Changing it to the following will reduce the number of events to just those necessary:</p>
+					<p></p>
+					<pre> 
+
+    always @(posedge clock)
+        if (notReset &amp;&amp; (scanShiftEnable !== 1)) begin
+             regOut = #ckToQ regIn;
+             @regIn;
+        end
+</pre>
+					<p>What would happen if regIn changed before t+ckToQ?</p>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

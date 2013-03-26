@@ -1,0 +1,57 @@
+<html lang="en">
+
+	<head>
+		<title>GHDL guide</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+		<meta name="description" content="GHDL guide">
+		<meta name="generator" content="makeinfo 4.1">
+		<link href="http://texinfo.org/" rel="generator-home">
+		<link href="../../../resources/base_style.css" rel="stylesheet" type="text/css" media="all">
+	</head>
+
+	<body>
+		<p>Node:<a name="The%20hello%20word%20program">The hello word program</a>, Next:<a href="A-full-adder.html#A%20full%20adder" rel="next">A full adder</a>, Previous:<a href="Starting-with-GHDL.html#Starting%20with%20GHDL" rel="previous">Starting with GHDL</a>, Up:<a href="Starting-with-GHDL.html#Starting%20with%20GHDL" rel="up">Starting with GHDL</a></p>
+		<hr>
+		<br>
+		<h3>The hello world program</h3>
+		<p>To illustrate the large purpose of VHDL, here is a commented VHDL &quot;Hello world&quot; program.<br>
+		</p>
+		<pre>--  Hello world program.
+use std.textio.all; --  Imports the standard textio package.
+
+--  Defines a design entity, without any ports.
+entity hello_world is
+end hello_world;
+
+architecture behaviour of hello_world is
+begin
+   process
+      variable l : line;
+   begin
+      l := new String'(&quot;Hello world!&quot;);
+      writeline (output, l);
+      wait;
+   end process;
+end behaviour;
+</pre>
+		<p>Suppose this program is contained in the file <code>hello.vhdl</code>. First, you have to compile the file; this is called <dfn>analysis</dfn> of a design file in VHDL terms.<br>
+		</p>
+		<pre>$ ghdl -a hello.vhdl
+</pre>
+		This command generates a file <code>hello.o</code>, which is the object file corresponding to your VHDL program. This command also creates or updates a file <code>work-obj93.cf</code>, which describes the library <code>work</code>.
+		<p>Then, you have to build an executable file.<br>
+		</p>
+		<pre>$ ghdl -e hello_world
+</pre>
+		The <code>-e</code> option means <dfn>elaborate</dfn>. With this option, <code>GHDL</code> creates code in order to elaborate a design, with the <code>hello</code> entity at the top of the hierarchy.
+		<p>The result is an executable program called <code>hello</code> which can be run:<br>
+		</p>
+		<pre>$ ./hello_world
+</pre>
+		<p>and which should display:<br>
+		</p>
+		<pre>Hello world!
+</pre>
+	</body>
+
+</html>

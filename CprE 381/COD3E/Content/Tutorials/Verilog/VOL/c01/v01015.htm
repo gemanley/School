@@ -1,0 +1,31 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td valign="TOP" width="500"><FONT SIZE="3">Verilog allows you to represent the <a href="javascript:parent.goGlossHash('#hierarchy')"><font color="#B22222">hierarchy</font></a> of a design. The Verilog structures which build the hierarchy are:<br>
+					<ul>
+						<li>modules<br>
+						<li>ports
+							<p>A Verilog <b>model</b> is composed of <b>modules</b>. A module is the basic unit of the model, and it may be composed of <b>instances</b> of other modules. A module which is composed of other module instances is called a <a href="javascript:parent.goGlossHash('#parent')"><i><font color="#B22222">parent module</font></i></a>, and the instances are called <a href="javascript:parent.goGlossHash('#child')"><i><font color="#B22222">child modules</font></i></a>.</FONT></p>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td valign="TOP" width="500">
+					<center>
+						<img src="images/v0105g1.gif" height="202" width="272"></center>
+				</td>
+			</tr>
+			<tr>
+				<td valign="TOP" width="500">In this example, there are four modules: system, <tt>comp_1</tt>, <tt>comp_2</tt>, and <tt>sub_3</tt>. System is the parent of <tt>comp_1</tt> and <tt>comp_2</tt>, and <tt>comp_2</tt> is the parent of <tt>sub_3</tt>. <tt>comp_1</tt> and <tt>comp_2</tt> are the children of system, and <tt>sub_3</tt> is the child of <tt>comp_2</tt>.</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

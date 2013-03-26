@@ -1,0 +1,67 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+		<style type="text/css" media="screen"><!--
+#answer  { visibility: hidden; position: absolute }
+--></style>
+		<csactions>
+			<csaction name="181A8C219" class="ShowHide" type="onevent" val0="answer" val1="1"></csaction>
+		</csactions>
+		<csscriptdict import>
+			<script type="text/javascript" src="../../../../resources/CSScriptLib.js"></script>
+		</csscriptdict>
+		<csactiondict>
+			<script type="text/javascript"><!--
+CSAct[/*CMP*/ '181A8C219'] = new Array(CSShowHide,/*CMP*/ 'answer',1);
+
+// --></script>
+		</csactiondict>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td><b>Complete the following module so that clk has the following waveform. Click Answer to see a solution.</b>
+					<p></p>
+					<center>
+						<img src="images/v0706ag1.gif" height="97" width="454"></center>
+					<p></p>
+						<tt><textarea name="SCRIPT1" rows="12" cols="35">
+module clkgen (clk);
+	output clk;
+endmodule
+</textarea></tt>
+							<p><a href="javascript:parent.gotoScreen('07','019',0)"><img src="images/vreset.gif" border="0"></a></p>
+							<center>
+						<a onclick="CSAction(new Array(/*CMP*/'181A8C219'));return CSClickReturn()" href="#" csclick="181A8C219"><img src="images/vanswer.gif" height="39" width="87" border="0"></a></center>
+					<div id="answer">
+						<pre>
+module test;
+	clkgen c1 (clk1);
+	
+	initial begin
+		$monitor($stime,,clk1);
+	#30 	$finish;
+	end
+endmodule
+
+module clkgen (clk);
+	output clk;
+	reg clk;
+initial begin
+	clk = 0;
+#1	forever begin
+	#4	clk = 1;
+	#1	clk = 0;
+	end
+end
+endmodule			
+</pre>
+					</div>
+			</tr>
+		</table>
+	</body>
+
+</html>

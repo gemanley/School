@@ -1,0 +1,46 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">Force and release are often used to initialize flip-flops or other feedback circuits. Consider the following model from Shift Register example in Chapter 4.
+					<p></p>
+					<center>
+						<img src="images/v0439g2.gif" height="218" width="376"></center>
+					<p></p>
+					<pre>
+module latch (bitIn, clk, bitOut);   
+    output bitOut;
+    input bitIn, clk;
+    /* SR jam flip-flop with an enable */
+    
+    not  (bitIn_, bitIn);
+    nand (cin,  bitIn,  clk),
+         (cin_, bitIn_, clk);
+    nand (bitOut,  cin,  bitOut_),
+         (bitOut_, cin_, bitOut);   
+endmodule
+</pre>
+					<p>When clk is 0 initially, the output of this model is x. In real life, the output would be 0 or 1, though it is unknown which it would be. If the circuit which takes the output of this latch as input is insensitive to which it is, it can be useful to force the latch output to be a known value, like this:</p>
+					<p></p>
+					<pre> 
+        latch pos (dataIn, clk, dataOut);
+        ...
+        initial begin
+                force pos.bitOut = 0;
+        #1      release pos.bitOut;
+        end
+        ...
+</pre>
+				</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

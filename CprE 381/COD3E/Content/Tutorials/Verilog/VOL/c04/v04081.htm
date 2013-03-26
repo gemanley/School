@@ -1,0 +1,29 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td>Ambiguous signals are signals which have multiple strength levels. Primarily, they are created by primitives with x values on their inputs. When two ambiguous signals are themselves combined, they generally produce an ambiguous result. For example, given this gate,
+					<p></p>
+					<pre>
+	and (strong1, highz0) (out, a, b);
+
+	a = 1
+	b = x   
+
+would produce   
+
+	out = StH (HiZ0,HiZ1,Sm1,Me1,We1,La1,Pu1,St1)
+</pre>
+					A complete discussion of ambiguous strengths is beyond the scope of this course. The most important thing to keep in mind is that different driving strengths can produce ambiguous results when combined on a single net.</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

@@ -1,0 +1,67 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">Here the user-defined routine is just a place-holder - there is no call= entry point. The C routine my_abort is to be called at the end of simulation, at which time it implements a small command loop.
+					<p>To do this, we use the misc= field in the PLI table. Then, we write the C routine. Note that the user-defined routine must still appear in the Verilog source, even though it does nothing when executed (and, in fact, does not need to be executed).</p>
+				</td>
+			</tr>
+		</table>
+		<table width="600">
+			<tr>
+				<td align="center" width="150"><a href="a09066.htm"><img src="images/vverilog.gif" height="39" width="139" border="0"></a></td>
+				<td align="center" width="150"><a href="b09066.htm"><img src="images/vpli.gif" height="39" width="136" border="0"></a></td>
+				<td align="center" width="190"><a href="c09066.htm"><img src="images/vuser.gif" height="39" width="177" border="0"></a></td>
+				<td align="center" width="110"><a href="d09066.htm"><img src="images/vresults.gif" height="39" width="87" border="0"></a></td>
+			</tr>
+		</table>
+		<p><br>
+		</p>
+		<table width="600">
+			<tr>
+				<td>
+					<pre>
+/* ex12_reason.c */
+#include &quot;acc_user.h&quot;
+#include &quot;vcsuser.h&quot;
+#include &lt;stdio.h&gt;
+ 
+int my_abort ( int data, int reason )
+{
+    int         request;
+ 
+    if ( reason_finish != reason ) { return; }
+    io_printf ( &quot;Welcome to my abort routine.  ( limited )\n\n&quot; );
+    io_printf ( &quot;Legal commands are as follows:\n&quot; );
+    io_printf ( &quot;\t1 - Get current value of Areg as an integer.\n&quot;);
+    io_printf ( &quot;\t0 - exit.\n\n&quot; );
+ 
+    while ( 1 ) {
+        io_printf ( &quot;What is your command?  &quot; );
+        scanf ( &quot;%d&quot;, &request );
+        io_printf ( &quot;\n&quot; );
+ 
+        switch ( request ) {
+          case 1 : 
+            io_printf ( &quot;\t The value of Areg is %s.\n&quot;,
+                     acc_fetch_value ( acc_handle_object (&quot;Areg&quot;), &quot;%d&quot;, 0 ) );
+            break;
+ 
+          default : return;
+        }
+    }
+    return 0;
+}
+</pre>
+					This routine could be added to the existing .c file, or it could be compiled separately.</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

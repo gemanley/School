@@ -1,0 +1,31 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">Part-select is the Verilog term for accessing a subset of bits from a vector. The set of bits accessed must be contiguous, and again this operation may be done for either obtaining or modifying the set of bits.
+					<p></p>
+					<center>
+						<a href="JavaScript:parent.dispWindow('v02099r1.htm','Example')"><img src="images/vexample.gif" height="39" width="91" border="0"></a></center>
+					<p><a href="javascript:parent.goGlossHash('#pselect')"><font color="#B22222">Part-select</font></a> bounds must always be constant-valued expressions, regardless of whether this is a left-hand side or a right-hand side access. Part-select bounds must also follow the declaration of the vector. That is, the following is incorrect</p>
+					<p><tt></tt></p>
+					<dl>
+						<dd>reg [1:20] vbad;<br>
+						<dd>...<br>
+						<dd>x = vbad[3:2];
+							<p></p>
+					</dl>
+					</TT>because the part-select bounds (3:2) are the wrong way around.
+					<p>If the part-select range is out of range of the vector, then the result is x. If the part-select range is partially out of range, then at least the out-of-range bits of the result will be x. Whether any of the bits will be valid data bits is implementation-dependent. The result is also x if either part-select bound is x. Because part-select bounds must be constants, this is a pretty unusual case. As with bit-select, it is illegal to apply part-select to a real register.</p>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

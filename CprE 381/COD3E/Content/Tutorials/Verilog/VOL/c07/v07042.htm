@@ -1,0 +1,36 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<td width="600">In a Moore machine, where the output is a function only of the state, the outputs could be produced by code that looked like this:
+				<p></p>
+				<pre>
+    assign out = outfunc(state);
+    function outfunc;
+        input [1:0] state;
+        case (state)
+        `A:      outfunc = 1;
+        `B:      outfunc = 0;
+        `C:      outfunc = 1;
+        default: outfunc = 1'bx;
+        endcase
+    endfunction
+</pre>
+				<p>Alternatively, the output assignment could be done like this:</p>
+				<p></p>
+				<pre>
+    assign out = state==`A ? 1 :
+                 state==`B ? 0 :
+                 state==`C ? 1 : 1'bx; 
+</pre>
+			</td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

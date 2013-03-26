@@ -1,0 +1,76 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<script language="JavaScript">
+
+
+</script>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td><b>Complete the following module so that it produces this output:</b>
+					<p></p>
+					<pre>
+clk	x	y
+0	0	0
+1	0	0
+0	1	0
+1	1	0
+0	0	1
+1	0	1
+0	0	0
+</pre>
+					Click Answer to see a sample solution.
+					<p></p>
+					<form>
+						<tt><textarea name="SCRIPT" rows="10" cols="60">
+
+module test;
+	reg x, y, clk;
+	
+	always 
+	    #10 clk = ~clk;
+
+	initial begin
+		$display(&quot;clk    x    y&quot;);
+		x = 0;  y = 0;
+		clk = 1;
+		forever
+		@clk	$strobe(&quot; %b     %b    %b&quot;, clk, x, y);
+	end
+
+	initial begin
+		@(negedge clk) ;
+		@(negedge clk)
+			x = 1;
+		@(negedge clk)
+			x = 0;
+		@(posedge clk) ;
+		@(posedge clk)
+			$finish();
+	end
+	
+	always @(posedge clk) ...
+
+	always @(negedge clk) ...
+endmodule
+
+</textarea></tt> <a name="answer">
+							<p><a href="javascript:parent.gotoScreen('05','174',0);"><img src="images/vreset.gif" height="29" width="63" border="0"></a><br>
+							</p>
+							<center>
+								<a href="JavaScript:parent.dispWindow('v05174r1.htm','Answer')"><img src="images/vanswer.gif" height="39" width="87" border="0"></a><br>
+							</center>
+						</a>
+					</form>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

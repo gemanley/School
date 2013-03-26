@@ -1,0 +1,236 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			<pre>
+/*  LocalInterruptStateMachine.v
+    Copyright (c) 1990 NeXT, Inc.
+    Originated:  Wed Oct 10 13:26:18 PDT 1990 by Mark Ross
+    Last Edited:  $Date$ by $Author$
+    
+Overview:
+    State machine to manage the interrupt controller.  When there are 
+    any unmasked interrupts, it will signal a request to the NextBus 
+    Interface logic in order to get a transaction.  When the transaction
+    succeeds, all interrupts which were just reported are masked off.  The
+    masks will be disabled whenever the interrupt is deasserted.  
+    
+IMPORTS:
+    none
+    
+EXPORTS:
+    modules:  LocalInterruptStateMachine
+    tasks:  none
+    
+Internal Tasks:
+    none
+Internal Functions:
+    none
+CHANGE LOG:
+    $Log$
+    
+*/
+module  LocalInterruptStateMachine(
+    /*  General inputs  */
+    reset,
+    clock,
+    /*  Control outputs  */
+    selectDeviceInterruptAddress,
+    selectNextBusNMIAddress,
+    selectNextBusResetAddress,
+    selectDeviceInterruptData,
+    maskDeviceInterrupts, 
+    maskNMI, 
+    maskReset, 
+    /*  Status signals from the data path  */
+    unmaskedDeviceInterruptPending,
+    unmaskedNMIPending,
+    unmaskedResetPending, 
+    /*  Signals to interact with the NextBusInterfaceLogic  */
+    nextBusRequest, 
+    nextBusGrant,
+    masterStart, 
+    ioMasterStart, 
+    masterDataStrobe,
+    /*  Scan signals  */
+    scanShiftIn, 
+    scanShiftOut,
+    scanShiftEnable
+    );
+    /*  IO Declarations  */
+    /*  General signals  */
+        input                   reset;
+        input                   clock;
+    /*  Signals to interact with the NextBusInterfaceLogic  */
+        output                  nextBusRequest;
+        input                   nextBusGrant;
+        input                   masterStart;
+        output                  ioMasterStart;
+        input                   masterDataStrobe;
+    /*  Control outputs  */
+        output                  selectDeviceInterruptAddress;
+        output                  selectNextBusNMIAddress;
+        output                  selectNextBusResetAddress;
+        output                  selectDeviceInterruptData;
+        output                  maskDeviceInterrupts;
+        output                  maskNMI;
+        output                  maskReset;
+    /*  Status signals from the data path  */
+        input                   unmaskedDeviceInterruptPending;
+        input                   unmaskedNMIPending;
+        input                   unmaskedResetPending;
+    /*  Scan signals  */
+        input                   scanShiftIn;
+        output                  scanShiftOut;
+        input                   scanShiftEnable;
+        
+    /*  Registers for the states and outputs  */
+    reg                 nextBusRequest;
+    reg                 nextIOMasterStart;
+    reg                 selectDeviceInterruptAddress;
+    reg                 selectNextBusNMIAddress;
+    reg                 selectNextBusResetAddress;
+    reg                 selectDeviceInterruptData;
+    reg                 maskDeviceInterrupts;
+    reg                 maskNMI;
+    reg                 maskReset;
+    
+    wire [3-1:0]        presentState;
+    reg [3-1:0]         nextState;
+    
+    /*  State assignments  */
+    parameter idle = 3'd0;
+    parameter requestNextBusState = 3'd1;
+    parameter driveDeviceInterruptAddressState = 3'd2;
+    parameter driveDeviceInterruptDataState = 3'd3;
+    parameter driveNMIAddressState = 3'd4;
+    parameter waitUntilDoneWithDataCycle = 3'd5;
+    parameter driveResetAddressState = 3'd6;
+    
+    /*  Combinatorial logic  */
+    always @(
+        presentState
+        or nextBusGrant
+        or masterDataStrobe
+        or unmaskedDeviceInterruptPending
+        or unmaskedNMIPending
+        or unmaskedResetPending
+        or masterStart
+    ) begin :stateMachineLogic
+        /*  Set up the default state of the outputs  */
+        nextState = presentState;
+        nextBusRequest = 0;
+        nextIOMasterStart = 0;
+        selectDeviceInterruptAddress = 0;
+        selectNextBusNMIAddress = 0;
+        selectNextBusResetAddress = 0;
+        selectDeviceInterruptData = 0;
+        maskDeviceInterrupts = 0;
+        maskNMI = 0;
+        maskReset = 0;
+        
+        case (presentState) /*  synopsys parallel_case */
+        idle:  begin
+            if (unmaskedResetPending | 
+            unmaskedNMIPending |
+            unmaskedDeviceInterruptPending) 
+            begin
+            nextState = requestNextBusState;
+            end
+        end
+        
+        requestNextBusState:  begin
+            nextBusRequest = 1;
+            if (nextBusGrant &amp; ~masterStart) begin
+                if (unmaskedResetPending) begin
+                    nextState = driveResetAddressState;
+                    nextIOMasterStart = 1;
+                end else if (unmaskedNMIPending) begin
+                    nextState = driveNMIAddressState;
+                    nextIOMasterStart = 1;
+                end else begin
+                    //  must be unmaskedDeviceInterruptPending
+                    nextState = driveDeviceInterruptAddressState;
+                    nextIOMasterStart = 1;
+                end 
+            end
+        end
+        
+        driveDeviceInterruptAddressState:  begin
+            nextIOMasterStart = 1;
+            selectDeviceInterruptAddress = 1;
+            if (masterDataStrobe) begin
+            nextState = driveDeviceInterruptDataState;
+            end
+        end
+        
+        driveDeviceInterruptDataState:  begin
+            nextIOMasterStart = 1;
+            selectDeviceInterruptData = 1;
+            if (masterDataStrobe) begin
+            nextIOMasterStart = 0;
+            maskDeviceInterrupts = 1;
+            nextState = idle;
+            end
+        end
+        
+        driveNMIAddressState:  begin
+            nextIOMasterStart = 1;
+            selectNextBusNMIAddress = 1;
+            if (masterDataStrobe) begin
+                maskNMI = 1;
+                nextState = waitUntilDoneWithDataCycle;
+            end 
+        end
+        
+        driveResetAddressState:  begin
+            nextIOMasterStart = 1;
+            selectNextBusResetAddress = 1;
+            if (masterDataStrobe) begin
+                maskReset = 1;
+                nextState = waitUntilDoneWithDataCycle;
+           end 
+        end
+        
+        waitUntilDoneWithDataCycle:  begin
+            nextIOMasterStart = 1;
+            if (masterDataStrobe) begin
+                nextState = idle;
+                nextIOMasterStart = 0;
+            end
+        end
+        
+        endcase /*  presentState  */
+    end
+    
+    RegX4 stateReg(
+    .regOut({
+        ioMasterStart,
+        presentState
+    }),
+    .regIn({
+        nextIOMasterStart, 
+        (reset? idle : nextState)
+    }),
+    .clkEnable1(1'b1),
+    .clkEnable2(1'b1),
+    .clock(clock),
+    .scanShiftOut(scanShiftOut),
+    .scanShiftIn(scanShiftIn),
+    .scanShiftEnable(scanShiftEnable)
+    );
+    
+endmodule  /*  LocalInterruptStateMachine  */
+
+
+</pre>
+		</table>
+	</body>
+
+</html>

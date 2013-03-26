@@ -1,0 +1,62 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<font size="3" face="Times">
+			<table width="600" cellpadding="10">
+				<tr>
+					<td>There are two Port Connection Rules:
+						<p>&nbsp;</p>
+						<center>
+							<table width="500" border="1">
+								<tr>
+									<td width="250">
+										<center>
+											<b>Rule 1</b></center>
+										</b></td>
+									<td width="250">
+										<center>
+											<b>Rule 2</b></center>
+										</b></td>
+								</tr>
+								<tr>
+									<td valign="top" width="250">An input port or inout port must be defined to be a net.</td>
+									<td valign="top" width="250">Ports which are defined to be output or inout may only have the following connected to them in the instantiation:
+										<p></p>
+										<ul>
+											<li>a net (scalar or vector)
+											<li>constant bit-select of a net
+											<li>part-select of a net
+											<li>concatenation of the above
+										</ul>
+									</td>
+								</tr>
+							</table>
+							<p></p>
+						</center>
+					</td>
+				</tr>
+			</table>
+			<table width="600">
+				<tr>
+					<td>A simple summary is:
+						<p></p>
+						<ul>
+							<li>nets receive signal values
+							<li>net or register port expressions send values
+						</ul>
+						Click the Diagram button to see an illustration of the Port Connection rules.
+						<p></p>
+						<center>
+							<a href="JavaScript:parent.dispWindow('v04027r1.htm','diagram')"><img src="images/v0408b1.gif" height="38" width="91" border="0"></a></center>
+					</td>
+				</tr>
+			</table>
+		</font>
+	</body>
+
+</html>

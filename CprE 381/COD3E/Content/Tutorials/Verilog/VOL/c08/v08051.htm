@@ -1,0 +1,17 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<td width="600">A middle ground solution that is often acceptable is to save the model history for a limited period (e.g. the last 10,000 cycles) in a circular buffer. Then, if the results are wrong, you can look at the limited history file and find the problem. This works best if there is enough internal checking to stop the simulation somewhere near where the error occurred. All of the commercial waveform viewers offer this capability.
+				<p>There is another disadvantage of saving all signal changes in a model, and that is simulation speed is adversely affected. Saving all signal changes can slow down simulation by 10-20%, even if they are not written out to an external file. Consequently, it is somewhat expensive to always save all signal changes, even in a circular buffer that is never written to disk.</p>
+			</td>
+		</table>
+		</FONT>
+	</body>
+
+</html>

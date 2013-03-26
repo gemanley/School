@@ -1,0 +1,71 @@
+
+@import url(../../../resources/base_style.css);
+BODY {
+  font-family: Verdana, Arial, Helvetica;
+  font-size: 10pt;
+}
+
+BLOCKQUOTE {
+  font-family: Verdana, Arial, Helvetica;
+  font-size: 10pt;
+}
+
+TEXTAREA {
+  font-family: Verdana, Arial, Helvetica;
+  font-size: 10pt;
+}
+
+P {
+  font-family: Verdana, Arial, Helvetica;
+  font-size: 10pt;
+}
+
+UL {
+  font-family: Verdana, Arial, Helvetica;
+  font-size: 10pt;
+}
+
+OL {
+  font-family: Verdana, Arial, Helvetica;
+  font-size: 10pt;
+}
+
+CENTER {
+  font-family: Verdana, Arial, Helvetica;
+  font-size: 10pt;
+}
+
+TD {
+  font-family: Verdana, Arial, Helvetica;
+  font-size: 10pt;
+}
+
+H3 {
+  font-family: Verdana, Arial, Helvetica;
+  font-size: 13pt;
+  color: #0A6C3B;
+  }
+
+H4 {
+  font-family: Verdana, Arial, Helvetica;
+  font-size: 11pt;
+  color: #551605;
+}
+
+H5 {
+  font-family: Verdana, Arial, Helvetica;
+  font-size: 10pt;
+  color: #247C16;
+  font-weight: bold;
+}
+
+H6 {
+  font-family: Verdana, Arial, Helvetica;
+  font-size: 8pt;
+  font-weight: normal;
+}
+
+A:link { color:#0A6C3B; text-decoration:underline }    /* unvisited link */
+A:visited { color:#555555; text-decoration:underline } /* visited links */
+A:active { color:#6ACC9B; text-decoration:underline }  /* active links */
+A:hover { color:#6ACC9B; text-decoration:underline }   /* active links */

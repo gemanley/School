@@ -1,0 +1,39 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td>The preceding description of a sequential UDP is dependent only on the value of the input ports and the current state variable. This is called level-sensitive behavior. While this can be very useful, it can be much more useful to be able to specify output behavior based on input transitions, or edges.
+					<p>To do this, a sequential UDP table can contain entries which specify value transitions, like this:</p>
+					<p><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(01) 1 : ? : 1;</tt></p>
+					<p></TT>This entry says that on the rising edge of the first input, the output becomes the value of the second input.</p>
+					<p>There are a few rules governing edge-sensitive UDPs.</p>
+					<p></p>
+					<ul>
+						<li>There can be only one edge specifier in a single table row.
+							<p></p>
+						<li>All transitions which do not affect the output must be explicitly specified. This is because the output will be x for any unspecified transition. In the above example, if there was no other table entry, then it would be the same as if the table contained this line:
+							<p></p>
+					</ul>
+					<TT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(10) ? : ? : x;
+					<p></TT></p>
+					<ul>
+						<li>If there is an edge specifier for any input, there must be one for all inputs.
+							<p></p>
+						<li>If an input has both an edge-sensitive and a level-sensitive table entry, the level-sensitive one dominates. Consequently, most inputs do not need edge-sensitive specifiers on them.
+					</ul>
+					<p></p>
+					<center>
+						<a href="JavaScript:parent.dispWindow('v04111r1.htm','JKflipflop')"><img src="images/v0434b1.gif" height="39" width="117" border="0"></a></center>
+				</td>
+			</tr>
+		</table>
+		</FONT>
+	</body>
+
+</html>

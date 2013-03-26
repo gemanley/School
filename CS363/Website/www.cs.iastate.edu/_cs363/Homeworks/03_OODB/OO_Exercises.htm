@@ -1,0 +1,85 @@
+<html>
+
+
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Homeworks/03_OODB/OO_Exercises.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:01:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>New Page 2</title>
+<style>
+<!--
+DIV.exampleInner {
+	PADDING-RIGHT: 4px; BORDER-TOP: #d3d3d3 4px double; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; MARGIN: 0em; PADDING-TOP: 4px; BORDER-BOTTOM: #d3d3d3 4px double; BACKGROUND-COLOR: #d5dee3
+}
+-->
+</style>
+<meta name="Microsoft Border" content="t, default">
+</head>
+
+<body><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td>
+
+<p><font face="AGaramond" size="3">Com S 363: Introduction to Database Systems</font><br>
+<font face="AGaramond" size="5">Introduction to Database Systems </font></p>
+<p>
+
+</p>
+<p>&nbsp; </p>
+
+</td></tr><!--msnavigation--></table><!--msnavigation--><table dir="ltr" border="0" cellpadding="0" cellspacing="0" width="100%"><tr><!--msnavigation--><td valign="top">
+
+<font SIZE="5">
+<p><i><font face="Arial">Exercises on a query language for objects </font></i></font></p>
+<font FACE="Times New Roman">
+<p ALIGN="JUSTIFY">In Project 1 we considered a University application in the 
+relational database setting. The following is a scheme for the same application 
+in our own object-oriented setting. Luckily for us, every relation becomes a 
+collection of objects. A Student is a person and a Faculty is also a person. 
+These are shown as directed edges labeled &quot;isa&quot;. All other directed edges show 
+reference attributes. Note that PreReq attribute in Course is a set of 
+references. </p>
+</font>
+
+<p>
+<MAP NAME="Homework 4 Figure-1">
+</MAP>
+<IMG SRC="OO_Figure.gif" USEMAP="#Homework 4 Figure-1" width="360" height="255"></p>
+<p>In our own SQL-like language, express each of the following in terms of 
+single select statement. Of course, a select statement may have other nested 
+selects. Note that <font color="#FF0000">our problem numbers deliberately start at 07</font>. Problems 07-12 
+will directly correspond to Items 07-12 on a future project where you will be 
+asked to write object-oriented style XQuery queries instead of our SQL-style 
+queries.&nbsp; FYI, Items 01 to 06 in that project will be about relational 
+style XQuery queries. </p>
+<p><font color="#FF0000">Feel free to come-up with any constructs for your SQL 
+queries so long as they make sense from a logical standpoint. </font> </p>
+    <p class="MsoNormal"><b>Problem 07.</b> List the FacultyID, Rank and Salary of 
+    the faculty who is a professor with a salary of 100K or higher.</p>
+    <p class="MsoNormal"><b>Problem 08.</b> List the StudentIDs of students and the 
+    FacultyIDs of their Mentors for students who have got at least one A's in 
+    their grades.</p>
+    <p class="MsoNormal"><b>Problem 09.</b> List the names of students and the 
+    FacultyIDs of their Mentors for students who have got all A's in their 
+    grades.</p>
+    <p class="MsoNormal"><b>Problem 10.</b> List the course codes of those courses 
+    that are prerequisites of prerequisites for the course ‘CS511’. We only want 
+    second level prerequisites. You should ignore immediate prerequisites.</p>
+    <p class="MsoNormal"><b>Problem 11. </b>For each classification, list the number 
+    of students and average GPA. Your query should not use constants, such as 
+    &quot;Freshman&quot;. In the output, each tuple should consist of 
+    Classification, NumOfStudents, and AvgGPA. </p>
+    <p class="MsoNormal"><b>Problem 12. </b>Reorganize Enrollment collection by StudentID. 
+    For each student you should have retrieve the student's id and a Grade. The 
+    Grade should be a relation consisting of CourseCode and LetterGrade 
+    attributes. </p>
+<font SIZE="2" face="Courier New">
+</font>
+    
+<!--msnavigation--></td></tr><!--msnavigation--></table></body>
+
+
+<!-- Mirrored from www.cs.iastate.edu/~cs363/Homeworks/03_OODB/OO_Exercises.htm by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 11 Dec 2012 05:01:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+</html>

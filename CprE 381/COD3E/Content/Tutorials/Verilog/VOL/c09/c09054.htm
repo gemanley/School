@@ -1,0 +1,60 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="600">This example is a user-defined task which, when called, will set a given register to a given value. Both the register and the value are given as parameters to the system task.
+					<p>The utility routines it uses in the C code are:</p>
+					<p>tf_getp(narg)<br>
+						A function that returns the value of the nth parameter of the user-defined task. The value returned is 2-value (x and z values are returned as 0).</p>
+					<p>tf_putp(narg, new)<br>
+						Change the nth parameter to the value given by new. If narg is 0, the function value is returned.</p>
+					<p>io_printf ( &quot;In my_tf: old=%d, new=%d\n&quot;, old, new )<br>
+						A print routine which prints to both stdout and the log file (if any).</p>
+				</td>
+			</tr>
+		</table>
+		<table width="600">
+			<tr>
+				<td align="center" width="150"><a href="a09054.htm"><img src="images/vverilog.gif" height="39" width="139" border="0"></a></td>
+				<td align="center" width="150"><a href="b09054.htm"><img src="images/vpli.gif" height="39" width="136" border="0"></a></td>
+				<td align="center" width="190"><a href="c09054.htm"><img src="images/vuser.gif" height="39" width="177" border="0"></a></td>
+				<td align="center" width="110"><a href="d09054.htm"><img src="images/vresults.gif" height="39" width="87" border="0"></a></td>
+			</tr>
+		</table>
+		<p><br>
+		</p>
+		<table width="600">
+			<tr>
+				<td>
+					<pre>
+/* ex2_tf.c */
+#include &quot;acc_user.h&quot;
+#include &quot;vcsuser.h&quot;
+ 
+int my_tf ( )
+{
+    int         old;
+    int         new;
+ 
+    old = tf_getp ( 1 );   // gets the first parameter's value
+    new = tf_getp ( 2 );    // gets the second parameter's value
+ 
+    io_printf ( &quot;In my_tf: old=%d, new=%d\n&quot;, old, new );
+ 
+    tf_putp ( 1, new );     // changes the first parameter's value
+  
+    return 0;
+}
+</pre>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

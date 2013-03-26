@@ -1,0 +1,35 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td width="417">The $random system function returns a random number. It is called like this:
+					<p></p>
+					<pre>
+        $random [(seed)]
+</pre>
+					<p><tt>$random</tt> returns a 32-bit signed integer.</p>
+					<p>The seed must be a reg, integer, or time register. If the seed is omitted, an arbitrary seed is used. It is recommended that you use a seed.</p>
+					<p>The seed is modified on each call to <tt>$random</tt>. This is one of the few places where a function can modify its argument.</p>
+					<p>Examples:</p>
+					<p></p>
+					<pre>
+    integer rand;
+    rand = $random % 60;
+    
+    seed = 17;
+    rand = {$random(seed)} % 60;
+</pre>
+					<p>The first example above produces a random number between -59 and +59. The second example produces a random number between 0 and 59, because the concatenation operator changes the signed integer into an unsigned one.</p>
+				</td>
+				<td valign="top" width="183"><img src="images/v0635g1.gif" height="127" width="183"></td>
+			</tr>
+		</table>
+	</body>
+
+</html>

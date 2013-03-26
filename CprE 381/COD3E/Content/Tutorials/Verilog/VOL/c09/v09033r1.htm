@@ -1,0 +1,27 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			The veriuser.c (Verilog-XL) file would look like this:
+			<pre>
+int checkArgs();       /* added */
+int myTask();          /* added */
+int myTaskCleanup();   /* added */
+
+
+s_tfcell veriusertfs[] =
+{
+    ( usertask, 0, checkArgs, 0, myTask, myTaskCleanup, &quot;$mytask&quot; ),
+    (0)     /*** final entry must be 0 ***/
+};
+</pre>
+		</table>
+	</body>
+
+</html>

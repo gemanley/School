@@ -1,0 +1,29 @@
+<html lang="en">
+
+	<head>
+		<title>GHDL guide</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+		<meta name="description" content="GHDL guide">
+		<meta name="generator" content="makeinfo 4.1">
+		<link href="http://texinfo.org/" rel="generator-home">
+		<link href="../../../resources/base_style.css" rel="stylesheet" type="text/css" media="all">
+	</head>
+
+	<body>
+		<p>Node:<a name="VHDL%20files%20format">VHDL files format</a>, Next:<a href="Top-entity.html#Top%20entity" rel="next">Top entity</a>, Previous:<a href="Library-database.html#Library%20database" rel="previous">Library database</a>, Up:<a href="GHDL-implementation-of-VHDL.html#GHDL%20implementation%20of%20VHDL" rel="up">GHDL implementation of VHDL</a></p>
+		<hr>
+		<br>
+		<h3>VHDL files format</h3>
+		<p>VHDL has features to handle files.</p>
+		<p>GHDL associates a file logical name (the VHDL file name) to an operating system file name. The logical name <code>STD_INPUT</code> is associated to the standard input as defined by <code>stdin</code> stream of the C library, while the logical name <code>STD_OUTPUT</code> is associated to the standard output, as defined by the <code>stdout</code> stream of the C library. Other logical name are directly mapped to a file name as defined by the first (<code>path</code>) argument of the <code>fopen</code> function of the C library. For a binary file, the <code>b</code> character is appended to the mode argument (binary mode).</p>
+		<p>If multiple file objects are associated with the same external file, a stream is created for each object, except for the standard input or output.</p>
+		<p>GHDL has no internal restrictions on the number of file objects that are associated at one time with a given external file, but the operating system may restrict the maximum number of file open at the same time.</p>
+		<p>For more details about these point, please refer to your operation system documentation.</p>
+		<p>There are two kinds of files: binary or text files.</p>
+		<p>Text files are files of type <code>std.textio.text</code>. The format is the same as the format of any ascii file. In VHDL-87, only the first 128 characters (7 bits) are allowed, since the character type has only 128 literals. The end of line is system dependent. Note that the stdio functions with the text mode are used to handle text files: the fgets function is used to read lines. Please, refer to the manual of your C library for more information.</p>
+		<p>There are two kind of binary files, according to the type mark of the file. According to the VHDL standard, binary files must be read using the same type they are written.</p>
+		<p>If the type mark is a non-composite type (integer, floating type enumeration, physical), the file is a raw stream: elements are read or written using the same format as is used to represent the data in memory. This is highly non-portable, but you should be able to read file written by a non-<code>GHDL</code> program.</p>
+		<p>If the type mark is a composite type (record or array), the file is composed of a 2 lines signature, followed by a raw stream.</p>
+	</body>
+
+</html>

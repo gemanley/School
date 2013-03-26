@@ -1,0 +1,71 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+		<style type="text/css" media="screen"><!--
+#answer  { visibility: hidden; position: absolute }
+--></style>
+		<csactions>
+			<csaction name="196B0CB21" class="ShowHide" type="onevent" val0="answer" val1="1"></csaction>
+		</csactions>
+		<csscriptdict import>
+			<script type="text/javascript" src="../../../../resources/CSScriptLib.js"></script>
+		</csscriptdict>
+		<csactiondict>
+			<script type="text/javascript"><!--
+CSAct[/*CMP*/ '196B0CB21'] = new Array(CSShowHide,/*CMP*/ 'answer',1);
+
+// --></script>
+		</csactiondict>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td><b>Write a module which implements a 3-stage pipeline. Each stage is a single bit, and there is a single bit as input. The output should be 1 whenever all three stages contain a zero, which is the initial condition. The module template is:</b></td>
+			</tr>
+		</table>
+		<table width="600" cellpadding="10">
+			<tr>
+				<td>
+					<tt><textarea name="SCRIPT1" rows="22" cols="55">
+module zero3 (out, in, clk);
+	output out;
+	input in, clk;
+	reg s1, s2, s3;
+	...
+endmodule
+</textarea></tt>
+				</td>
+			</tr>
+		</table>
+		<A HREF="javascript:parent.gotoScreen('07','073',0)"><img src="images/vreset.gif" border="0"></A>
+		<A HREF="JavaScript:parent.dispWindow('v07073r1.htm','Test')"><img src="images/vtest.gif" width="124" height="38" border="0"></a>
+		<center>
+			<A onclick="CSAction(new Array(/*CMP*/'196B0CB21'));return CSClickReturn()" csclick="196B0CB21"><img src="images/vanswer.gif" width="87" height="39" border="0"></a></center>
+			<div id="answer">
+			<pre>
+module zero3 (out, in, clk);
+	output out;
+	input in, clk;
+	reg s1, s2, s3;
+
+	assign out = s1==0 &amp; s2==0 &amp; s3==0;
+
+	initial begin
+		s1 = 0;
+		s2 = 0;
+		s3 = 0;
+	end
+
+	always @(posedge clk) begin
+		s1 &lt;= in; 
+		s2 &lt;= s1;
+		s3 &lt;= s2;
+	end
+endmodule
+</pre>
+			</div>
+	</body>
+</html>

@@ -1,0 +1,123 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<table width="600" cellpadding="10">
+			<tr>
+				<td><b>What is the waveform of q in the following model?</b>
+					<p></p>
+				</td>
+			</tr>
+		</table>
+		<table width="500" cellpadding="10">
+			<tr>
+				<td width="500">
+					<pre>
+module AN4 (q, a, b, c, d);
+	output q;
+	input a, b, c, d;
+	assign q = a &amp; b &amp; c &amp; d;
+	specify
+		(a =&gt; q) = 10;
+		(b =&gt; q) = 12;
+		(c,d *&gt; q) = 16;
+	endspecify
+endmodule
+module test;
+	reg a, b, c, d;
+	AN4 n (q, a, b, c, d);
+	initial begin
+	#100	a = 1; b = 1; c = 1; d = 1;
+	#100	a = 0;
+	#100	a = 1;
+	#100	c = 0;
+	#100	c = 1;
+	#100	$finish;
+	end
+endmodule
+
+</pre>
+				</td>
+			</tr>
+		</table>
+		<table width="600">
+			<tr>
+				<td>
+					<form>
+						<pre>
+<input onclick="parent.setValue(0,0)" type="radio" name="A" value="-1">a.  time:  0   100   200   300   400   500<br>
+							
+							
+							
+    q:  x         1     0     1     0     1
+<br>
+							
+							
+							
+<input onclick="parent.setValue(0,1)" type="radio" name="A" value="-1">b.  time:  0   110   210   310   416   516<br>
+							
+							
+							
+    q:  x         1     0     1     0     1
+<br>
+							
+							
+							
+<input onclick="parent.setValue(0,2)" type="radio" name="A" value="-1">c.  time:  0   116   210   310   416   516<br>
+							
+							
+							
+    q:  x         1     0     1     0     1
+<br>
+							
+							
+							
+<input onclick="parent.setValue(0,3)" type="radio" name="A" value="-1">d.  time:  0   116   226   336   452   568<br>
+							
+							
+							
+    q:  x         1     0     1     0     1
+<br>
+							
+							
+							
+<input onclick="parent.setValue(0,4)" type="radio" name="A" value="-1">e.  time:  0   116   212   312   416   516<br>
+							
+							
+							
+    q:  x         1     0     1     0     1
+<br>
+							
+							
+							
+<input onclick="parent.setValue(0,5)" type="radio" name="A" value="-1">f.  time:  0   116   216   310   416   516<br>
+							
+							
+							
+    q:  x         1     0     1     0     1
+<br>
+							
+							
+							
+<input onclick="parent.setValue(0,6)" type="radio" name="A" value="-1">g. this will not compile<br>
+							
+							
+							
+<input onclick="parent.setValue(0,7)" type="radio" name="A" value="-1">h. none of the above<br>
+							
+							
+							
+</pre>
+					</form>
+					<b>Click Done to check your answer.</b>
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:parent.checkAnswer(0,2)"><img src="images/vdone.gif" height="39" width="74" border="0"></a></center></p>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

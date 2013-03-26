@@ -1,0 +1,328 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from class.ece.iastate.edu/cpre288/labs/Lab1/index.asp by HTTrack Website Copier/3.x [XR&CO'2010], Wed, 12 Dec 2012 08:16:46 GMT -->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<!-- INSERT TITLE -->
+	<title>CprE 288 Lab Manual</title>
+
+	<meta charset="utf-8"> 
+	<link rel="stylesheet" href="../../css/base4341.css?1.6" media="all"> 
+	<link rel="stylesheet" href="../../css/iastate4341.css?1.6" media="all"> 
+	<!--[if lt IE 9]>
+		<link rel="stylesheet" href="../../css/ie-fix.css">
+		<link rel="stylesheet" href="../../css/ie-fix-iastate.css">
+		<script>
+			(function()
+			{
+				var els = 'header,footer,section,aside,nav,article,hgroup,time'.split(',');
+				for (var i = 0; i < els.length; i++)
+					document.createElement(els[i]);
+			})()
+		</script>
+	<![endif]--> 
+
+	<link rel="stylesheet" href="../../css/content4341.css?1.6" media="all">
+
+	<!-- PAGE CONTENT -->
+	<meta name="title" content="CprE 288 - Embedded Systems Lab Manual">
+	<meta name="keywords" content="cpre 288, cpre288, lab manual, manual, iRobot, course, iastate, atmel, atmega128">
+</head>
+<body>
+
+<!-- HEADER -->
+	<header> 
+		<article id="ribbon"> 
+			<section class="grids-24"> 
+				<section class="grid-16"> 
+					<h1> 
+						<img src="../../css/isu-logo.png" alt="Iowa State University"/> 
+					</h1> 
+				</section> 
+				<section class="grid-8"> 
+					<form method="get" action="http://google.iastate.edu/search"> 
+						<input type="hidden" name="output" value="xml_no_dtd"/> 
+						<input type="hidden" name="client" value="default_frontend"/> 
+						<input type="hidden" name="site" value="class.ece.iastate.edu/cpre288"/> 
+						<input type="hidden" name="proxystylesheet" value="beta_frontend"/> 
+						<input type="text" name="q" tabindex="1" accesskey="s" placeholder="Search"/> 
+						<input type="submit" name="btnG" value="" title="Search"/> 
+					</form> 
+				</section> 
+			</section> 
+		</article> 
+	</header> 
+
+    
+   	<article>
+		<section id="container">
+			<section class="grids-24"> 
+                <article id="content" class="grid-24"> 
+                    <section class="gutter">
+<!-- BODY -->
+
+
+<h1>CPRE 288 Laboratory</h1>
+<hr>
+<h1>Lab 1: Introduction to the AVR Studio 5 and VORTEX Platform</h1>
+
+
+
+<h2>Lecture - Lab Connection</h2>
+
+<p>In lecture, we are starting with an overview of microcontrollers and
+embedded systems. In this lab, we are starting with an overview of the
+platform being used in the lab for investigating microcontrollers and embedded
+systems. The educational environment includes the AVR Studio 5, an integrated
+development environment (IDE) provided by Atmel, and the VORTEX platform consisting
+in part of a Cerebot II microcontroller board designed by Digilent and an 
+iRobot Create mobile sensor platform. Lecture begins with a review of the 
+C programming language, and we will also start using C immediately in the labs. 
+Self-study based on your own needs through your laboratory experiences will 
+be an important complement to the lectures.</p>
+
+<p>The VORTEX platform is the CprE Department's code name for the
+iRobot Create platform, the Cerebot II add-on, and various additional
+accessories (LCD board, sonar/servo, stepper motor, bluetooth dongle, etc).</p>
+
+
+
+<h2>Prelab</h2>
+
+<ul>
+ <li>Read carefully the lab policies on the course website.</li>
+ <li>Read through the lab description, including the linked documents.</li>
+ <li>Print the <a href="lab_eval.doc">Lab Evaluation Form</a>.</li>
+</ul>
+
+
+
+<h2>Reference Files</h2>
+
+<p>Download the following files to a single folder on your U: drive. (Right-click 
+and select 'Save Target As')</p>
+
+<ul>
+ <li><a href="../programs/helloworld.c">helloworld.c</a>: The main program for printing "Hello, World" on the board's LCD screen</li>
+ <li><a href="../programs/lcd.c">lcd.c</a>: A program file with a number of LCD functions</li>
+ <li><a href="../programs/lcd.h">lcd.h</a>: The header file for lcd.c</li>
+ <li><a href="../programs/lab1/util.c">util.c</a>: A program file that supports lcd.c</li>
+ <li><a href="../programs/lab1/util.h">util.h</a>: The header file for util.c</li>
+</ul>
+
+
+<hr>
+<h1>Part I. "Hello, world"</h1>
+
+
+<p>In this part, you will build a program executable from files provided to you.</p>
+
+<h3>Create a project and build</h3>
+
+<p><i>Note: Before starting AVR Studio, make sure the blue JTAGICE mkII box is connected to the computer via USB and is powered on.  AVR Studio recognizes the JTAGICE mkII during startup.</i></p>
+
+<p>Start AVR Studio. Select File -&gt; New -&gt; Project (or Ctrl+Shift+N).  You will see the following dialogue:</p>
+
+
+<a href="images/image001.jpg"><img src="images/image001.jpg" width=200/></a>
+
+
+<p>Make sure you select "AVR GCC" -&gt; "C Executable Project" as the template. The checkbox
+"Create directory for Solution" is checked by default.</p>
+
+<p><strong>WARNING</strong>: Make sure your project is saved to a directory that is not a UNC path (AVR does not accept UNC
+paths like \\ComputerName\SharedFolder\MyProject).</p>
+
+<p>You may use "helloworld" as the project name and then the default initial file is "helloworld.c". Other project names
+can be used, but then you need to keep in mind that the initial file name will
+not be "helloworld.c".
+
+<p>Click on "OK".</p>
+
+<p>Now you will select your platform from the many Atmel processors from the following screen:</p>
+
+
+<a href="images/image004.jpg"><img src="images/image004.jpg" width=200/></a>
+
+
+<p>Choose "ATmega128".  The ATmega128 is the microcontroller on our version of the Cerebot II controller board.</p>
+
+<p>Click on "OK".</p>
+
+<p>Next, <strong>delete the default template file named helloworld.c</strong> (this file is empty and has the same name as 
+your newly created project).  Delete it by right-clicking on "helloworld.c" in the Solution Explorer window, then select delete.</p>
+
+<p>Now add files into the project. Right-click in the Solution Explorer on the right side of AVR Studio. Click on <strong>Add -&gt; "Existing item..."</strong> You will
+see a dialogue window, select "lcd.c", "lcd.h", "util.c", "util.h", and "helloworld.c".  Then click "Add".</p>
+
+
+<a href="images/image010.jpg"><img src="images/image010.jpg" width=200/></a>
+
+
+<p>Build the binary image by using the menu or the shortcut key F7. You should see this 
+message at the end: "Build succeeded."  Your source code has just been compiled into a 
+binary program named "helloworld.hex" in your project's "debug" folder.</p>
+
+
+
+<h3>Load the Binary Image on to the ATmega128 processor</h3>
+
+<p>We will be using a device called the JTAGICE mkII (figure below) to provide both programming and on-chip debugging
+capabilities. The JTAGICE mkII is managed from within AVR Studio.</p>
+
+
+<a href="images/JTAGICE_mkII.jpg"><img src="images/JTAGICE_mkII.jpg" width=200/></a>
+
+
+<p>Attach the cable connected to the mkII to the JTAG header on the red Cerebot II board. Since both the cable
+and connector are keyed there should only be one orientation for which they fit
+together. On the back side of the mkII is a USB connector and a power
+switch. As you would expect, the power needs to be turned on the mkII in
+order for it to be functional. You will see lights lit on the topside
+when it is powered. When the mkII is oriented as shown in the picture, the left
+most light will be green when the mkII is properly attached to the Cerebot II
+board and both are turned on. For more details on the status LEDs take a
+look at the JTAGICE mkII's <a
+href="http://support.atmel.no/knowledgebase/avrstudiohelp/mergedProjects/JTAGICEmkII/mkII/Html/JTAGICE_mkII_Hardware_description.htm">hardware
+description</a>.
+
+<p><i>Note: Always leave the JTAGICE mkII powered on and connected to the computer.  It must be connected when 
+you start AVR Studio, otherwise, AVR Studio will not recognize it properly.  If you switch JTAGICE mkII boxes because yours is broken, you 
+must restart AVR Studio.</i></p>
+
+<p>To load your program, select the "Debug" file menu and click "Start Without debugging."  The LCD should now saw "Hello World."</p>
+
+<p><strong>If you have completed this section of the lab within the first 30 minutes of lab, move on to Part 2.  The parts of the lab are cummulative, and demoing the last part to the TA is sufficient for receiving all points.  If you think you will fail to complete the entire lab within the lab period, you may demo this part to your TA for partial credit and demo the remaining parts at the beginning of your next lab session.</strong></p>
+
+
+
+<hr>
+<h2>Part 2. Simulated Execution</h2>
+
+<p>In this section, you will explore the simulation feature of AVR Studio. 
+Simulating runs your program using a software simulator of the ATmega128
+processor. Simulated execution has many advantages: You can run the program
+without the controller board, so in the future labs you can test run your
+program on your home computers (you can download AVR Studio for free). 
+More importantly, you can do debugging with simulation. </p>
+
+<p>Simulation does have a shortcoming: It only simulates the
+microcontroller. The JTAGICE mkII is capable of allowing one see how the
+program is operating in the physical environment on the actual processor.  JTAGICE mkII debugging
+will be explored in a future lab. You will not see the contents of the LCD
+screen, push button actions, LED status and other devices on the
+microcontroller board.</p>
+
+<p>In the AVR studio, right-click on your project "helloworld" in the
+Solution Explorer and select "Properties", and then select "Tool."  Choose AVR Simulator as the selected debugger.</p>
+
+<p>Click the "Debug" file menu and then click "Start Debugging". Press F10 to step over each statement until you reach statement "lprintf" function.  Press F11 to step in this function.</p>
+
+<p>Move on to Part III, or explain how to debug to the TA for partial credit.</p>
+
+
+
+<hr>
+<h2>Part 3. Rotating Banner</h2>
+
+<p>In this section, you will write a program to show a rotating banner on the LCD screen.  Every 300 milliseconds, the text "Microcontrollers are lots of fun!" should move one position to the left.  This banner should repeat indefinitely.  Edit your helloworld project, as it provides a good starting point.</p>
+
+<p>Here are the requirements of the output:</p>
+
+<ul>
+ <li>Only the first line of the LCD screen should be used. The LCD screen has 4
+     lines. The second line should be blank all the time. </li>
+ <li>At the beginning, the first letter 'M' appears on the right side of Line 1.  The following characters appear one by
+     one every 0.3 second.</li>
+ <li>After the 20<sup>th</sup> letter appears, new characters appear one by one every 0.3 second and push the old letters off the LCD screen. </li>
+ <li>After the last character '!' appears on the right, the message continues shifting to the left.  Every 300 milliseconds the leftmost letter is pushed out until the screen is
+     completely cleared.</li>
+ <li>After the screen is cleared for 0.3 second, repeat the whole procedure again.  The banner should repeat forever until the board is turned off. </li>
+ <li>You need to write your program so that the message can be changed quickly.  The TA will ask you to display a new message during the demo.  You should only need to make a minor change to your program and compile. </li>
+</ul>
+
+There are three functions that have been written for you that will help:</p>
+
+<ul>
+ <li>wait_ms(unsigned int n): Delay the program execution for n milliseconds. </li>
+ <li>lcd_init(): Initializes the IO ports to communicate with the LCD controller; clears the screen. </li>
+ <li>lprintf(const char *fmt, ...): Clears the screen and displays text.  See documentation on <a href="http://www.cplusplus.com/reference/clibrary/cstdio/printf/">printf</a>.</li>
+</ul>
+
+<p><strong>Demo your program to your TA.</strong></p>
+
+
+<hr>
+<h2>Cautions</h2>
+                
+<p>Never leave a powered-down JTAGICE mkII connected to a powered robot - current may 
+leak from the unit and result in damage to the emulator.  Try to leave the blue JTAGICE 
+mkII box powered on at all times.</p>
+
+<p>Turn the power to the Cerebot board and iRobot off before charging.  The Cerebot 
+board consumes power and the battery will not charge if the robot is in full_mode (which 
+it enters after calling oi_init, turing the power LED yellow).  The robot is charging 
+when the robot's power LED is pulsing red and both green LEDS on the dock are lit.</p>
+
+
+<h2>Reference Files</h2>
+
+<table class="gray" cellpadding="0" cellspacing="0" width="500">
+  <thead>
+    <th>Files</th>
+    <th>Description</th>
+  </thead>
+  </tbody>
+	<tr>
+	  <td><a href="../../resources/docs/HD44780.pdf">LCD Controller Datasheet</a></td>
+	  <td>Information about the LCD controller connected to PORTA</td>
+	</tr>
+    <tr>
+      <td><a href="http://www.cplusplus.com/reference/clibrary/cstdio/printf/">Documentation on printf</a></td>
+      <td>Documentation for the lprintf and printf function.</td>
+    </tr>
+    <tr>
+      <td><a href="lab_eval.doc">Lab Evaluation Form</a></td>
+      <td>Evaluation form for Lab</td>
+    </tr>
+    <tr> 
+      <td><a href="https://spreadsheets.google.com/viewform?hl=en&formkey=dDBwV3J1UkxJdnZfTEtZV2NKSzFwU1E6MQ#gid=0">Online Feedback Form</a></td>
+      <td>Tell us what you think of the lab (feedback forms)</td>
+    </tr>
+  </tbody>
+</table>
+
+                    </section>
+ 				</article> 
+			</section>
+		</section>
+	</article> 
+    
+<!-- FOOTER -->
+	<footer class="grids-24"> 
+		<section id="footer" class="grid-24"> 
+			<section class="grid-3 first"> 
+				<h1><img alt="Iowa State University" src="../../css/isu-footer-logo.png"></h1> 
+			</section> 
+			<section class="grid-17"> 
+				<p> 
+					Department of Electrical and Computer Engineering 
+				</p> 
+				<p> 
+					Copyright &copy; 2011, Iowa State University of Science and Technology.
+					All rights reserved. 
+                </p>
+                <p>
+                	Page last updated on 
+                    8/27/2012 4:32:44 PM
+				</p> 
+			</section>  
+		</section> 
+	</footer>
+ 
+</body>
+
+<!-- Mirrored from class.ece.iastate.edu/cpre288/labs/Lab1/index.asp by HTTrack Website Copier/3.x [XR&CO'2010], Wed, 12 Dec 2012 08:16:46 GMT -->
+</html>

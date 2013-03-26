@@ -1,0 +1,39 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body onload="parent.initBtn0()" bgcolor="white">
+				<table width="600" cellpadding="3">
+			<tr>
+				<td><b>What is wrong with the following module instantiation?</b>
+					<p><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;module modA;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modB #(1,2) (p1, p2,, p4);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;endmodule</tt></p>
+					<p></TT></p>
+					<hr>
+				</td>
+			</tr>
+			<tr>
+				<form>
+					<td width="450">a. <input type="radio" name="A" value="A">missing ports are not allowed in instantiations</td>
+				</form>
+			</tr>
+			<tr>
+				<td width="450">b. <input type="radio" name="A" value="B"><font color="#4B0082"><b>the module instance name is missing</b></font></td>
+			</tr>
+			<tr>
+				<td width="450">c. <input type="radio" name="A" value="C">the module instance parameter values must be after the port list</td>
+			</tr>
+			<tr>
+				<td width="450">d. <input type="radio" name="A" value="D">nothing</td>
+			</tr>
+			<tr></form>
+				<td><B>The correct answer is b. The module instance name is missing.
+					<p>To review content related to this question see <a href="javascript:parent.gotoScreen('01','030',1)">Ports: Port List</a>.</b></p>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

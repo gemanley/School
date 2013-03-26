@@ -1,0 +1,42 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			<b>Register File</b>
+			<p></p>
+			<pre>
+module RegFile (r1, r2, wradd, r1val, r2val, wdata, writeValid, clock);
+    input  [3:0] r1, r2, wradd;
+    input [31:0] wdata;
+    input        writeValid, clock;
+    output [31:0] r1val, r2val;
+    reg    [31:0] r1vt, r2vt;
+    
+    reg [31:0] registers [0:15];
+    
+    assign #1 r1val = r1vt, // return register values
+              r2val = r2vt;
+    
+    always @(posedge clock)
+        begin
+            if (writeValid &amp;&amp; wradd) begin      // write first
+                registers[wradd] = wdata;
+                if (test.debug)
+                    $display($stime,,&quot;stored: reg %h  %h&quot;, wradd, wdata); 
+            end
+            
+            r1vt = r1==0 ? 0 : registers[r1];   // sample the registers
+            r2vt = r2==0 ? 0 : registers[r2];
+        end
+endmodule
+</pre>
+		</table>
+	</body>
+
+</html>

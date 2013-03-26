@@ -1,0 +1,45 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+				<table width="600" cellpadding="10">
+			<tr>
+				<td>Compound statements, both sequential and parallel, may have a label attached to them like this
+					<p><tt></tt></p>
+					<dl>
+						<dd>begin : name
+							<dl>
+								<dd>...
+							</dl>
+						<dd>end
+					</dl>
+					<p></TT>The point of doing this is twofold,</p>
+					<p></p>
+					<dl>
+						<dd>1. You can define register variables local to the block if the block has a name.<br>
+							<dl>
+								<dd>For example,
+									<p><tt></tt></p>
+								<dd>begin : nextblock
+								<dd>integer localindx;
+								<dd>reg localbit;
+								<dd>...
+								<dd>end
+							</dl>
+							</TT>
+						<dd>2. You can stop execution of the block with a disable statement. (Disable is discussed in Chapter 6.)
+					</dl>
+					Both begin...end and fork...join can be named. In both cases, the function of the name is the same.
+					<p>Local registers declared in a named block have a scope which consists of just that block, and any blocks which may be contained within it. This is similar to local storage in C. However, there is a difference - local storage in Verilog is still static. That is, there is only one storage location associated with a register defined within that block in any single instance. Because procedural code is not recursive, this static property is generally not visible.</p>
+					<p>Semantically, a named block is just like a task which is enabled from only one place.</p>
+				</td>
+			</tr>
+		</table>
+		</center>
+	</body>
+
+</html>

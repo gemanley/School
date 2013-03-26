@@ -1,0 +1,26 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+	</head>
+
+	<body bgcolor="white">
+		<BASEFONT="times" size"3">
+		<table width="600">
+			<tr>
+				<td>Assuming port1 and port2 are input, port3 is output, and port4 is inout, the following instantiations are legal:
+					<p></p>
+					<pre>
+foo bar1(a*b, controlFunc(a/b), {data[1:0], data[2], data[5:4]},
+      bus[28:30]);
+           
+foo bar2(.port1(sel?x:y), .port2(a[4]), .port3(ext[7:3]), 
+     .port4({b1, b2, b3}));
+</pre>
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

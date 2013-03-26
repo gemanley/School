@@ -1,0 +1,47 @@
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+	<title>Sketch of PDP-8 Interrupts -- Mark Smotherman</title>
+	<link href="../../resources/base_style.css" rel="stylesheet" type="text/css" media="all">
+</head>
+
+<style TEXT="TEXT/CSS">
+  body{margin-left: 5%; margin-right: 5%; color: black;}
+  hr{margin-left: -4%;}
+  hr{margin-right: -4%;}
+  em{color: green}
+  cite{color: brown}
+</style>
+
+<body>
+	<h1>DEC PDP-8 Interrupts<br>
+		<font size="-2">Mark Smotherman</font></h1>
+	<p></p>
+	<h3>Introduction</h3>
+	<p>The PDP-8 was the first mass-produced minicomputer. It was a 12-bit, word-addressed, accumulator-based design, first shipped in 1965. It was influenced by the CDC 160, the MIT Lincoln Labs LINC, and the DEC PDP-5.</p>
+	<p>Instructions are one 12-bit word each.</p>
+	<pre><font size="-1">        +-----+-+-+-------------+
+        | opc |i|p|    offset   |
+        +-----+-+-+-------------+
+         0 1 2 3 4 5 6 7 8 9 a b
+
+           opc     3-bit opcode
+           i       1-bit direct/indirect addressing mode
+           p       1-bit global/current page for high address bits
+           offset  7-bit offset
+
+           effective address = p ? ( top 5 bits of last pc # offset )
+                                 : ( 00000 # offset );
+    </font></pre>
+	A notable feature of the PDP-8 was the lack of a load instruction. Instead, you would first clear the accumulator (cla) and then add the contents of a memory loaction to the accumulator (tad). The function of a store was done by the deposit and clear accumulator (dca) instruction. The PDP-8 did provide a fast loop-closing instruction, increment and skip if zero (isz), that did not use the accumulator. The isz instruction was also used as a general way to increment memory locations apart from its function in loops.
+	<h3>Interrupts</h3>
+	<p>A single interrupt enable bit controlled whether or not interrupts would be accepted. Upon an interrupt,</p>
+	<ol>
+		<li>the enable flag would be reset to 0 (disabled),
+		<li>the updated PC would be saved into memory at address 0, and
+		<li>the PC would be reset to address 1.
+	</ol>
+	<ul>
+		<li>N.A.B. Gray, Introduction to Computer Systems. Maryborough, Vic.: Prentice-Hall of Australia, 1987.<li><a href="http://www.cs.uiowa.edu/%7ejones/pdp8/">Doug Jones' PDP-8 pages at Univ. of Iowa</a>
+		<li><a href="http://research.microsoft.com/users/GBell/Computer_Engineering/00000197.htm">C. Gordon Bell and John E. McNamara, &quot;The PDP-8 and Other 12-Bit Computers,&quot;</a> chapter 7 of C. Gordon Bell, J. Craig Mudge, and John E. McNamara, Computer Engineering: A DEC View of Hardware Systems Design, Digital Press, 1978.
+	</ul>
+</body>
